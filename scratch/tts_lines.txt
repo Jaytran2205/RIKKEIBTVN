@@ -1,0 +1,13 @@
+Line 529: <h3>Chuyển Văn Bản Thành Giọng Nói AI (TTS)</h3>
+Line 1379: case 'tts-studio': renderTTSStudio(); break;
+Line 1550: function renderTTSStudio() {
+Line 1671: openModal('Studio Giọng Nói AI Đa Năng (Hơn 50 Ngôn Ngữ & Hàng Nghìn Giọng Đọc)', html);
+Line 2325: const sel = document.getElementById('ttsModalVoice');
+Line 2421: const sel = document.getElementById('ttsModalVoice');
+Line 2510: const sel = document.getElementById('ttsModalVoice');
+Line 2532: const text = document.getElementById('ttsModalText')?.value.trim();
+Line 2533: const sel = document.getElementById('ttsModalVoice');
+Line 2537: const userSpeed = parseFloat(document.getElementById('ttsModalSpeed')?.value) || 1.0;
+Line 2539: const resBox = document.getElementById('ttsModalResult');
+Line 2540: const audio = document.getElementById('ttsModalAudio');
+Line 2642: const audio = document.getElementById('ttsModalAudio');

@@ -1,0 +1,62 @@
+[
+  {
+    "code": "hn_female_ngochuyen_full_48k-fhg",
+    "name": "HN - Ngọc Huyền",
+    "gender": "Nữ",
+    "category": "review",
+    "lang": "vi-VN",
+    "group": "vi_north",
+    "group_name": "🇻🇳 Tiếng Việt (Miền Bắc)",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_ngochuyen_fast_news_48k-thg.mp3"
+  },
+  {
+    "code": "hn_male_manhdung_full_24k-st",
+    "name": "Mạnh Dũng 2.0 (Beta)",
+    "gender": "Nam",
+    "category": "advertise",
+    "lang": "vi-VN",
+    "group": "vi_north",
+    "group_name": "🇻🇳 Tiếng Việt (Miền Bắc)",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_manhdung_full_24k-st.mp3"
+  },
+  {
+    "code": "ru-RU-Standard-B",
+    "name": "Leposava",
+    "gender": "Nam",
+    "category": "Phổ thông",
+    "lang": "ru-RU",
+    "group": "intl_eu",
+    "group_name": "🇪🇺 Tiếng Châu Âu",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/google/ru-RU-Standard-B.mp3"
+  },
+  {
+    "code": "es-ES-Standard-B",
+    "name": "Esequiel",
+    "gender": "Nam",
+    "category": "Phổ thông",
+    "lang": "es-ES",
+    "group": "intl_eu",
+    "group_name": "🇪🇺 Tiếng Châu Âu",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/google/es-ES-Standard-B.mp3"
+  },
+  {
+    "code": "bn-IN-Standard-A",
+    "name": "Aamaal",
+    "gender": "Nữ",
+    "category": "Phổ thông",
+    "lang": "bn-IN",
+    "group": "intl_other",
+    "group_name": "Quốc tế khác",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/google/bn-IN-Standard-A.mp3"
+  },
+  {
+    "code": "nl-BE-Standard-A",
+    "name": "Adrie",
+    "gender": "Nữ",
+    "category": "Phổ thông",
+    "lang": "nl-BE",
+    "group": "intl_eu",
+    "group_name": "🇪🇺 Tiếng Châu Âu",
+    "demo": "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/google/nl-BE-Standard-A.mp3"
+  }
+]

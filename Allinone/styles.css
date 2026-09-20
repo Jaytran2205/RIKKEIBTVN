@@ -1,0 +1,888 @@
+/* ==========================================================================
+   SOẠN THẢO VĂN BẢN HÀNH CHÍNH (NGHỊ ĐỊNH 30/2020/NĐ-CP)
+   Nền tảng All in One — Chuẩn Thể Thức & Quản Trị Văn Bản Hiện Đại
+   ========================================================================== */
+
+/* 1. Header Thanh Điều Hướng Công Cụ (Đã ẩn hoàn toàn theo yêu cầu) */
+.vb-top-bar {
+  display: none !important;
+}
+
+.vb-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.vb-brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #C22026 0%, #991B1B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 6px rgba(194, 32, 38, 0.3);
+  flex-shrink: 0;
+}
+
+.vb-brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0F172A !important;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.vb-brand-title span.accent-highlight {
+  color: #C22026 !important;
+  font-weight: 800;
+}
+
+.vb-brand-subtitle {
+  color: #64748B;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.vb-nav-menus {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.vb-nav-item {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569 !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all .2s ease;
+}
+
+.vb-nav-item:hover {
+  color: #C22026 !important;
+}
+
+.vb-top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vb-credits-badge {
+  background: #FEE2E2 !important;
+  color: #C22026 !important;
+  border: 1px solid #FECACA !important;
+  font-size: 0.78rem !important;
+  font-weight: 700;
+  padding: 4px 12px !important;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vb-user-avatar-jt {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50%;
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  font-weight: 800;
+  font-size: 0.82rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #CBD5E1 !important;
+}
+
+/* ==========================================================================
+   2. BỐ CỤC 2 CỘT TÁCH RỜI CUỘN ĐỘC LẬP (INDEPENDENT SPLIT SCROLL)
+   ========================================================================== */
+/* Khóa tuyệt đối cuộn trang ngoài khi ở giao diện Soạn thảo văn bản */
+html.vanban-page-active,
+body.vanban-page-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+body.vanban-page-active footer {
+  display: none !important;
+}
+
+#page-vanban.active {
+  height: calc(100vh - 58px) !important;
+  max-height: calc(100vh - 58px) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  background: #F3F4F6 !important;
+}
+
+.vb-wrapper {
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  background: #F8F9FA !important;
+}
+
+.vb-split-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 480px !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important; /* Bắt buộc để con cuộn độc lập trong flexbox */
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important; /* Không để container ngoài cuộn */
+  background: #F3F4F6 !important;
+}
+
+@media(max-width: 1100px) {
+  #page-vanban.active {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .vb-split-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+/* CỘT TRÁI: KHU VỰC XEM TRƯỚC VĂN BẢN A4 (CUỘN ĐỘC LẬP) */
+.vb-preview-pane {
+  background: #F3F4F6 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+  overflow-y: auto !important; /* Cuộn riêng cột trái */
+  overflow-x: auto !important;
+  overscroll-behavior: contain !important; /* Không cuộn lan sang cửa sổ */
+  padding: 16px 24px 80px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  border-right: 1px solid #E2E8F0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Thanh công cụ xem trước */
+.vb-preview-toolbar {
+  width: 100% !important;
+  max-width: 980px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 12px !important;
+  gap: 12px !important;
+}
+
+.vb-toolbar-btn {
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 6px !important;
+  padding: 7px 14px !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all .2s ease !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+}
+
+.vb-toolbar-btn:hover {
+  background: #F8FAFC !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-toggle-preview,
+.vb-pill-close-btn {
+  background: #FFFFFF !important;
+  color: #475569 !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 20px !important;
+  padding: 6px 18px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+  transition: all .2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.btn-toggle-preview:hover,
+.vb-pill-close-btn:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+
+/* ==========================================================================
+   3. TỜ GIẤY TRẮNG A4 RỘNG RÃI CHUẨN NGHỊ ĐỊNH 30/2020/NĐ-CP
+   Lề chuẩn NĐ 30: Trên 20-25mm, Dưới 20-25mm, Trái 30-35mm, Phải 15-20mm
+   Hiển thị rộng rãi bao quát y hệt Ảnh 1 của người dùng
+   ========================================================================== */
+.vb-a4-sheet {
+  background: #FFFFFF !important;
+  width: 100% !important;
+  max-width: 980px !important; /* Rộng rãi rõ ràng đúng chuẩn Ảnh 1 */
+  min-height: 1100px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  border-radius: 2px !important;
+  padding: 2.2cm 2.0cm 2.0cm 2.8cm !important;
+  font-family: 'Times New Roman', Times, serif !important;
+  color: #000000 !important;
+  line-height: 1.45 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+/* Typography văn bản hành chính */
+.vb-a4-sheet .org-header-left {
+  text-align: center;
+}
+
+.vb-a4-sheet .org-superior {
+  font-size: 12pt;
+  text-transform: uppercase;
+  color: #000000;
+  font-weight: normal;
+  line-height: 1.25;
+}
+
+.vb-a4-sheet .org-name {
+  font-size: 13pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1.25;
+  margin-top: 2px;
+}
+
+.vb-a4-sheet .org-divider {
+  width: 40%;
+  height: 1px;
+  background: #000000;
+  margin: 4px auto 5px;
+}
+
+.vb-a4-sheet .doc-number {
+  font-size: 12pt;
+  color: #000000;
+  font-weight: normal;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.vb-a4-sheet .nation-header-right {
+  text-align: center;
+}
+
+.vb-a4-sheet .nation-name {
+  font-size: 12.5pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.vb-a4-sheet .motto {
+  font-size: 13pt;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.25;
+  margin-top: 2px;
+}
+
+.vb-a4-sheet .motto-divider {
+  width: 55%;
+  height: 1px;
+  background: #000000;
+  margin: 4px auto 5px;
+}
+
+.vb-a4-sheet .doc-date {
+  font-size: 13pt;
+  font-style: italic;
+  color: #000000;
+  line-height: 1.25;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Loại văn bản & Trích yếu */
+.vb-a4-sheet .doc-type-title {
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  letter-spacing: 0.03em;
+  text-align: center;
+  margin: 28px 0 6px 0;
+  line-height: 1.3;
+}
+
+.vb-a4-sheet .doc-subject {
+  font-size: 13pt;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 22px;
+  line-height: 1.35;
+}
+
+/* Nội dung văn bản (Body) */
+.vb-a4-sheet .document-body {
+  font-size: 13pt;
+  line-height: 1.5;
+  text-align: justify;
+  text-justify: inter-word;
+  color: #000000;
+  outline: none;
+  min-height: 320px;
+}
+
+.vb-a4-sheet .document-body p {
+  text-indent: 1cm !important; /* Thụt đầu dòng chuẩn 1cm */
+  margin: 0 0 6pt 0 !important; /* Khoảng cách sau đoạn 6pt */
+  line-height: 1.5 !important;
+  text-align: justify !important;
+}
+
+/* Chân trang: Nơi nhận & Chữ ký */
+.vb-a4-sheet .footer-recipients {
+  font-size: 11pt;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.vb-a4-sheet .footer-recipients-title {
+  font-size: 11.5pt;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.vb-a4-sheet .footer-signature {
+  text-align: center;
+}
+
+.vb-a4-sheet .footer-sign-role {
+  font-size: 13pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.vb-a4-sheet .footer-sign-name {
+  font-size: 13pt;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.25;
+}
+
+/* Chú thích AI dưới tờ A4 */
+.vb-preview-disclaimer {
+  text-align: center;
+  color: #94A3B8;
+  font-size: 0.82rem;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   4. CỘT PHẢI: BỘ ĐIỀU KHIỂN FORM WIZARD (CUỘN ĐỘC LẬP)
+   ========================================================================== */
+.vb-control-pane {
+  background: #FFFFFF !important;
+  border-left: 1px solid #E2E8F0 !important;
+  padding: 20px 24px 80px !important;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto; /* Cuộn riêng cột phải */
+  box-sizing: border-box;
+}
+
+/* Tabs điều hướng bước (1. Thiết lập ban đầu, 2. Tạo nội dung AI, 3. Tinh chỉnh AI) */
+.vb-wizard-tabs {
+  display: flex;
+  border-bottom: 2px solid #F1F5F9 !important;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.vb-tab-step {
+  flex: 1;
+  text-align: center;
+  padding: 10px 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #94A3B8 !important;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+
+.vb-tab-step.active {
+  color: #C22026 !important; /* Đỏ chuông chuẩn công vụ */
+  border-bottom-color: #C22026 !important;
+  font-weight: 700 !important;
+}
+
+/* Accordions */
+.vb-accordion-item {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #FFFFFF !important;
+  overflow: hidden;
+  transition: all .2s ease;
+}
+
+.vb-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  background: #FFFFFF;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #1E293B !important;
+  user-select: none;
+  transition: all .2s ease;
+}
+
+.vb-accordion-header:hover {
+  background: #F8FAFC !important;
+  color: #C22026 !important;
+}
+
+.vb-accordion-item.open {
+  border-color: #CBD5E1 !important;
+}
+
+.vb-accordion-item.open .vb-accordion-header {
+  color: #0F172A !important;
+}
+
+.vb-accordion-chevron {
+  color: #64748B !important;
+  font-size: 0.8rem;
+}
+
+/* Hộp Chọn Mẫu AI */
+.vb-ai-sample-box {
+  border: 1.5px solid #CBD5E1 !important;
+  background: #F8FAFC !important;
+  border-radius: 8px;
+  padding: 14px !important;
+  margin-bottom: 16px;
+}
+
+.vb-ai-sample-title {
+  color: #0F172A !important;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Khối Đơn Vị Liên Tịch (Đơn vị 2...) theo đúng mẫu */
+.vb-agency-unit-box {
+  border: 1.5px solid #FCA5A5;
+  border-left: 4px solid #C22026 !important;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.vb-agency-unit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #1E293B;
+}
+
+.vb-btn-remove-unit {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: all .2s;
+}
+
+.vb-btn-remove-unit:hover {
+  background: #FCA5A5;
+  color: #991B1B;
+}
+
+/* Badge Loại văn bản (TB, CV, QĐ...) */
+.vb-type-badge {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  border: 1px solid #334155 !important;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Form Inputs */
+.vb-control-pane input[type="text"],
+.vb-control-pane input[type="date"],
+.vb-control-pane select,
+.vb-control-pane textarea {
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 0.92rem;
+  color: #0F172A;
+  background: #FFFFFF;
+  transition: all .2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vb-control-pane input:focus,
+.vb-control-pane select:focus,
+.vb-control-pane textarea:focus {
+  border-color: #C22026 !important;
+  box-shadow: 0 0 0 3px rgba(194, 32, 38, 0.12) !important;
+  outline: none;
+}
+
+/* Nơi nhận tags */
+.vb-tag-input-container {
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: #FFFFFF;
+}
+
+.vb-tag-input-container:focus-within {
+  border-color: #C22026 !important;
+  box-shadow: 0 0 0 3px rgba(194, 32, 38, 0.12) !important;
+}
+
+.vb-tag-chip {
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+}
+
+.vb-tag-chip-remove {
+  cursor: pointer;
+  color: #64748B;
+  font-weight: bold;
+}
+.vb-tag-chip-remove:hover {
+  color: #DC2626;
+}
+
+.vb-sug-item {
+  color: #C22026 !important;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.vb-sug-item:hover {
+  color: #991B1B !important;
+}
+
+/* Slider tỷ lệ cột Header */
+.vb-slider-input::-webkit-slider-thumb {
+  background: #C22026 !important;
+  box-shadow: 0 2px 6px rgba(194, 32, 38, 0.4) !important;
+}
+
+.vb-slider-badge-pill {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  border: 1px solid #334155 !important;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Nút Đỏ "+ Thêm đơn vị" và Nút Tiếp Tục */
+.btn-add-unit {
+  background: #C22026 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  padding: 11px 20px !important;
+  font-size: 0.92rem !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(194, 32, 38, 0.25) !important;
+  width: 100% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.btn-add-unit:hover {
+  background: #A61B20 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(194, 32, 38, 0.35) !important;
+}
+
+.btn-continue {
+  background: #C22026 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  padding: 12px 20px !important;
+  font-size: 0.95rem !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(194, 32, 38, 0.25) !important;
+  width: 100% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-continue:hover {
+  background: #A61B20 !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   IN VĂN BẢN CHUẨN NGHỊ ĐỊNH 30/2020/NĐ-CP (CHUẨN XÁC 100% - KHÔNG LỆCH GIẤY)
+   ========================================================================== */
+@page {
+  size: A4 portrait;
+  /* Căn lề chính giữa giấy A4 tuyệt đối cân xứng 100%:
+     - Lề trên (top): 20mm (2.0cm)
+     - Lề dưới (bottom): 20mm (2.0cm)
+     - Lề trái (left): 20mm (2.0cm)
+     - Lề phải (right): 20mm (2.0cm)
+     -> Văn bản nằm ngay chính giữa tâm giấy A4
+  */
+  margin: 20mm 20mm 20mm 20mm !important;
+}
+
+@media print {
+  /* 1. Ẩn toàn bộ các thành phần giao diện thừa không in */
+  header,
+  footer,
+  nav,
+  .toolbar,
+  .vb-top-bar,
+  .vb-control-pane,
+  .vb-preview-toolbar,
+  .vb-preview-disclaimer,
+  .btn-toggle-preview,
+  #btnTogglePreviewPane,
+  .modal,
+  .toast,
+  #toastContainer,
+  .page-view:not(#page-vanban) {
+    display: none !important;
+  }
+
+  /* 2. Giải phóng hoàn toàn các thẻ cha khỏi overflow:hidden và height:100vh để không bị cắt trang */
+  html,
+  body,
+  html.vanban-page-active,
+  body.vanban-page-active,
+  #page-vanban,
+  #page-vanban.active,
+  .vb-wrapper,
+  .vb-split-grid,
+  .vb-preview-pane {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    float: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 3. Khung giấy in #a4PaperDoc: Tận dụng đúng 100% vùng in do @page cấp, không bị nhân đôi lề */
+  #a4PaperDoc {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #FFFFFF !important;
+    overflow: visible !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: 13pt !important;
+    line-height: 1.45 !important;
+    color: #000000 !important;
+  }
+
+  /* 4. Đầu trang: Căn chỉnh tỷ lệ 35% / 65% giữ Quốc hiệu luôn nằm trên 1 dòng */
+  #docHeaderRow {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-bottom: 20pt !important;
+  }
+  #docHeaderLeft {
+    width: 35% !important;
+    text-align: center !important;
+    padding-right: 4px !important;
+  }
+  #docHeaderRight {
+    width: 65% !important;
+    text-align: center !important;
+    padding-left: 4px !important;
+  }
+  .nation-name,
+  #docHeaderRight .nation-name {
+    white-space: nowrap !important;
+    font-size: 12pt !important;
+    font-weight: bold !important;
+    letter-spacing: -0.2px !important;
+    text-transform: uppercase !important;
+    line-height: 1.25 !important;
+  }
+  .motto,
+  #docHeaderRight .motto {
+    white-space: nowrap !important;
+    font-size: 13pt !important;
+    font-weight: bold !important;
+    line-height: 1.25 !important;
+    margin-top: 2px !important;
+  }
+  .doc-date,
+  #docHeaderRight .doc-date {
+    font-size: 13pt !important;
+    font-style: italic !important;
+    line-height: 1.25 !important;
+    margin-top: 4px !important;
+  }
+
+  /* 5. Tiêu đề loại & trích yếu */
+  .doc-type-title {
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    margin-top: 20pt !important;
+    margin-bottom: 4pt !important;
+    text-align: center !important;
+  }
+  .doc-subject {
+    font-size: 13pt !important;
+    font-weight: bold !important;
+    font-style: italic !important;
+    text-decoration: underline !important;
+    margin-bottom: 18pt !important;
+    text-align: center !important;
+  }
+
+  /* 6. Nội dung thân văn bản */
+  #docPrevNoiDung,
+  .document-body {
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: 13pt !important;
+    line-height: 1.45 !important;
+    color: #000000 !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+  }
+  #docPrevNoiDung p,
+  .document-body p {
+    text-indent: 1.0cm !important;
+    margin: 0 0 6pt 0 !important;
+    line-height: 1.45 !important;
+    text-align: justify !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 7. Chân trang: Nơi nhận và chữ ký */
+  .footer-recipients-title {
+    font-size: 11.5pt !important;
+    font-weight: bold !important;
+    font-style: italic !important;
+  }
+  .footer-recipients {
+    font-size: 11pt !important;
+    line-height: 1.3 !important;
+  }
+  .footer-signature {
+    text-align: center !important;
+    page-break-inside: avoid !important;
+  }
+}

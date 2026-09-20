@@ -1,0 +1,51 @@
+/* ==========================================================================
+   BẢNG MÀU CHỦ ĐẠO - VĂN BẢN HÀNH CHÍNH & ALL IN ONE
+   Chuẩn Thể Thức Nghị Định 30/2020/NĐ-CP (Đỏ Quốc Gia & Xanh Slate Hiện Đại)
+   ========================================================================== */
+:root {
+  /* Primary Administrative Red & Ruby Accents (Chuẩn Thể Thức NĐ 30) */
+  --primary-admin-red: #C22026;
+  --primary-admin-red-hover: #A61B20;
+  --primary-admin-red-light: #FEE2E2;
+  --primary-admin-red-subtle: #FFF5F5;
+
+  /* Neutral & Slate */
+  --admin-navy: #0F172A;
+  --admin-navy-dark: #020617;
+  --admin-slate: #334155;
+  --admin-muted: #64748B;
+  --admin-border: #E2E8F0;
+  --admin-bg-preview: #F3F4F6;
+  --admin-bg-paper: #FFFFFF;
+  --admin-bg-card: #FFFFFF;
+
+  /* Aliased variables for backward compatibility without gold/bronze */
+  --primary-gold: #C22026;
+  --primary-gold-hover: #A61B20;
+  --primary-gold-light: #FEE2E2;
+  --primary-gold-dark: #991B1B;
+  
+  --secondary-navy: #0F172A;
+  --secondary-navy-hover: #1E293B;
+  --secondary-navy-light: #334155;
+  
+  --bg-main-paper: #FFFFFF;
+  --bg-sidebar-panel: #FFFFFF;
+  --bg-header-gradient: #FFFFFF;
+  
+  --text-doc-ink: #000000;
+  --text-body: #1E293B;
+  --text-muted: #64748B;
+  --text-gold: #C22026;
+  --text-white: #FFFFFF;
+  
+  --accent-gold-shimmer: #C22026;
+  --border-gold-subtle: #E2E8F0;
+  --border-gold-solid: #C22026;
+  --border-subtle: #E2E8F0;
+  
+  /* Status Colors */
+  --status-success: #16A34A;
+  --status-warning: #D97706;
+  --status-danger: #DC2626;
+}
