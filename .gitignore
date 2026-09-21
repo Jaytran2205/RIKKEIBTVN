@@ -25,3 +25,9 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
+
+# Temporary & scratch folders
+scratch/
+.agents/
+.codex/
+.impeccable/

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Du Lịch Ninh Bình - Giao Diện Mới</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="redesign-system.css">
+    <link rel="stylesheet" href="travel-redesign.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="travel-hero">
+            <div class="travel-hero-content">
+                <span class="travel-hero-label">
+                    🏞️ Khám phá Ninh Bình
+                </span>
+                <h1 class="travel-hero-title">
+                    Du Lịch & Dịch Vụ<br>Ninh Bình
+                </h1>
+                <p class="travel-hero-subtitle">
+                    Khám phá những điểm đến tuyệt vời, thưởng thức ẩm thực đặc sắc và trải nghiệm văn hóa độc đáo tại vùng đất di sản
+                </p>
+                <div class="travel-hero-stats">
+                    <div class="travel-stat-item">
+                        <div class="travel-stat-value">200+</div>
+                        <div class="travel-stat-label">Địa điểm</div>
+                    </div>
+                    <div class="travel-stat-item">
+                        <div class="travel-stat-value">50+</div>
+                        <div class="travel-stat-label">Đối tác</div>
+                    </div>
+                    <div class="travel-stat-item">
+                        <div class="travel-stat-value">4.8★</div>
+                        <div class="travel-stat-label">Đánh giá</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="travel-search-section">
+            <div class="travel-search-bar">
+                <input type="text"
+                       class="travel-search-input"
+                       placeholder="Tìm kiếm địa điểm, món ăn, dịch vụ...">
+                <button class="travel-search-btn">
+                    🔍 Tìm kiếm
+                </button>
+            </div>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="travel-filter-container">
+            <div class="travel-filter-pill active">Tất cả</div>
+            <div class="travel-filter-pill">🏠 Homestay & Khách sạn</div>
+            <div class="travel-filter-pill">🍜 Ẩm thực</div>
+            <div class="travel-filter-pill">🏍️ Thuê xe máy</div>
+            <div class="travel-filter-pill">🎁 Đặc sản</div>
+            <div class="travel-filter-pill">📸 Điểm check-in</div>
+            <div class="travel-filter-pill">☕ Cà phê View đẹp</div>
+        </div>
+
+        <!-- Section: Featured Products -->
+        <div class="travel-section-header">
+            <span class="travel-section-label">Đặc sản nổi bật</span>
+            <h2 class="travel-section-title">Đặc Sản & Ẩm Thực Ninh Bình</h2>
+            <p class="travel-section-description">
+                Khám phá hương vị đặc trưng của vùng đất Cố đô với những món ăn được chế biến từ nguyên liệu địa phương tươi ngon nhất
+            </p>
+        </div>
+
+        <!-- Featured Card -->
+        <div class="grid" style="margin-bottom: 80px;">
+            <div class="travel-featured-card" onclick="openModal('featured1')">
+                <div class="travel-featured-image">
+                    <img src="https://images.unsplash.com/photo-1596040033229-a0b51f6e7ab2?w=1200&q=80" alt="Cơm Cháy">
+                    <span class="travel-featured-badge">🔥 Bán chạy nhất</span>
+                </div>
+                <div class="travel-featured-content">
+                    <span class="travel-featured-category">Đặc sản</span>
+                    <h3 class="travel-featured-title">Cơm Cháy Mỡ Hành Đặc Biệt</h3>
+                    <div class="travel-featured-location">
+                        📍 Phố Cầu Khách, TP. Ninh Bình
+                    </div>
+                    <div class="travel-featured-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">5.0 (348+ đánh giá)</span>
+                    </div>
+                    <p class="travel-featured-description">
+                        Cơm cháy Ninh Bình là món đặc sản nổi tiếng với hương vị thơm ngon, giòn rụm. Được làm từ gạo nếp ngon nhất vùng, rang vàng đều, ướp mỡ hành thơm lừng.
+                    </p>
+                    <div class="travel-featured-footer">
+                        <div class="travel-price-block">
+                            <span class="travel-price-label">Giá / gói (500g)</span>
+                            <div class="travel-price-value">65.000đ</div>
+                        </div>
+                        <button class="travel-btn-detail">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Homestay -->
+        <div class="travel-section-header">
+            <span class="travel-section-label">Nơi lưu trú</span>
+            <h2 class="travel-section-title">Homestay & Khách Sạn Ninh Bình</h2>
+            <p class="travel-section-description">
+                Tìm nơi nghỉ ngơi lý tưởng với view thiên nhiên tuyệt đẹp và dịch vụ chu đáo
+            </p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="travel-product-grid">
+            <!-- Product 1 -->
+            <div class="travel-product-card" onclick="openModal('homestay1')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Hotel">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Khách sạn</div>
+                    <h3 class="travel-product-title">The Visual Hotel Ninh Bình</h3>
+                    <div class="travel-product-location">
+                        📍 Trần Hoàng Phổ, TP. Ninh Bình
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">4.8 (350+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">850.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="travel-product-card" onclick="openModal('homestay2')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Homestay">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Homestay</div>
+                    <h3 class="travel-product-title">Tam Cốc Garden Homestay</h3>
+                    <div class="travel-product-location">
+                        📍 Ninh Hải, Hoa Lư
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">4.9 (124+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">600.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="travel-product-card" onclick="openModal('homestay3')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" alt="Resort">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Resort</div>
+                    <h3 class="travel-product-title">Emeralda Resort Ninh Bình</h3>
+                    <div class="travel-product-location">
+                        📍 Văn Long, Gia Viễn
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">5.0 (89+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">1.200.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Thuê Xe -->
+        <div class="travel-section-header" style="margin-top: 80px;">
+            <span class="travel-section-label">Dịch vụ</span>
+            <h2 class="travel-section-title">Thuê Xe Máy Uy Tín</h2>
+            <p class="travel-section-description">
+                Dịch vụ cho thuê xe máy chất lượng, giao tận nơi, hỗ trợ 24/7
+            </p>
+        </div>
+
+        <div class="travel-product-grid">
+            <!-- Bike Rental 1 -->
+            <div class="travel-product-card" onclick="openModal('bike1')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1558980664-769d59546b3d?w=800&q=80" alt="Thuê Xe">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Thuê xe</div>
+                    <h3 class="travel-product-title">Thuê Xe Máy Ninh Bình</h3>
+                    <div class="travel-product-location">
+                        📍 Trần Hoàng Phổ, TP. Ninh Bình
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">4.9 (412+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">100.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bike Rental 2 -->
+            <div class="travel-product-card" onclick="openModal('bike2')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80" alt="Motogo">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Thuê xe</div>
+                    <h3 class="travel-product-title">Motogo Ninh Bình</h3>
+                    <div class="travel-product-location">
+                        📍 TP. Ninh Bình
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">4.8 (328+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">120.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bike Rental 3 -->
+            <div class="travel-product-card" onclick="openModal('bike3')">
+                <div class="travel-product-image">
+                    <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800&q=80" alt="Thuê Xe">
+                </div>
+                <div class="travel-product-content">
+                    <div class="travel-product-category">Thuê xe</div>
+                    <h3 class="travel-product-title">Thuê Xe Máy Chi Dùng Biên</h3>
+                    <div class="travel-product-location">
+                        📍 P. Nam Thành, TP. Ninh Bình
+                    </div>
+                    <div class="travel-product-rating">
+                        <div class="travel-stars">
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                            <span class="travel-star">★</span>
+                        </div>
+                        <span class="travel-rating-text">4.7 (287+)</span>
+                    </div>
+                    <div class="travel-product-footer">
+                        <div class="travel-product-price">80.000đ</div>
+                        <button class="travel-btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="travel-modal" id="productModal">
+        <div class="travel-modal-content">
+            <button class="travel-modal-close" onclick="closeModal()">✕</button>
+            <img class="travel-modal-image" id="modalImage" src="" alt="">
+
+            <div class="travel-modal-body">
+                <div class="travel-modal-header">
+                    <span class="travel-modal-category" id="modalCategory"></span>
+                    <h2 class="travel-modal-title" id="modalTitle"></h2>
+                    <div class="travel-modal-meta">
+                        <div class="travel-product-location" id="modalLocation"></div>
+                        <div class="travel-product-rating" id="modalRating"></div>
+                    </div>
+                </div>
+
+                <div class="travel-modal-section">
+                    <h3 class="travel-modal-section-title">Mô tả</h3>
+                    <p class="travel-modal-description" id="modalDescription"></p>
+                </div>
+
+                <div class="travel-modal-section">
+                    <h3 class="travel-modal-section-title">Đặc điểm nổi bật</h3>
+                    <div class="travel-modal-features" id="modalFeatures"></div>
+                </div>
+
+                <div class="travel-modal-footer">
+                    <div class="travel-modal-price-block">
+                        <span class="travel-modal-price-label">Giá</span>
+                        <div class="travel-modal-price-value" id="modalPrice"></div>
+                    </div>
+                    <button class="travel-btn-book">Đặt ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Product Data
+        const products = {
+            featured1: {
+                category: 'Đặc sản',
+                title: 'Cơm Cháy Mỡ Hành Đặc Biệt',
+                image: 'https://images.unsplash.com/photo-1596040033229-a0b51f6e7ab2?w=1200&q=80',
+                location: '📍 Phố Cầu Khách, TP. Ninh Bình',
+                rating: '5.0 (348+ đánh giá)',
+                price: '65.000đ / gói (500g)',
+                description: 'Cơm cháy Ninh Bình là món đặc sản nổi tiếng với hương vị thơm ngon, giòn rụm. Được làm từ gạo nếp ngon nhất vùng, rang vàng đều, ướp mỡ hành thơm lừng. Thích hợp làm quà biếu hoặc thưởng thức cùng gia đình.',
+                features: [
+                    { icon: '🍚', text: 'Gạo nếp Ninh Bình cao cấp' },
+                    { icon: '🔥', text: 'Rang vàng đều, giòn rụm' },
+                    { icon: '🧈', text: 'Mỡ hành thơm ngon' },
+                    { icon: '📦', text: 'Đóng gói chân không' },
+                    { icon: '🚚', text: 'Giao hàng toàn quốc' },
+                    { icon: '✅', text: 'An toàn vệ sinh thực phẩm' }
+                ]
+            },
+            homestay1: {
+                category: 'Khách sạn',
+                title: 'The Visual Hotel Ninh Bình',
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
+                location: '📍 Trần Hoàng Phổ, TP. Ninh Bình',
+                rating: '4.8 (350+ đánh giá)',
+                price: '850.000đ / đêm',
+                description: 'Khách sạn 4 sao với view đẹp, nội thất hiện đại. Phòng rộng rãi, sạch sẽ, đầy đủ tiện nghi. Bữa sáng buffet phong phú. Gần trung tâm thành phố.',
+                features: [
+                    { icon: '🏨', text: 'Khách sạn 4 sao' },
+                    { icon: '🛏️', text: 'Phòng rộng rãi, hiện đại' },
+                    { icon: '🍳', text: 'Bữa sáng buffet' },
+                    { icon: '🏊', text: 'Hồ bơi ngoài trời' },
+                    { icon: '🚗', text: 'Bãi đỗ xe miễn phí' },
+                    { icon: '📍', text: 'Gần trung tâm' }
+                ]
+            },
+            homestay2: {
+                category: 'Homestay',
+                title: 'Tam Cốc Garden Homestay',
+                image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80',
+                location: '📍 Ninh Hải, Hoa Lư',
+                rating: '4.9 (124+ đánh giá)',
+                price: '600.000đ / đêm',
+                description: 'Homestay view ruộng lúa, không gian yên tĩnh, gần Tam Cốc. Phòng sạch sẽ, thoáng mát. Chủ nhà thân thiện, nhiệt tình.',
+                features: [
+                    { icon: '🌾', text: 'View ruộng lúa đẹp' },
+                    { icon: '🏡', text: 'Không gian yên tĩnh' },
+                    { icon: '👨‍👩‍👧', text: 'Chủ nhà thân thiện' },
+                    { icon: '🍜', text: 'Đặt cơm gia đình' },
+                    { icon: '🚲', text: 'Cho thuê xe đạp' },
+                    { icon: '🗺️', text: 'Tư vấn lộ trình' }
+                ]
+            },
+            homestay3: {
+                category: 'Resort',
+                title: 'Emeralda Resort Ninh Bình',
+                image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=80',
+                location: '📍 Văn Long, Gia Viễn',
+                rating: '5.0 (89+ đánh giá)',
+                price: '1.200.000đ / đêm',
+                description: 'Resort 5 sao cao cấp, view núi non hùng vĩ. Villa riêng biệt với bể bơi. Dịch vụ spa, nhà hàng món Âu-Á.',
+                features: [
+                    { icon: '⭐', text: 'Resort 5 sao' },
+                    { icon: '🏞️', text: 'View núi non tuyệt đẹp' },
+                    { icon: '🏊', text: 'Villa có bể bơi riêng' },
+                    { icon: '💆', text: 'Dịch vụ spa cao cấp' },
+                    { icon: '🍽️', text: 'Nhà hàng món Âu-Á' },
+                    { icon: '🚐', text: 'Đưa đón sân bay' }
+                ]
+            },
+            bike1: {
+                category: 'Thuê xe',
+                title: 'Thuê Xe Máy Ninh Bình',
+                image: 'https://images.unsplash.com/photo-1558980664-769d59546b3d?w=1200&q=80',
+                location: '📍 Trần Hoàng Phổ, TP. Ninh Bình',
+                rating: '4.9 (412+ đánh giá)',
+                price: '100.000đ / ngày',
+                description: 'Dịch vụ cho thuê xe máy uy tín tại Ninh Bình. Xe đảm bảo chất lượng, bảo dưỡng định kỳ. Giao xe tận nơi miễn phí.',
+                features: [
+                    { icon: '🛵', text: 'Xe mới, chất lượng tốt' },
+                    { icon: '🔧', text: 'Bảo dưỡng định kỳ' },
+                    { icon: '🚚', text: 'Giao xe tận nơi miễn phí' },
+                    { icon: '🗺️', text: 'Tư vấn lộ trình miễn phí' },
+                    { icon: '⛑️', text: 'Mũ bảo hiểm chất lượng' },
+                    { icon: '📞', text: 'Hỗ trợ 24/7' }
+                ]
+            },
+            bike2: {
+                category: 'Thuê xe',
+                title: 'Motogo Ninh Bình',
+                image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=1200&q=80',
+                location: '📍 TP. Ninh Bình',
+                rating: '4.8 (328+ đánh giá)',
+                price: '120.000đ / ngày',
+                description: 'Dịch vụ cho thuê xe máy cao cấp với đội ngũ nhân viên chuyên nghiệp. Xe đời mới, bảo hiểm đầy đủ.',
+                features: [
+                    { icon: '🏍️', text: 'Xe đời mới 2024-2025' },
+                    { icon: '🛡️', text: 'Bảo hiểm đầy đủ' },
+                    { icon: '⏰', text: 'Giao nhận 24/7' },
+                    { icon: '💳', text: 'Thanh toán đa dạng' },
+                    { icon: '📱', text: 'Đặt xe online' },
+                    { icon: '🎁', text: 'Ưu đãi thuê dài hạn' }
+                ]
+            },
+            bike3: {
+                category: 'Thuê xe',
+                title: 'Thuê Xe Máy Chi Dùng Biên',
+                image: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=1200&q=80',
+                location: '📍 P. Nam Thành, TP. Ninh Bình',
+                rating: '4.7 (287+ đánh giá)',
+                price: '80.000đ / ngày',
+                description: 'Cho thuê xe máy giá rẻ, phù hợp sinh viên và du khách tiết kiệm. Xe Honda Wave, Blade đảm bảo an toàn.',
+                features: [
+                    { icon: '💰', text: 'Giá cả phải chăng' },
+                    { icon: '🛵', text: 'Honda Wave, Blade' },
+                    { icon: '📝', text: 'Thủ tục đơn giản' },
+                    { icon: '⚡', text: 'Giao xe nhanh chóng' },
+                    { icon: '🔒', text: 'An toàn, đáng tin cậy' },
+                    { icon: '🎒', text: 'Phù hợp sinh viên' }
+                ]
+            }
+        };
+
+        function openModal(productId) {
+            const product = products[productId];
+            if (!product) return;
+
+            document.getElementById('modalCategory').textContent = product.category;
+            document.getElementById('modalTitle').textContent = product.title;
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalLocation').innerHTML = product.location;
+
+            const stars = '★★★★★';
+            document.getElementById('modalRating').innerHTML = `
+                <div class="travel-stars">
+                    ${stars.split('').map(s => `<span class="travel-star">${s}</span>`).join('')}
+                </div>
+                <span class="travel-rating-text">${product.rating}</span>
+            `;
+
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalPrice').textContent = product.price;
+
+            const featuresHTML = product.features.map(f => `
+                <div class="travel-feature-item">
+                    <span class="travel-feature-icon">${f.icon}</span>
+                    <span class="travel-feature-text">${f.text}</span>
+                </div>
+            `).join('');
+            document.getElementById('modalFeatures').innerHTML = featuresHTML;
+
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on outside click
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
