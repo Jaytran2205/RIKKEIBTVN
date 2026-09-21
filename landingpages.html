@@ -9,6 +9,179 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- GLOBAL MODERN DIALOG SYSTEM (POP-UP THAY THẾ TOÀN BỘ ALERT & CONFIRM) -->
+<script>
+(function() {
+  let appDialogResolve = null;
+
+  function getOrCreateAppDialog() {
+    let overlay = document.getElementById('appDialogOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'appDialogOverlay';
+      overlay.style.cssText = 'display:none; position:fixed; inset:0; z-index:9999999; background:rgba(15,23,42,0.68); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:16px; font-family:inherit;';
+      overlay.innerHTML = `
+        <div id="appDialogCard" style="background:#FFFFFF; border-radius:18px; max-width:440px; width:100%; box-shadow:0 25px 50px -12px rgba(0,0,0,0.35); border:1px solid #E2E8F0; overflow:hidden; transform:scale(0.92); opacity:0; transition:all .22s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div id="appDialogAccent" style="height:4px; background:linear-gradient(90deg, #2563EB, #0F3D6E);"></div>
+          <div style="padding:22px 24px 20px;">
+            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:14px;">
+              <div id="appDialogIconBox" style="width:42px; height:42px; border-radius:12px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0;">
+                🔔
+              </div>
+              <div style="flex:1;">
+                <h3 id="appDialogTitle" style="font-size:1.1rem; font-weight:800; color:#0F172A; margin:0 0 3px 0; line-height:1.3;">
+                  Thông Báo
+                </h3>
+                <div id="appDialogSub" style="font-size:0.75rem; color:#64748B;">Ninh Bình Digital System</div>
+              </div>
+              <button type="button" onclick="window.closeAppDialog(false)" style="background:none; border:none; color:#94A3B8; font-size:1.5rem; line-height:1; cursor:pointer; padding:0;" title="Đóng">&times;</button>
+            </div>
+            <div id="appDialogMessage" style="font-size:0.92rem; color:#334155; line-height:1.6; margin-bottom:20px; max-height:55vh; overflow-y:auto; word-break:break-word;">
+            </div>
+            <div id="appDialogActions" style="display:flex; justify-content:flex-end; gap:10px;">
+              <button id="appDialogBtnCancel" type="button" class="btn btn-outline" onclick="window.closeAppDialog(false)" style="padding:9px 18px; border-radius:9px; font-weight:600; font-size:0.88rem; border-color:#CBD5E1; color:#475569; background:#fff; cursor:pointer;">
+                Hủy bỏ
+              </button>
+              <button id="appDialogBtnConfirm" type="button" class="btn btn-primary" onclick="window.closeAppDialog(true)" style="padding:9px 22px; border-radius:9px; font-weight:700; font-size:0.88rem; background:#0F3D6E; color:#fff; border:none; box-shadow:0 4px 12px rgba(15,61,110,0.25); cursor:pointer;">
+                Đồng ý
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      (document.body || document.documentElement).appendChild(overlay);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) window.closeAppDialog(false);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (overlay && overlay.style.display === 'flex') {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            window.closeAppDialog(false);
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            window.closeAppDialog(true);
+          }
+        }
+      });
+    }
+    return overlay;
+  }
+
+  window.closeAppDialog = function(result) {
+    const overlay = document.getElementById('appDialogOverlay');
+    const card = document.getElementById('appDialogCard');
+    if (card) {
+      card.style.transform = 'scale(0.92)';
+      card.style.opacity = '0';
+    }
+    setTimeout(() => {
+      if (overlay) overlay.style.display = 'none';
+      if (typeof appDialogResolve === 'function') {
+        const fn = appDialogResolve;
+        appDialogResolve = null;
+        fn(result);
+      }
+    }, 180);
+  };
+
+  window.showAppAlert = function(opts) {
+    return new Promise((resolve) => {
+      appDialogResolve = resolve;
+      const msg = typeof opts === 'string' ? opts : (opts.message || '');
+      const title = (typeof opts === 'object' && opts.title) ? opts.title : 'Thông Báo';
+      const icon = (typeof opts === 'object' && opts.icon) ? opts.icon : '🔔';
+      const btnText = (typeof opts === 'object' && opts.btnText) ? opts.btnText : 'Đã hiểu';
+
+      const overlay = getOrCreateAppDialog();
+      const card = document.getElementById('appDialogCard');
+      const titleEl = document.getElementById('appDialogTitle');
+      const msgEl = document.getElementById('appDialogMessage');
+      const iconBox = document.getElementById('appDialogIconBox');
+      const accent = document.getElementById('appDialogAccent');
+      const btnCancel = document.getElementById('appDialogBtnCancel');
+      const btnConfirm = document.getElementById('appDialogBtnConfirm');
+
+      titleEl.innerText = title;
+      msgEl.innerHTML = (typeof msg === 'string') ? msg.replace(/\n/g, '<br>') : msg;
+      iconBox.innerText = icon;
+      iconBox.style.background = '#EFF6FF';
+      iconBox.style.color = '#2563EB';
+      accent.style.background = 'linear-gradient(90deg, #2563EB, #0F3D6E)';
+      btnConfirm.style.background = '#0F3D6E';
+      btnConfirm.innerText = btnText;
+      btnCancel.style.display = 'none';
+
+      overlay.style.display = 'flex';
+      requestAnimationFrame(() => {
+        card.style.transform = 'scale(1)';
+        card.style.opacity = '1';
+      });
+    });
+  };
+
+  window.showAppConfirm = function(opts) {
+    return new Promise((resolve) => {
+      appDialogResolve = (result) => {
+        if (result) {
+          if (typeof opts.onConfirm === 'function') opts.onConfirm();
+        } else {
+          if (typeof opts.onCancel === 'function') opts.onCancel();
+        }
+        resolve(result);
+      };
+
+      const msg = typeof opts === 'string' ? opts : (opts.message || '');
+      const title = (typeof opts === 'object' && opts.title) ? opts.title : 'Xác Nhận';
+      const icon = (typeof opts === 'object' && opts.icon) ? opts.icon : '⚠️';
+      const confirmText = (typeof opts === 'object' && opts.confirmText) ? opts.confirmText : 'Đồng ý';
+      const cancelText = (typeof opts === 'object' && opts.cancelText) ? opts.cancelText : 'Hủy bỏ';
+      const isDanger = (typeof opts === 'object' && opts.isDanger);
+
+      const overlay = getOrCreateAppDialog();
+      const card = document.getElementById('appDialogCard');
+      const titleEl = document.getElementById('appDialogTitle');
+      const msgEl = document.getElementById('appDialogMessage');
+      const iconBox = document.getElementById('appDialogIconBox');
+      const accent = document.getElementById('appDialogAccent');
+      const btnCancel = document.getElementById('appDialogBtnCancel');
+      const btnConfirm = document.getElementById('appDialogBtnConfirm');
+
+      titleEl.innerText = title;
+      msgEl.innerHTML = (typeof msg === 'string') ? msg.replace(/\n/g, '<br>') : msg;
+      iconBox.innerText = icon;
+
+      if (isDanger) {
+        iconBox.style.background = '#FEE2E2';
+        iconBox.style.color = '#DC2626';
+        accent.style.background = 'linear-gradient(90deg, #DC2626, #B91C1C)';
+        btnConfirm.style.background = '#DC2626';
+      } else {
+        iconBox.style.background = '#FEF3C7';
+        iconBox.style.color = '#D97706';
+        accent.style.background = 'linear-gradient(90deg, #F59E0B, #D97706)';
+        btnConfirm.style.background = '#0F3D6E';
+      }
+
+      btnConfirm.innerText = confirmText;
+      btnCancel.innerText = cancelText;
+      btnCancel.style.display = 'inline-flex';
+
+      overlay.style.display = 'flex';
+      requestAnimationFrame(() => {
+        card.style.transform = 'scale(1)';
+        card.style.opacity = '1';
+      });
+    });
+  };
+
+  // Tự động chuyển toàn bộ lệnh alert() mặc định sang pop-up hiện đại
+  window.alert = function(message) {
+    window.showAppAlert(message);
+  };
+})();
+</script>
+
 <!-- Client-side Engines: QRCode.js, PDF-Lib, jsPDF, AI Voice Databases -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -1645,20 +1818,682 @@
     </div>
   </div>
 
-  <!-- TAB PANE: MẸO THI A1, A, B, C -->
-  <div id="pane-meo-a1" class="driving-tab-pane" style="display:none; padding:40px 0;">
-    <div class="wrap" style="max-width:860px;">
-      <h2 style="font-size:1.6rem; color:#0F172A; font-weight:800; margin-bottom:20px;">Mẹo thi lý thuyết &amp; sa hình Hạng A1</h2>
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:12px; padding:22px;">
-          <h3 style="color:#2563EB; font-size:1.1rem; margin-bottom:8px;">1. Mẹo Chọn Nhanh Đáp Án Khái Niệm</h3>
-          <p style="color:#334155; line-height:1.6;">• Cứ thấy từ <b>"Bị nghiêm cấm"</b> hoặc <b>"Không được phép"</b> ở đầu câu đáp án là chọn ngay (đúng 100%).<br>• Dải phân cách gồm 2 loại: Cố định và di động.<br>• Đường ưu tiên: Là đường mà phương tiện trên đó được các phương tiện khác nhường đường.</p>
+  <!-- TAB PANE: MẸO THI A1 TOÀN DIỆN (250 CÂU, 20 CÂU LIỆT, BIỂN BÁO, SA HÌNH, THỰC HÀNH) -->
+  <div id="pane-meo-a1" class="driving-tab-pane" style="display:none; padding:36px 0 70px; background:#F8FAFC;">
+    <div class="wrap" style="max-width:960px; margin:0 auto; padding:0 20px;">
+
+      <!-- Header Bài Viết -->
+      <div style="background:linear-gradient(135deg, #0F3D6E 0%, #1E293B 100%); border-radius:20px; padding:36px 32px; color:#FFF; margin-bottom:28px; box-shadow:0 10px 25px rgba(15,61,110,0.18); position:relative; overflow:hidden;">
+        <div style="position:absolute; right:-20px; top:-20px; font-size:10rem; opacity:0.04; user-select:none; pointer-events:none;">🏍️</div>
+        
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
+          <span style="background:rgba(255,255,255,0.18); color:#FDE047; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; padding:4px 14px; border-radius:20px;">
+            📚 CẨM NANG ÔN THI BẰNG LÁI XE 2026
+          </span>
+          <span style="color:#94A3B8; font-size:0.8rem; display:flex; align-items:center; gap:5px;">
+            🕒 Cập nhật vào lúc 07:00 ngày 12/08/2026
+          </span>
         </div>
-        <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:12px; padding:22px;">
-          <h3 style="color:#2563EB; font-size:1.1rem; margin-bottom:8px;">2. Mẹo Quy Tắc Nhường Đường Sa Hình (Thần Chú 4 Bước)</h3>
-          <p style="color:#334155; line-height:1.6;">1. <b>Nhất chớm:</b> Xe nào đã vào giao lộ trước thì được đi trước.<br>2. <b>Nhì ưu:</b> Cứu hỏa > Quân sự > Công an > Cứu thương.<br>3. <b>Tam đường:</b> Xe nằm trên đường ưu tiên được đi trước.<br>4. <b>Tứ hướng:</b> Rẽ phải > Đi thẳng > Rẽ trái.</p>
+
+        <h1 style="font-size:2.2rem; font-weight:900; color:#FFF; margin-bottom:14px; line-height:1.25;">
+          Mẹo thi A1 2026: 250 câu, 20 câu liệt, biển báo, sa hình
+        </h1>
+        
+        <p style="color:#E2E8F0; font-size:1.02rem; line-height:1.65; margin-bottom:24px; max-width:860px;">
+          <strong>Mẹo thi A1</strong> không nên hiểu là học tủ vài đáp án rời rạc. Cách học an toàn hơn là nắm cấu trúc đề, học chắc 20 câu điểm liệt, nhận diện nhanh nhóm biển báo, xử lý sa hình theo thứ tự ưu tiên và luyện đề đủ nhiều để quen áp lực thời gian. Cẩm nang này tổng hợp các mẹo thi bằng lái xe A1 mới nhất cho người cần ôn nhanh nhưng vẫn muốn hiểu bản chất.
+        </p>
+
+        <!-- Thanh Thống Kê Nhanh (Summary Cards) -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:14px;">
+          <div style="background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#93C5FD; font-weight:700;">Đề thi A1</div>
+            <div style="font-size:1.15rem; font-weight:800; color:#FFF; margin-top:2px;">25 câu / 19 phút</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#86EFAC; font-weight:700;">Điều kiện đạt</div>
+            <div style="font-size:1.15rem; font-weight:800; color:#86EFAC; margin-top:2px;">Đúng ≥ 21/25 câu</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#FDE047; font-weight:700;">Ngân hàng ôn tập</div>
+            <div style="font-size:1.15rem; font-weight:800; color:#FFF; margin-top:2px;">250 câu chuẩn</div>
+          </div>
+          <div style="background:rgba(239,68,68,0.2); backdrop-filter:blur(6px); border:1px solid rgba(252,165,165,0.3); border-radius:12px; padding:14px 16px;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#FCA5A5; font-weight:700;">Điểm cần học trước</div>
+            <div style="font-size:1.15rem; font-weight:800; color:#FCA5A5; margin-top:2px;">20 câu điểm liệt</div>
+          </div>
         </div>
       </div>
+
+      <!-- Khối Văn Bản & Dẫn Nhập Pháp Lý -->
+      <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:26px 30px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+        <p style="color:#334155; font-size:0.96rem; line-height:1.7; margin-bottom:18px;">
+          Theo <a href="https://xaydungchinhsach.chinhphu.vn/huong-dan-su-dung-bo-600-cau-hoi-dung-de-sat-hach-lai-xe-co-gioi-duong-bo-119250513110514585.htm" target="_blank" rel="noopener noreferrer" style="color:#2563EB; font-weight:700; text-decoration:underline;">hướng dẫn sử dụng bộ 600 câu hỏi sát hạch lái xe cơ giới đường bộ</a> được áp dụng từ ngày 01/06/2025, hạng A1 và A dùng <b>250 câu hỏi chọn lọc từ bộ 600 câu</b>; mỗi đề lý thuyết có 25 câu, trong đó có 1 câu về tình huống mất an toàn giao thông nghiêm trọng. Vì vậy, khi tìm <em>mẹo thi bằng lái xe máy A1</em>, bạn nên ưu tiên mẹo giúp nhận diện nhóm câu và tránh sai câu liệt, thay vì chỉ ghi nhớ máy móc số thứ tự đáp án.
+        </p>
+
+        <!-- Callout: Học Nhanh Ngay -->
+        <div style="background:#EFF6FF; border-left:4px solid #2563EB; border-radius:0 12px 12px 0; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;">
+          <div>
+            <strong style="color:#1D4ED8; font-size:0.95rem; display:block; margin-bottom:4px;">⚡ Học nhanh ngay trên hệ thống:</strong>
+            <span style="color:#334155; font-size:0.9rem;">
+              Bắt đầu với <a href="javascript:void(0)" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="color:#DC2626; font-weight:800; text-decoration:underline;">20 câu điểm liệt A1</a>, sau đó làm <a href="javascript:void(0)" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">đề thi thử bằng lái xe A1 online</a> để kiểm tra khả năng đạt 21/25 câu trong 19 phút.
+            </span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="background:#DC2626; color:#FFF; border:none; padding:8px 14px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
+              🚨 20 Câu Liệt
+            </button>
+            <button type="button" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="background:#2563EB; color:#FFF; border:none; padding:8px 14px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
+              ✍️ Thi Thử A1
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Danh Sách Các Mục Mẹo Chi Tiết -->
+      <div style="display:flex; flex-direction:column; gap:26px;">
+
+        <!-- 1. Cấu trúc đề thi A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">1</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Cấu trúc đề thi A1 mới nhất cần nhớ trước khi học mẹo</h2>
+          </div>
+          
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:18px;">
+            Một lỗi phổ biến khi học mẹo thi lý thuyết A1 là lao ngay vào đáp án mà chưa hiểu đề thi được chia như thế nào. Khi biết rõ cấu trúc, bạn sẽ biết nhóm nào cần học thuộc, nhóm nào cần hiểu biển báo, nhóm nào cần luyện phản xạ sa hình.
+          </p>
+
+          <div style="overflow-x:auto; margin-bottom:18px;">
+            <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.9rem;">
+              <thead>
+                <tr style="background:#F1F5F9; color:#0F172A; border-bottom:2px solid #CBD5E1;">
+                  <th style="padding:12px 16px; font-weight:800; width:38%;">Nội dung trong đề A1</th>
+                  <th style="padding:12px 16px; font-weight:800; width:18%; text-align:center;">Số câu</th>
+                  <th style="padding:12px 16px; font-weight:800; width:44%;">Cách học nên ưu tiên</th>
+                </tr>
+              </thead>
+              <tbody style="color:#334155;">
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:700; color:#0F3D6E;">Quy định chung và quy tắc giao thông đường bộ</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:800; color:#2563EB;">8 câu</td>
+                  <td style="padding:12px 16px;">Học theo từ khóa: cấm, nhường đường, giảm tốc độ, làn đường, phần đường.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0; background:#FEF2F2;">
+                  <td style="padding:12px 16px; font-weight:800; color:#DC2626;">Tình huống mất an toàn giao thông nghiêm trọng</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:900; color:#DC2626;">1 câu</td>
+                  <td style="padding:12px 16px; color:#DC2626; font-weight:700;">Phải đúng tuyệt đối vì đây là câu điểm liệt.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:700; color:#0F3D6E;">Văn hóa giao thông, đạo đức người lái xe</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:800; color:#2563EB;">1 câu</td>
+                  <td style="padding:12px 16px;">Chọn đáp án an toàn, văn minh, không vội vàng, không tranh đường.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:700; color:#0F3D6E;">Kỹ thuật lái xe hoặc cấu tạo sửa chữa</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:800; color:#2563EB;">1 câu</td>
+                  <td style="padding:12px 16px;">Nhớ nguyên tắc xử lý xe, phanh, quan sát và kiểm soát tốc độ.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:700; color:#0F3D6E;">Báo hiệu đường bộ</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:800; color:#2563EB;">8 câu</td>
+                  <td style="padding:12px 16px;">Nhận diện hình dạng, màu sắc, nhóm biển cấm, nguy hiểm, hiệu lệnh, chỉ dẫn.</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px; font-weight:700; color:#0F3D6E;">Giải thế sa hình và xử lý tình huống giao thông</td>
+                  <td style="padding:12px 16px; text-align:center; font-weight:800; color:#2563EB;">6 câu</td>
+                  <td style="padding:12px 16px;">Áp dụng thứ tự ưu tiên: xe vào giao lộ, xe ưu tiên, đường ưu tiên, hướng đi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="color:#475569; font-size:0.92rem; line-height:1.6; margin:0; background:#F8FAFC; padding:12px 16px; border-radius:10px; border-left:3px solid #0F3D6E;">
+            💡 <b>Tóm lại:</b> Muốn học mẹo thi A1 hiệu quả, bạn nên chia thời gian theo đúng tỷ trọng: <b>điểm liệt học đầu tiên</b>, <b>biển báo và sa hình luyện mỗi ngày</b>, phần <b>quy tắc giao thông học bằng từ khóa</b> nhưng vẫn phải hiểu ngữ cảnh.
+          </p>
+        </div>
+
+        <!-- 2. Lộ trình học mẹo thi A1 trong 60 phút mỗi ngày -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">2</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Lộ trình học mẹo thi A1 trong 60 phút mỗi ngày</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            Nếu bạn chỉ còn vài ngày trước kỳ thi, đừng cố đọc lan man toàn bộ tài liệu từ đầu đến cuối. Hãy học theo lộ trình ngắn, có kiểm tra lại ngay sau mỗi nhóm. Đây cũng là cách bao phủ các nhóm từ khóa người học thường tìm như <em>cách học 250 câu A1 nhanh thuộc</em>, <em>mẹo thi lý thuyết A1</em>, <em>mẹo thi xe máy A1</em> và <em>mẹo thi bằng lái A1 mới nhất</em>.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-bottom:20px;">
+            <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="background:#DC2626; color:#FFF; font-weight:800; font-size:0.75rem; padding:2px 8px; border-radius:6px;">10 PHÚT ĐẦU</span>
+                <span style="font-weight:800; color:#DC2626; font-size:0.9rem;">Học 20 câu điểm liệt</span>
+              </div>
+              <p style="color:#7F1D1D; font-size:0.86rem; margin:0; line-height:1.5;">Học riêng 20 câu điểm liệt A1, ghi chú các hành vi bị cấm tuyệt đối.</p>
+            </div>
+
+            <div style="background:#FEFCE8; border:1px solid #FEF08A; border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="background:#CA8A04; color:#FFF; font-weight:800; font-size:0.75rem; padding:2px 8px; border-radius:6px;">15 PHÚT TIẾP</span>
+                <span style="font-weight:800; color:#854D0E; font-size:0.9rem;">Ôn nhóm biển báo</span>
+              </div>
+              <p style="color:#713F12; font-size:0.86rem; margin:0; line-height:1.5;">Ôn biển báo theo màu và hình dạng, không học rời từng biển.</p>
+            </div>
+
+            <div style="background:#F5F3FF; border:1px solid #DDD6FE; border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="background:#7C3AED; color:#FFF; font-weight:800; font-size:0.75rem; padding:2px 8px; border-radius:6px;">15 PHÚT TIẾP</span>
+                <span style="font-weight:800; color:#5B21B6; font-size:0.9rem;">Luyện sa hình ưu tiên</span>
+              </div>
+              <p style="color:#4C1D95; font-size:0.86rem; margin:0; line-height:1.5;">Luyện sa hình, luôn hỏi “xe nào được ưu tiên trước?” trước khi chọn đáp án.</p>
+            </div>
+
+            <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.75rem; padding:2px 8px; border-radius:6px;">15 PHÚT TIẾP</span>
+                <span style="font-weight:800; color:#1E40AF; font-size:0.9rem;">Làm đề thi thử 25 câu</span>
+              </div>
+              <p style="color:#1E3A8A; font-size:0.86rem; margin:0; line-height:1.5;">Làm một đề thi thử 25 câu trong điều kiện có bấm giờ 19 phút.</p>
+            </div>
+
+            <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <span style="background:#16A34A; color:#FFF; font-weight:800; font-size:0.75rem; padding:2px 8px; border-radius:6px;">5 PHÚT CUỐI</span>
+                <span style="font-weight:800; color:#166534; font-size:0.9rem;">Xem lại câu sai</span>
+              </div>
+              <p style="color:#14532D; font-size:0.86rem; margin:0; line-height:1.5;">Xem lại câu sai, đặc biệt là câu liệt, biển báo và sa hình.</p>
+            </div>
+          </div>
+
+          <div style="background:#F1F5F9; border-radius:12px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="font-size:0.9rem; color:#334155;">
+              <b>💡 Gợi ý:</b> Nếu chưa biết bắt đầu từ đâu, dùng <a href="javascript:void(0)" onclick="switchDrivingTab('lotrinh', document.querySelector('[data-tab=lotrinh]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">Lộ trình học A1</a> để đi theo từng bước: câu liệt, đề cố định, chủ đề, thi ngẫu nhiên và luyện tốc độ.
+            </div>
+            <button type="button" onclick="switchDrivingTab('lotrinh', document.querySelector('[data-tab=lotrinh]'))" style="background:#0F172A; color:#FFF; border:none; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.84rem; cursor:pointer;">
+              🎯 Mở Lộ Trình Học →
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Mẹo 20 câu điểm liệt A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#FEF2F2; color:#DC2626; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">3</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo 20 câu điểm liệt A1: nhóm phải học trước tiên</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:18px;">
+            Trong đề thi A1, chỉ cần sai câu điểm liệt là không đạt, kể cả khi bạn làm đúng hầu hết các câu còn lại. Vì vậy, nhóm <strong>mẹo 20 câu điểm liệt A1</strong> phải được học trước mọi mẹo khác.
+          </p>
+
+          <!-- Ảnh Biểu Trưng Câu Điểm Liệt -->
+          <div style="display:flex; justify-content:center; margin-bottom:24px;">
+            <div style="background:#FEF2F2; border:1.5px solid #FECACA; border-radius:16px; padding:12px; max-width:540px; width:100%; text-align:center; box-shadow:0 4px 14px rgba(220,38,38,0.06);">
+              <img src="./images/20-cau-diem-liet-a1.webp" alt="20 câu hỏi điểm liệt thi bằng lái xe máy A1" style="width:100%; height:auto; max-height:260px; object-fit:cover; border-radius:10px;" onerror="this.src='./images/driving_a1/q_17.jpg'">
+              <p style="margin:10px 0 0; font-size:0.85rem; font-weight:800; color:#DC2626;">
+                ⚠️ Bắt buộc đúng tuyệt đối 100% các câu hỏi điểm liệt để không bị trượt trực tiếp
+              </p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:18px; margin-bottom:20px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1.02rem; font-weight:800; color:#DC2626; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                <span>🔍</span> Nhận diện câu điểm liệt qua nội dung nguy hiểm
+              </h3>
+              <p style="color:#334155; font-size:0.88rem; line-height:1.65; margin:0;">
+                Các câu điểm liệt thường xoay quanh hành vi gây mất an toàn giao thông nghiêm trọng: <b>sử dụng rượu bia, chất kích thích; đi ngược chiều; đua xe trái phép; bỏ trốn sau tai nạn; không chấp hành hiệu lệnh; chở quá quy định; vượt, quay đầu, dừng đỗ ở nơi nguy hiểm</b>. Khi thấy đáp án thể hiện sự liều lĩnh, tranh đường hoặc coi nhẹ an toàn, gần như chắc chắn đó là đáp án sai.
+              </p>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1.02rem; font-weight:800; color:#16A34A; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                <span>🎯</span> Nguyên tắc chọn đáp án trong câu liệt
+              </h3>
+              <ul style="color:#334155; font-size:0.88rem; line-height:1.65; margin:0; padding-left:18px;">
+                <li><b>Ưu tiên đáp án tuân thủ pháp luật</b> và bảo đảm an toàn cho người tham gia giao thông.</li>
+                <li><b>Không chọn đáp án cho phép tiếp tục đi</b> khi có nguy cơ tai nạn, khuất tầm nhìn hoặc thiếu điều kiện an toàn.</li>
+                <li>Với câu hỏi hành vi bị nghiêm cấm, đọc kỹ từng vế; nếu nhiều hành vi đều bị cấm, đáp án tổng hợp thường là lựa chọn cần chú ý.</li>
+                <li><b>Không học câu liệt bằng mẹo số thứ tự đáp án</b> vì đề và thứ tự lựa chọn có thể thay đổi.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background:#FEF2F2; border-radius:12px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="color:#991B1B; font-size:0.88rem; line-height:1.5;">
+              <b>Cách chắc nhất:</b> Luyện riêng nhóm câu liệt cho đến khi bạn đúng liên tiếp nhiều lượt. Sau đó mới chuyển sang đề ngẫu nhiên để tránh cảm giác “học thuộc nhưng vào đề thật vẫn rối”.
+            </div>
+            <button type="button" onclick="startExamSimulation('A1', 'paralyzed', 'Học 20 Câu Điểm Liệt A1 (Kèm Lời Giải & Mẹo)', true)" style="background:#DC2626; color:#FFF; border:none; padding:10px 20px; border-radius:8px; font-weight:800; font-size:0.88rem; cursor:pointer; box-shadow:0 2px 8px rgba(220,38,38,0.25);">
+              🚨 Vào Luyện 20 Câu Liệt Ngay →
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Mẹo khái niệm, quy tắc & đạo đức -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">4</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo câu khái niệm, quy tắc giao thông và đạo đức lái xe</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            Nhóm quy tắc giao thông trong đề A1 có nhiều câu chữ dài. Mẹo tốt nhất là tìm <b>động từ chính</b> và <b>cụm từ thể hiện mức độ bắt buộc</b>. Khi gặp câu hỏi về “phải làm gì”, “không được làm gì”, “người lái xe cần xử lý ra sao”, hãy đọc theo hướng <b>an toàn trước, nhanh sau</b>.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:14px; margin-bottom:20px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <div style="color:#2563EB; font-weight:800; font-size:0.92rem; margin-bottom:6px;">🔑 Phải giảm tốc độ</div>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                Thường gắn với khu vực đông người, giao nhau, đường hẹp, tầm nhìn hạn chế, thời tiết xấu.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <div style="color:#2563EB; font-weight:800; font-size:0.92rem; margin-bottom:6px;">🔑 Phải nhường đường</div>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                Chú ý người đi bộ, xe ưu tiên, xe trên đường ưu tiên, xe từ bên phải tại giao lộ đồng cấp.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <div style="color:#DC2626; font-weight:800; font-size:0.92rem; margin-bottom:6px;">🔑 Bị nghiêm cấm</div>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                Đọc kỹ vì nhiều câu bẫy bằng cách đưa cả hành vi rất quen thuộc lẫn hành vi nguy hiểm.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <div style="color:#16A34A; font-weight:800; font-size:0.92rem; margin-bottom:6px;">🔑 Đi đúng làn, phần đường</div>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                Nếu đáp án khuyến khích lấn làn, vượt ẩu, chen ngang thì loại bỏ sớm.
+              </p>
+            </div>
+          </div>
+
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:18px;">
+            <h3 style="font-size:1rem; font-weight:800; color:#166534; margin-bottom:8px;">Mẹo câu văn hóa giao thông &amp; đạo đức:</h3>
+            <p style="color:#14532D; font-size:0.88rem; line-height:1.6; margin:0;">
+              Với câu văn hóa giao thông, đáp án đúng thường thể hiện <b>thái độ bình tĩnh, tôn trọng, giúp đỡ người bị nạn, nhường nhịn và không gây nguy hiểm cho người khác</b>. Tránh chọn các đáp án có tinh thần nóng vội, bấm còi liên tục, tranh đường, bỏ mặc tai nạn hoặc xử lý theo cảm tính.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. Mẹo biển báo A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">5</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo biển báo A1: nhìn hình dạng và màu trước khi đọc chữ</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            Biển báo là nhóm dễ kiếm điểm nếu học đúng cách. Đừng cố nhớ từng biển riêng lẻ ngay từ đầu. Hãy nhận diện nhóm biển bằng hình dạng và màu sắc, sau đó mới học các biển dễ nhầm.
+          </p>
+
+          <!-- 2 Card Ảnh Minh Họa Biển Báo -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:22px;">
+            <div style="background:#FFF; border:1.5px solid #FECACA; border-radius:14px; padding:20px; display:flex; flex-direction:column; align-items:center; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+              <img src="./images/188.jpg" alt="Biển báo cấm xe mô tô hai bánh đi vào" style="width:120px; height:120px; object-fit:contain; margin-bottom:12px;" onerror="this.src='./images/driving_a1/q_111.jpg'">
+              <h4 style="font-size:1rem; font-weight:800; color:#DC2626; margin-bottom:6px;">1. Nhóm Biển Cấm</h4>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                <b>Hình tròn viền đỏ nền trắng:</b> Biểu thị các điều cấm người lái xe không được vi phạm.
+              </p>
+            </div>
+
+            <div style="background:#FFF; border:1.5px solid #FEF08A; border-radius:14px; padding:20px; display:flex; flex-direction:column; align-items:center; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+              <img src="./images/227.png" alt="Biển cảnh báo nguy hiểm giao nhau đường đồng mức" style="width:120px; height:120px; object-fit:contain; margin-bottom:12px;" onerror="this.src='./images/driving_a1/q_138.jpg'">
+              <h4 style="font-size:1rem; font-weight:800; color:#D97706; margin-bottom:6px;">2. Nhóm Biển Nguy Hiểm</h4>
+              <p style="color:#475569; font-size:0.85rem; line-height:1.5; margin:0;">
+                <b>Hình tam giác viền đỏ nền vàng:</b> Báo trước các tình huống nguy hiểm để giảm tốc độ.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bảng 4 Nhóm Biển Báo -->
+          <div style="overflow-x:auto; margin-bottom:20px;">
+            <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.9rem;">
+              <thead>
+                <tr style="background:#F1F5F9; color:#0F172A; border-bottom:2px solid #CBD5E1;">
+                  <th style="padding:12px 16px; font-weight:800; width:25%;">Nhóm biển</th>
+                  <th style="padding:12px 16px; font-weight:800; width:35%;">Dấu hiệu nhận biết</th>
+                  <th style="padding:12px 16px; font-weight:800; width:40%;">Mẹo ghi nhớ</th>
+                </tr>
+              </thead>
+              <tbody style="color:#334155;">
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:800; color:#DC2626;">Biển cấm</td>
+                  <td style="padding:12px 16px;">Thường là hình tròn, viền đỏ, nền trắng</td>
+                  <td style="padding:12px 16px;">Gặp biển cấm thì nghĩ ngay đến <b>hành vi không được làm</b>.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:800; color:#D97706;">Biển nguy hiểm, cảnh báo</td>
+                  <td style="padding:12px 16px;">Thường là tam giác viền đỏ, nền vàng</td>
+                  <td style="padding:12px 16px;">Có nguy cơ phía trước, người lái phải <b>giảm tốc và quan sát</b>.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #E2E8F0;">
+                  <td style="padding:12px 16px; font-weight:800; color:#2563EB;">Biển hiệu lệnh</td>
+                  <td style="padding:12px 16px;">Thường là hình tròn nền xanh</td>
+                  <td style="padding:12px 16px;"><b>Bắt buộc đi theo hướng</b> hoặc cách thể hiện trên biển.</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px; font-weight:800; color:#16A34A;">Biển chỉ dẫn</td>
+                  <td style="padding:12px 16px;">Thường là hình vuông hoặc chữ nhật nền xanh</td>
+                  <td style="padding:12px 16px;">Cung cấp hướng đi, khu vực, làn đường hoặc thông tin hỗ trợ.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:18px; margin-bottom:18px;">
+            <h3 style="font-size:1rem; font-weight:800; color:#0F172A; margin-bottom:10px;">Các cặp biển dễ nhầm khi thi A1:</h3>
+            <ul style="color:#334155; font-size:0.88rem; line-height:1.7; margin:0; padding-left:20px;">
+              <li><b>Cấm rẽ và cấm quay đầu:</b> nhìn kỹ mũi tên và vạch gạch đỏ, không suy luận theo thói quen đi đường.</li>
+              <li><b>Đường cấm và cấm đi ngược chiều:</b> một biển cấm mọi xe vào, một biển báo chiều đường không được đi từ phía đó.</li>
+              <li><b>Nơi giao nhau và đường ưu tiên:</b> cần phân biệt biển cảnh báo giao nhau với biển xác định quyền ưu tiên.</li>
+              <li><b>Biển dành cho xe thô sơ, xe mô tô, xe gắn máy:</b> đọc đúng đối tượng phương tiện để không chọn nhầm.</li>
+            </ul>
+          </div>
+
+          <div style="background:#EFF6FF; border-radius:12px; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="color:#1E40AF; font-size:0.88rem;">
+              Khi luyện <a href="javascript:void(0)" onclick="startExamSimulation('A1', 'chapter4', 'Học Chuyên Đề Biển Báo (94 Câu Kèm Mẹo)', true)" style="color:#2563EB; font-weight:800; text-decoration:underline;">câu hỏi biển báo A1</a>, hãy ghi lại các biển bạn nhầm nhiều nhất. Chỉ cần giảm lỗi ở nhóm biển báo, điểm lý thuyết A1 sẽ tăng rất nhanh.
+            </div>
+            <button type="button" onclick="startExamSimulation('A1', 'chapter4', 'Học Chuyên Đề Biển Báo (94 Câu Kèm Mẹo)', true)" style="background:#2563EB; color:#FFF; border:none; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
+              🚸 Luyện 94 Câu Biển Báo →
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Mẹo sa hình A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">6</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo sa hình A1: giải theo thứ tự ưu tiên cố định</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            Sa hình là nhóm nhiều người sợ vì nhìn hình có vẻ rối. Thực ra, phần lớn câu sa hình A1 có thể giải bằng một quy trình cố định. <b>Đừng nhìn đáp án trước; hãy xác định quyền đi trước của từng xe</b>.
+          </p>
+
+          <!-- 2 Card Ảnh Minh Họa Sa Hình -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-bottom:22px;">
+            <div style="background:#FFF; border:1.5px solid #A7F3D0; border-radius:14px; padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+              <img src="./images/487.jpg" alt="Tình huống sa hình xe ưu tiên chữa cháy được đi trước" style="width:100%; max-width:280px; height:150px; object-fit:contain; border-radius:8px; margin-bottom:10px;" onerror="this.src='./images/driving_a1/q_215.jpg'">
+              <p style="margin:0; font-size:0.85rem; font-weight:800; color:#065F46;">
+                Bước 2: Xe Cứu Hỏa (Hỏa - Sự - An - Thương) luôn có quyền ưu tiên cao nhất
+              </p>
+            </div>
+
+            <div style="background:#FFF; border:1.5px solid #BAE6FD; border-radius:14px; padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+              <img src="./images/490.jpg" alt="Tình huống sa hình theo quyền đường ưu tiên" style="width:100%; max-width:280px; height:150px; object-fit:contain; border-radius:8px; margin-bottom:10px;" onerror="this.src='./images/driving_a1/q_220.jpg'">
+              <p style="margin:0; font-size:0.85rem; font-weight:800; color:#0369A1;">
+                Bước 3: Xe trên đường có biển quả trám vàng (Đường ưu tiên) đi trước
+              </p>
+            </div>
+          </div>
+
+          <!-- Trình Tự 5 Bước Ưu Tiên Cố Định -->
+          <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:center;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.9rem; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</span>
+              <div>
+                <b style="color:#0F172A; font-size:0.92rem;">Xe đã vào nơi giao nhau:</b>
+                <span style="color:#475569; font-size:0.88rem;"> xe đã đi vào giao lộ trước thường được xét trước.</span>
+              </div>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:center;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.9rem; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</span>
+              <div>
+                <b style="color:#0F172A; font-size:0.92rem;">Xe ưu tiên:</b>
+                <span style="color:#475569; font-size:0.88rem;"> xe chữa cháy, quân sự, công an, cứu thương khi làm nhiệm vụ được ưu tiên theo quy định.</span>
+              </div>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:center;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.9rem; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</span>
+              <div>
+                <b style="color:#0F172A; font-size:0.92rem;">Đường ưu tiên:</b>
+                <span style="color:#475569; font-size:0.88rem;"> xe trên đường ưu tiên được đi trước xe từ đường không ưu tiên.</span>
+              </div>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:center;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.9rem; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</span>
+              <div>
+                <b style="color:#0F172A; font-size:0.92rem;">Hướng đi tại giao lộ đồng cấp:</b>
+                <span style="color:#475569; font-size:0.88rem;"> xét xe bên phải trống, xe đi thẳng, xe rẽ phải, xe rẽ trái theo tình huống cụ thể.</span>
+              </div>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; display:flex; gap:14px; align-items:center;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.9rem; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">5</span>
+              <div>
+                <b style="color:#0F172A; font-size:0.92rem;">Biển báo và vạch kẻ đường:</b>
+                <span style="color:#475569; font-size:0.88rem;"> nếu hình có biển, phải đọc biển trước khi suy luận theo cảm giác.</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#FEF3C7; border-left:4px solid #D97706; padding:14px 18px; border-radius:0 10px 10px 0; color:#92400E; font-size:0.88rem; line-height:1.6; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+              💡 <b>Mẹo nhớ nhanh:</b> Sa hình không phải đoán xe nào “có vẻ nhanh hơn”, mà là tìm xe có quyền ưu tiên hợp pháp hơn. Hãy đọc biển, hướng đi và vị trí xe trước khi nhìn đáp án.
+            </div>
+            <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Học Chuyên Đề Sa Hình (41 Câu Kèm Mẹo)', true)" style="background:#D97706; color:#FFF; border:none; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
+              🏎️ Luyện 41 Câu Sa Hình →
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. Mẹo học 250 câu A1 nhanh thuộc -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">7</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo học 250 câu A1 nhanh thuộc mà không học vẹt</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:18px;">
+            Bộ 250 câu A1 có thể khiến người mới học thấy dài, nhưng nội dung được chia theo nhóm rõ ràng. Cách học tốt là đi từ nhóm rủi ro cao đến nhóm dễ lấy điểm, sau đó luyện đề để gắn kiến thức vào thời gian thật.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1rem; font-weight:800; color:#0F172A; margin-bottom:12px;">Thứ tự học nên dùng:</h3>
+              <ul style="color:#334155; font-size:0.88rem; line-height:1.7; margin:0; padding-left:18px;">
+                <li><b>Bước 1:</b> học 20 câu điểm liệt đến khi không còn sai.</li>
+                <li><b>Bước 2:</b> học biển báo theo nhóm màu và hình dạng.</li>
+                <li><b>Bước 3:</b> luyện sa hình theo thứ tự ưu tiên.</li>
+                <li><b>Bước 4:</b> ôn quy tắc giao thông bằng từ khóa và tình huống.</li>
+                <li><b>Bước 5:</b> làm đề ngẫu nhiên, xem lại câu sai và làm lại sau vài giờ.</li>
+              </ul>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1rem; font-weight:800; color:#0F172A; margin-bottom:12px;">Cách xử lý câu sai:</h3>
+              <p style="color:#334155; font-size:0.88rem; line-height:1.65; margin:0;">
+                Mỗi câu sai nên được phân loại: sai vì không thuộc luật, sai vì đọc thiếu chữ, sai vì nhầm biển báo, sai vì không hiểu sa hình hay sai vì vội. Khi biết nguyên nhân, bạn sẽ sửa nhanh hơn nhiều so với việc chỉ nhìn đáp án đúng rồi bỏ qua. Hệ thống của chúng tôi tự động lưu mục <b>"Các Câu Từng Sai"</b> để bạn ôn tập lại bất kỳ lúc nào.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Chiến thuật làm bài thi A1 trong 19 phút -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">8</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Chiến thuật làm bài thi A1 trong 19 phút</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            19 phút là đủ nếu bạn có chiến thuật. Đừng dừng quá lâu ở một câu khó ngay vòng đầu. Mục tiêu là lấy chắc câu dễ, đánh dấu câu phân vân, rồi quay lại xử lý khi đầu óc đã ổn hơn.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:18px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <span style="background:#2563EB; color:#FFF; font-weight:800; font-size:0.75rem; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:8px;">VÒNG 1</span>
+              <p style="color:#334155; font-size:0.86rem; line-height:1.5; margin:0;">
+                Làm nhanh các câu chắc chắn, đặc biệt là biển báo quen và câu quy tắc rõ ràng.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <span style="background:#D97706; color:#FFF; font-weight:800; font-size:0.75rem; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:8px;">VÒNG 2</span>
+              <p style="color:#334155; font-size:0.86rem; line-height:1.5; margin:0;">
+                Quay lại câu sa hình, câu dài và câu có nhiều vế phủ định.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <span style="background:#DC2626; color:#FFF; font-weight:800; font-size:0.75rem; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:8px;">VÒNG 3</span>
+              <p style="color:#334155; font-size:0.86rem; line-height:1.5; margin:0;">
+                Kiểm tra câu điểm liệt, câu có chữ “không”, “cấm”, “phải”, “được phép”.
+              </p>
+            </div>
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+              <span style="background:#16A34A; color:#FFF; font-weight:800; font-size:0.75rem; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:8px;">TRƯỚC KHI NỘP</span>
+              <p style="color:#334155; font-size:0.86rem; line-height:1.5; margin:0;">
+                Chắc chắn không bỏ trống câu nào và không chọn nhầm do thao tác tay.
+              </p>
+            </div>
+          </div>
+
+          <p style="color:#475569; font-size:0.9rem; line-height:1.6; margin:0;">
+            Khi luyện trên phần mềm thi thử của chúng tôi, hãy tập bấm giờ như thi thật. Nếu bạn thường đạt <b>23/25 trở lên ở đề ngẫu nhiên</b> và không sai câu liệt, khả năng vào phòng thi sẽ vững vàng 100%.
+          </p>
+        </div>
+
+        <!-- 9. Mẹo thi thực hành A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">9</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Mẹo thi thực hành A1: vòng số 8 và các bài phụ</h2>
+          </div>
+
+          <p style="color:#475569; font-size:0.93rem; line-height:1.65; margin-bottom:20px;">
+            Phần lớn người thi bằng lái xe máy vẫn cần chuẩn bị phần thực hành. Phần thực hành gồm vòng số 8 và các đoạn đường phụ như đường thẳng, đường quanh co, đường gồ ghề. Mục tiêu là <b>đi chậm, đều, đúng hướng và không chạm vạch</b>.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1rem; font-weight:800; color:#0F3D6E; margin-bottom:12px;">🏍️ Mẹo đi vòng số 8:</h3>
+              <ul style="color:#334155; font-size:0.88rem; line-height:1.7; margin:0; padding-left:18px;">
+                <li><b>Chọn số xe phù hợp:</b> Trước khi vào bài, nên đi <b>số 2 hoặc số 3</b> để xe đầm, không bị giật hay bốc đầu.</li>
+                <li><b>Nhìn xa theo hướng muốn đi:</b> Không nhìn chằm chằm xuống bánh trước; mắt nhìn hướng nào đầu xe sẽ đi theo hướng đó.</li>
+                <li><b>Giữ ga đều:</b> Không giật ga, rà nhẹ phanh chân khi cần giảm tốc. <b>Tuyệt đối không bóp phanh trước</b> đột ngột khi đang ôm cua.</li>
+                <li><b>Ôm cua rộng vừa đủ:</b> Cho bánh trước bám mép ngoài đường cua để bánh sau không cắt vào vạch trong.</li>
+              </ul>
+            </div>
+
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
+              <h3 style="font-size:1rem; font-weight:800; color:#0F3D6E; margin-bottom:12px;">🛣️ Mẹo qua đường thẳng, quanh co và gồ ghề:</h3>
+              <ul style="color:#334155; font-size:0.88rem; line-height:1.7; margin:0; padding-left:18px;">
+                <li><b>Ở đường thẳng:</b> Giữ mắt nhìn thẳng về cuối đoạn đường, thả lỏng vai và giữ tay lái thật ổn định.</li>
+                <li><b>Ở đường quanh co (zíc-zắc):</b> Đi chậm, đánh lái mềm mại, không bẻ lái gấp để tránh chạm cọc cảm ứng.</li>
+                <li><b>Ở đường gồ ghề:</b> Giữ chắc tay lái, hơi đứng nhổm nhẹ chân khỏi gác chân để giảm sốc và không tăng ga bất ngờ.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Những lỗi thường gặp khiến rớt A1 dù đã học mẹo -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#FEF2F2; color:#DC2626; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">10</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Những lỗi thường gặp khiến rớt A1 dù đã học mẹo</h2>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:0 10px 10px 0; padding:12px 16px; color:#334155; font-size:0.9rem;">
+              <b>1. Chỉ học đáp án theo số thứ tự:</b> khi vào phòng thi hệ thống đảo vị trí đáp án là bạn mất phương hướng ngay.
+            </div>
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:0 10px 10px 0; padding:12px 16px; color:#334155; font-size:0.9rem;">
+              <b>2. Bỏ qua câu điểm liệt:</b> làm đúng 24/25 câu nhưng sai trúng 1 câu điểm liệt vẫn bị trượt trực tiếp.
+            </div>
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:0 10px 10px 0; padding:12px 16px; color:#334155; font-size:0.9rem;">
+              <b>3. Đọc thiếu chữ phủ định:</b> các từ then chốt như <i>“không”, “cấm”, “phải”, “được phép”</i> thường là bẫy phổ biến nhất.
+            </div>
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:0 10px 10px 0; padding:12px 16px; color:#334155; font-size:0.9rem;">
+              <b>4. Nhầm biển báo do nhìn lướt:</b> đặc biệt là phân biệt giữa biển cấm, biển hiệu lệnh và biển chỉ dẫn.
+            </div>
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:0 10px 10px 0; padding:12px 16px; color:#334155; font-size:0.9rem;">
+              <b>5. Không luyện thi bấm giờ:</b> dù biết kiến thức nhưng vào thi thật dễ mất bình tĩnh vì áp lực đồng hồ đếm ngược.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ: Câu hỏi thường gặp về mẹo thi A1 -->
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:1.3rem;">❓</div>
+            <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin:0;">Câu hỏi thường gặp về mẹo thi A1</h2>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;" open>
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Mẹo thi A1 có đủ để đậu không?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                Mẹo giúp bạn học nhanh và tránh bẫy, nhưng vẫn cần luyện đề để hiểu câu hỏi. Tối thiểu hãy học chắc 20 câu điểm liệt, luyện biển báo, sa hình và làm nhiều đề 25 câu có bấm giờ trên website của chúng tôi.
+              </p>
+            </details>
+
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Thi bằng lái xe A1 cần đúng bao nhiêu câu?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                Bài lý thuyết A1 gồm <b>25 câu trong 19 phút</b>. Bạn cần đúng từ <b>21/25 câu trở lên VÀ không được sai câu điểm liệt</b>.
+              </p>
+            </details>
+
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Bộ đề A1 hiện có bao nhiêu câu?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                Hạng A1 ôn theo <b>250 câu hỏi chọn lọc từ bộ 600 câu hỏi</b> dùng cho sát hạch lái xe cơ giới đường bộ (Cục Đường Bộ & Bộ Công An ban hành), trong đó có đúng 20 câu về tình huống mất an toàn giao thông nghiêm trọng.
+              </p>
+            </details>
+
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Nên học 20 câu điểm liệt A1 lúc nào?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                <b>Nên học đầu tiên!</b> Khi đã chắc câu liệt, bạn mới nên chuyển sang làm các bộ đề ngẫu nhiên, vì sai 1 câu liệt là không đạt dù tổng điểm của bạn đạt 24/25.
+              </p>
+            </details>
+
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Làm sao để nhớ biển báo A1 nhanh?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                Hãy học theo nhóm hình dạng và màu sắc trước: biển cấm (tròn đỏ), biển nguy hiểm (tam giác vàng), biển hiệu lệnh (tròn xanh), biển chỉ dẫn (vuông/chữ nhật xanh). Sau đó mới học các cặp biển dễ nhầm.
+              </p>
+            </details>
+
+            <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;" open>
+              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Luyện đề thi thử A1 ở đâu chuẩn nhất?</summary>
+              <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
+                Bạn có thể làm đề ngay tại website của chúng tôi: vào <a href="javascript:void(0)" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">phần mềm thi thử bằng lái xe A1 online</a>, ôn riêng <a href="javascript:void(0)" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="color:#DC2626; font-weight:800; text-decoration:underline;">20 câu điểm liệt A1</a> hoặc tra cứu từng câu trong <a href="javascript:void(0)" onclick="switchDrivingTab('tracuu600', document.querySelector('[data-tab=tracuu600]'))" style="color:#16A34A; font-weight:800; text-decoration:underline;">ngân hàng câu hỏi A1</a> hoàn toàn miễn phí!
+              </p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Kết luận & Khung CTA Hành Động -->
+        <div style="background:linear-gradient(135deg, #1E293B 0%, #0F172A 100%); border-radius:20px; padding:32px; color:#FFF; text-align:center; box-shadow:0 8px 25px rgba(15,23,42,0.2);">
+          <h2 style="font-size:1.6rem; font-weight:900; color:#FDE047; margin-bottom:12px;">
+            Kết luận: học mẹo A1 đúng cách là học để hiểu nhanh hơn
+          </h2>
+          <p style="color:#CBD5E1; font-size:0.96rem; line-height:1.7; max-width:800px; margin:0 auto 24px;">
+            Mẹo thi bằng lái xe A1 hiệu quả nhất là mẹo giúp bạn nhận ra quy luật của đề: <b>câu liệt phải đúng tuyệt đối</b>, <b>biển báo phải nhìn nhóm trước</b>, <b>sa hình phải xét quyền ưu tiên</b>, <b>câu quy tắc phải đọc kỹ chữ bắt buộc và phủ định</b>. Sau khi đọc xong bài này, hãy bấm ngay các nút bên dưới để bắt đầu luyện tập!
+          </p>
+
+          <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px;">
+            <button type="button" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="background:#2563EB; color:#FFF; border:none; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(37,99,235,0.3);">
+              ✍️ Vào Thi Thử A1 Ngay
+            </button>
+            <button type="button" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="background:#DC2626; color:#FFF; border:none; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(220,38,38,0.3);">
+              🚨 Ôn 20 Câu Điểm Liệt
+            </button>
+            <button type="button" onclick="switchDrivingTab('lotrinh', document.querySelector('[data-tab=lotrinh]'))" style="background:#059669; color:#FFF; border:none; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+              🎯 Xem Lộ Trình Học A1
+            </button>
+            <button type="button" onclick="switchDrivingTab('tracuu600', document.querySelector('[data-tab=tracuu600]'))" style="background:#475569; color:#FFF; border:none; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+              🔍 Tra Cứu Ngân Hàng Câu Hỏi
+            </button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
@@ -1742,13 +2577,59 @@
     </div>
   </div>
 
-  <div id="pane-cau-liet-20" class="driving-tab-pane" style="display:none; padding:40px 0;">
-    <div class="wrap" style="max-width:860px;">
-      <div style="background:#FEF2F2; border:1.5px solid #FCA5A5; border-radius:14px; padding:24px; margin-bottom:24px;">
-        <h2 style="font-size:1.4rem; color:#DC2626; font-weight:800; margin-bottom:6px;">⚠️ Chuyên Đề 20 Câu Hỏi Điểm Liệt Xe Máy Hạng A1 / A</h2>
-        <p style="color:#991B1B; font-size:0.92rem; line-height:1.5;">Trong đề thi sát hạch lý thuyết thật, nếu thí sinh trả lời sai dù chỉ <b>1 câu duy nhất</b> trong danh sách câu điểm liệt này, bài thi sẽ bị <b>TRƯỢT TRỰC TIẾP NGAY LẬP TỨC</b> dù các câu khác làm đúng 100%!</p>
+    <!-- TAB PANE: 20 CÂU HỎI ĐIỂM LIỆT (PROMAX UI/UX EDITION) -->
+  <div id="pane-cau-liet-20" class="driving-tab-pane" style="display:none; padding:36px 0 70px; background:#F8FAFC;">
+    <div class="wrap" style="max-width:960px; margin:0 auto; padding:0 20px;">
+      
+      <!-- Hero Banner ProMax -->
+      <div style="background:linear-gradient(135deg, #1E1B4B 0%, #0F172A 60%, #1E293B 100%); border-radius:20px; padding:32px 30px; color:#FFF; margin-bottom:26px; box-shadow:0 12px 30px rgba(15,23,42,0.18); position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.1);">
+        <div style="position:absolute; right:-20px; top:-20px; font-size:9rem; opacity:0.04; user-select:none; pointer-events:none;">🚨</div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
+          <div>
+            <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(239,68,68,0.2); border:1px solid rgba(248,113,113,0.3); color:#FCA5A5; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; padding:4px 14px; border-radius:20px; margin-bottom:10px;">
+              <span style="width:8px; height:8px; background:#EF4444; border-radius:50%; display:inline-block; box-shadow:0 0 0 3px rgba(239,68,68,0.3);"></span>
+              QUY CHUẨN SÁT HẠCH 2026 • SAI 1 CÂU LÀ RỚT NGAY
+            </div>
+            <h1 style="font-size:2rem; font-weight:900; color:#FFF; margin:0 0 8px; line-height:1.25;">
+              20 Câu Hỏi Điểm Liệt Xe Máy (Hạng A1 &amp; A)
+            </h1>
+            <p style="color:#CBD5E1; font-size:0.95rem; line-height:1.6; max-width:760px; margin:0;">
+              Chỉ cần trả lời sai dù chỉ <b>1 câu duy nhất</b> trong 20 câu này, bài thi sẽ bị <b>TRƯỢT TRỰC TIẾP NGAY LẬP TỨC</b>! Toàn bộ 20 câu đã được thiết kế chuẩn ProMax kèm đáp án đúng, mẹo ghi nhớ vàng và giọng đọc AI.
+            </p>
+          </div>
+          
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" onclick="startExamSimulation('A1', 'paralyzed', 'Thi Thử 20 Câu Điểm Liệt A1 (15 Phút)', false)" style="background:#DC2626; color:#FFF; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(220,38,38,0.35); transition:all 0.2s;">
+              ✍️ Thi Thử 20 Câu
+            </button>
+            <button type="button" onclick="startExamSimulation('A1', 'paralyzed', 'Học 20 Câu Điểm Liệt A1 (Kèm Lời Giải & Mẹo)', true)" style="background:#2563EB; color:#FFF; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(37,99,235,0.35); transition:all 0.2s;">
+              📖 Luyện Có Mẹo &amp; Lời Giải
+            </button>
+          </div>
+        </div>
+
+        <!-- Thanh Tìm Kiếm & Lọc Nhanh ProMax -->
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.12);">
+          <div style="flex:1; min-width:260px; position:relative;">
+            <input type="text" id="paralyzedSearchInput" oninput="renderParalyzedQuestions(this.value)" placeholder="🔍 Nhập từ khóa tìm nhanh (cồn, ma túy, nhường đường, quay đầu, vượt xe...)" style="width:100%; background:rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.2); border-radius:10px; padding:10px 16px; color:#FFF; font-size:0.88rem; outline:none; backdrop-filter:blur(6px); transition:all 0.2s;" onfocus="this.style.background='rgba(255,255,255,0.2)'; this.style.borderColor='#93C5FD';" onblur="this.style.background='rgba(255,255,255,0.12)'; this.style.borderColor='rgba(255,255,255,0.2)';">
+          </div>
+          
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" onclick="document.getElementById('paralyzedSearchInput').value=''; renderParalyzedQuestions('')" style="background:rgba(255,255,255,0.15); color:#FFF; border:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer;">
+              Tất Cả (20)
+            </button>
+            <button type="button" onclick="document.getElementById('paralyzedSearchInput').value='cấm'; renderParalyzedQuestions('cấm')" style="background:rgba(239,68,68,0.25); color:#FCA5A5; border:1px solid rgba(248,113,113,0.3); padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer;">
+              🚫 Bị Cấm
+            </button>
+            <button type="button" onclick="document.getElementById('paralyzedSearchInput').value='nhường'; renderParalyzedQuestions('nhường')" style="background:rgba(37,99,235,0.25); color:#93C5FD; border:1px solid rgba(147,197,253,0.3); padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer;">
+              🚶 Nhường Đường
+            </button>
+          </div>
+        </div>
       </div>
       
+      <!-- Danh Sách 20 Câu Điểm Liệt ProMax -->
       <div id="paralyzedQuestionsList"></div>
     </div>
   </div>
@@ -1914,15 +2795,8 @@
 
   // 2. AUTH & STATE MANAGEMENT
   let currentUser = JSON.parse(localStorage.getItem('nb_user')) || null;
-  let allUsers = JSON.parse(localStorage.getItem('nb_all_users')) || [
-    { name: "Quản Trị Viên", email: "admin@ninhbinh.vn", role: "admin", date: "2026-01-01" },
-    { name: "Chủ Homestay Tam Cốc", email: "tamcoc@homestay.vn", role: "homestay", date: "2026-02-15" },
-    { name: "Cửa Hàng Cơm Cháy", email: "comchay@hoalu.vn", role: "merchant", date: "2026-02-20" }
-  ];
-  let serviceRequests = JSON.parse(localStorage.getItem('nb_requests')) || [
-    { name: "Nguyễn Văn Hùng", phone: "0988123456", service: "Thiết kế Website Homestay", note: "Cần tích hợp thanh toán VietQR" },
-    { name: "Trần Thị Mai", phone: "0912345678", service: "Đào tạo AI cho đội ngũ", note: "Dạy viết bài Facebook & trả lời Zalo" }
-  ];
+  let allUsers = JSON.parse(localStorage.getItem('nb_all_users')) || [];
+  let serviceRequests = JSON.parse(localStorage.getItem('nb_requests')) || [];
 
   // Init App on Load
   window.addEventListener('DOMContentLoaded', () => {
@@ -4356,27 +5230,263 @@
     }
   }
 
-  // 8. Watermark
+  // 8. Watermark (Đóng Dấu Bản Quyền Đa Năng: Chọn Màu, Độ Mờ, Tải Logo, Đổi Vị Trí)
   let rawWmImg = null;
+  let wmLogoImg = null;
+  let wmCurrentMode = 'text';
+  let wmPosition = 'bottom-right';
+  let wmFontSize = 'md';
+  let wmShadow = true;
+
   function renderWatermark() {
+    rawWmImg = null;
+    wmLogoImg = null;
+    wmCurrentMode = 'text';
+    wmPosition = 'bottom-right';
+    wmFontSize = 'md';
+    wmShadow = true;
+
     const html = `
-      <div>
-        <div class="drop-zone" onclick="document.getElementById('wmInp').click()">
+      <div style="font-family:inherit;">
+        <!-- Vùng chọn ảnh sản phẩm / ảnh gốc -->
+        <div id="wmDropZone" class="drop-zone" onclick="document.getElementById('wmInp').click()" style="border:2px dashed #93C5FD; background:#F8FAFC; border-radius:12px; padding:28px 20px; text-align:center; cursor:pointer; transition:all .2s;">
           <input type="file" id="wmInp" accept="image/*" style="display:none;" onchange="handleWm(event)">
-          <div style="font-size:2rem; margin-bottom:8px;">🛡️</div>
-          <div style="font-weight:700; color:var(--primary);">Chọn ảnh sản phẩm đóng dấu</div>
+          <div style="font-size:2.5rem; margin-bottom:8px;">🛡️</div>
+          <div style="font-weight:700; color:var(--primary); font-size:1.05rem;">Chọn ảnh sản phẩm đóng dấu</div>
+          <div style="color:var(--muted); font-size:0.82rem; margin-top:4px;">Nhấp hoặc kéo thả ảnh (JPG, PNG, WebP)</div>
         </div>
-        <div id="wmCtrl" style="display:none; margin-top:20px;">
-          <div class="form-group">
-            <label>Chữ bản quyền:</label>
-            <input type="text" id="wmTxt" value="Ninh Bình Digital - 0988.xxx.xxx" oninput="drawWm()">
+
+        <!-- Bảng điều khiển khi đã nạp ảnh -->
+        <div id="wmCtrl" style="display:none; margin-top:16px;">
+          <!-- Thanh chọn chế độ: Chữ hoặc Logo ảnh -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+            <div style="display:inline-flex; background:#F1F5F9; padding:4px; border-radius:10px; border:1px solid #E2E8F0;">
+              <button id="wmTabBtnText" type="button" class="btn btn-sm" onclick="setWmMode('text')" style="background:#fff; color:var(--primary); font-weight:700; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.1); border:none; padding:7px 16px; font-size:0.85rem; cursor:pointer;">
+                ✍️ Watermark Dạng Chữ
+              </button>
+              <button id="wmTabBtnLogo" type="button" class="btn btn-sm" onclick="setWmMode('image')" style="background:transparent; color:var(--muted); font-weight:600; border-radius:8px; border:none; padding:7px 16px; font-size:0.85rem; cursor:pointer;">
+                🖼️ Tải Lên Watermark (Logo / Con Dấu)
+              </button>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('wmInp').click()" style="font-size:0.8rem; padding:6px 14px; border-radius:8px;">
+              🔄 Đổi ảnh sản phẩm khác
+            </button>
           </div>
-          <canvas id="wmCv" style="max-width:100%; max-height:260px; display:block; margin:12px auto; border-radius:6px;"></canvas>
-          <button class="btn btn-primary btn-full" onclick="downloadWmImg()">Tải Ảnh Đã Đóng Dấu (.jpg)</button>
+
+          <!-- 1. BẢNG DẠNG CHỮ -->
+          <div id="wmTextPanel" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:12px;">
+            <div class="form-group" style="margin-bottom:12px;">
+              <label style="font-weight:700; font-size:0.85rem; color:var(--ink); margin-bottom:6px; display:block;">
+                Nội dung chữ bản quyền:
+              </label>
+              <input type="text" id="wmTxt" value="Ninh Bình Digital - 0988.xxx.xxx" oninput="drawWm()" style="width:100%; font-weight:600; padding:9px 12px; border:1.5px solid #CBD5E1; border-radius:8px;">
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <!-- CHỌN MÀU SẮC -->
+              <div>
+                <label style="display:block; font-weight:700; font-size:0.82rem; margin-bottom:6px; color:var(--ink);">
+                  🎨 Chọn màu watermark:
+                </label>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <input type="color" id="wmColor" value="#FFFFFF" onchange="drawWm()" oninput="drawWm()" style="width:42px; height:36px; padding:2px; border:1.5px solid #CBD5E1; border-radius:6px; cursor:pointer; background:#fff;">
+                  <div style="display:flex; gap:6px; align-items:center;">
+                    <button type="button" onclick="setWmQuickColor('#FFFFFF')" title="Trắng" style="width:26px; height:26px; border-radius:50%; background:#FFFFFF; border:2px solid #94A3B8; cursor:pointer;"></button>
+                    <button type="button" onclick="setWmQuickColor('#000000')" title="Đen" style="width:26px; height:26px; border-radius:50%; background:#000000; border:2px solid #CBD5E1; cursor:pointer;"></button>
+                    <button type="button" onclick="setWmQuickColor('#EF4444')" title="Đỏ" style="width:26px; height:26px; border-radius:50%; background:#EF4444; border:none; cursor:pointer;"></button>
+                    <button type="button" onclick="setWmQuickColor('#F59E0B')" title="Vàng" style="width:26px; height:26px; border-radius:50%; background:#F59E0B; border:none; cursor:pointer;"></button>
+                    <button type="button" onclick="setWmQuickColor('#2563EB')" title="Xanh" style="width:26px; height:26px; border-radius:50%; background:#2563EB; border:none; cursor:pointer;"></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CỠ CHỮ -->
+              <div>
+                <label style="display:block; font-weight:700; font-size:0.82rem; margin-bottom:6px; color:var(--ink);">
+                  📏 Cỡ chữ:
+                </label>
+                <select id="wmSizeSelect" onchange="setWmFontSize(this.value)" style="width:100%; padding:8px 10px; border:1.5px solid #CBD5E1; border-radius:8px; font-size:0.85rem; background:#fff;">
+                  <option value="sm">Nhỏ (Gọn gàng)</option>
+                  <option value="md" selected>Vừa phải (Tiêu chuẩn)</option>
+                  <option value="lg">Lớn (Nổi bật)</option>
+                  <option value="xl">Rất lớn (Bảo vệ mạnh)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;">
+              <label style="font-size:0.82rem; display:inline-flex; align-items:center; gap:6px; cursor:pointer; user-select:none; color:var(--ink);">
+                <input type="checkbox" id="wmShadowChk" checked onchange="toggleWmShadow(this.checked)" style="width:auto; margin:0;">
+                <span>Thêm viền bóng chữ (giúp chữ luôn nổi bật trên cả nền sáng lẫn tối)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. BẢNG DẠNG TẢI LÊN WATERMARK (LOGO/CON DẤU) -->
+          <div id="wmLogoPanel" style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+              <div>
+                <label class="btn btn-outline btn-sm" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#fff; font-weight:700; border-color:#93C5FD; color:var(--primary);">
+                  📁 Tải lên ảnh Watermark (Logo, Con dấu, PNG trong suốt)
+                  <input type="file" id="wmLogoInp" accept="image/*" style="display:none;" onchange="handleWmLogo(event)">
+                </label>
+                <div id="wmLogoStatus" style="font-size:0.8rem; color:var(--muted); margin-top:4px;">Chưa chọn file logo/watermark</div>
+              </div>
+              <div id="wmLogoThumbBox" style="display:none; align-items:center; gap:8px;">
+                <img id="wmLogoThumb" style="max-height:44px; max-width:60px; object-fit:contain; border:1px solid #CBD5E1; border-radius:4px; background:#E2E8F0; padding:2px;">
+                <button type="button" class="btn btn-outline btn-sm" onclick="clearWmLogo()" style="color:#DC2626; border-color:#FECACA; font-size:0.75rem; padding:3px 8px;">Xóa logo</button>
+              </div>
+            </div>
+            
+            <div id="wmLogoConfigRow" style="display:none; margin-top:12px; padding-top:12px; border-top:1px dashed #CBD5E1;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <label style="font-weight:700; font-size:0.82rem; color:var(--ink);">Kích thước Logo:</label>
+                <span id="wmLogoScaleVal" style="font-weight:700; color:var(--primary); font-size:0.85rem;">25%</span>
+              </div>
+              <input type="range" id="wmLogoScale" min="8" max="75" value="25" oninput="document.getElementById('wmLogoScaleVal').innerText=this.value+'%'; drawWm();" style="width:100%; cursor:pointer;">
+            </div>
+          </div>
+
+          <!-- 3. CÀI ĐẶT ĐỘ MỜ NHẠT & VỊ TRÍ (ÁP DỤNG CẢ 2) -->
+          <div style="background:#fff; border:1.5px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:14px;">
+            <!-- ĐỘ MỜ NHẠT (OPACITY) -->
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label style="font-weight:700; font-size:0.85rem; color:var(--ink); display:flex; align-items:center; gap:5px;">
+                  <span>🌫️ Độ mờ nhạt (Độ trong suốt / Opacity):</span>
+                </label>
+                <span id="wmOpacityVal" style="font-weight:800; color:#2563EB; font-size:0.9rem; background:#EFF6FF; padding:3px 10px; border-radius:6px; border:1px solid #BFDBFE;">45%</span>
+              </div>
+              <input type="range" id="wmOpacity" min="5" max="100" value="45" oninput="updateWmOpacity(this.value)" style="width:100%; cursor:pointer;">
+              <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--muted); margin-top:3px;">
+                <span>5% (Mờ nhẹ tinh tế)</span>
+                <span>45% (Tiêu chuẩn)</span>
+                <span>100% (Đậm nét hoàn toàn)</span>
+              </div>
+            </div>
+
+            <!-- VỊ TRÍ ĐÓNG DẤU -->
+            <div>
+              <label style="display:block; font-weight:700; font-size:0.85rem; color:var(--ink); margin-bottom:8px;">
+                📍 Vị trí đóng dấu:
+              </label>
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;" id="wmPosGrid">
+                <button type="button" class="btn btn-sm wm-pos-btn" onclick="setWmPosition('top-left', this)" style="border:1.5px solid #CBD5E1; background:#fff; font-size:0.78rem; padding:7px 4px; cursor:pointer;">↖️ Trên Trái</button>
+                <button type="button" class="btn btn-sm wm-pos-btn" onclick="setWmPosition('center', this)" style="border:1.5px solid #CBD5E1; background:#fff; font-size:0.78rem; padding:7px 4px; cursor:pointer;">🎯 Chính Giữa</button>
+                <button type="button" class="btn btn-sm wm-pos-btn" onclick="setWmPosition('top-right', this)" style="border:1.5px solid #CBD5E1; background:#fff; font-size:0.78rem; padding:7px 4px; cursor:pointer;">↗️ Trên Phải</button>
+                <button type="button" class="btn btn-sm wm-pos-btn" onclick="setWmPosition('bottom-left', this)" style="border:1.5px solid #CBD5E1; background:#fff; font-size:0.78rem; padding:7px 4px; cursor:pointer;">↙️ Dưới Trái</button>
+                <button type="button" class="btn btn-sm wm-pos-btn active" onclick="setWmPosition('bottom-right', this)" style="border:1.5px solid var(--primary); background:#EFF6FF; color:var(--primary); font-weight:700; font-size:0.78rem; padding:7px 4px; cursor:pointer;">↘️ Dưới Phải</button>
+                <button type="button" class="btn btn-sm wm-pos-btn" onclick="setWmPosition('tile', this)" style="border:1.5px solid #CBD5E1; background:#fff; font-size:0.78rem; padding:7px 4px; cursor:pointer;">🔀 Lặp Toàn Ảnh</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- KHUNG PREVIEW TRỰC TIẾP -->
+          <div style="background:#0F172A; border-radius:10px; padding:12px; margin-bottom:14px; text-align:center;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; color:#94A3B8; font-size:0.78rem;">
+              <span>👁️ Xem trước kết quả trực tiếp:</span>
+              <span id="wmImgDim" style="color:#CBD5E1; font-weight:600;">0 x 0 px</span>
+            </div>
+            <div style="overflow:auto; max-height:340px; display:flex; align-items:center; justify-content:center; background:#1E293B; border-radius:8px; padding:6px;">
+              <canvas id="wmCv" style="max-width:100%; height:auto; max-height:320px; display:block; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.3);"></canvas>
+            </div>
+          </div>
+
+          <!-- NÚT TẢI XUỐNG -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="downloadWmImg('jpeg')" style="flex:1; font-weight:700; font-size:0.95rem; padding:12px; border-radius:8px;">
+              💾 Tải Ảnh Đã Đóng Dấu (.JPG)
+            </button>
+            <button class="btn btn-outline" onclick="downloadWmImg('png')" style="flex:1; font-weight:700; font-size:0.95rem; padding:12px; border-radius:8px;">
+              💎 Tải Ảnh Nét Gốc (.PNG)
+            </button>
+          </div>
         </div>
       </div>
     `;
     openModal('Đóng Dấu Bản Quyền Ảnh (Watermark)', html);
+  }
+
+  function setWmMode(mode) {
+    wmCurrentMode = mode;
+    const btnText = document.getElementById('wmTabBtnText');
+    const btnLogo = document.getElementById('wmTabBtnLogo');
+    const pText = document.getElementById('wmTextPanel');
+    const pLogo = document.getElementById('wmLogoPanel');
+    if (!btnText || !btnLogo) return;
+
+    if (mode === 'text') {
+      btnText.style.background = '#fff';
+      btnText.style.color = 'var(--primary)';
+      btnText.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      btnText.style.fontWeight = '700';
+
+      btnLogo.style.background = 'transparent';
+      btnLogo.style.color = 'var(--muted)';
+      btnLogo.style.boxShadow = 'none';
+      btnLogo.style.fontWeight = '600';
+
+      if (pText) pText.style.display = 'block';
+      if (pLogo) pLogo.style.display = 'none';
+    } else {
+      btnLogo.style.background = '#fff';
+      btnLogo.style.color = 'var(--primary)';
+      btnLogo.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      btnLogo.style.fontWeight = '700';
+
+      btnText.style.background = 'transparent';
+      btnText.style.color = 'var(--muted)';
+      btnText.style.boxShadow = 'none';
+      btnText.style.fontWeight = '600';
+
+      if (pText) pText.style.display = 'none';
+      if (pLogo) pLogo.style.display = 'block';
+    }
+    drawWm();
+  }
+
+  function setWmQuickColor(color) {
+    const el = document.getElementById('wmColor');
+    if (el) {
+      el.value = color;
+      drawWm();
+    }
+  }
+
+  function setWmFontSize(size) {
+    wmFontSize = size;
+    drawWm();
+  }
+
+  function toggleWmShadow(chk) {
+    wmShadow = chk;
+    drawWm();
+  }
+
+  function updateWmOpacity(val) {
+    const disp = document.getElementById('wmOpacityVal');
+    if (disp) disp.innerText = val + '%';
+    drawWm();
+  }
+
+  function setWmPosition(pos, btn) {
+    wmPosition = pos;
+    const grid = document.getElementById('wmPosGrid');
+    if (grid) {
+      grid.querySelectorAll('.wm-pos-btn').forEach(b => {
+        b.style.border = '1.5px solid #CBD5E1';
+        b.style.background = '#fff';
+        b.style.color = 'inherit';
+        b.style.fontWeight = 'normal';
+      });
+    }
+    if (btn) {
+      btn.style.border = '1.5px solid var(--primary)';
+      btn.style.background = '#EFF6FF';
+      btn.style.color = 'var(--primary)';
+      btn.style.fontWeight = '700';
+    }
+    drawWm();
   }
 
   function handleWm(e) {
@@ -4386,7 +5496,12 @@
     r.onload = ev => {
       rawWmImg = new Image();
       rawWmImg.onload = () => {
-        document.getElementById('wmCtrl').style.display = 'block';
+        const ctrl = document.getElementById('wmCtrl');
+        if (ctrl) ctrl.style.display = 'block';
+        const dim = document.getElementById('wmImgDim');
+        if (dim) dim.innerText = `${rawWmImg.width} x ${rawWmImg.height} px`;
+        const dropZone = document.getElementById('wmDropZone');
+        if (dropZone) dropZone.style.display = 'none';
         drawWm();
       };
       rawWmImg.src = ev.target.result;
@@ -4394,30 +5509,165 @@
     r.readAsDataURL(file);
   }
 
+  function handleWmLogo(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      wmLogoImg = new Image();
+      wmLogoImg.onload = () => {
+        const st = document.getElementById('wmLogoStatus');
+        if (st) st.innerText = `Đã tải: ${file.name} (${wmLogoImg.width}x${wmLogoImg.height})`;
+        const row = document.getElementById('wmLogoConfigRow');
+        if (row) row.style.display = 'block';
+        const thumbBox = document.getElementById('wmLogoThumbBox');
+        const thumb = document.getElementById('wmLogoThumb');
+        if (thumbBox && thumb) {
+          thumb.src = ev.target.result;
+          thumbBox.style.display = 'flex';
+        }
+        drawWm();
+      };
+      wmLogoImg.src = ev.target.result;
+    };
+    r.readAsDataURL(file);
+  }
+
+  function clearWmLogo() {
+    wmLogoImg = null;
+    const inp = document.getElementById('wmLogoInp');
+    if (inp) inp.value = '';
+    const st = document.getElementById('wmLogoStatus');
+    if (st) st.innerText = 'Chưa chọn file logo/watermark';
+    const row = document.getElementById('wmLogoConfigRow');
+    if (row) row.style.display = 'none';
+    const thumbBox = document.getElementById('wmLogoThumbBox');
+    if (thumbBox) thumbBox.style.display = 'none';
+    drawWm();
+  }
+
   function drawWm() {
     if(!rawWmImg) return;
     const cv = document.getElementById('wmCv');
-    cv.width = rawWmImg.width; cv.height = rawWmImg.height;
+    if(!cv) return;
+    cv.width = rawWmImg.width; 
+    cv.height = rawWmImg.height;
     const ctx = cv.getContext('2d');
     ctx.drawImage(rawWmImg, 0, 0);
 
-    const txt = document.getElementById('wmTxt').value || 'BẢN QUYỀN';
-    ctx.save();
-    ctx.globalAlpha = 0.45;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = `bold ${Math.max(20, Math.round(cv.width / 26))}px sans-serif`;
-    ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
-    ctx.fillText(txt, cv.width - 24, cv.height - 24);
-    ctx.restore();
+    const opInp = document.getElementById('wmOpacity');
+    const alpha = opInp ? parseFloat(opInp.value) / 100 : 0.45;
+    const margin = Math.max(16, Math.round(cv.width * 0.025));
+
+    if (wmCurrentMode === 'text') {
+      const txtInp = document.getElementById('wmTxt');
+      const txt = (txtInp && txtInp.value) ? txtInp.value.trim() : 'BẢN QUYỀN';
+      if (!txt) return;
+
+      const colorInp = document.getElementById('wmColor');
+      const color = colorInp ? colorInp.value : '#FFFFFF';
+
+      const scaleMap = { sm: 36, md: 24, lg: 17, xl: 12 };
+      const divisor = scaleMap[wmFontSize] || 24;
+      const fSize = Math.max(16, Math.round(cv.width / divisor));
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.font = `bold ${fSize}px sans-serif`;
+
+      if (wmShadow) {
+        const isLight = (color.toLowerCase() === '#ffffff' || color.toLowerCase() === '#fff');
+        ctx.shadowColor = isLight ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)';
+        ctx.shadowBlur = Math.max(3, Math.round(fSize / 6));
+        ctx.shadowOffsetX = Math.max(1, Math.round(fSize / 15));
+        ctx.shadowOffsetY = Math.max(1, Math.round(fSize / 15));
+      }
+
+      if (wmPosition === 'bottom-right') {
+        ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+        ctx.fillText(txt, cv.width - margin, cv.height - margin);
+      } else if (wmPosition === 'bottom-left') {
+        ctx.textAlign = 'left'; ctx.textBaseline = 'bottom';
+        ctx.fillText(txt, margin, cv.height - margin);
+      } else if (wmPosition === 'top-right') {
+        ctx.textAlign = 'right'; ctx.textBaseline = 'top';
+        ctx.fillText(txt, cv.width - margin, margin);
+      } else if (wmPosition === 'top-left') {
+        ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+        ctx.fillText(txt, margin, margin);
+      } else if (wmPosition === 'center') {
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(txt, cv.width / 2, cv.height / 2);
+      } else if (wmPosition === 'tile') {
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const stepX = Math.max(200, fSize * 10);
+        const stepY = Math.max(120, fSize * 4);
+        for (let y = -cv.height; y < cv.height * 2; y += stepY) {
+          for (let x = -cv.width; x < cv.width * 2; x += stepX) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(-25 * Math.PI / 180);
+            ctx.fillText(txt, 0, 0);
+            ctx.restore();
+          }
+        }
+      }
+      ctx.restore();
+
+    } else if (wmCurrentMode === 'image') {
+      if (wmLogoImg) {
+        const scaleInp = document.getElementById('wmLogoScale');
+        const scale = (scaleInp ? parseFloat(scaleInp.value) : 25) / 100;
+        const lw = cv.width * scale;
+        const lh = (lw / wmLogoImg.width) * wmLogoImg.height;
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+
+        if (wmPosition === 'bottom-right') {
+          ctx.drawImage(wmLogoImg, cv.width - lw - margin, cv.height - lh - margin, lw, lh);
+        } else if (wmPosition === 'bottom-left') {
+          ctx.drawImage(wmLogoImg, margin, cv.height - lh - margin, lw, lh);
+        } else if (wmPosition === 'top-right') {
+          ctx.drawImage(wmLogoImg, cv.width - lw - margin, margin, lw, lh);
+        } else if (wmPosition === 'top-left') {
+          ctx.drawImage(wmLogoImg, margin, margin, lw, lh);
+        } else if (wmPosition === 'center') {
+          ctx.drawImage(wmLogoImg, (cv.width - lw) / 2, (cv.height - lh) / 2, lw, lh);
+        } else if (wmPosition === 'tile') {
+          const stepX = lw * 1.8;
+          const stepY = lh * 1.8;
+          for (let y = 0; y < cv.height; y += stepY) {
+            for (let x = 0; x < cv.width; x += stepX) {
+              ctx.drawImage(wmLogoImg, x, y, lw, lh);
+            }
+          }
+        }
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.fillStyle = 'rgba(0,0,0,0.5)';
+        ctx.fillRect(cv.width / 2 - 190, cv.height / 2 - 25, 380, 50);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Vui lòng tải lên ảnh Logo / Watermark ở trên', cv.width / 2, cv.height / 2);
+        ctx.restore();
+      }
+    }
   }
 
-  function downloadWmImg() {
+  function downloadWmImg(format = 'jpeg') {
     const cv = document.getElementById('wmCv');
     if(!cv) return;
+    const mime = format === 'png' ? 'image/png' : 'image/jpeg';
+    const ext = format === 'png' ? 'png' : 'jpg';
     cv.toBlob(blob => {
-      downloadBlobFile(blob, 'anh-dong-dau-ban-quyen.jpg');
-      showToast('Đã tải ảnh đóng dấu .JPG thành công!');
-    }, 'image/jpeg', 0.9);
+      downloadBlobFile(blob, `anh-dong-dau-ban-quyen.${ext}`);
+      showToast(`Đã tải ảnh đóng dấu .${ext.toUpperCase()} thành công!`);
+    }, mime, 0.95);
   }
 
   // 9. Invoice Generator

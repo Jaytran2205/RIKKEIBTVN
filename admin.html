@@ -865,9 +865,9 @@ body {
             <span class="stat-label">Tổng doanh thu tháng</span>
             <span class="stat-icon">💰</span>
           </div>
-          <div class="stat-val" id="statMonthlyRevenue">112.450.000 đ</div>
+          <div class="stat-val" id="statMonthlyRevenue">0 đ</div>
           <div class="stat-meta">
-            <span class="stat-up">↑ +14.2%</span> so với tháng trước
+            <span class="stat-up">0 đ</span> phát sinh tháng này
           </div>
         </div>
         <div class="stat-card accent">
@@ -875,9 +875,9 @@ body {
             <span class="stat-label">Người dùng hiện tại</span>
             <span class="stat-icon">👥</span>
           </div>
-          <div class="stat-val" id="statTotalUsers">1.284</div>
+          <div class="stat-val" id="statTotalUsers">0</div>
           <div class="stat-meta">
-            <span class="stat-up">↑ +28</span> thành viên mới tuần này
+            <span class="stat-up">0</span> thành viên đăng ký
           </div>
         </div>
         <div class="stat-card success">
@@ -885,7 +885,7 @@ body {
             <span class="stat-label">Người đang online</span>
             <span class="stat-icon">🟢</span>
           </div>
-          <div class="stat-val" id="statLiveUsers">42</div>
+          <div class="stat-val" id="statLiveUsers">0</div>
           <div class="stat-meta">
             Đang hoạt động trên web chính
           </div>
@@ -997,15 +997,15 @@ body {
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:24px;">
           <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px;">
             <span style="font-size:0.8rem; color:var(--muted); font-weight:700;">HÔM NAY</span>
-            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revToday">4.850.000 đ</div>
+            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revToday">0 đ</div>
           </div>
           <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px;">
             <span style="font-size:0.8rem; color:var(--muted); font-weight:700;">TUẦN NÀY</span>
-            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revWeek">28.600.000 đ</div>
+            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revWeek">0 đ</div>
           </div>
           <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:18px;">
             <span style="font-size:0.8rem; color:var(--muted); font-weight:700;">THÁNG NÀY</span>
-            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revMonth">112.450.000 đ</div>
+            <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-top:4px;" id="revMonth">0 đ</div>
           </div>
         </div>
 
@@ -1014,28 +1014,28 @@ body {
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.88rem; font-weight:600; margin-bottom:4px;">
               <span>Đặc sản cơm cháy &amp; OCOP</span>
-              <span>58.200.000 đ (52%)</span>
+              <span id="distOcopText">0 đ (0%)</span>
             </div>
             <div style="height:8px; border-radius:4px; background:var(--surface-3); overflow:hidden;">
-              <div style="width:52%; height:100%; background:var(--primary);"></div>
+              <div id="distOcopBar" style="width:0%; height:100%; background:var(--primary);"></div>
             </div>
           </div>
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.88rem; font-weight:600; margin-bottom:4px;">
               <span>Phí đặt phòng Homestay / Khách sạn</span>
-              <span>34.150.000 đ (30%)</span>
+              <span id="distHomestayText">0 đ (0%)</span>
             </div>
             <div style="height:8px; border-radius:4px; background:var(--surface-3); overflow:hidden;">
-              <div style="width:30%; height:100%; background:var(--gold);"></div>
+              <div id="distHomestayBar" style="width:0%; height:100%; background:var(--gold);"></div>
             </div>
           </div>
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.88rem; font-weight:600; margin-bottom:4px;">
               <span>Dịch vụ ăn uống dê núi &amp; Cafe</span>
-              <span>20.100.000 đ (18%)</span>
+              <span id="distFoodText">0 đ (0%)</span>
             </div>
             <div style="height:8px; border-radius:4px; background:var(--surface-3); overflow:hidden;">
-              <div style="width:18%; height:100%; background:var(--accent);"></div>
+              <div id="distFoodBar" style="width:0%; height:100%; background:var(--accent);"></div>
             </div>
           </div>
         </div>
@@ -1690,65 +1690,62 @@ function initAdminData() {
   updateDashboardCounts();
 }
 
-// Live concurrent users simulation (realistic fluctuation)
+// Live concurrent users simulation (reset to 0)
 function renderLiveUsersSimulation() {
-  let count = Math.floor(Math.random() * 8) + 38; // 38 - 45
-  document.getElementById('statLiveUsers').textContent = count;
-  document.getElementById('liveVisitorsCount').textContent = count;
-  document.getElementById('asideOnlineBadge').textContent = count;
-
-  setInterval(() => {
-    const delta = Math.floor(Math.random() * 5) - 2;
-    count = Math.max(32, Math.min(68, count + delta));
-    document.getElementById('statLiveUsers').textContent = count;
-    document.getElementById('liveVisitorsCount').textContent = count;
-    document.getElementById('asideOnlineBadge').textContent = count;
-  }, 4000);
+  let count = 0;
+  const elLive = document.getElementById('statLiveUsers');
+  const elVis = document.getElementById('liveVisitorsCount');
+  const elBadge = document.getElementById('asideOnlineBadge');
+  if (elLive) elLive.textContent = count;
+  if (elVis) elVis.textContent = count;
+  if (elBadge) elBadge.textContent = count;
 }
 
-// Revenue chart 7 days
+// Revenue chart 7 days (clean 0 VND state)
 function renderRevenueChart() {
   const container = document.getElementById('revenueChartContainer');
-  const days = [
-    { day: 'T2', rev: '12.4 Tr', height: 45 },
-    { day: 'T3', rev: '14.8 Tr', height: 55 },
-    { day: 'T4', rev: '16.2 Tr', height: 60 },
-    { day: 'T5', rev: '19.5 Tr', height: 72 },
-    { day: 'T6', rev: '24.8 Tr', height: 85 },
-    { day: 'T7', rev: '32.1 Tr', height: 98 },
-    { day: 'CN', rev: '28.6 Tr', height: 90 }
-  ];
+  if (!container) return;
+  const orders = JSON.parse(localStorage.getItem('nb_specialty_orders') || '[]');
+  const totalRev = orders.reduce((sum, o) => sum + (o.total || 0), 0);
 
-  container.innerHTML = days.map(d => `
-    <div class="chart-col">
-      <div class="chart-bar" style="height:${d.height}%;" data-val="${d.rev}"></div>
-      <span class="chart-day">${d.day}</span>
-    </div>
-  `).join('');
+  const days = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+  if (totalRev === 0) {
+    container.innerHTML = days.map(d => `
+      <div class="chart-col">
+        <div class="chart-bar" style="height:4px; opacity:0.3;" data-val="0 đ"></div>
+        <span class="chart-day">${d}</span>
+      </div>
+    `).join('');
+  } else {
+    container.innerHTML = days.map(d => `
+      <div class="chart-col">
+        <div class="chart-bar" style="height:25%;" data-val="${(totalRev / 7).toLocaleString('vi-VN')} đ"></div>
+        <span class="chart-day">${d}</span>
+      </div>
+    `).join('');
+  }
 }
 
-// Users Table
+// Users Table (clean empty state)
 function renderUsersTable() {
   const users = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+  const totalEl = document.getElementById('statTotalUsers');
+  if (totalEl) totalEl.textContent = users.length.toString();
+
+  const tbody = document.getElementById('adminUsersTableBody');
+  if (!tbody) return;
+
   if (users.length === 0) {
-    users.push(
-      { name: "Quản Trị Viên", email: "admin@ninhbinh.vn", role: "admin", date: "2026-01-01" },
-      { name: "Chủ Homestay Tam Cốc", email: "tamcoc@homestay.vn", role: "homestay", date: "2026-02-15" },
-      { name: "Cửa Hàng Cơm Cháy", email: "comchay@hoalu.vn", role: "merchant", date: "2026-02-20" },
-      { name: "Trần Anh Quân (Khách du lịch)", email: "quanta@gmail.com", role: "user", date: "2026-03-01" },
-      { name: "Phạm Thu Hương (Cô giáo)", email: "huongpt@thcs.edu.vn", role: "teacher", date: "2026-03-05" }
-    );
-    localStorage.setItem('nb_all_users', JSON.stringify(users));
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:28px;">Chưa có người dùng / khách hàng nào đăng ký.</td></tr>`;
+    return;
   }
 
-  document.getElementById('statTotalUsers').textContent = (users.length * 256 + 4).toLocaleString();
-  const tbody = document.getElementById('adminUsersTableBody');
   tbody.innerHTML = users.map((u, i) => `
     <tr>
       <td><b>${u.name}</b></td>
       <td>${u.email}</td>
       <td><span class="table-tag ${u.role === 'admin' ? 'tag-done' : 'tag-active'}">${u.role}</span></td>
-      <td>${u.date || '2026-03-01'}</td>
+      <td>${u.date || 'Hôm nay'}</td>
       <td><span class="table-tag tag-active">● Hoạt động</span></td>
     </tr>
   `).join('');
@@ -2090,6 +2087,15 @@ function updateDashboardCounts() {
 
   const elPlaces = document.getElementById('statActivePlacesCount');
   if (elPlaces) elPlaces.textContent = `${activePlaces} cơ sở`;
+
+  const users = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+  const elUsers = document.getElementById('statTotalUsers');
+  if (elUsers) elUsers.textContent = users.length.toString();
+
+  const orders = JSON.parse(localStorage.getItem('nb_specialty_orders') || '[]');
+  const totalRev = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+  const elRev = document.getElementById('statMonthlyRevenue');
+  if (elRev) elRev.textContent = totalRev.toLocaleString('vi-VN') + ' đ';
 }
 
 // 7. Tools Configuration

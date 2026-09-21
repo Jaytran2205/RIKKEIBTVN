@@ -9240,15 +9240,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
   // 2. AUTH & STATE MANAGEMENT
   let currentUser = JSON.parse(localStorage.getItem('nb_user')) || null;
-  let allUsers = JSON.parse(localStorage.getItem('nb_all_users')) || [
-    { name: "Quản Trị Viên", email: "admin@ninhbinh.vn", role: "admin", date: "2026-01-01" },
-    { name: "Chủ Homestay Tam Cốc", email: "tamcoc@homestay.vn", role: "homestay", date: "2026-02-15" },
-    { name: "Cửa Hàng Cơm Cháy", email: "comchay@hoalu.vn", role: "merchant", date: "2026-02-20" }
-  ];
-  let serviceRequests = JSON.parse(localStorage.getItem('nb_requests')) || [
-    { name: "Nguyễn Văn Hùng", phone: "0988123456", service: "Thiết kế Website Homestay", note: "Cần tích hợp thanh toán VietQR" },
-    { name: "Trần Thị Mai", phone: "0912345678", service: "Đào tạo AI cho đội ngũ", note: "Dạy viết bài Facebook & trả lời Zalo" }
-  ];
+  let allUsers = JSON.parse(localStorage.getItem('nb_all_users')) || [];
+  let serviceRequests = JSON.parse(localStorage.getItem('nb_requests')) || [];
 
   // ========================================================
   // WELCOME PROMOTIONAL POPUP CONTROLLER (GPLX 2026 & AI STUDIO)
@@ -9686,26 +9679,34 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     const uTbody = document.getElementById('adminUsersList');
     if(uTbody) {
-      uTbody.innerHTML = allUsers.map(u => `
-        <tr>
-          <td><b>${u.name}</b></td>
-          <td>${u.email}</td>
-          <td><span class="badge-tag" style="background:#EFF6FF; color:#1D4ED8;">${u.role}</span></td>
-          <td>${u.date || '2026-02-28'}</td>
-        </tr>
-      `).join('');
+      if (allUsers.length === 0) {
+        uTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:18px; color:var(--muted);">Chưa có người dùng / khách hàng nào.</td></tr>';
+      } else {
+        uTbody.innerHTML = allUsers.map(u => `
+          <tr>
+            <td><b>${u.name}</b></td>
+            <td>${u.email}</td>
+            <td><span class="badge-tag" style="background:#EFF6FF; color:#1D4ED8;">${u.role}</span></td>
+            <td>${u.date || 'Hôm nay'}</td>
+          </tr>
+        `).join('');
+      }
     }
 
     const rTbody = document.getElementById('adminRequestsList');
     if(rTbody) {
-      rTbody.innerHTML = serviceRequests.map(r => `
-        <tr>
-          <td><b>${r.name}</b></td>
-          <td><b style="color:var(--primary);">${r.phone}</b></td>
-          <td>${r.service}</td>
-          <td>${r.note}</td>
-        </tr>
-      `).join('');
+      if (serviceRequests.length === 0) {
+        rTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:18px; color:var(--muted);">Chưa có yêu cầu tư vấn nào.</td></tr>';
+      } else {
+        rTbody.innerHTML = serviceRequests.map(r => `
+          <tr>
+            <td><b>${r.name}</b></td>
+            <td><b style="color:var(--primary);">${r.phone}</b></td>
+            <td>${r.service}</td>
+            <td>${r.note}</td>
+          </tr>
+        `).join('');
+      }
     }
   }
 
@@ -12683,15 +12684,9 @@ HS05\tTrần Văn Hải\t12A3\t6.5\t7.0\tKhá`;
   // SỔ QUỸ THU CHI & DOANH THU CƠ SỞ KINH DOANH NINH BÌNH (EXCEL WORKBOOK)
   // =========================================================================
 
-  let cashbookEntries = JSON.parse(localStorage.getItem('nb_cashbook_data') || 'null');
-  if (!cashbookEntries || !Array.isArray(cashbookEntries)) {
-    cashbookEntries = [
-      { id: 1, date: "2026-03-01", type: "thu", cat: "Tiền phòng Homestay", amount: 1500000, method: "Chuyển khoản VietQR", note: "Đoàn khách Hà Nội thuê 2 đêm phòng Deluxe" },
-      { id: 2, date: "2026-03-01", type: "chi", cat: "Mua nguyên liệu đặc sản", amount: 450000, method: "Tiền mặt", note: "Mua thịt dê tươi & rau sạch chợ Rồng Ninh Bình" },
-      { id: 3, date: "2026-03-02", type: "thu", cat: "Bán cơm cháy quà biếu", amount: 1200000, method: "Chuyển khoản VietQR", note: "Bán 10 hộp cơm cháy chà bông đặc biệt" },
-      { id: 4, date: "2026-03-02", type: "thu", cat: "Thuê xe máy Tam Cốc", amount: 240000, method: "Tiền mặt", note: "Cho thuê 2 xe máy tay ga đi Tràng An" },
-      { id: 5, date: "2026-03-02", type: "chi", cat: "Tiền điện & Wifi Viettel", amount: 680000, method: "Chuyển khoản VietQR", note: "Thanh toán cước internet wifi homestay" }
-    ];
+  let cashbookEntries = JSON.parse(localStorage.getItem('nb_cashbook_data') || '[]');
+  if (!Array.isArray(cashbookEntries)) {
+    cashbookEntries = [];
     localStorage.setItem('nb_cashbook_data', JSON.stringify(cashbookEntries));
   }
 
@@ -12753,11 +12748,11 @@ HS05\tTrần Văn Hải\t12A3\t6.5\t7.0\tKhá`;
             </div>
             <div>
               <label style="font-size:0.76rem; font-weight:700; display:block; margin-bottom:4px;">Hạng mục:</label>
-              <input type="text" id="cbCatInp" placeholder="Tiền phòng / Nguyên liệu..." value="Tiền phòng Deluxe" style="padding:7px; font-size:0.82rem;">
+              <input type="text" id="cbCatInp" placeholder="Tiền phòng / Nguyên liệu / Bán hàng..." value="" style="padding:7px; font-size:0.82rem;">
             </div>
             <div>
               <label style="font-size:0.76rem; font-weight:700; display:block; margin-bottom:4px;">Số tiền (VNĐ):</label>
-              <input type="number" id="cbAmountInp" placeholder="500000" value="750000" style="padding:7px; font-size:0.82rem; font-weight:700;">
+              <input type="number" id="cbAmountInp" placeholder="Ví dụ: 500000" value="" style="padding:7px; font-size:0.82rem; font-weight:700;">
             </div>
             <div>
               <label style="font-size:0.76rem; font-weight:700; display:block; margin-bottom:4px;">Hình thức:</label>

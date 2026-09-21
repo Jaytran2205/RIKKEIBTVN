@@ -1340,3 +1340,26 @@ if (typeof globalThis !== 'undefined') {
   globalThis.getCombinedPlacesList = getCombinedPlacesList;
   globalThis.getActiveWebPlaces = getActiveWebPlaces;
 }
+
+// Tự động dọn sạch dữ liệu mock doanh thu & khách hàng cũ trong localStorage của trình duyệt
+(function purgeLegacyMockData() {
+  if (typeof window === 'undefined' || !window.localStorage) return;
+  try {
+    const RESET_KEY = 'nb_reset_revenue_customers_v1';
+    if (localStorage.getItem(RESET_KEY) !== 'true') {
+      localStorage.removeItem('nb_all_users');
+      localStorage.removeItem('nb_requests');
+      localStorage.removeItem('nb_service_leads');
+      localStorage.removeItem('nb_specialty_orders');
+      localStorage.removeItem('nb_cashbook_data');
+      localStorage.setItem('nb_all_users', JSON.stringify([]));
+      localStorage.setItem('nb_requests', JSON.stringify([]));
+      localStorage.setItem('nb_service_leads', JSON.stringify([]));
+      localStorage.setItem('nb_specialty_orders', JSON.stringify([]));
+      localStorage.setItem('nb_cashbook_data', JSON.stringify([]));
+      localStorage.setItem(RESET_KEY, 'true');
+    }
+  } catch (e) {
+    // ignore
+  }
+})();
