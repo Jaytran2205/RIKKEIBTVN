@@ -1,156 +1,230 @@
 # 🌟 NINH BÌNH DIGITAL & ALL-IN-ONE PLATFORM
-### Cổng Thông Tin Du Lịch Số, Đặc Sản OCOP Cố Đô & Nền Tảng Tiện Ích Đa Năng
+### Hệ Sinh Thái Du Lịch Số, Bản Đồ Tương Tác, OCOP Cố Đô & Quản Trị Dữ Liệu Tập Trung
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-Web%20Desktop%20%26%20Mobile-0B5C57?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Platform" />
-  <img src="https://img.shields.io/badge/Deploy-Cloudflare%20Pages%20Ready-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare Pages Ready" />
-  <img src="https://img.shields.io/badge/Maps-Leaflet%20%26%20Google%20Maps-2563EB?style=for-the-badge&logo=leaflet&logoColor=white" alt="Maps" />
-  <img src="https://img.shields.io/badge/Code-HTML5%20%7C%20CSS3%20%7C%20ES6+-E34F26?style=for-the-badge&logo=javascript&logoColor=white" alt="Tech" />
-  <img src="https://img.shields.io/badge/License-MIT-success?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/Architecture-Clean%20Decoupled%20Architecture-0B5C57?style=for-the-badge&logo=diagramsdotnet&logoColor=white" alt="Architecture" />
+  <img src="https://img.shields.io/badge/Interactive%20Engine-Leaflet%20OSM%20Map-2563EB?style=for-the-badge&logo=leaflet&logoColor=white" alt="Leaflet Map" />
+  <img src="https://img.shields.io/badge/Data%20Sync-Realtime%20State%20Engine-10B981?style=for-the-badge&logo=databricks&logoColor=white" alt="Data Sync" />
+  <img src="https://img.shields.io/badge/Core%20Stack-HTML5%20%7C%20CSS3%20%7C%20ES6+%20%7C%20Python-E34F26?style=for-the-badge&logo=javascript&logoColor=white" alt="Tech Stack" />
+  <img src="https://img.shields.io/badge/License-MIT-gray?style=for-the-badge" alt="License" />
 </p>
 
 ---
 
-## 📌 Giới Thiệu Dự Án
+## 🧭 1. Tổng Quan Hệ Thống (System Overview)
 
-**Ninh Bình Digital & All-in-One Platform** là nền tảng web tích hợp hiện đại, kết hợp giải pháp chuyển đổi số du lịch vùng Cố đô Hoa Lư với hệ sinh thái thương mại điện tử đặc sản OCOP và các bộ công cụ tiện ích số thiết yếu.
+**Ninh Bình Digital & All-in-One Platform** là giải pháp nền tảng công nghệ số tích hợp đa phân hệ, thiết kế chuyên biệt nhằm giải quyết bài toán trải nghiệm du lịch số hóa tại Cố đô Hoa Lư (Ninh Bình), kết nối chuỗi cung ứng sản phẩm OCOP địa phương, cùng hệ thống quản trị dữ liệu tập trung và các công cụ tiện ích công cộng.
 
-Được xây dựng với kiến trúc **Ultra-Fast Vanilla Frontend (Không phụ thuộc Framework cồng kềnh)**, hệ thống đảm bảo thời gian tải trang dưới 0.8s, giao diện chuẩn UI/UX phong cách Á Đông đương đại, hỗ trợ tương thích hoàn hảo trên mọi thiết bị di động và máy tính.
-
----
-
-## 🚀 Các Tính Năng Nổi Bật
-
-### 1. 🗺️ Cẩm Nang Du Lịch & Bản Đồ Số Tương Tác (Ninh Bình Travel Hub)
-- **Hơn 60+ cơ sở uy tín được tuyển chọn khắt khe**: Khách sạn 4-5 sao, Homestay view núi, quán dê núi truyền thống, cà phê ngắm đầm sen Tam Cốc, dịch vụ thuê xe máy ga/số chất lượng cao, điểm check-in Tràng An, Hang Múa, Bái Đính, Phố Cổ Hoa Lư.
-- **Bản đồ số Leaflet OSM tương tác thời gian thực**:
-  - Ghim tự động tọa độ các cơ sở theo 8 khu vực trọng điểm (*Tam Cốc, Tràng An, Hang Múa, Bái Đính, TP. Ninh Bình, Cố Đô Hoa Lư, Kim Sơn, Cúc Phương*).
-  - Pop-up thông minh hiển thị ảnh, đánh giá sao, địa chỉ, khoảng giá và nút gọi hotline.
-- **Chỉ đường Google Maps chuẩn xác 100%**: Tích hợp thuật toán tự động chuẩn hóa liên kết Universal Google Maps (`https://www.google.com/maps/search/?api=1&query=...`), tương thích mượt mà trên cả Google Maps App (Android, iOS) và Web browser, loại bỏ hoàn toàn lỗi *Dynamic Link Not Found*.
-- **Tính năng So sánh giá đa điểm (Smart Comparison)**: Cho phép du khách chọn so sánh từ 2 đến 4 cơ sở cùng lúc theo bảng đối soát trực quan về mức giá, vị trí, ưu điểm và đánh giá review.
-
-### 2. 🌾 Gian Hàng Đặc Sản OCOP Cố Đô (E-Commerce Mini)
-- Giới thiệu và phân phối các sản phẩm nông sản, làng nghề đạt chứng nhận OCOP 3–5 sao:
-  - Cơm cháy đáy nồi nếp hương & chà bông cao cấp Hoa Lư.
-  - Thịt dê núi tươi sạch đóng gói hút chân không.
-  - Rượu nếp Kim Sơn hạ thổ chum sành men lá.
-  - Mắm tép Gia Viễn tiến vua, Chiếu cói thêu tay Kim Sơn, Trà hoa vàng Cúc Phương...
-- Giỏ hàng trực tuyến linh hoạt, tính tổng tiền tự động, hỗ trợ đặt mua nhanh và kết nối trực tiếp Hotline/Zalo của nhà cung cấp.
-
-### 3. ⚙️ Hệ Thống Quản Trị Nội Dung Toàn Diện (Admin CMS — `admin.html`)
-- **Dashboard quản trị**: Thống kê số lượng cơ sở, sản phẩm OCOP, tình trạng hiển thị theo thời gian thực.
-- **Quản lý linh hoạt**:
-  - Thêm mới, chỉnh sửa thông tin, bảng giá, số điện thoại, mô tả nổi bật.
-  - Đánh dấu **⭐ Đề Xuất (Featured)** để đưa cơ sở ưu tiên lên vị trí đầu trang.
-  - Tính năng Ẩn/Hiện hoặc Xóa cơ sở khi hết phòng/ngừng kinh doanh.
-- **Đồng bộ dữ liệu hai chiều**: Dữ liệu lưu trữ thông minh qua `localStorage` và tệp cấu hình trung tâm `ninhbinh_data.js`, đảm bảo dữ liệu luôn nhất quán giữa Web chính và trang Admin.
-
-### 4. 🏍️ Hệ Thống Ôn Thi Sát Hạch GPLX Mô Tô Hạng A1 (250 Câu Hỏi)
-- Bộ đề thi chuẩn 250 câu hỏi lý thuyết mới nhất của Tổng cục Đường bộ Việt Nam.
-- Chế độ ôn tập chuyên sâu **20 câu hỏi điểm liệt** (sai 1 câu là trượt).
-- Tổng hợp bảng **Mẹo thi lý thuyết** ghi nhớ cấp tốc.
-- Chế độ thi thử ngẫu nhiên có đếm ngược thời gian, tự động chấm điểm và giải thích đáp án chi tiết.
-
-### 5. 📄 Bộ Công Cụ Tiện Ích Văn Bản Hành Chính
-- Hỗ trợ rà soát, căn chỉnh định dạng thể thức văn bản hành chính theo tiêu chuẩn **Nghị định 30/2020/NĐ-CP**.
-- Trình biên tập bảng biểu, công cụ làm sạch dữ liệu văn bản nhanh chóng.
+Dự án áp dụng mô hình **Kiến trúc phân tầng tối giản (Zero-Dependency Modular Architecture)**:
+* **Tốc độ phản hồi cực hạn**: Không phụ thuộc các runtime hay framework cồng kềnh, toàn bộ tài nguyên được tối ưu hóa cho trải nghiệm mượt mà, phản hồi ngay lập tức dưới 100ms.
+* **Đồng bộ hóa trạng thái hai chiều (Two-way State Synchronization)**: Cho phép quản trị viên điều chỉnh giá cả, ẩn/hiện cơ sở, ghim đề xuất từ trang Quản trị (`admin.html`) và phản ánh tức thì lên cổng người dùng (`index.html`).
+* **Chuẩn hóa dữ liệu định vị địa lý (Spatial Normalization)**: Tự động xử lý, làm sạch và gắn kết tọa độ bản đồ số mở (OpenStreetMap) kết hợp liên kết dẫn đường Universal Google Maps chính xác 100%.
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
+## 🏗️ 2. Kiến Trúc Hệ Thống Tổng Thể (System Architecture)
 
-| Thành phần | Công nghệ | Mô tả |
-| :--- | :--- | :--- |
-| **Giao diện (Frontend)** | HTML5, CSS3 (Modern Vanilla), ES6+ JavaScript | Không dùng framework nặng; tối ưu dung lượng và tốc độ tải trang |
-| **Bản đồ số** | [Leaflet.js](https://leafletjs.com/) & OpenStreetMap Tiles | Bản đồ mã nguồn mở mượt mà, không tốn phí API bản đồ đắt đỏ |
-| **Định vị & Dẫn đường** | Google Maps Search & Directions API | Chuẩn hóa liên kết chỉ đường trên thiết bị di động và máy bàn |
-| **Lưu trữ & Trạng thái** | `localStorage` + `ninhbinh_data.js` | Đồng bộ dữ liệu quản trị tức thì không cần cấu hình database phức tạp |
-| **Bộ thu thập dữ liệu** | Python 3 (`crawler_ninhbinh_daily.py`) | Script đồng bộ giá cả và đánh giá địa điểm tự động |
-| **Hạ tầng khuyến nghị** | **Cloudflare Pages** / GitHub Pages / Vercel | Hỗ trợ Edge CDN toàn cầu, SSL miễn phí, chống DDoS mạnh mẽ |
+Hệ thống được tổ chức thành 4 tầng kiến trúc phân tách rõ ràng:
 
----
+```mermaid
+graph TD
+    subgraph INGESTION["1. Data Ingestion & Crawler Engine"]
+        Crawler["crawler_ninhbinh_daily.py<br/>(Daily Web & Social Scraper)"]
+        Sanitizer["Data Sanitizer & URL Normalizer<br/>(Clean Google Maps & Coordinates)"]
+        Crawler --> Sanitizer
+    end
 
-## ☁️ Hướng Dẫn Triển Khai Lên Cloudflare Pages
+    subgraph STORAGE["2. Core Data & State Management"]
+        DB_JSON[("ninhbinh_database.json<br/>(Master Database)")]
+        Data_JS["ninhbinh_data.js<br/>(Runtime Memory State)"]
+        LocalStorage[("Browser LocalStorage<br/>(Custom Places & Admin Statuses)")]
+        Sanitizer --> DB_JSON
+        DB_JSON -.-> Data_JS
+        LocalStorage <--> Data_JS
+    end
 
-Dự án này là **Static Web Application (HTML/CSS/JS thuần)**, hoàn toàn tương thích và **được tối ưu hoàn hảo nhất khi chạy trên Cloudflare Pages**!
+    subgraph PRESENTATION["3. Client Presentation Layer (index.html)"]
+        TravelHub["Travel Hub & Explorer<br/>(60+ Curated Places)"]
+        LeafletMap["Interactive Leaflet Map Engine<br/>(Spatial Markers & Popups)"]
+        Comparator["Smart Price Comparator<br/>(Multi-facility Comparison)"]
+        OCOPShop["OCOP Artisan Market<br/>(Cart & Direct Ordering)"]
+        GPLXEngine["GPLX A1 Exam Simulator<br/>(250 Questions & Countdown)"]
+        DocEngine["Administrative Doc Engine<br/>(Decree 30/2020 Format)"]
+    end
 
-### Vì sao nên dùng Cloudflare Pages cho dự án này?
-1. **Hoàn toàn Miễn phí (Hạn mức cực lớn)**: Băng thông không giới hạn, không lo vượt quota.
-2. **Tốc độ siêu nhanh**: Hệ sinh thái mạng lưới máy chủ Edge CDN toàn cầu của Cloudflare (có datacenter tại Hà Nội và TP.HCM) giúp web mở gần như tức thì.
-3. **Bảo mật hàng đầu**: Tự động cấp chứng chỉ bảo mật SSL (HTTPS), chống tấn công DDoS tự động.
-4. **Tên miền tùy chỉnh**: Dễ dàng trỏ tên miền riêng (ví dụ: `dulichninhbinh.vn`) chỉ với 1 cú click.
+    subgraph CONTROL["4. Administration & CMS Layer (admin.html)"]
+        CMS_Dashboard["CMS Admin Dashboard"]
+        PlaceManager["Places & Dining Manager"]
+        ProductManager["OCOP Catalog Manager"]
+        LiveStateSync["Instant State Synchronizer"]
+        CMS_Dashboard --> PlaceManager
+        CMS_Dashboard --> ProductManager
+        PlaceManager --> LiveStateSync
+        ProductManager --> LiveStateSync
+    end
 
-### Các bước Deploy lên Cloudflare Pages trong 2 phút:
-
-#### Cách 1: Kết nối trực tiếp qua GitHub Repo (Khuyên dùng)
-1. Đăng nhập vào [Cloudflare Dashboard](https://dash.cloudflare.com/).
-2. Chọn menu **Workers & Pages** > Bấm nút **Create application** > Chọn tab **Pages**.
-3. Chọn **Connect to Git** > Chọn Repository GitHub của bạn (`Allinone` hoặc `RIKKEIBTVN`).
-4. Tại mục **Build settings**:
-   - **Framework preset**: Chọn `None` (hoặc để trống).
-   - **Build command**: *Để trống* (vì là web tĩnh).
-   - **Build output directory**: Để trống hoặc điền `/`.
-5. Bấm **Save and Deploy**. Cloudflare sẽ build xong trong vòng 10 giây và cung cấp một đường dẫn `https://ten-du-an.pages.dev` hoạt động 24/7!
-
-#### Cách 2: Upload trực tiếp (Direct Upload - Không cần Git)
-1. Trong Cloudflare Dashboard > **Workers & Pages** > **Create application** > **Pages** > Chọn **Upload assets**.
-2. Đặt tên dự án (ví dụ: `ninhbinh-travel`).
-3. Kéo thả toàn bộ thư mục dự án (chứa `index.html`, `admin.html`, `ninhbinh_data.js`, thư mục `images/`...) lên giao diện web.
-4. Bấm **Deploy site** là trang web sẽ online ngay lập tức!
-
----
-
-## 💻 Cài Đặt & Chạy Cục Bộ (Local Development)
-
-Không cần cài đặt môi trường phức tạp! Bạn chỉ cần một trình duyệt web:
-
-1. **Clone mã nguồn về máy**:
-   ```bash
-   git clone https://github.com/Jaytran2205/RIKKEIBTVN.git
-   cd RIKKEIBTVN
-   ```
-
-2. **Chạy trang web**:
-   - Mở trực tiếp tệp `index.html` trên trình duyệt (Chrome, Edge, Firefox, Safari).
-   - Hoặc khởi tạo máy chủ cục bộ bằng extension **Live Server** trên VS Code / Antigravity IDE.
-   - Hoặc dùng Python:
-     ```bash
-     # Với Python 3
-     python -m http.server 8080
-     ```
-     Sau đó truy cập: `http://localhost:8080` trên trình duyệt.
-
-3. **Truy cập trang Quản Trị**:
-   - Mở tệp `admin.html` hoặc truy cập `http://localhost:8080/admin.html`.
-
----
-
-## 📁 Cấu Trúc Thư Mục Dự Án
-
-```plaintext
-Allinone/
-├── index.html                 # Giao diện chính (Cẩm nang du lịch, bản đồ số, OCOP, GPLX A1)
-├── admin.html                 # Bảng điều khiển CMS quản trị cơ sở, sản phẩm và dịch vụ
-├── ninhbinh_data.js           # Cơ sở dữ liệu trung tâm & hàm chuẩn hóa Google Maps, cache
-├── ninhbinh_database.json     # Tệp dữ liệu nguồn định dạng JSON chuẩn
-├── crawler_ninhbinh_daily.py  # Script crawler Python cập nhật dữ liệu tự động
-├── styles.css                 # Hệ thống style giao diện chính
-├── color-variables.css        # Bảng mã màu thương hiệu Á Đông hiện đại
-├── travel-redesign.css        # CSS tùy chỉnh chuyên sâu cho phân hệ Du lịch
-├── interface-overhaul.css     # CSS hoàn thiện giao diện responsive
-├── images/                    # Thư mục hình ảnh cơ sở, banner, đặc sản OCOP thực tế
-│   ├── aravinda_resort.jpg    # Hình ảnh thực tế của Aravinda Resort Ninh Bình
-│   └── ...
-└── README.md                  # Tài liệu giới thiệu và hướng dẫn dự án
+    Data_JS ==> TravelHub
+    Data_JS ==> LeafletMap
+    Data_JS ==> Comparator
+    Data_JS ==> OCOPShop
+    LiveStateSync ==> LocalStorage
 ```
 
 ---
 
-## 🤝 Tác Giả & Bản Quyền
+## 🔄 3. Sơ Đồ Luồng Hoạt Động (Operational Workflows)
 
-- **Nhà phát triển**: [Jay Trần (Jaytran2205)](https://github.com/Jaytran2205)
-- **Hỗ trợ & Liên hệ**:
-  - Hotline: `0866.520.567`
-  - Zalo: [0866520567](https://zalo.me/0866520567)
-  - Facebook: [Jay Trần](https://web.facebook.com/jaytran0522)
-- **Giấy phép (License)**: Dự án được phát hành theo giấy phép mã nguồn mở **MIT License**.
+### 3.1. Luồng Trải Nghiệm Của Du Khách (Visitor Journey Flow)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Guest as Du Khách
+    participant UI as Cổng Du Lịch (index.html)
+    participant Engine as Bộ Lọc & Tìm Kiếm
+    participant Map as Leaflet Map Engine
+    participant GNav as Google Maps App / Web
+
+    Guest->>UI: Truy cập danh mục Cẩm nang du lịch
+    UI->>Engine: Kích hoạt getActiveWebPlaces()
+    Engine-->>UI: Kết xuất danh sách 60+ cơ sở đã lọc (Bỏ cơ sở bị ẩn/xóa)
+    
+    rect rgb(240, 250, 255)
+        Note over Guest, Map: Trải nghiệm khám phá bản đồ tương tác
+        Guest->>UI: Chọn khu vực (Tam Cốc, Tràng An, Hang Múa,...)
+        UI->>Map: Cập nhật tọa độ AREA_COORDS & Pins
+        Map-->>Guest: Hiển thị Marker màu sắc + Popup thông tin & giá phòng/món ăn
+    end
+
+    rect rgb(255, 248, 240)
+        Note over Guest, GNav: Điều hướng & Chỉ đường
+        Guest->>UI: Bấm nút 'Chỉ đường' hoặc '📍 Google Maps'
+        UI->>UI: getValidGoogleMapUrl(place)
+        UI->>GNav: Mở Google Maps Search/Directions chính xác 100%
+    end
+
+    rect rgb(245, 255, 245)
+        Note over Guest, UI: So sánh giá thông minh
+        Guest->>UI: Đánh dấu chọn từ 2 - 4 cơ sở muốn xem
+        UI->>UI: Kích hoạt thanh nổi 'So sánh đa điểm'
+        UI-->>Guest: Bảng đối soát chi tiết: Hạng mục, Mức giá, Điểm nhấn, Review
+    end
+```
+
+---
+
+### 3.2. Luồng Quản Trị & Đồng Bộ Dữ Liệu Thời Gian Thực (Admin CMS Synchronization Flow)
+
+```mermaid
+flowchart TD
+    Admin([Quản Trị Viên]) --> Action{Thao tác trên admin.html}
+    
+    Action -->|Thêm cơ sở mới| AddPlace["formAddPlace<br/>Nhập Tên, Khu vực, Giá, Hotline, Ảnh"]
+    Action -->|Chỉnh sửa nhanh| EditModal["Modal Chỉnh sửa<br/>Cập nhật giá, mô tả, hình ảnh"]
+    Action -->|Đổi trạng thái| ToggleStatus["Ẩn/Hiện cơ sở<br/>Ghim ⭐ Đề Xuất lên đầu"]
+    Action -->|Xóa bỏ| DeletePlace["Xóa cơ sở khỏi web chính"]
+
+    AddPlace --> URLValidator["URL Sanitizer & Validator<br/>Tự động tạo link Google Maps nếu trống/sai"]
+    EditModal --> URLValidator
+
+    URLValidator --> WriteLocal["Ghi đè trạng thái vào LocalStorage<br/>- 'nb_places_status'<br/>- 'nb_custom_places'"]
+    ToggleStatus --> WriteLocal
+    DeletePlace --> WriteLocal
+
+    WriteLocal --> Broadcast["Sự kiện cập nhật dữ liệu"]
+    
+    subgraph ClientSync["Đồng Bộ Hóa Phía Khách Hàng (index.html)"]
+        Broadcast --> Combine["getCombinedPlacesList()<br/>Hợp nhất NINHBINH_DEFAULT_PLACES + Custom Places"]
+        Combine --> FilterActive["getActiveWebPlaces()<br/>Loại bỏ isDeleted & isHidden, Ưu tiên isFeatured"]
+        FilterActive --> RenderView["Cập nhật Grid thẻ địa điểm & Ghim Leaflet Map"]
+    end
+```
+
+---
+
+### 3.3. Luồng Thu Thập & Chuẩn Hóa Dữ Liệu Tự Động (Daily Crawler & Data Pipeline)
+
+```mermaid
+flowchart LR
+    Schedule["Bộ Lập Lịch Định Kỳ<br/>(24 Giờ / Lần)"] --> Crawler["crawler_ninhbinh_daily.py"]
+    
+    subgraph Scrape["Thu Thập & Trích Xuất"]
+        Crawler --> FetchSource["Trích xuất Dữ liệu Cơ sở Du lịch,<br/>Quán ăn, Giá phòng, OCOP"]
+        FetchSource --> ParseInfo["Phân giải Tên, Địa chỉ, Hotline, Đánh giá sao"]
+    end
+
+    subgraph Validate["Chuẩn Hóa & Kiểm Duyệt"]
+        ParseInfo --> CleanAddr["Làm sạch chuỗi địa phương & Khu vực"]
+        CleanAddr --> GeoCode["Gán Tọa độ Trọng tâm (lat, lng)"]
+        GeoCode --> MapLinkGen["Tạo Universal Google Maps Link<br/>search/?api=1&query=..."]
+    end
+
+    subgraph Sync["Lưu Trữ & Xuất Bản"]
+        MapLinkGen --> DumpJSON["Ghi tệp Master: ninhbinh_database.json"]
+        DumpJSON --> SyncJS["Đồng bộ bộ nhớ Runtime: ninhbinh_data.js"]
+    end
+```
+
+---
+
+## 🧩 4. Bóc Tách Chi Tiết Các Phân Hệ Cốt Lõi
+
+### 4.1. 🗺️ Ninh Bình Travel Hub & Bản Đồ Số Tương Tác
+* **Spatial Marker Grouping**: Tự động phân nhóm và đổi màu pin theo từng phân loại (Quán Dê núi, Cơm cháy, Homestay/Resort, Cà phê chill, Thuê xe máy, Điểm check-in).
+* **Fault-tolerant Coordinates**: Đối với cơ sở chưa có tọa độ vệ tinh tuyệt đối, thuật toán `AREA_COORDS` cùng công thức phân tán vi phân hạt nhân (Micro-offset dispersion) sẽ tự động bố trí marker quanh tâm khu vực, tránh tình trạng ghim đè lấp lẫn nhau.
+* **Universal Google Maps Linking**: Giải quyết triệt để lỗi phân giải liên kết rút gọn ảo bằng cách khởi tạo trực tiếp truy vấn định danh địa điểm và địa chỉ qua URL Search API chính thức của Google.
+
+### 4.2. ⚖️ Bộ So Sánh Đa Điểm Thông Minh (Smart Comparison)
+* Hỗ trợ lưu bộ nhớ tạm thời từ 2 đến 4 địa điểm.
+* Hiển thị thanh nổi (Floating comparison dock) báo số lượng mục đã chọn kèm nút xóa nhanh.
+* Bảng modal đối soát trực quan ma trận thuộc tính: Mức giá, Loại hình, Địa bàn, Ưu đãi, Điểm đánh giá sao và Hotline liên hệ.
+
+### 4.3. 🛍️ Gian Hàng Nông Sản & Đặc Sản OCOP Cố Đô
+* Hiển thị sản phẩm gắn nhãn chứng nhận OCOP chuẩn sao (3 sao, 4 sao, 5 sao).
+* Bộ lọc chuyên biệt theo từng dòng sản vật: Cơm cháy, Dê núi đóng gói, Rượu Kim Sơn, Nông sản Cúc Phương.
+* Giỏ hàng mini xử lý tính toán số tiền ngay tại client, hỗ trợ xuất thông tin đơn hàng để đặt trực tiếp qua Hotline/Zalo.
+
+### 4.4. 🏍️ Phân Hệ Luyện Thi Sát Hạch GPLX Mô Tô Hạng A1
+* Số hóa trọn bộ **250 câu hỏi sát hạch** chuẩn mới nhất của Tổng cục Đường bộ Việt Nam.
+* Phân loại danh mục riêng cho **20 câu hỏi điểm liệt** có cảnh báo rủi ro cao.
+* Tổng hợp bảng mẹo nhớ nhanh câu hỏi chữ, biển báo và sa hình.
+* Động cơ thi thử ngẫu nhiên: Đồng hồ đếm ngược 19 phút, kiểm tra điều kiện đạt/trượt tự động.
+
+### 4.5. 📜 Phân Hệ Soạn Thảo & Chuẩn Hóa Văn Bản Hành Chính
+* Kiểm tra và căn chỉnh bố cục văn bản hành chính theo quy định tại **Nghị định 30/2020/NĐ-CP**.
+* Hỗ trợ canh lề chuẩn, phông chữ Times New Roman, định dạng ngày tháng, nơi nhận và số/ký hiệu văn bản.
+
+---
+
+## 📂 5. Cấu Trúc Tổ Chức Mã Nguồn (Repository Structure)
+
+```plaintext
+Allinone/
+├── index.html                 # Cổng thông tin giao diện khách hàng (Travel, Map, OCOP, GPLX)
+├── admin.html                 # Bảng điều khiển quản trị CMS đa phân hệ
+├── ninhbinh_data.js           # Bộ nhớ trạng thái trung tâm, danh mục 60+ cơ sở & hàm lọc
+├── ninhbinh_database.json     # Cơ sở dữ liệu nguồn JSON chuẩn hóa
+├── crawler_ninhbinh_daily.py  # Động cơ Python thu thập và làm mới dữ liệu định kỳ
+├── chay_crawler_hangngay.bat  # Kịch bản tự động kích hoạt Crawler theo lịch tác vụ
+├── styles.css                 # Hệ thống kiểu dáng nền tảng & layout lưới responsive
+├── color-variables.css        # Hệ thống Design Tokens (màu sắc Á Đông, spacing, typography)
+├── travel-redesign.css        # Kiểu dáng chuyên sâu cho Travel Hub & Thẻ so sánh
+├── interface-overhaul.css     # Hoàn thiện giao diện hiện đại & tương thích đa màn hình
+├── leaflet.css / leaflet.js   # Thư viện bản đồ số mã nguồn mở Leaflet độc lập
+├── images/                    # Thư mục tài nguyên hình ảnh thực tế đã được chuẩn hóa
+│   ├── aravinda_resort.jpg    # Ảnh thực tế chính thức của Aravinda Resort Ninh Bình
+│   ├── driving_a1/            # Tài nguyên hình ảnh biển báo và sa hình thi GPLX A1
+│   └── ...
+└── README.md                  # Hồ sơ kiến trúc và tài liệu giới thiệu dự án
+```
+
+---
+
+## 👨‍💻 6. Tác Giả & Bản Quyền (Author & License)
+
+* **Chủ nhiệm dự án & Lập trình viên**: [Jay Trần (Jaytran2205)](https://github.com/Jaytran2205)
+* **Kênh hỗ trợ & Trao đổi hợp tác**:
+  * 📞 Hotline: `0866.520.567`
+  * 💬 Zalo: [0866520567](https://zalo.me/0866520567)
+  * 🌐 Facebook: [Jay Trần](https://web.facebook.com/jaytran0522)
+* **Giấy phép phát hành**: Dự án được công bố mã nguồn mở theo giấy phép **MIT License**.
