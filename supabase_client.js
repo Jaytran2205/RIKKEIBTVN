@@ -4,10 +4,11 @@
  */
 
 const SUPABASE_URL = "https://ufnbgkfgjazjcvwalvpx.supabase.co";
-// Khóa API Public (anon / publishable key dành cho Web Client)
-let SUPABASE_KEY = window.SUPABASE_ANON_KEY || localStorage.getItem('nb_supabase_anon_key') || "";
+// Khóa API Public (publishable key an toàn tuyệt đối cho Web Client)
+const DEFAULT_ANON_KEY = "sb_publishable_Wxd6lTG78xAQNdE-FrmZxg_2sGxKwP3";
+let SUPABASE_KEY = window.SUPABASE_ANON_KEY || localStorage.getItem('nb_supabase_anon_key') || DEFAULT_ANON_KEY;
 
-// Cung cấp hàm lưu anon key
+// Cung cấp hàm lưu anon key nếu muốn cập nhật
 function setSupabaseAnonKey(newKey) {
   if (newKey && newKey.trim()) {
     SUPABASE_KEY = newKey.trim();

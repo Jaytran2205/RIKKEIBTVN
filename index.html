@@ -15406,6 +15406,10 @@ Quản trị tài chính số — Ninh Bình Digital`;
     feedbacks.unshift(newFeedback);
     localStorage.setItem('nb_user_feedbacks', JSON.stringify(feedbacks));
 
+    if (typeof dbCreateFeedback === 'function') {
+      dbCreateFeedback(newFeedback).catch(err => console.warn('[Supabase Feedback Sync]', err));
+    }
+
     closeFeedbackModal();
     document.getElementById('feedbackForm').reset();
     selectFeedbackStar(5);
