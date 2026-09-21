@@ -193,6 +193,67 @@ async function dbGetUsers() {
   return res.data || [];
 }
 
+// ==========================================
+// 6. GOOGLE OAUTH AUTHENTICATION
+// ==========================================
+function loginWithGoogleOAuth(redirectUrl) {
+  const finalRedirect = redirectUrl || (window.location.origin + window.location.pathname);
+  const authUrl = `${SUPABASE_URL}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(finalRedirect)}`;
+  window.location.href = authUrl;
+}
+
+async function handleSupabaseAuthCallback(onSuccess) {
+  if (typeof window === 'undefined') return;
+  const hash = window.location.hash;
+  if (!hash || !hash.includes('access_token=')) return;
+
+  try {
+    const params = new URLSearchParams(hash.replace(/^#/, ''));
+    const accessToken = params.get('access_token');
+    if (!accessToken) return;
+
+    const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+
+    if (!userRes.ok) return;
+    const user = await userRes.json();
+    if (user && user.email) {
+      const name = user.user_metadata?.full_name || user.user_metadata?.name || user.email.split('@')[0];
+      const avatar = user.user_metadata?.avatar_url || user.user_metadata?.picture || '';
+
+      const currentUser = {
+        id: user.id,
+        name: name,
+        email: user.email,
+        avatar: avatar,
+        role: 'member',
+        provider: 'google'
+      };
+
+      localStorage.setItem('nb_user', JSON.stringify(currentUser));
+
+      // Xóa access_token khỏi thanh địa chỉ cho sạch URL
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.pathname + window.location.search);
+      }
+
+      // Tự động lưu hoặc đồng bộ vào bảng nb_users trên Supabase
+      dbCreateUser(currentUser).catch(() => {});
+
+      if (typeof onSuccess === 'function') {
+        onSuccess(currentUser);
+      }
+      return currentUser;
+    }
+  } catch (err) {
+    console.error('[Supabase OAuth Callback Error]', err);
+  }
+}
+
 // Export ra window toàn cục
 if (typeof window !== 'undefined') {
   window.SUPABASE_URL = SUPABASE_URL;
@@ -211,4 +272,6 @@ if (typeof window !== 'undefined') {
   window.dbDeleteCashbookEntry = dbDeleteCashbookEntry;
   window.dbCreateUser = dbCreateUser;
   window.dbGetUsers = dbGetUsers;
+  window.loginWithGoogleOAuth = loginWithGoogleOAuth;
+  window.handleSupabaseAuthCallback = handleSupabaseAuthCallback;
 }

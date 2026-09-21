@@ -9305,6 +9305,15 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
   // Init App on Load
   window.addEventListener('DOMContentLoaded', () => {
+    if (typeof handleSupabaseAuthCallback === 'function') {
+      handleSupabaseAuthCallback(user => {
+        currentUser = user;
+        updateAuthUI();
+        if (typeof showToast === 'function') {
+          showToast(`Chào mừng ${user.name} đã đăng nhập Google thành công!`);
+        }
+      });
+    }
     updateAuthUI();
     handleHashNavigation();
     renderAdminData();
@@ -9509,7 +9518,13 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       const uName = document.getElementById('headerUserName');
       if(uName) uName.textContent = currentUser.name || 'Người dùng';
       const uAvatar = document.getElementById('headerAvatar');
-      if(uAvatar) uAvatar.textContent = (currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U');
+      if(uAvatar) {
+        if (currentUser.avatar) {
+          uAvatar.innerHTML = `<img src="${currentUser.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" referrerpolicy="no-referrer">`;
+        } else {
+          uAvatar.textContent = (currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U');
+        }
+      }
 
       const pName = document.getElementById('profName');
       if(pName) pName.textContent = currentUser.name;
@@ -9518,7 +9533,13 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       const pRole = document.getElementById('profRole');
       if(pRole) pRole.value = currentUser.role === 'admin' ? 'Quản trị viên' : 'Thành viên cộng đồng';
       const pAvatar = document.getElementById('profAvatar');
-      if(pAvatar) pAvatar.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+      if(pAvatar) {
+        if (currentUser.avatar) {
+          pAvatar.innerHTML = `<img src="${currentUser.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" referrerpolicy="no-referrer">`;
+        } else {
+          pAvatar.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+        }
+      }
     } else {
       if(authBox) authBox.style.display = 'flex';
       if(userBox) userBox.style.display = 'none';
@@ -9600,16 +9621,21 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   }
 
   function handleGoogleSignIn() {
-    currentUser = {
-      name: "Người Dùng Google",
-      email: "user.google@gmail.com",
-      role: "member",
-      provider: "google"
-    };
-    localStorage.setItem('nb_user', JSON.stringify(currentUser));
-    updateAuthUI();
-    closeModal();
-    showToast('Đăng nhập thành công với tài khoản Google!');
+    if (typeof loginWithGoogleOAuth === 'function') {
+      showToast('Đang kết nối Google...');
+      loginWithGoogleOAuth();
+    } else {
+      currentUser = {
+        name: "Người Dùng Google",
+        email: "user.google@gmail.com",
+        role: "member",
+        provider: "google"
+      };
+      localStorage.setItem('nb_user', JSON.stringify(currentUser));
+      updateAuthUI();
+      closeModal();
+      showToast('Đăng nhập thành công với tài khoản Google!');
+    }
   }
 
   function handleLoginSubmit() {
