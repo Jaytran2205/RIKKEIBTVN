@@ -1,0 +1,9 @@
+*.py
+*.bat
+*.docx
+scratch/
+.agents/
+.codex/
+.impeccable/
+admin/
+Allinone/
