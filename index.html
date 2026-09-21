@@ -14,6 +14,7 @@
 <!-- Phông chữ: Bricolage Grotesque (tiêu đề) + Be Vietnam Pro (nội dung) — đều có bộ ký tự tiếng Việt -->
 
 <script src="ninhbinh_data.js"></script>
+<script src="supabase_client.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14694,6 +14695,10 @@ Quản trị tài chính số — Ninh Bình Digital`;
       localStorage.setItem('nb_specialty_orders', JSON.stringify(orders));
     } catch(e) {}
 
+    if (typeof dbCreateOrder === 'function') {
+      dbCreateOrder(newOrder).catch(err => console.warn('[Supabase Order Sync]', err));
+    }
+
     closeSpecialtyCartModal();
     specialtyCart = [];
     updateCartCountBadge();
@@ -15447,6 +15452,10 @@ Quản trị tài chính số — Ninh Bình Digital`;
       leads.unshift(newLead);
       localStorage.setItem('nb_service_leads', JSON.stringify(leads));
     } catch(err) {}
+
+    if (typeof dbCreateLead === 'function') {
+      dbCreateLead(newLead).catch(err => console.warn('[Supabase Lead Sync]', err));
+    }
 
     document.getElementById('leadCaptureForm')?.reset();
 

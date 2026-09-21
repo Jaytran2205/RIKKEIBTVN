@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <script src="ninhbinh_data.js"></script>
+<script src="supabase_client.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard — Ninh Bình Digital</title>
@@ -1657,6 +1658,82 @@ function initAdminData() {
   renderFeedbackTable();
   renderOrdersTable();
   updateDashboardCounts();
+  syncDataFromSupabase();
+}
+
+async function syncDataFromSupabase() {
+  if (typeof dbGetOrders === 'function') {
+    try {
+      const orders = await dbGetOrders();
+      if (orders && orders.length > 0) {
+        const mapped = orders.map(o => ({
+          orderId: o.order_code,
+          date: new Date(o.created_at).toLocaleDateString('vi-VN'),
+          customer: { name: o.customer_name, phone: o.customer_phone, address: o.customer_address },
+          total: Number(o.total) || 0,
+          status: o.status
+        }));
+        localStorage.setItem('nb_specialty_orders', JSON.stringify(mapped));
+        renderOrdersTable();
+        renderRevenueChart();
+        updateDashboardCounts();
+      }
+    } catch(e) {}
+  }
+
+  if (typeof dbGetLeads === 'function') {
+    try {
+      const leads = await dbGetLeads();
+      if (leads && leads.length > 0) {
+        const mapped = leads.map(l => ({
+          id: l.id,
+          name: l.name,
+          phone: l.phone,
+          email: l.email,
+          service: l.service,
+          note: l.note,
+          status: l.status,
+          createdAt: l.created_at
+        }));
+        localStorage.setItem('nb_service_leads', JSON.stringify(mapped));
+        renderLeadsTable();
+      }
+    } catch(e) {}
+  }
+
+  if (typeof dbGetFeedbacks === 'function') {
+    try {
+      const fbs = await dbGetFeedbacks();
+      if (fbs && fbs.length > 0) {
+        const mapped = fbs.map(f => ({
+          name: f.name,
+          phone: f.phone,
+          topic: f.topic,
+          rating: f.rating,
+          content: f.content,
+          date: new Date(f.created_at).toLocaleDateString('vi-VN')
+        }));
+        localStorage.setItem('nb_user_feedbacks', JSON.stringify(mapped));
+        renderFeedbackTable();
+      }
+    } catch(e) {}
+  }
+
+  if (typeof dbGetUsers === 'function') {
+    try {
+      const users = await dbGetUsers();
+      if (users && users.length > 0) {
+        const mapped = users.map(u => ({
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          date: new Date(u.created_at).toLocaleDateString('vi-VN')
+        }));
+        localStorage.setItem('nb_all_users', JSON.stringify(mapped));
+        renderUsersTable();
+      }
+    } catch(e) {}
+  }
 }
 
 // Live concurrent users simulation (reset to 0)
