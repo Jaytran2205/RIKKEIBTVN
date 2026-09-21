@@ -1,0 +1,10 @@
+.git/
+.agents/
+.codex/
+.impeccable/
+scratch/
+Allinone/
+admin/
+*.py
+*.bat
+*.docx
