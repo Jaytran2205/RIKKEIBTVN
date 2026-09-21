@@ -89,26 +89,20 @@ sequenceDiagram
     UI->>Engine: Kích hoạt getActiveWebPlaces()
     Engine-->>UI: Kết xuất danh sách 60+ cơ sở đã lọc (Bỏ cơ sở bị ẩn/xóa)
     
-    rect rgb(240, 250, 255)
-        Note over Guest, Map: Trải nghiệm khám phá bản đồ tương tác
-        Guest->>UI: Chọn khu vực (Tam Cốc, Tràng An, Hang Múa,...)
-        UI->>Map: Cập nhật tọa độ AREA_COORDS & Pins
-        Map-->>Guest: Hiển thị Marker màu sắc + Popup thông tin & giá phòng/món ăn
-    end
+    Note over Guest, Map: 1. Khám phá & Tương tác bản đồ số
+    Guest->>UI: Chọn khu vực (Tam Cốc, Tràng An, Hang Múa,...)
+    UI->>Map: Cập nhật tọa độ AREA_COORDS & Pins
+    Map-->>Guest: Hiển thị Marker màu sắc + Popup thông tin & giá phòng/món ăn
 
-    rect rgb(255, 248, 240)
-        Note over Guest, GNav: Điều hướng & Chỉ đường
-        Guest->>UI: Bấm nút 'Chỉ đường' hoặc '📍 Google Maps'
-        UI->>UI: getValidGoogleMapUrl(place)
-        UI->>GNav: Mở Google Maps Search/Directions chính xác 100%
-    end
+    Note over Guest, GNav: 2. Điều hướng & Dẫn đường chuẩn xác
+    Guest->>UI: Bấm nút 'Chỉ đường' hoặc '📍 Google Maps'
+    UI->>UI: Chuẩn hóa liên kết qua getValidGoogleMapUrl(place)
+    UI->>GNav: Mở Google Maps Search/Directions chính xác 100%
 
-    rect rgb(245, 255, 245)
-        Note over Guest, UI: So sánh giá thông minh
-        Guest->>UI: Đánh dấu chọn từ 2 - 4 cơ sở muốn xem
-        UI->>UI: Kích hoạt thanh nổi 'So sánh đa điểm'
-        UI-->>Guest: Bảng đối soát chi tiết: Hạng mục, Mức giá, Điểm nhấn, Review
-    end
+    Note over Guest, UI: 3. So sánh giá đa điểm thông minh
+    Guest->>UI: Đánh dấu chọn từ 2 - 4 cơ sở muốn xem
+    UI->>UI: Kích hoạt thanh nổi 'So sánh đa điểm'
+    UI-->>Guest: Bảng đối soát chi tiết: Hạng mục, Mức giá, Điểm nhấn, Review
 ```
 
 ---
