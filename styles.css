@@ -19,7 +19,7 @@
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #C22026 0%, #991B1B 100%);
+  background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
   font-size: 1.05rem;
-  box-shadow: 0 2px 6px rgba(194, 32, 38, 0.3);
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3);
   flex-shrink: 0;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .vb-brand-title span.accent-highlight {
-  color: #C22026 !important;
+  color: #1D4ED8 !important;
   font-weight: 800;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .vb-nav-item:hover {
-  color: #C22026 !important;
+  color: #1D4ED8 !important;
 }
 
 .vb-top-right {
@@ -80,9 +80,9 @@
 }
 
 .vb-credits-badge {
-  background: #FEE2E2 !important;
-  color: #C22026 !important;
-  border: 1px solid #FECACA !important;
+  background: #EFF6FF !important;
+  color: #1D4ED8 !important;
+  border: 1px solid #BFDBFE !important;
   font-size: 0.78rem !important;
   font-weight: 700;
   padding: 4px 12px !important;
@@ -452,8 +452,8 @@ body.vanban-page-active footer {
 }
 
 .vb-tab-step.active {
-  color: #C22026 !important; /* Đỏ chuông chuẩn công vụ */
-  border-bottom-color: #C22026 !important;
+  color: #1D4ED8 !important; /* Xanh GovTech chuẩn công vụ số */
+  border-bottom-color: #1D4ED8 !important;
   font-weight: 700 !important;
 }
 
@@ -483,7 +483,7 @@ body.vanban-page-active footer {
 
 .vb-accordion-header:hover {
   background: #F8FAFC !important;
-  color: #C22026 !important;
+  color: #1D4ED8 !important;
 }
 
 .vb-accordion-item.open {
@@ -522,8 +522,8 @@ body.vanban-page-active footer {
 
 /* Khối Đơn Vị Liên Tịch (Đơn vị 2...) theo đúng mẫu */
 .vb-agency-unit-box {
-  border: 1.5px solid #FCA5A5;
-  border-left: 4px solid #C22026 !important;
+  border: 1.5px solid #BFDBFE;
+  border-left: 4px solid #1D4ED8 !important;
   border-radius: 8px;
   padding: 14px 16px;
   background: #FFFFFF;
@@ -594,8 +594,8 @@ body.vanban-page-active footer {
 .vb-control-pane input:focus,
 .vb-control-pane select:focus,
 .vb-control-pane textarea:focus {
-  border-color: #C22026 !important;
-  box-shadow: 0 0 0 3px rgba(194, 32, 38, 0.12) !important;
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
   outline: none;
 }
 
@@ -608,8 +608,8 @@ body.vanban-page-active footer {
 }
 
 .vb-tag-input-container:focus-within {
-  border-color: #C22026 !important;
-  box-shadow: 0 0 0 3px rgba(194, 32, 38, 0.12) !important;
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
 }
 
 .vb-tag-chip {
@@ -635,20 +635,20 @@ body.vanban-page-active footer {
 }
 
 .vb-sug-item {
-  color: #C22026 !important;
+  color: #1D4ED8 !important;
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
 }
 
 .vb-sug-item:hover {
-  color: #991B1B !important;
+  color: #1E3A8A !important;
 }
 
 /* Slider tỷ lệ cột Header */
 .vb-slider-input::-webkit-slider-thumb {
-  background: #C22026 !important;
-  box-shadow: 0 2px 6px rgba(194, 32, 38, 0.4) !important;
+  background: #1D4ED8 !important;
+  box-shadow: 0 2px 6px rgba(29, 78, 216, 0.4) !important;
 }
 
 .vb-slider-badge-pill {
@@ -661,9 +661,9 @@ body.vanban-page-active footer {
   font-weight: 700;
 }
 
-/* Nút Đỏ "+ Thêm đơn vị" và Nút Tiếp Tục */
+/* Nút Xanh Công Vụ "+ Thêm đơn vị" và Nút Tiếp Tục */
 .btn-add-unit {
-  background: #C22026 !important;
+  background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
   padding: 11px 20px !important;
@@ -672,7 +672,7 @@ body.vanban-page-active footer {
   border-radius: 8px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 2px 8px rgba(194, 32, 38, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25) !important;
   width: 100% !important;
   display: inline-flex;
   align-items: center;
@@ -682,13 +682,13 @@ body.vanban-page-active footer {
 }
 
 .btn-add-unit:hover {
-  background: #A61B20 !important;
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(194, 32, 38, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35) !important;
 }
 
 .btn-continue {
-  background: #C22026 !important;
+  background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
   padding: 12px 20px !important;
@@ -697,7 +697,7 @@ body.vanban-page-active footer {
   border-radius: 8px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 2px 8px rgba(194, 32, 38, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25) !important;
   width: 100% !important;
   display: inline-flex;
   align-items: center;
@@ -706,8 +706,9 @@ body.vanban-page-active footer {
 }
 
 .btn-continue:hover {
-  background: #A61B20 !important;
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%) !important;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35) !important;
 }
 
 /* ==========================================================================
@@ -886,3 +887,1013 @@ body.vanban-page-active footer {
     page-break-inside: avoid !important;
   }
 }
+
+/* ==========================================================================
+   UI/UX PROMAX DESIGN SYSTEM STYLES (ĐIỂM LIỆT & THI SÁT HẠCH)
+   ========================================================================== */
+@keyframes beaconPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.promax-paralyzed-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.promax-paralyzed-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(220, 38, 38, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+.beacon-dot-pulse {
+  animation: beaconPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* 1. Sub-nav bar ProMax Pills */
+.driving-header-subnav {
+  position: sticky !important;
+  top: 58px !important;
+  z-index: 100 !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: var(--shadow-promax-sm) !important;
+}
+
+.driving-subnav-btn {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  outline: none !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+}
+
+.driving-subnav-btn:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  transform: translateY(-1px);
+}
+
+.driving-subnav-btn:active {
+  transform: scale(0.97) !important;
+}
+
+.driving-subnav-btn.active {
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28) !important;
+}
+
+/* 2. ProMax Elevated Card & Hover */
+.promax-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--shadow-promax-md) !important;
+  transition: var(--transition-promax) !important;
+}
+
+.promax-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-promax-hover) !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* 3. Button Micro-interactions & Core Styles */
+.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  padding: 11px 22px !important;
+  border-radius: 10px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  box-sizing: border-box !important;
+  line-height: 1.3 !important;
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0F3D6E 0%, #1E5998 100%) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 4px 14px rgba(15, 61, 110, 0.25) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #092545 0%, #0F3D6E 100%) !important;
+  box-shadow: 0 6px 20px rgba(15, 61, 110, 0.35) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+}
+
+body.midnight-mode .btn-primary {
+  background: linear-gradient(135deg, #00F2FE 0%, #0284C7 100%) !important;
+  color: #040E24 !important;
+  font-weight: 800 !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.midnight-mode .btn-primary:hover {
+  background: linear-gradient(135deg, #38BDF8 0%, #67E8F9 100%) !important;
+  box-shadow: 0 6px 26px rgba(0, 242, 254, 0.6) !important;
+  transform: translateY(-2px) !important;
+  color: #040E24 !important;
+}
+
+.btn-outline {
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  color: #0F3D6E !important;
+}
+
+body:not(.midnight-mode) .btn-outline:hover {
+  background: #F8FAFC !important;
+  border-color: #0F3D6E !important;
+  color: #0F3D6E !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 4. Accessibility & Focus States */
+:focus-visible {
+  outline: 2.5px solid var(--color-ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* 5. Impeccable Browser Surfaces */
+::selection {
+  background: #DBEAFE !important;
+  color: #1E3A8A !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   6. UI/UX PRO MAX - MIDNIGHT DARK MODE (DEEP MIDNIGHT #0A0E27)
+   ========================================================================== */
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #F1F5F9;
+  color: var(--ink);
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.theme-toggle-btn:hover {
+  background: #E2E8F0;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* Developer Nav link status */
+.nav-link-dev {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.nav-link-dev:hover {
+  background: #FEF3C7 !important;
+  color: #B45309 !important;
+}
+
+/* Light Mode Defaults for ProMax Cards */
+.promax-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  transition: var(--transition-promax);
+  color: var(--ink);
+}
+.promax-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  border-color: #CBD5E1;
+}
+
+/* ==========================================================================
+   6. UI/UX PRO MAX - MIDNIGHT DARK MODE (KHI BẬT THEME TỐI)
+   ========================================================================== */
+/* Default / Light Mode Classes for Adaptive Components */
+.home-quick-tools-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  transition: all .25s ease;
+}
+.home-quick-tools-card .quick-tools-title {
+  color: var(--primary-dark);
+}
+.home-quick-btn-dev {
+  border-color: #FDE68A !important;
+  background: #FEFCE8 !important;
+  color: #92400E !important;
+}
+.home-quick-btn-vanban {
+  border-color: #C8853F !important;
+  background: #F6F1E8 !important;
+  color: #9A3412 !important;
+}
+.home-quick-btn-vanban .btn-lbl,
+.home-quick-btn-vanban .btn-arr {
+  color: #9A3412 !important;
+}
+.home-quick-btn-excel {
+  border-color: #86EFAC !important;
+  background: #F0FDF4 !important;
+  color: #166534 !important;
+}
+.home-quick-btn-excel .btn-lbl,
+.home-quick-btn-excel .btn-arr {
+  color: #166534 !important;
+}
+
+.page-banner-hero {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border);
+  transition: all .25s ease;
+}
+.page-banner-title {
+  color: var(--primary-dark);
+}
+.page-banner-desc {
+  color: var(--muted);
+}
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  transition: all .25s ease;
+}
+.community-main-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  transition: all .25s ease;
+}
+
+/* Midnight Dark Mode Core */
+body.midnight-mode {
+  background-color: var(--midnight-bg) !important;
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .theme-toggle-btn {
+  background: #1A243B !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #F8FAFC !important;
+}
+body.midnight-mode .theme-toggle-btn:hover {
+  background: #253352 !important;
+  border-color: #38BDF8 !important;
+  color: #38BDF8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+}
+
+body.midnight-mode .nav-link-dev:hover {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #FCD34D !important;
+}
+
+body.midnight-mode #driving-portal,
+body.midnight-mode .driving-tab-pane {
+  background-color: var(--midnight-bg) !important;
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode h1, 
+body.midnight-mode h2, 
+body.midnight-mode h3, 
+body.midnight-mode h4 {
+  color: var(--midnight-text-primary);
+}
+
+/* Midnight Dark - Hero Section */
+body.midnight-mode .hero-section {
+  background: radial-gradient(circle at 50% 0%, #151D3B 0%, #0A0E27 80%) !important;
+  border-bottom: 1px solid var(--midnight-border) !important;
+}
+
+body.midnight-mode .badge-tag {
+  background: rgba(56, 189, 248, 0.12) !important;
+  color: var(--midnight-accent) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+}
+
+body.midnight-mode .hero-title {
+  color: #F8FAFC !important;
+  letter-spacing: -0.02em;
+}
+
+body.midnight-mode .hero-desc {
+  color: var(--midnight-text-muted) !important;
+}
+
+body.midnight-mode .hero-stats {
+  border-top: 1px solid var(--midnight-border) !important;
+}
+
+body.midnight-mode .hero-stats b {
+  color: var(--midnight-accent) !important;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+
+body.midnight-mode .hero-stats span {
+  color: var(--midnight-text-muted) !important;
+}
+
+/* Midnight Dark - Quick Tools Card on Home */
+body.midnight-mode .home-quick-tools-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+body.midnight-mode .home-quick-tools-card .quick-tools-title {
+  color: #F8FAFC !important;
+}
+body.midnight-mode .home-quick-btn-dev {
+  background: rgba(245, 158, 11, 0.14) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  color: #FCD34D !important;
+}
+body.midnight-mode .home-quick-btn-vanban {
+  background: rgba(194, 65, 12, 0.14) !important;
+  border-color: rgba(194, 65, 12, 0.4) !important;
+  color: #FB923C !important;
+}
+body.midnight-mode .home-quick-btn-vanban .btn-lbl,
+body.midnight-mode .home-quick-btn-vanban .btn-arr {
+  color: #FB923C !important;
+}
+body.midnight-mode .home-quick-btn-excel {
+  background: rgba(22, 163, 74, 0.14) !important;
+  border-color: rgba(22, 163, 74, 0.4) !important;
+  color: #4ADE80 !important;
+}
+body.midnight-mode .home-quick-btn-excel .btn-lbl,
+body.midnight-mode .home-quick-btn-excel .btn-arr {
+  color: #4ADE80 !important;
+}
+
+/* Midnight Dark - Section Titles & Tool Cards */
+body.midnight-mode .section-title-wrap h2 {
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .section-title-wrap p {
+  color: var(--midnight-text-muted) !important;
+}
+
+body.midnight-mode .tool-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+  transition: all .25s ease !important;
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .tool-card:hover {
+  border-color: var(--midnight-border-hover) !important;
+  background: var(--midnight-card-hover) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65) !important;
+}
+
+body.midnight-mode .tool-card h3 {
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .tool-card p {
+  color: var(--midnight-text-muted) !important;
+}
+
+body.midnight-mode .tool-card .go-badge {
+  color: var(--midnight-accent) !important;
+}
+
+body.midnight-mode .tool-card .tool-ic {
+  background: rgba(56, 189, 248, 0.12) !important;
+  color: var(--midnight-accent) !important;
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+}
+
+/* Midnight Dark - Floating Header Capsule */
+body.midnight-mode header {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.midnight-mode .logo-text {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode .logo-text small,
+body.midnight-mode .logo-sub {
+  color: #94A3B8 !important;
+}
+
+body.midnight-mode .nav-link {
+  color: #CBD5E1 !important;
+}
+
+body.midnight-mode .nav-link:hover {
+  background: rgba(0, 242, 254, 0.08) !important;
+  color: #00F2FE !important;
+}
+
+body.midnight-mode .nav-link.active {
+  background: rgba(0, 242, 254, 0.1) !important;
+  border-color: #00F2FE !important;
+  color: #00F2FE !important;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.25) !important;
+}
+
+body.midnight-mode .nav-link-dev:hover {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #FBBF24 !important;
+}
+
+body.midnight-mode .nav-dev-badge {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #FBBF24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+
+body.midnight-mode .user-badge {
+  background: #1A243B !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode .promax-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45) !important;
+  transition: var(--transition-promax) !important;
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .promax-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.65) !important;
+  border-color: var(--midnight-border-hover) !important;
+  background: var(--midnight-card-hover) !important;
+}
+
+body.midnight-mode .driving-header-subnav {
+  background: rgba(10, 14, 39, 0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid var(--midnight-border) !important;
+}
+
+body.midnight-mode .driving-subnav-btn {
+  background: #131B2E !important;
+  color: var(--midnight-text-muted) !important;
+  border: 1px solid var(--midnight-border) !important;
+}
+
+body.midnight-mode .driving-subnav-btn:hover:not(.active) {
+  background: #1E293B !important;
+  color: var(--midnight-text-primary) !important;
+  border-color: var(--midnight-border-hover) !important;
+  transform: translateY(-1px);
+}
+
+body.midnight-mode .driving-subnav-btn.active {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4) !important;
+}
+
+body.midnight-mode .promax-paralyzed-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-left: 4px solid var(--midnight-danger) !important;
+  border-radius: 16px !important;
+  padding: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  transition: var(--transition-promax);
+  color: var(--midnight-text-primary) !important;
+}
+
+body.midnight-mode .promax-paralyzed-card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6) !important;
+  border-color: var(--midnight-danger-border) !important;
+  border-left: 4px solid #F87171 !important;
+  background: var(--midnight-card-hover) !important;
+  transform: translateY(-2px);
+}
+
+body.midnight-mode .btn-outline {
+  background: #131B2E !important;
+  border: 1.5px solid #334155 !important;
+  color: #E2E8F0 !important;
+}
+
+body.midnight-mode .btn-outline:hover {
+  background: #1E293B !important;
+  border-color: #38BDF8 !important;
+  color: #38BDF8 !important;
+}
+
+/* Midnight Dark - Page Banners, Blog, Services & Community */
+body.midnight-mode .page-banner-hero {
+  background: radial-gradient(circle at 50% 0%, #151D3B 0%, #0A0E27 80%) !important;
+  border-bottom: 1px solid var(--midnight-border) !important;
+}
+body.midnight-mode .page-banner-title {
+  color: #F8FAFC !important;
+}
+body.midnight-mode .page-banner-desc {
+  color: var(--midnight-text-muted) !important;
+}
+
+body.midnight-mode .blog-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+  color: var(--midnight-text-primary) !important;
+}
+body.midnight-mode .blog-card:hover {
+  background: var(--midnight-card-hover) !important;
+  border-color: var(--midnight-border-hover) !important;
+  transform: translateY(-3px) !important;
+}
+body.midnight-mode .blog-card h3 {
+  color: #F8FAFC !important;
+}
+body.midnight-mode .blog-card p {
+  color: var(--midnight-text-muted) !important;
+}
+body.midnight-mode .blog-card .read-more {
+  color: #38BDF8 !important;
+}
+
+body.midnight-mode .service-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+  color: var(--midnight-text-primary) !important;
+}
+body.midnight-mode .service-card h3 {
+  color: #F8FAFC !important;
+}
+body.midnight-mode .service-card p,
+body.midnight-mode .service-desc {
+  color: var(--midnight-text-muted) !important;
+}
+
+body.midnight-mode .community-main-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
+  color: var(--midnight-text-primary) !important;
+}
+body.midnight-mode .community-main-card h1 {
+  color: #F8FAFC !important;
+}
+body.midnight-mode .community-desc {
+  color: var(--midnight-text-muted) !important;
+}
+
+/* Midnight Dark - Prompt Cards & Admin */
+body.midnight-mode .prompt-card {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+  color: var(--midnight-text-primary) !important;
+}
+body.midnight-mode .prompt-card p {
+  color: #CBD5E1 !important;
+}
+body.midnight-mode .tab-btn {
+  background: #131B2E !important;
+  border-color: var(--midnight-border) !important;
+  color: var(--midnight-text-muted) !important;
+}
+body.midnight-mode .tab-btn.active {
+  background: #2563EB !important;
+  border-color: #2563EB !important;
+  color: #FFFFFF !important;
+}
+body.midnight-mode .admin-sidebar {
+  background: var(--midnight-card) !important;
+  border: 1px solid var(--midnight-border) !important;
+}
+body.midnight-mode .admin-menu-item {
+  color: var(--midnight-text-muted) !important;
+}
+body.midnight-mode .admin-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #38BDF8 !important;
+}
+
+/* Midnight Dark - Inputs & Modals */
+body.midnight-mode input,
+body.midnight-mode select,
+body.midnight-mode textarea {
+  background: #1A243B !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+body.midnight-mode input:focus,
+body.midnight-mode select:focus,
+body.midnight-mode textarea:focus {
+  border-color: #38BDF8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+}
+body.midnight-mode .modal-box {
+  background: #131B2E !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+body.midnight-mode .modal-header {
+  background: #0A0E27 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+body.midnight-mode .modal-body {
+  color: #CBD5E1 !important;
+}
+body.midnight-mode .form-group label {
+  color: #E2E8F0 !important;
+}
+body.midnight-mode .drop-zone {
+  background: rgba(37, 99, 235, 0.08) !important;
+  border-color: #38BDF8 !important;
+  color: #CBD5E1 !important;
+}
+body.midnight-mode #appDialogCard {
+  background: #131B2E !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+}
+body.midnight-mode #appDialogTitle {
+  color: #F8FAFC !important;
+}
+body.midnight-mode #appDialogMessage {
+  color: #CBD5E1 !important;
+}
+body.midnight-mode #appDialogSub {
+  color: #94A3B8 !important;
+}
+body.midnight-mode #appDialogBtnCancel {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #CBD5E1 !important;
+}
+
+/* ==========================================================================
+   UNIVERSAL CONTRAST INVARIANCE GUARD
+   Ensures document preview and certificate canvas keep black text,
+   while allowing app cards, tools banners, and travel components to adapt to dark mode!
+   ========================================================================== */
+.community-qr-container,
+.community-qr-container *,
+.community-qr-label {
+  color: #0F172A !important;
+}
+.vb-a4-sheet,
+.vb-a4-sheet * {
+  color: #000000 !important;
+}
+body.midnight-mode .vb-a4-sheet {
+  background-color: #FFFFFF !important;
+}
+body.midnight-mode .community-qr-container {
+  background-color: #FFFFFF !important;
+  border-color: #38BDF8 !important;
+}
+
+/* Midnight Dark Mode - All Headings, Titles & Form Controls */
+body.midnight-mode h1,
+body.midnight-mode h2,
+body.midnight-mode h3,
+body.midnight-mode h4,
+body.midnight-mode .brand-font,
+body.midnight-mode #currentCategoryTitle,
+body.midnight-mode .place-card-title {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode .page-banner,
+body.midnight-mode .tools-header-banner,
+body.midnight-mode #page-tools > div:first-child {
+  background: #0D1527 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode #page-tools h1,
+body.midnight-mode #page-tools .tools-banner-title {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #page-tools p,
+body.midnight-mode #page-tools .tools-banner-desc {
+  color: #94A3B8 !important;
+}
+
+body.midnight-mode .group-title {
+  color: #38BDF8 !important;
+}
+
+/* Travel Section Dark Mode */
+body.midnight-mode .travel-filter-box,
+body.midnight-mode #travelFilterBox {
+  background: #131B2E !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.midnight-mode #travelSearch {
+  background: #0A0E27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #travelSearch::placeholder {
+  color: #64748B !important;
+}
+
+body.midnight-mode .area-filter-lbl {
+  color: #CBD5E1 !important;
+}
+
+body.midnight-mode .area-filter-btn {
+  background: #1A243B !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #CBD5E1 !important;
+}
+
+body.midnight-mode .area-filter-btn:hover {
+  border-color: #38BDF8 !important;
+  color: #38BDF8 !important;
+}
+
+body.midnight-mode .area-filter-btn.active {
+  background: #2563EB !important;
+  border-color: #38BDF8 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
+}
+
+body.midnight-mode #currentCategoryTitle {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #currentPlaceCount {
+  color: #94A3B8 !important;
+}
+
+body.midnight-mode .travel-card {
+  background: #131B2E !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.midnight-mode .travel-card:hover {
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.midnight-mode .travel-card h3 {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode .travel-card .travel-addr {
+  color: #94A3B8 !important;
+}
+
+body.midnight-mode .travel-card .travel-highlight {
+  background: #1A243B !important;
+  color: #E2E8F0 !important;
+  border-left: 3px solid #38BDF8 !important;
+}
+
+body.midnight-mode .travel-card .travel-price {
+  color: #38BDF8 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode .travel-empty-box {
+  background: #131B2E !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.midnight-mode .travel-empty-box .empty-title {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode .travel-empty-box .empty-desc {
+  color: #94A3B8 !important;
+}
+
+/* Specialty Cart Modal Dark Mode */
+body.midnight-mode #specialtyCartCard {
+  background: #131B2E !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #cartCustomerTitle,
+body.midnight-mode #cartFooterTotal {
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #cartModalBodyContent input {
+  background: #0A0E27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+body.midnight-mode #cartModalBodyContent label {
+  color: #CBD5E1 !important;
+}
+
+body.midnight-mode #cartPaymentBox {
+  background: #0A0E27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode #cartPaymentBox label span {
+  color: #E2E8F0 !important;
+}
+
+body.midnight-mode #cartModalFooter {
+  background: #0A0E27 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode #cartItemsList > div > div {
+  background: #0A0E27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode #cartItemsList button {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.midnight-mode #cartItemsList [style*="color:#0F172A"] {
+  color: #F8FAFC !important;
+}
+
+/* Spa & Pho Co Badges & Dark Mode */
+.badge-tag-spa {
+  background: #F3E8FF !important;
+  color: #7C3AED !important;
+  border: 1px solid #DDD6FE !important;
+}
+
+body.midnight-mode .badge-tag-spa {
+  background: rgba(139, 92, 246, 0.16) !important;
+  color: #C4B5FD !important;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+}
+
+body.midnight-mode #travelTabSpa {
+  background: rgba(139, 92, 246, 0.15) !important;
+  color: #C4B5FD !important;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+}
+
+body.midnight-mode #travelTabSpa.active {
+  background: #7C3AED !important;
+  color: #FFFFFF !important;
+  border-color: #A78BFA !important;
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.4) !important;
+}
+
+body.midnight-mode .area-filter-btn[onclick*="phoco"] {
+  border-color: #EF4444 !important;
+  color: #F87171 !important;
+}
+
+body.midnight-mode .area-filter-btn[onclick*="phoco"].active {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border-color: #F87171 !important;
+}
+
+/* ==========================================================================
+   DRIVING EXAM SYSTEM - THEME CONTRAST & RESPONSIVE ADAPTATION (LIGHT & DARK)
+   ========================================================================== */
+.driving-tab-pane,
+#pane-thi-a1,
+#pane-meo-a,
+#pane-meo-b,
+#pane-cau-liet-20 {
+  color: var(--ink) !important;
+}
+
+#pane-thi-a1 h1,
+#pane-thi-a1 h2,
+#pane-thi-a1 h3,
+#pane-thi-a1 h4,
+.driving-tab-pane h1,
+.driving-tab-pane h2,
+.driving-tab-pane h3,
+.driving-tab-pane h4 {
+  color: var(--ink) !important;
+}
+
+#pane-thi-a1 p,
+.driving-tab-pane p {
+  color: var(--ink-2) !important;
+}
+
+#pane-thi-a1 .promax-card,
+.driving-tab-pane .promax-card {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-sm, 0 4px 14px rgba(0,0,0,0.05)) !important;
+}
+
+#pane-thi-a1 .promax-card h1,
+#pane-thi-a1 .promax-card h2,
+#pane-thi-a1 .promax-card h3,
+#pane-thi-a1 .promax-card h4,
+.driving-tab-pane .promax-card h1,
+.driving-tab-pane .promax-card h2,
+.driving-tab-pane .promax-card h3,
+.driving-tab-pane .promax-card h4 {
+  color: var(--ink) !important;
+}
+
+#pane-thi-a1 > .wrap > div:first-child h1 {
+  color: var(--ink) !important;
+}
+
+#pane-thi-a1 > .wrap > div:first-child p {
+  color: var(--muted) !important;
+}
+
+/* Light mode specific contrast */
+body:not(.midnight-mode):not([data-theme="dark"]) #pane-thi-a1 .promax-card {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+body:not(.midnight-mode):not([data-theme="dark"]) #pane-thi-a1 h1 {
+  color: #0F172A !important;
+}
+
+/* Dark/Midnight mode specific contrast */
+body.midnight-mode #pane-thi-a1 .promax-card,
+body[data-theme="dark"] #pane-thi-a1 .promax-card {
+  background: #111E2E !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.midnight-mode #pane-thi-a1 h1,
+body[data-theme="dark"] #pane-thi-a1 h1 {
+  color: #F8FAFC !important;
+}
+
+
+
+
+
+
+
+

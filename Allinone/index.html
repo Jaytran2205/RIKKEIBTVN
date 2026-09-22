@@ -6545,8 +6545,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       
       <!-- Tiêu Đề Trung Tâm -->
       <div style="text-align:center; margin-bottom:32px;">
-        <h1 style="font-size:2.2rem; font-weight:800; color:#F8FAFC; margin-bottom:8px;">Thi Thử Bằng Lái Xe Hạng A1</h1>
-        <p style="color:#94A3B8; font-size:1.02rem;">Chọn một bộ đề dưới đây để bắt đầu làm bài thi.</p>
+        <h1 style="font-size:2.2rem; font-weight:800; color:var(--ink); margin-bottom:8px;">Thi Thử Bằng Lái Xe Hạng A1</h1>
+        <p style="color:var(--muted); font-size:1.02rem;">Chọn một bộ đề dưới đây để bắt đầu làm bài thi.</p>
       </div>
 
       <!-- Khối Row 1: Hero Banner Ôn Thi Lý Thuyết A1 & Widget Phòng Chat -->
@@ -6565,18 +6565,18 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
 
           <div style="flex:1;">
-            <h2 style="font-size:1.35rem; font-weight:800; color:#F8FAFC; margin-bottom:8px;">ÔN THI LÝ THUYẾT A1 - BỘ 250 CÂU</h2>
-            <p style="color:#CBD5E1; font-size:0.88rem; line-height:1.5; margin-bottom:12px;">
+            <h2 style="font-size:1.35rem; font-weight:800; color:var(--ink); margin-bottom:8px;">ÔN THI LÝ THUYẾT A1 - BỘ 250 CÂU</h2>
+            <p style="color:var(--ink-2); font-size:0.88rem; line-height:1.5; margin-bottom:12px;">
               Hệ thống thi thử sát hạch <b>A1</b> chuẩn theo dữ liệu của Cục Đường Bộ Việt Nam &amp; Bộ Công An. Giao diện tối giản, thao tác nhanh, giúp bạn ôn tập và thi thử hiệu quả.
             </p>
-            <p style="color:#94A3B8; font-size:0.86rem; line-height:1.5; margin-bottom:12px;">
+            <p style="color:var(--muted); font-size:0.86rem; line-height:1.5; margin-bottom:12px;">
               <b>Đề thi ngẫu nhiên:</b> Hệ thống tự động tạo đề <b>25 câu</b> (luôn bao gồm 1 câu điểm liệt), bám sát cấu trúc thi thật.
             </p>
 
-            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:10px 14px; margin-bottom:14px; font-size:0.82rem; color:#E2E8F0;">
-              <div style="font-weight:700; color:#38BDF8; margin-bottom:4px;">Quy chế thi A1 cần nhớ:</div>
+            <div style="background:var(--surface-2, rgba(255,255,255,0.05)); border:1px solid var(--border, rgba(255,255,255,0.08)); border-radius:8px; padding:10px 14px; margin-bottom:14px; font-size:0.82rem; color:var(--ink-2);">
+              <div style="font-weight:700; color:#2563EB; margin-bottom:4px;">Quy chế thi A1 cần nhớ:</div>
               <div>• Thời gian: <b>19 phút</b>.</div>
-              <div>• Điều kiện Đạt: Đúng tối thiểu <b>21/25 câu VÀ không sai câu điểm liệt</b>.</div>
+              <div>• Điều kiện Đạt: Đúng tối thiểu <b>24/25 câu VÀ không sai câu điểm liệt</b>.</div>
             </div>
 
             <button type="button" onclick="startExamSimulation('A1', 'random', 'Đề Thi Thử Sát Hạch A1 Ngẫu Nhiên (25 Câu)')" style="background:#2563EB; color:#FFF; border:none; padding:12px 24px; border-radius:8px; font-weight:700; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(37,99,235,0.25);">
@@ -6588,31 +6588,31 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <!-- Widget Bên Phải: Phòng Chat Hạng A1 & Sự Kiện -->
         <div class="promax-card" style="padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
-              <div style="display:flex; align-items:center; gap:8px; font-weight:800; color:#F8FAFC; font-size:0.95rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border, rgba(255,255,255,0.08)); padding-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:8px; font-weight:800; color:var(--ink); font-size:0.95rem;">
                 <span>💬 Phòng Chat Hạng A1</span>
               </div>
-              <span style="font-size:0.75rem; color:#38BDF8; font-weight:600; cursor:pointer;">Tin riêng »</span>
+              <span style="font-size:0.75rem; color:#2563EB; font-weight:600; cursor:pointer;">Tin riêng »</span>
             </div>
 
             <div style="display:flex; gap:8px; margin-bottom:14px;">
-              <span onclick="openWheelFortuneModal()" style="background:rgba(16,185,129,0.12); color:#34D399; border:1px solid rgba(16,185,129,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">🎁 Quay nón 21h</span>
-              <span onclick="openSpeedSignGameModal()" style="background:rgba(56,189,248,0.12); color:#38BDF8; border:1px solid rgba(56,189,248,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">🏆 Biển báo 60s</span>
-              <span onclick="openAIPvpModal()" style="background:rgba(239,68,68,0.12); color:#F87171; border:1px solid rgba(239,68,68,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">⚡ Đấu trí AI: Bật</span>
+              <span onclick="openWheelFortuneModal()" style="background:rgba(16,185,129,0.12); color:#10B981; border:1px solid rgba(16,185,129,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">🎁 Quay nón 21h</span>
+              <span onclick="openSpeedSignGameModal()" style="background:rgba(37,99,235,0.12); color:#2563EB; border:1px solid rgba(37,99,235,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">🏆 Biển báo 60s</span>
+              <span onclick="openAIPvpModal()" style="background:rgba(239,68,68,0.12); color:#EF4444; border:1px solid rgba(239,68,68,0.3); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; cursor:pointer;">⚡ Đấu trí AI: Bật</span>
             </div>
 
             <div style="display:flex; flex-direction:column; gap:10px;">
               <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:12px;">
-                <div style="color:#34D399; font-size:0.72rem; font-weight:800; text-transform:uppercase; margin-bottom:4px;">⚡ TIN HỆ THỐNG</div>
-                <div style="font-size:0.8rem; color:#CBD5E1; line-height:1.4;">Quay nón 21h đã chốt 10 vé. Vòng quay bắt đầu, hệ thống tự quay lúc 21:05 nếu Admin bận.</div>
+                <div style="color:#059669; font-size:0.72rem; font-weight:800; text-transform:uppercase; margin-bottom:4px;">⚡ TIN HỆ THỐNG</div>
+                <div style="font-size:0.8rem; color:var(--ink-2); line-height:1.4;">Quay nón 21h đã chốt 10 vé. Vòng quay bắt đầu, hệ thống tự quay lúc 21:05 nếu Admin bận.</div>
                 <div style="margin-top:8px;">
                   <button type="button" onclick="openWheelFortuneModal()" class="btn btn-sm" style="background:#10B981; color:#FFF; font-size:0.72rem; padding:6px 12px; border-radius:6px; font-weight:700; cursor:pointer;">🎡 Quay nón 21h ngay →</button>
                 </div>
               </div>
 
               <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:10px; padding:12px;">
-                <div style="color:#FBBF24; font-size:0.72rem; font-weight:800; text-transform:uppercase; margin-bottom:4px;">🎉 CHÚC MỪNG HỌC VIÊN</div>
-                <div style="font-size:0.8rem; color:#CBD5E1; line-height:1.4;">Học viên <b>@Ngọc Cầm</b> vừa hoàn thành đề thi số 08 đạt điểm tối đa <b>25/25</b> (+500 XP)!</div>
+                <div style="color:#D97706; font-size:0.72rem; font-weight:800; text-transform:uppercase; margin-bottom:4px;">🎉 CHÚC MỪNG HỌC VIÊN</div>
+                <div style="font-size:0.8rem; color:var(--ink-2); line-height:1.4;">Học viên <b>@Ngọc Cầm</b> vừa hoàn thành đề thi số 08 đạt điểm tối đa <b>25/25</b> (+500 XP)!</div>
               </div>
             </div>
           </div>
@@ -6628,8 +6628,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div style="display:flex; align-items:center; gap:20px;">
             <div style="width:48px; height:48px; border-radius:12px; background:rgba(56,189,248,0.12); color:#38BDF8; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;">🔍</div>
             <div>
-              <h3 style="font-size:1.15rem; font-weight:800; color:#F8FAFC; margin-bottom:4px;">Tra cứu câu hỏi lý thuyết</h3>
-              <p style="color:#94A3B8; font-size:0.88rem;">Tìm kiếm thông minh câu hỏi theo từ khóa, biển báo hoặc mẹo thi trong bộ đề A1.</p>
+              <h3 style="font-size:1.15rem; font-weight:800; color:var(--ink); margin-bottom:4px;">Tra cứu câu hỏi lý thuyết</h3>
+              <p style="color:var(--muted); font-size:0.88rem;">Tìm kiếm thông minh câu hỏi theo từ khóa, biển báo hoặc mẹo thi trong bộ đề A1.</p>
             </div>
           </div>
           <button type="button" onclick="switchDrivingTab('tracuu600', document.querySelector('[data-tab=tracuu600]'))" style="background:#2563EB; color:#FFF; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.88rem; cursor:pointer; letter-spacing:0.04em;">
@@ -6640,14 +6640,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <!-- Thanh 2: Lộ Trình Học A1 Từng Bước -->
         <div class="promax-card" style="border:1.5px solid rgba(16,185,129,0.3) !important; padding:20px 28px; display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:20px;">
-            <div style="width:48px; height:48px; border-radius:12px; background:rgba(16,185,129,0.15); color:#34D399; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;">🎯</div>
+            <div style="width:48px; height:48px; border-radius:12px; background:rgba(16,185,129,0.15); color:#10B981; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;">🎯</div>
             <div>
-              <div style="color:#34D399; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">NGƯỜI MỚI NÊN BẮT ĐẦU TẠI ĐÂY</div>
-              <h3 style="font-size:1.15rem; font-weight:800; color:#F8FAFC; margin:2px 0 4px;">Lộ trình học A1 từng bước</h3>
-              <p style="color:#94A3B8; font-size:0.88rem;">Xem thứ tự học rõ ràng: điểm liệt, đề cố định, chủ đề, thi ngẫu nhiên, thi full, tốc độ, đấu AI và đối kháng.</p>
+              <div style="color:#059669; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">NGƯỜI MỚI NÊN BẮT ĐẦU TẠI ĐÂY</div>
+              <h3 style="font-size:1.15rem; font-weight:800; color:var(--ink); margin:2px 0 4px;">Lộ trình học A1 từng bước</h3>
+              <p style="color:var(--muted); font-size:0.88rem;">Xem thứ tự học rõ ràng: điểm liệt, đề cố định, chủ đề, thi ngẫu nhiên, thi full, tốc độ, đấu AI và đối kháng.</p>
             </div>
           </div>
-          <button type="button" onclick="switchDrivingTab('lotrinh', document.querySelector('[data-tab=lotrinh]'))" style="background:#1E293B; color:#F8FAFC; border:1px solid rgba(255,255,255,0.1); padding:10px 22px; border-radius:8px; font-weight:700; font-size:0.88rem; cursor:pointer;">
+          <button type="button" onclick="switchDrivingTab('lotrinh', document.querySelector('[data-tab=lotrinh]'))" style="background:var(--surface-2); color:var(--ink); border:1px solid var(--border); padding:10px 22px; border-radius:8px; font-weight:700; font-size:0.88rem; cursor:pointer;">
             Xem lộ trình →
           </button>
         </div>
@@ -6658,10 +6658,10 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       <div class="promax-card" style="padding:28px; margin-bottom:28px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
           <div>
-            <h2 style="font-size:1.35rem; font-weight:800; color:#F8FAFC; display:flex; align-items:center; gap:8px;">
+            <h2 style="font-size:1.35rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px;">
               🏆 BẢNG THÀNH TÍCH - HỌC VIÊN THI A1 🏆
             </h2>
-            <p style="color:#94A3B8; font-size:0.85rem;">Vinh danh những học viên có thành tích xuất sắc nhất tuần này.</p>
+            <p style="color:var(--muted); font-size:0.85rem;">Vinh danh những học viên có thành tích xuất sắc nhất tuần này.</p>
           </div>
           <button type="button" onclick="showToast('Đang tải danh sách bảng xếp hạng đầy đủ...')" style="background:#2563EB; color:#FFF; border:none; padding:8px 18px; border-radius:8px; font-weight:700; font-size:0.8rem; cursor:pointer;">
             XEM BẢNG XẾP HẠNG ĐẦY ĐỦ →
@@ -6673,78 +6673,78 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div style="background:rgba(234,179,8,0.08); border:1.5px solid rgba(234,179,8,0.4); border-radius:12px; padding:16px; text-align:center; position:relative;">
             <div style="width:24px; height:24px; background:#EAB308; color:#FFF; font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; margin:0 auto 8px;">1</div>
             <div style="width:52px; height:52px; border-radius:50%; background:rgba(254,240,138,0.2); margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">👩</div>
-            <div style="font-weight:800; color:#F8FAFC; font-size:0.9rem;">Ngọc Cầm ♀</div>
-            <div style="color:#94A3B8; font-size:0.72rem; margin:2px 0 6px;">CẤP 1643 • BÌNH THUẬN</div>
-            <div style="color:#38BDF8; font-weight:900; font-size:1.05rem;">1,3 triệu XP</div>
-            <div style="color:#64748B; font-size:0.68rem;">XP TÍCH LŨY</div>
+            <div style="font-weight:800; color:var(--ink); font-size:0.9rem;">Ngọc Cầm ♀</div>
+            <div style="color:var(--muted); font-size:0.72rem; margin:2px 0 6px;">CẤP 1643 • BÌNH THUẬN</div>
+            <div style="color:#2563EB; font-weight:900; font-size:1.05rem;">1,3 triệu XP</div>
+            <div style="color:var(--muted); font-size:0.68rem;">XP TÍCH LŨY</div>
           </div>
 
           <!-- Top 2 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; text-align:center;">
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;">
             <div style="width:24px; height:24px; background:#64748B; color:#FFF; font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; margin:0 auto 8px;">2</div>
             <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.08); margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">👨</div>
-            <div style="font-weight:800; color:#F8FAFC; font-size:0.9rem;">tt:hng.tr14769 ♂</div>
-            <div style="color:#94A3B8; font-size:0.72rem; margin:2px 0 6px;">CẤP 134 • PHÚ THỌ</div>
-            <div style="color:#38BDF8; font-weight:900; font-size:1.05rem;">107.150 XP</div>
-            <div style="color:#64748B; font-size:0.68rem;">XP TÍCH LŨY</div>
+            <div style="font-weight:800; color:var(--ink); font-size:0.9rem;">tt:hng.tr14769 ♂</div>
+            <div style="color:var(--muted); font-size:0.72rem; margin:2px 0 6px;">CẤP 134 • PHÚ THỌ</div>
+            <div style="color:#2563EB; font-weight:900; font-size:1.05rem;">107.150 XP</div>
+            <div style="color:var(--muted); font-size:0.68rem;">XP TÍCH LŨY</div>
           </div>
 
           <!-- Top 3 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; text-align:center;">
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;">
             <div style="width:24px; height:24px; background:#D97706; color:#FFF; font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; margin:0 auto 8px;">3</div>
             <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,237,213,0.15); margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">👧</div>
-            <div style="font-weight:800; color:#F8FAFC; font-size:0.9rem;">như ý ♀</div>
-            <div style="color:#94A3B8; font-size:0.72rem; margin:2px 0 6px;">CẤP 120 • ĐỒNG THÁP</div>
-            <div style="color:#38BDF8; font-weight:900; font-size:1.05rem;">95.240 XP</div>
-            <div style="color:#64748B; font-size:0.68rem;">XP TÍCH LŨY</div>
+            <div style="font-weight:800; color:var(--ink); font-size:0.9rem;">như ý ♀</div>
+            <div style="color:var(--muted); font-size:0.72rem; margin:2px 0 6px;">CẤP 120 • ĐỒNG THÁP</div>
+            <div style="color:#2563EB; font-weight:900; font-size:1.05rem;">95.240 XP</div>
+            <div style="color:var(--muted); font-size:0.68rem;">XP TÍCH LŨY</div>
           </div>
 
           <!-- Top 4 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; text-align:center;">
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;">
             <div style="width:24px; height:24px; background:#334155; color:#94A3B8; font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; margin:0 auto 8px;">4</div>
             <div style="width:52px; height:52px; border-radius:50%; background:#0284C7; color:#FFF; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-weight:800;">08</div>
-            <div style="font-weight:800; color:#F8FAFC; font-size:0.9rem;">0843***415 ♂</div>
-            <div style="color:#94A3B8; font-size:0.72rem; margin:2px 0 6px;">CẤP 58 • BÌNH THUẬN</div>
-            <div style="color:#38BDF8; font-weight:900; font-size:1.05rem;">46.310 XP</div>
-            <div style="color:#64748B; font-size:0.68rem;">XP TÍCH LŨY</div>
+            <div style="font-weight:800; color:var(--ink); font-size:0.9rem;">0843***415 ♂</div>
+            <div style="color:var(--muted); font-size:0.72rem; margin:2px 0 6px;">CẤP 58 • BÌNH THUẬN</div>
+            <div style="color:#2563EB; font-weight:900; font-size:1.05rem;">46.310 XP</div>
+            <div style="color:var(--muted); font-size:0.68rem;">XP TÍCH LŨY</div>
           </div>
 
           <!-- Top 5 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; text-align:center;">
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;">
             <div style="width:24px; height:24px; background:#334155; color:#94A3B8; font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; margin:0 auto 8px;">5</div>
             <div style="width:52px; height:52px; border-radius:50%; background:#0284C7; color:#FFF; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-weight:800;">NT</div>
-            <div style="font-weight:800; color:#F8FAFC; font-size:0.9rem;">Ngô Thái Hoàng Nam ♂</div>
-            <div style="color:#94A3B8; font-size:0.72rem; margin:2px 0 6px;">CẤP 43 • BÌNH THUẬN</div>
-            <div style="color:#38BDF8; font-weight:900; font-size:1.05rem;">33.880 XP</div>
-            <div style="color:#64748B; font-size:0.68rem;">XP TÍCH LŨY</div>
+            <div style="font-weight:800; color:var(--ink); font-size:0.9rem;">Ngô Thái Hoàng Nam ♂</div>
+            <div style="color:var(--muted); font-size:0.72rem; margin:2px 0 6px;">CẤP 43 • BÌNH THUẬN</div>
+            <div style="color:#2563EB; font-weight:900; font-size:1.05rem;">33.880 XP</div>
+            <div style="color:var(--muted); font-size:0.68rem;">XP TÍCH LŨY</div>
           </div>
         </div>
       </div>
 
       <!-- Khối Row 4: Trình Quản Lý Học Tập - GPLX -->
       <div class="promax-card" style="padding:28px; margin-bottom:36px;">
-        <h2 style="font-size:1.35rem; font-weight:800; color:#F8FAFC; margin-bottom:16px;">Trình quản lý Học tập - GPLX</h2>
+        <h2 style="font-size:1.35rem; font-weight:800; color:var(--ink); margin-bottom:16px;">Trình quản lý Học tập - GPLX</h2>
         
-        <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:10px; padding:12px 16px; margin-bottom:24px; text-align:center; color:#FBBF24; font-size:0.88rem;">
-          Vui lòng <a href="javascript:void(0)" onclick="openAuthModal('login')" style="color:#38BDF8; font-weight:700;">đăng nhập</a> để lưu và theo dõi quá trình học tập của bạn.
+        <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:10px; padding:12px 16px; margin-bottom:24px; text-align:center; color:#D97706; font-size:0.88rem;">
+          Vui lòng <a href="javascript:void(0)" onclick="openAuthModal('login')" style="color:#2563EB; font-weight:700;">đăng nhập</a> để lưu và theo dõi quá trình học tập của bạn.
         </div>
 
         <div class="ui-grid ui-grid-3" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; text-align:center; margin-bottom:20px;">
-          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px;">
-            <div style="color:#94A3B8; font-size:0.75rem; font-weight:700; text-transform:uppercase;">TỔNG CÂU</div>
-            <div id="statTotalQuestions" style="font-size:1.8rem; font-weight:900; color:#F8FAFC; margin-top:4px;">250</div>
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+            <div style="color:var(--muted); font-size:0.75rem; font-weight:700; text-transform:uppercase;">TỔNG CÂU</div>
+            <div id="statTotalQuestions" style="font-size:1.8rem; font-weight:900; color:var(--ink); margin-top:4px;">250</div>
           </div>
-          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px;">
-            <div style="color:#94A3B8; font-size:0.75rem; font-weight:700; text-transform:uppercase;">ĐÃ THUỘC</div>
-            <div id="statMasteredQuestions" style="font-size:1.8rem; font-weight:900; color:#34D399; margin-top:4px;">0</div>
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+            <div style="color:var(--muted); font-size:0.75rem; font-weight:700; text-transform:uppercase;">ĐÃ THUỘC</div>
+            <div id="statMasteredQuestions" style="font-size:1.8rem; font-weight:900; color:#10B981; margin-top:4px;">0</div>
           </div>
-          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px;">
-            <div style="color:#94A3B8; font-size:0.75rem; font-weight:700; text-transform:uppercase;">TỈ LỆ ĐẠT</div>
-            <div id="statPassRate" style="font-size:1.8rem; font-weight:900; color:#38BDF8; margin-top:4px;">0%</div>
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:18px;">
+            <div style="color:var(--muted); font-size:0.75rem; font-weight:700; text-transform:uppercase;">TỈ LỆ ĐẠT</div>
+            <div id="statPassRate" style="font-size:1.8rem; font-weight:900; color:#2563EB; margin-top:4px;">0%</div>
           </div>
         </div>
 
-        <p style="text-align:center; color:#94A3B8; font-size:0.85rem;">
+        <p style="text-align:center; color:var(--muted); font-size:0.85rem;">
           Gợi ý: Phần <b>'Câu điểm liệt'</b> đang ở mức thấp nhất (0%). Hãy làm các Bộ Đề ôn riêng mảng này nhé!
         </p>
       </div>
@@ -6754,9 +6754,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px;">
           <div>
             <div style="color:#2563EB; font-weight:800; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">BỘ ĐỀ CỐ ĐỊNH CHÍNH THỨC</div>
-            <h2 style="font-size:1.5rem; font-weight:800; color:#0F172A; margin:0;">10 Bộ Đề Thi Sát Hạch A1 Chuẩn 2026</h2>
+            <h2 style="font-size:1.5rem; font-weight:800; color:var(--ink); margin:0;">10 Bộ Đề Thi Sát Hạch A1 Chuẩn 2026</h2>
           </div>
-          <span style="font-size:0.84rem; color:#64748B;">Bao quát toàn bộ 250 câu • Đạt: ≥ 21/25 &amp; không sai câu liệt</span>
+          <span style="font-size:0.84rem; color:var(--muted);">Bao quát toàn bộ 250 câu • Đạt: ≥ 24/25 &amp; không sai câu liệt</span>
         </div>
         
         <div id="examSetsGridA1Container"></div>
@@ -6822,16 +6822,16 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
 <!-- Khối Row 5: CÁC CHẾ ĐỘ THI ĐẶC BIỆT (10 THẺ CHUẨN MẪU) -->
       <div>
-        <h2 style="font-size:1.5rem; font-weight:800; color:#0F172A; text-align:center; margin-bottom:24px;">Các chế độ thi đặc biệt</h2>
+        <h2 style="font-size:1.5rem; font-weight:800; color:var(--ink); text-align:center; margin-bottom:24px;">Các chế độ thi đặc biệt</h2>
 
         <div class="ui-grid ui-grid-4" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
           
           <!-- Card 1: 21 Câu Điểm Liệt -->
           <div class="promax-card" style="padding:22px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; border-top:3px solid #EF4444;">
             <div>
-              <h3 style="font-size:1.1rem; font-weight:800; color:#0F172A; margin-bottom:2px;">21 Câu Điểm Liệt</h3>
+              <h3 style="font-size:1.1rem; font-weight:800; color:var(--ink); margin-bottom:2px;">21 Câu Điểm Liệt</h3>
               <div style="font-size:0.78rem; color:#DC2626; font-weight:700; margin-bottom:8px;">(21 câu bắt buộc)</div>
-              <p style="font-size:0.8rem; color:#64748B; line-height:1.4; margin-bottom:12px;">Sai 1 câu điểm liệt là trượt ngay lập tức! Bắt buộc phải học thuộc 100%.</p>
+              <p style="font-size:0.8rem; color:var(--muted); line-height:1.4; margin-bottom:12px;">Sai 1 câu điểm liệt là trượt ngay lập tức! Bắt buộc phải học thuộc 100%.</p>
               <div style="background:#FEF2F2; color:#DC2626; font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:16px;">🚨 QUAN TRỌNG NHẤT</div>
             </div>
             <div class="ui-grid ui-grid-actions" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
@@ -7160,7 +7160,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div style="background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 16px;">
             <div style="font-size:0.75rem; text-transform:uppercase; color:#86EFAC; font-weight:700;">Điều kiện đạt</div>
-            <div style="font-size:1.15rem; font-weight:800; color:#86EFAC; margin-top:2px;">Đúng ≥ 21/25 câu</div>
+            <div style="font-size:1.15rem; font-weight:800; color:#86EFAC; margin-top:2px;">Đúng ≥ 24/25 câu</div>
           </div>
           <div style="background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 16px;">
             <div style="font-size:0.75rem; text-transform:uppercase; color:#FDE047; font-weight:700;">Ngân hàng ôn tập</div>
@@ -7184,7 +7184,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div>
             <strong style="color:#1D4ED8; font-size:0.95rem; display:block; margin-bottom:4px;">⚡ Học nhanh ngay trên hệ thống:</strong>
             <span style="color:#334155; font-size:0.9rem;">
-              Bắt đầu với <a href="javascript:void(0)" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="color:#DC2626; font-weight:800; text-decoration:underline;">20 câu điểm liệt A1</a>, sau đó làm <a href="javascript:void(0)" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">đề thi thử bằng lái xe A1 online</a> để kiểm tra khả năng đạt 21/25 câu trong 19 phút.
+              Bắt đầu với <a href="javascript:void(0)" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="color:#DC2626; font-weight:800; text-decoration:underline;">20 câu điểm liệt A1</a>, sau đó làm <a href="javascript:void(0)" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">đề thi thử bằng lái xe A1 online</a> để kiểm tra khả năng đạt 24/25 câu trong 19 phút.
             </span>
           </div>
           <div style="display:flex; gap:8px;">
@@ -7740,35 +7740,35 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             </details>
 
             <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
-              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Thi bằng lái xe A1 cần đúng bao nhiêu câu?</summary>
+              <summary style="font-weight:700; color:var(--ink); font-size:0.95rem;">Thi bằng lái xe A1 cần đúng bao nhiêu câu?</summary>
               <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
-                Bài lý thuyết A1 gồm <b>25 câu trong 19 phút</b>. Bạn cần đúng từ <b>21/25 câu trở lên VÀ không được sai câu điểm liệt</b>.
+                Bài lý thuyết A1 gồm <b>25 câu trong 19 phút</b>. Bạn cần đúng từ <b>24/25 câu trở lên VÀ không được sai câu điểm liệt</b>.
               </p>
             </details>
 
             <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
-              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Bộ đề A1 hiện có bao nhiêu câu?</summary>
+              <summary style="font-weight:700; color:var(--ink); font-size:0.95rem;">Bộ đề A1 hiện có bao nhiêu câu?</summary>
               <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
                 Hạng A1 ôn theo <b>250 câu hỏi chọn lọc từ bộ 600 câu hỏi</b> dùng cho sát hạch lái xe cơ giới đường bộ (Cục Đường Bộ & Bộ Công An ban hành), trong đó có đúng 20 câu về tình huống mất an toàn giao thông nghiêm trọng.
               </p>
             </details>
 
             <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
-              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Nên học 20 câu điểm liệt A1 lúc nào?</summary>
+              <summary style="font-weight:700; color:var(--ink); font-size:0.95rem;">Nên học 20 câu điểm liệt A1 lúc nào?</summary>
               <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
                 <b>Nên học đầu tiên!</b> Khi đã chắc câu liệt, bạn mới nên chuyển sang làm các bộ đề ngẫu nhiên, vì sai 1 câu liệt là không đạt dù tổng điểm của bạn đạt 24/25.
               </p>
             </details>
 
             <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;">
-              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Làm sao để nhớ biển báo A1 nhanh?</summary>
+              <summary style="font-weight:700; color:var(--ink); font-size:0.95rem;">Làm sao để nhớ biển báo A1 nhanh?</summary>
               <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
                 Hãy học theo nhóm hình dạng và màu sắc trước: biển cấm (tròn đỏ), biển nguy hiểm (tam giác vàng), biển hiệu lệnh (tròn xanh), biển chỉ dẫn (vuông/chữ nhật xanh). Sau đó mới học các cặp biển dễ nhầm.
               </p>
             </details>
 
             <details style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px 18px; cursor:pointer;" open>
-              <summary style="font-weight:700; color:#0F172A; font-size:0.95rem;">Luyện đề thi thử A1 ở đâu chuẩn nhất?</summary>
+              <summary style="font-weight:700; color:var(--ink); font-size:0.95rem;">Luyện đề thi thử A1 ở đâu chuẩn nhất?</summary>
               <p style="margin-top:10px; color:#475569; font-size:0.9rem; line-height:1.6; margin-bottom:0;">
                 Bạn có thể làm đề ngay tại website của chúng tôi: vào <a href="javascript:void(0)" onclick="switchDrivingTab('thi-a1', document.querySelector('[data-tab=thi-a1]'))" style="color:#2563EB; font-weight:800; text-decoration:underline;">phần mềm thi thử bằng lái xe A1 online</a>, ôn riêng <a href="javascript:void(0)" onclick="switchDrivingTab('cau-liet-20', document.querySelector('[data-tab=cau-liet-20]'))" style="color:#DC2626; font-weight:800; text-decoration:underline;">20 câu điểm liệt A1</a> hoặc tra cứu từng câu trong <a href="javascript:void(0)" onclick="switchDrivingTab('tracuu600', document.querySelector('[data-tab=tracuu600]'))" style="color:#16A34A; font-weight:800; text-decoration:underline;">ngân hàng câu hỏi A1</a> hoàn toàn miễn phí!
               </p>
@@ -7822,11 +7822,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
         <!-- Khối 1: Quy chuẩn Hạng A 2026 -->
         <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
-          <h2 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:16px;">1. Quy Chế Sát Hạch Hạng A Mới Nhất</h2>
+          <h2 style="font-size:1.35rem; font-weight:800; color:var(--ink); margin-bottom:16px;">1. Quy Chế Sát Hạch Hạng A Mới Nhất</h2>
           <div class="ui-grid ui-grid-4" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-bottom:18px;">
             <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px; text-align:center;">
               <div style="color:#64748B; font-size:0.75rem; font-weight:700;">ĐỐI TƯỢNG CẤP</div>
-              <div style="font-size:1.4rem; font-weight:900; color:#0F172A; margin-top:4px;">&gt; 125 cm³</div>
+              <div style="font-size:1.4rem; font-weight:900; color:var(--ink); margin-top:4px;">&gt; 125 cm³</div>
               <div style="font-size:0.72rem; color:#64748B;">Hoặc mô tô điện &gt; 11 kW</div>
             </div>
             <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px; text-align:center;">
@@ -7836,7 +7836,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             </div>
             <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px; text-align:center;">
               <div style="color:#64748B; font-size:0.75rem; font-weight:700;">ĐIỀU KIỆN ĐẠT</div>
-              <div style="font-size:1.4rem; font-weight:900; color:#16A34A; margin-top:4px;">≥ 21/25</div>
+              <div style="font-size:1.4rem; font-weight:900; color:#16A34A; margin-top:4px;">≥ 24/25</div>
               <div style="font-size:0.72rem; color:#16A34A; font-weight:700;">Không sai câu điểm liệt</div>
             </div>
             <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:12px; padding:16px; text-align:center;">
@@ -8654,6 +8654,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
              BƯỚC 1: THIẾT LẬP BAN ĐẦU
              ============================================== -->
         <div id="vbStepContent_1">
+          <!-- NÚT BÓC TÁCH TOÀN BỘ VĂN BẢN THÔ (NĐ 30) -->
+          <div style="margin-bottom:14px;">
+            <button type="button" class="btn btn-outline" style="width:100%; border:2px dashed #2563EB; color:#1D4ED8; background:rgba(37,99,235,0.06); font-weight:800; padding:11px 16px; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; font-size:0.88rem; transition:all 0.2s;" onclick="AdministrativeDocEngine.handlePasteFullRawDocument()">
+              <span>🪄</span> DÁN &amp; BÓC TÁCH TOÀN BỘ VĂN BẢN THÔ (NĐ 30)
+            </button>
+            <small style="display:block; color:#64748B; font-size:0.75rem; margin-top:4px; text-align:center;">Dán toàn bộ văn bản từ trên xuống dưới, hệ thống tự động bóc tách và căn chỉnh 100%</small>
+          </div>
+
           <!-- Đơn vị ban hành chính (Chuẩn giao diện Ảnh 1) -->
           <div class="form-group" style="margin-bottom:12px;">
             <label style="font-size:0.78rem; font-weight:700; color:#334155; text-transform:uppercase; display:block; margin-bottom:6px;">
@@ -8833,11 +8841,19 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <input type="text" id="vbTrichYeuInput" class="form-input" placeholder="VD: Về việc tổ chức hội nghị tổng kết công tác năm 2026">
           </div>
 
+          <!-- NÚT BÓC TÁCH TOÀN BỘ VĂN BẢN THÔ (NĐ 30) -->
+          <div style="margin-bottom:14px;">
+            <button type="button" class="btn btn-outline" style="width:100%; border:2px dashed #2563EB; color:#1D4ED8; background:rgba(37,99,235,0.06); font-weight:800; padding:11px 16px; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; font-size:0.88rem; transition:all 0.2s;" onclick="AdministrativeDocEngine.handlePasteFullRawDocument()">
+              <span>🪄</span> DÁN &amp; BÓC TÁCH TOÀN BỘ VĂN BẢN THÔ (NĐ 30)
+            </button>
+            <small style="display:block; color:#64748B; font-size:0.75rem; margin-top:4px; text-align:center;">Hệ thống tự động lọc Quốc hiệu, Cơ quan, Số hiệu, Ngày tháng, Trích yếu, Nội dung, Nơi nhận, Người ký</small>
+          </div>
+
           <div class="form-group" style="margin-bottom:14px;">
             <label style="font-size:0.78rem; font-weight:700; color:#334155; text-transform:uppercase;">
               BỐI CẢNH / YÊU CẦU CẦN SOẠN THẢO (AI PROMPT)
             </label>
-            <textarea id="vbContextInput" class="form-input" rows="3" placeholder="Nhập mục đích, các căn cứ pháp lý hoặc các nội dung chính cần truyền đạt trong văn bản..."></textarea>
+            <textarea id="vbContextInput" class="form-input" rows="3" placeholder="Nhập mục đích, các căn cứ pháp lý hoặc dán toàn bộ văn bản thô vào đây..."></textarea>
           </div>
 
           <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
@@ -9315,10 +9331,49 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     }
     // Tự động mở popup chào mừng giới thiệu sau 1 giây khi vào trang
     setTimeout(openWelcomePromo, 1000);
-    if (!currentUser && typeof promptGoogleOneTap === 'function') {
-      setTimeout(promptGoogleOneTap, 2500);
-    }
+    // Kích hoạt nhịp tim theo dõi phiên trực tiếp cho Admin Dashboard
+    initActivePresenceHeartbeat();
   });
+
+  // REALTIME ACTIVE SESSION HEARTBEAT (Đồng bộ số người truy cập trực tiếp qua tab)
+  function initActivePresenceHeartbeat() {
+    try {
+      const tabId = 'nb_tab_' + Math.random().toString(36).substr(2, 9);
+      let bc = null;
+      try { bc = new BroadcastChannel('nb_live_presence'); } catch(e) {}
+
+      function pingSession() {
+        try {
+          const raw = localStorage.getItem('nb_active_sessions') || '{}';
+          const sessions = JSON.parse(raw);
+          const now = Date.now();
+          sessions[tabId] = { time: now, path: window.location.hash || '/' };
+          for (const id in sessions) {
+            if (now - sessions[id].time > 15000) {
+              delete sessions[id];
+            }
+          }
+          localStorage.setItem('nb_active_sessions', JSON.stringify(sessions));
+          if (bc) bc.postMessage({ type: 'heartbeat', tabId, time: now });
+        } catch(e) {}
+      }
+      setInterval(pingSession, 3000);
+      pingSession();
+
+      const clearSession = () => {
+        try {
+          const raw = localStorage.getItem('nb_active_sessions') || '{}';
+          const sessions = JSON.parse(raw);
+          delete sessions[tabId];
+          localStorage.setItem('nb_active_sessions', JSON.stringify(sessions));
+          if (bc) bc.postMessage({ type: 'leave', tabId });
+        } catch(e) {}
+      };
+      window.addEventListener('beforeunload', clearSession);
+      window.addEventListener('unload', clearSession);
+      window.addEventListener('pagehide', clearSession);
+    } catch(e) {}
+  }
 
   // Lắng nghe phím ESC để tắt popup
   document.addEventListener('keydown', (e) => {

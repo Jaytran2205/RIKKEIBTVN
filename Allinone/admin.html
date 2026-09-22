@@ -1741,9 +1741,20 @@ async function syncDataFromSupabase() {
   }
 }
 
-// Live concurrent users simulation (reset to 0)
+// Realtime concurrent active users tracking (Đồng bộ nhịp tim từ các tab đang hoạt động)
 function renderLiveUsersSimulation() {
   let count = 0;
+  try {
+    const raw = localStorage.getItem('nb_active_sessions') || '{}';
+    const sessions = JSON.parse(raw);
+    const now = Date.now();
+    for (const id in sessions) {
+      if (now - sessions[id].time <= 15000) {
+        count++;
+      }
+    }
+  } catch(e) {}
+
   const elLive = document.getElementById('statLiveUsers');
   const elVis = document.getElementById('liveVisitorsCount');
   const elBadge = document.getElementById('asideOnlineBadge');
@@ -1751,6 +1762,19 @@ function renderLiveUsersSimulation() {
   if (elVis) elVis.textContent = count;
   if (elBadge) elBadge.textContent = count;
 }
+renderLiveUsersSimulation();
+setInterval(renderLiveUsersSimulation, 2000);
+window.addEventListener('storage', (e) => {
+  if (e.key === 'nb_active_sessions') {
+    renderLiveUsersSimulation();
+  }
+});
+try {
+  const bc = new BroadcastChannel('nb_live_presence');
+  bc.onmessage = () => {
+    renderLiveUsersSimulation();
+  };
+} catch(e) {}
 
 // Revenue chart 7 days (clean 0 VND state)
 function renderRevenueChart() {

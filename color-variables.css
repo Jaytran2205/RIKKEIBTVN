@@ -1,13 +1,17 @@
 /* ==========================================================================
    BẢNG MÀU CHỦ ĐẠO - VĂN BẢN HÀNH CHÍNH & ALL IN ONE
-   Chuẩn Thể Thức Nghị Định 30/2020/NĐ-CP (Đỏ Quốc Gia & Xanh Slate Hiện Đại)
+   Chuẩn Thể Thức Nghị Định 30/2020/NĐ-CP (GovTech Royal Blue & Xanh Công Vụ Quốc Gia)
    ========================================================================== */
 :root {
-  /* Primary Administrative Red & Ruby Accents (Chuẩn Thể Thức NĐ 30) */
-  --primary-admin-red: #C22026;
-  --primary-admin-red-hover: #A61B20;
-  --primary-admin-red-light: #FEE2E2;
-  --primary-admin-red-subtle: #FFF5F5;
+  /* Primary Administrative GovTech Blue (Chuẩn Công Vụ Số Quốc Gia) */
+  --primary-admin-red: #1D4ED8;
+  --primary-admin-red-hover: #1E3A8A;
+  --primary-admin-red-light: #DBEAFE;
+  --primary-admin-red-subtle: #EFF6FF;
+  --primary-admin-blue: #1D4ED8;
+  --primary-admin-blue-hover: #1E3A8A;
+  --primary-admin-blue-light: #DBEAFE;
+  --primary-admin-blue-subtle: #EFF6FF;
 
   /* Neutral & Slate */
   --admin-navy: #0F172A;
@@ -19,11 +23,11 @@
   --admin-bg-paper: #FFFFFF;
   --admin-bg-card: #FFFFFF;
 
-  /* Aliased variables for backward compatibility without gold/bronze */
-  --primary-gold: #C22026;
-  --primary-gold-hover: #A61B20;
-  --primary-gold-light: #FEE2E2;
-  --primary-gold-dark: #991B1B;
+  /* Aliased variables for GovTech Royal Blue theme */
+  --primary-gold: #1D4ED8;
+  --primary-gold-hover: #1E3A8A;
+  --primary-gold-light: #DBEAFE;
+  --primary-gold-dark: #1E3A8A;
   
   --secondary-navy: #0F172A;
   --secondary-navy-hover: #1E293B;
@@ -36,16 +40,93 @@
   --text-doc-ink: #000000;
   --text-body: #1E293B;
   --text-muted: #64748B;
-  --text-gold: #C22026;
+  --text-gold: #1D4ED8;
   --text-white: #FFFFFF;
   
-  --accent-gold-shimmer: #C22026;
+  --accent-gold-shimmer: #2563EB;
   --border-gold-subtle: #E2E8F0;
-  --border-gold-solid: #C22026;
+  --border-gold-solid: #2563EB;
   --border-subtle: #E2E8F0;
   
   /* Status Colors */
   --status-success: #16A34A;
   --status-warning: #D97706;
   --status-danger: #DC2626;
+
+  /* ==========================================================================
+     UI/UX PRO MAX - DESIGN SYSTEM TOKENS (ACCESSIBLE & ETHICAL + EDTECH)
+     Derived from https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+     ========================================================================== */
+  --color-primary: #0F172A;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #334155;
+  --color-on-secondary: #FFFFFF;
+  --color-brand: #0F3D6E;
+  --color-brand-accent: #2563EB;
+  --color-accent: #0369A1;
+  --color-on-accent: #FFFFFF;
+  --color-background: #F8FAFC;
+  --color-foreground: #020617;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #020617;
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+  --color-destructive: #DC2626;
+  --color-on-destructive: #FFFFFF;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-ring: #2563EB;
+
+  --shadow-promax-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-promax-md: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  --shadow-promax-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  --shadow-promax-hover: 0 14px 34px -4px rgba(37, 99, 235, 0.12), 0 6px 14px -2px rgba(15, 23, 42, 0.04);
+  --transition-promax: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* UI/UX Pro Max: Midnight Dark Mode Tokens */
+  --midnight-bg: #0A0E27;
+  --midnight-card: #131B2E;
+  --midnight-card-hover: #1A243B;
+  --midnight-border: rgba(255, 255, 255, 0.08);
+  --midnight-border-hover: rgba(56, 189, 248, 0.35);
+  --midnight-text-primary: #F8FAFC;
+  --midnight-text-muted: #94A3B8;
+  --midnight-accent: #38BDF8;
+  --midnight-accent-glow: rgba(56, 189, 248, 0.15);
+  --midnight-danger: #EF4444;
+  --midnight-danger-bg: rgba(239, 68, 68, 0.12);
+  --midnight-danger-border: rgba(239, 68, 68, 0.3);
+  --midnight-success: #10B981;
+  --midnight-success-bg: rgba(16, 185, 129, 0.12);
+  --midnight-success-border: rgba(16, 185, 129, 0.3);
+  /* UI/UX Pro Max: Dynamic Theme Tokens */
+  --app-card-bg: #FFFFFF;
+  --app-card-border: #E2E8F0;
+  --app-text-primary: #0F172A;
+  --app-text-muted: #64748B;
+  --app-page-bg: #F8FAFC;
+}
+
+body.midnight-mode {
+  --primary: #38BDF8 !important;
+  --primary-dark: #F8FAFC !important;
+  --primary-light: #0284C7 !important;
+  --bg: #0A0E27 !important;
+  --card-bg: #131B2E !important;
+  --border: rgba(255, 255, 255, 0.12) !important;
+  --border-hover: rgba(56, 189, 248, 0.35) !important;
+  --ink: #F8FAFC !important;
+  --muted: #94A3B8 !important;
+  --color-foreground: #F8FAFC !important;
+  --color-card: #131B2E !important;
+  --color-card-foreground: #F8FAFC !important;
+  --color-muted-foreground: #94A3B8 !important;
+  --color-border: rgba(255, 255, 255, 0.12) !important;
+  --app-card-bg: #131B2E !important;
+  --app-card-border: rgba(255, 255, 255, 0.08) !important;
+  --app-text-primary: #F8FAFC !important;
+  --app-text-muted: #94A3B8 !important;
+  --app-page-bg: #0A0E27 !important;
 }
