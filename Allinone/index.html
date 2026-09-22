@@ -9636,15 +9636,57 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     }
   }
 
-  function handleLoginSubmit() {
+  async function handleLoginSubmit() {
     const email = document.getElementById('authEmail').value.trim();
-    if(!email) { showToast('Vui lòng nhập email!'); return; }
+    const passInput = document.getElementById('authPass');
+    const pass = passInput ? passInput.value : '';
 
-    if(email.includes('admin')) {
-      currentUser = { name: "Quản Trị Viên", email: email, role: "admin" };
+    if(!email) { showToast('Vui lòng nhập email hoặc số điện thoại!'); return; }
+    if(!pass) { showToast('Vui lòng nhập mật khẩu!'); return; }
+
+    // Băm mật khẩu đầu vào (SHA-256 kèm Salt)
+    let passwordHash = '';
+    if (typeof hashPassword === 'function') {
+      passwordHash = await hashPassword(pass);
     } else {
-      currentUser = { name: "Thành Viên Ninh Bình", email: email, role: "member" };
+      passwordHash = btoa(pass);
     }
+
+    // Xóa ngay mật khẩu thô khỏi ô input và bộ nhớ
+    if (passInput) passInput.value = '';
+
+    // 1. Kiểm tra trong danh sách allUsers (Local Cache)
+    let foundUser = allUsers.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+
+    // 2. Nếu local chưa có, tra cứu trên Supabase
+    if (!foundUser && typeof dbGetUserByEmail === 'function') {
+      try {
+        const dbUser = await dbGetUserByEmail(email);
+        if (dbUser) foundUser = dbUser;
+      } catch(e) {}
+    }
+
+    if (foundUser) {
+      if (foundUser.password_hash) {
+        if (foundUser.password_hash !== passwordHash) {
+          showToast('Mật khẩu không chính xác! Vui lòng thử lại.');
+          return;
+        }
+      }
+      currentUser = {
+        name: foundUser.name,
+        email: foundUser.email,
+        role: foundUser.role || (email.includes('admin') ? 'admin' : 'member')
+      };
+    } else {
+      if (email.includes('admin')) {
+        currentUser = { name: "Quản Trị Viên", email: email, role: "admin" };
+      } else {
+        showToast('Tài khoản chưa tồn tại, vui lòng đăng ký thành viên mới!');
+        return;
+      }
+    }
+
     localStorage.setItem('nb_user', JSON.stringify(currentUser));
     updateAuthUI();
     closeModal();
@@ -9659,17 +9701,52 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     showToast('Đã đăng nhập quyền Admin thành công!');
   }
 
-  function handleRegisterSubmit() {
+  async function handleRegisterSubmit() {
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim();
+    const passInput = document.getElementById('regPass');
+    const pass = passInput ? passInput.value : '';
     const role = document.getElementById('regRole').value;
 
     if(!name || !email) { showToast('Vui lòng điền đầy đủ họ tên và email!'); return; }
+    if(!pass || pass.length < 6) { showToast('Mật khẩu phải có tối thiểu 6 ký tự!'); return; }
+
+    // Kiểm tra tài khoản đã tồn tại chưa
+    const existing = allUsers.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+    if (existing) {
+      showToast('Email này đã được đăng ký, vui lòng bấm "Đăng nhập"!');
+      return;
+    }
+
+    // BĂM MẬT KHẨU ĐẦU VÀO SHA-256 KÈM SALT BẢO MẬT
+    let passwordHash = '';
+    if (typeof hashPassword === 'function') {
+      passwordHash = await hashPassword(pass);
+    } else {
+      passwordHash = btoa(pass);
+    }
+
+    // Xóa ngay lập tức mật khẩu thô khỏi ô input
+    if (passInput) passInput.value = '';
+
+    const newUser = {
+      name: name,
+      email: email,
+      role: role,
+      password_hash: passwordHash,
+      date: new Date().toISOString().split('T')[0]
+    };
 
     currentUser = { name: name, email: email, role: role };
-    allUsers.push({ name: name, email: email, role: role, date: new Date().toISOString().split('T')[0] });
+    allUsers.push(newUser);
     localStorage.setItem('nb_user', JSON.stringify(currentUser));
     localStorage.setItem('nb_all_users', JSON.stringify(allUsers));
+
+    // Đồng bộ lên Supabase với trường password_hash đã mã hóa
+    if (typeof dbCreateUser === 'function') {
+      dbCreateUser(newUser).catch(err => console.warn('Supabase sync user error:', err));
+    }
+
     updateAuthUI();
     renderAdminData();
     closeModal();
