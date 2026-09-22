@@ -2258,7 +2258,11 @@ body[data-theme="dark"] .hero-brand-pill span {
 }
 
 .nb-circle-btn:hover {
- /* ========================================================
+  background: #E2E8F0;
+  transform: scale(1.05);
+}
+
+/* ========================================================
    NINH BÌNH HOMESTAY & TRAVEL REDESIGN (APPLE GLASSMORPHISM & #1B4D3E)
    ======================================================== */
 
