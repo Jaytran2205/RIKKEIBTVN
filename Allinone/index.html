@@ -34,7 +34,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
 
@@ -409,7 +409,7 @@
 
 <link rel="stylesheet" href="color-variables.css?v=2026_v11_header">
 
-<link rel="stylesheet" href="styles.css?v=2026_homestay_blur_v7">
+<link rel="stylesheet" href="styles.css?v=2026_homestay_v9_luxury">
 
 <script src="document-formatter.js?v=2026_v9"></script>
 
@@ -5390,7 +5390,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <p class="nb-hero-subtitle">
           Thư giãn thảnh thơi và thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian bình dị giữa núi non di sản Cố đô.
         </p>
-        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom: 24px;">
+        <div class="nb-hero-btn-row">
           <button type="button" class="nb-hero-btn" onclick="openNBCinematicVideo()">
             <span>Xem video toàn cảnh 4K ▶</span>
           </button>
@@ -5402,6 +5402,19 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
       <!-- 2. REFINED FLOATING GLASSMORPHISM SEARCH BAR (APPLE SEGMENTED PILL) -->
       <div class="nb-glass-search-wrap" id="nbGlassSearchBar">
+        <!-- Tabs matching Mockup Image 3 -->
+        <div class="nb-search-tabs-header">
+          <button type="button" class="nb-search-tab active">
+            <span>🏡 Homestay &amp; Khách Sạn</span>
+          </button>
+          <button type="button" class="nb-search-tab" onclick="showToast('Tính năng Tour &amp; Trải nghiệm đang cập nhật!')">
+            <span>🛶 Tour &amp; Trải Nghiệm</span>
+          </button>
+          <button type="button" class="nb-search-tab" onclick="showToast('Tính năng Thuê xe đưa đón đang cập nhật!')">
+            <span>🚗 Thuê Xe Đưa Đón</span>
+          </button>
+        </div>
+
         <div class="nb-glass-search">
           
           <!-- Field 1: Location -->
@@ -5409,7 +5422,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <span class="nb-field-icon">📍</span>
             <div class="nb-field-content">
               <span class="nb-field-label">Điểm đến</span>
-              <input type="text" id="nbLocationInput" class="nb-field-input" autocomplete="off" placeholder="Tràng An, Tam Cốc, Hang Múa..." oninput="filterNBPlaces()">
+              <input type="text" id="nbLocationInput" class="nb-field-input" autocomplete="off" placeholder="Tràng An, Tam Cốc, Hang Múa..." oninput="filterNBPlaces()" spellcheck="false">
             </div>
           </div>
 
@@ -5518,9 +5531,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá từ</span>
                 <span class="nb-card-price-value">795,500đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc Rice Fields Resort')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(1)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc Rice Fields Resort')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5544,9 +5562,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá tốt nhất</span>
                 <span class="nb-card-price-value">650,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Ninh Bình Eco Garden')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(2)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Ninh Bình Eco Garden')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5570,9 +5593,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá ưu đãi</span>
                 <span class="nb-card-price-value">1,850,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Emeralda Resort Ninh Bình')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(3)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Emeralda Resort Ninh Bình')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5596,9 +5624,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá niêm yết</span>
                 <span class="nb-card-price-value">806,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc La Montagne Resort')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(4)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc La Montagne Resort')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5645,9 +5678,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá tốt nhất</span>
                 <span class="nb-card-price-value">650,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Ninh Binh Eco Garden')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(1)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Ninh Binh Eco Garden')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5670,9 +5708,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá ưu đãi</span>
                 <span class="nb-card-price-value">1,450,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Aravinda Resort Ninh Bình')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(2)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Aravinda Resort Ninh Bình')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5695,9 +5738,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá niêm yết</span>
                 <span class="nb-card-price-value">1,850,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Emeralda Resort Ninh Bình')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(3)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Emeralda Resort Ninh Bình')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -5720,9 +5768,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <span class="nb-card-price-label">Giá tốt nhất</span>
                 <span class="nb-card-price-value">890,000đ</span>
               </div>
-              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Hang Mua Ecolodge')">
-                + Chỉ đường
-              </button>
+              <div class="nb-card-btn-group">
+                <button type="button" class="nb-card-view-btn" onclick="event.stopPropagation(); expandHomestayDetail(4)">
+                  Xem phòng
+                </button>
+                <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Hang Mua Ecolodge')">
+                  + Chỉ đường
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -16666,40 +16719,96 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
     container.innerHTML = `
       <div class="nb-detail-inner">
-        <button type="button" class="nb-detail-close-btn" onclick="closeNBDetail()">✕ Đóng</button>
+        <div class="nb-detail-header-bar">
+          <div class="nb-detail-badge-group">
+            <span class="nb-detail-badge">${data.tag}</span>
+            <span class="nb-detail-rating-pill">⭐ ${data.rating}</span>
+          </div>
+          <button type="button" class="nb-detail-close-btn" onclick="closeNBDetail()" aria-label="Đóng xem phòng">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span>Đóng xem phòng</span>
+          </button>
+        </div>
+
         <div class="nb-detail-grid">
-          <div>
-            <div class="nb-detail-badge">${data.tag} • ${data.rating}</div>
+          <div class="nb-detail-left-col">
             <h2 class="nb-detail-title">${data.name}</h2>
-            <div class="nb-detail-location">📍 ${data.location}</div>
-            <p class="nb-detail-desc">${data.desc}</p>
-            <div class="nb-detail-features">
-              ${data.features.map(f => `<span>✓ ${f}</span>`).join('')}
+            <div class="nb-detail-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>${data.location}</span>
+              <button type="button" class="nb-detail-map-link" onclick="openNBDirectMap(event, '${data.name}')">Xem bản đồ Google →</button>
             </div>
+            
+            <p class="nb-detail-desc">${data.desc}</p>
+            
+            <div class="nb-detail-features-label">Tiện ích &amp; Dịch vụ đặc quyền:</div>
+            <div class="nb-detail-features">
+              ${data.features.map(f => `
+                <span class="nb-feature-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>${f}</span>
+                </span>
+              `).join('')}
+            </div>
+
             <div class="nb-detail-rooms-box">
-              <h4 style="font-size:0.95rem; font-weight:800; color:#1B4D3E; margin-bottom:8px;">Hạng phòng trống hôm nay:</h4>
-              ${data.rooms.map(r => `
-                <div class="nb-room-row">
-                  <div>
-                    <div style="font-weight:750; font-size:0.92rem; color:#0F172A;">${r.type}</div>
-                    <div style="font-size:0.78rem; color:#64748B;">${r.beds} • <span style="color:#059669; font-weight:700;">${r.available}</span></div>
+              <div class="nb-rooms-box-header">
+                <span class="nb-rooms-box-title">🛎️ Danh sách phòng trống hôm nay</span>
+                <span class="nb-rooms-box-badge">Giá độc quyền online</span>
+              </div>
+              <div class="nb-rooms-list">
+                ${data.rooms.map(r => `
+                  <div class="nb-room-row">
+                    <div class="nb-room-info">
+                      <div class="nb-room-name">${r.type}</div>
+                      <div class="nb-room-meta">
+                        <span>🛏️ ${r.beds}</span>
+                        <span class="nb-room-avail-tag">${r.available}</span>
+                      </div>
+                    </div>
+                    <div class="nb-room-action-side">
+                      <div class="nb-room-price-val">${r.price}</div>
+                      <button type="button" class="nb-room-book-btn" onclick="bookDirectHomestay('${data.name}', '${r.type}')">
+                        <span>Đặt ngay</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                      </button>
+                    </div>
                   </div>
-                  <div style="text-align:right;">
-                    <div style="font-weight:850; font-size:1.05rem; color:#1B4D3E;">${r.price}</div>
-                    <button type="button" class="btn btn-accent btn-sm" style="margin-top:4px;" onclick="bookDirectHomestay('${data.name}', '${r.type}')">Đặt ngay</button>
-                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="nb-detail-right-col">
+            <div class="nb-detail-main-img-wrap">
+              <img id="nbDetailMainImg" src="${data.images[0]}" alt="${data.name}" class="nb-detail-main-img">
+              <div class="nb-detail-img-counter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>${data.images.length} Ảnh phòng thực tế</span>
+              </div>
+            </div>
+            
+            <div class="nb-detail-gallery">
+              ${data.images.map((img, i) => `
+                <div class="nb-detail-thumb-wrap ${i === 0 ? 'active' : ''}" onclick="changeNBDetailImage('${img}', this)">
+                  <img src="${img}" alt="Ảnh phòng ${i+1}" class="nb-detail-thumb">
                 </div>
               `).join('')}
             </div>
-          </div>
-          <div>
-            <div class="nb-detail-main-img-wrap">
-              <img id="nbDetailMainImg" src="${data.images[0]}" alt="${data.name}" class="nb-detail-main-img">
-            </div>
-            <div class="nb-detail-gallery">
-              ${data.images.map((img, i) => `
-                <img src="${img}" alt="Thumb" class="nb-detail-thumb ${i === 0 ? 'active' : ''}" onclick="changeNBDetailImage('${img}', this)">
-              `).join('')}
+
+            <div class="nb-detail-booking-perks">
+              <div class="nb-perk-item">
+                <span class="nb-perk-icon">⚡</span>
+                <div class="nb-perk-text">
+                  <strong>Giữ phòng tức thì:</strong> Nhận tin xác nhận phòng qua Zalo trong 2 phút
+                </div>
+              </div>
+              <div class="nb-perk-item">
+                <span class="nb-perk-icon">🛡️</span>
+                <div class="nb-perk-text">
+                  <strong>An tâm chuyến đi:</strong> Hỗ trợ đổi ngày miễn phí nếu lịch trình thay đổi
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -16717,7 +16826,7 @@ Quản trị tài chính số — Ninh Bình Digital`;
     }
   }
 
-  function changeNBDetailImage(src, thumbEl) {
+  function changeNBDetailImage(src, thumbWrapEl) {
     const main = document.getElementById('nbDetailMainImg');
     if (main) {
       if (typeof gsap !== 'undefined') {
@@ -16729,8 +16838,8 @@ Quản trị tài chính số — Ninh Bình Digital`;
         main.src = src;
       }
     }
-    document.querySelectorAll('.nb-detail-thumb').forEach(t => t.classList.remove('active'));
-    if (thumbEl) thumbEl.classList.add('active');
+    document.querySelectorAll('.nb-detail-thumb-wrap').forEach(t => t.classList.remove('active'));
+    if (thumbWrapEl) thumbWrapEl.classList.add('active');
   }
 
   function closeNBDetail() {
