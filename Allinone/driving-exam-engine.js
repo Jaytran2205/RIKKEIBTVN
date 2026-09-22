@@ -4580,22 +4580,22 @@ function renderExamUI() {
           </div>
         ` : ''}
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:18px; border-top:1px solid #F1F5F9;">
-          <button type="button" onclick="goToExamQuestion(${activeExam.currentIndex - 1})" ${activeExam.currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} style="background:#F1F5F9; color:#334155; border:1px solid #CBD5E1; padding:10px 18px; border-radius:8px; font-weight:700; font-size:0.88rem; cursor:pointer;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:18px; border-top:1px solid #F1F5F9; flex-wrap:wrap; gap:8px;">
+          <button type="button" onclick="goToExamQuestion(${activeExam.currentIndex - 1})" ${activeExam.currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} style="background:#F1F5F9; color:#334155; border:1px solid #CBD5E1; padding:10px 16px; border-radius:10px; font-weight:700; font-size:0.9rem; cursor:pointer; min-height:44px;">
             ⬅ Câu trước
           </button>
           
           ${activeExam.isLearningMode ? `
-            <button type="button" onclick="finishLearningSession()" style="background:#059669; color:#FFF; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; gap:6px;">
+            <button type="button" onclick="finishLearningSession()" style="background:#059669; color:#FFF; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.92rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; min-height:44px;">
               🏁 Kết thúc buổi học
             </button>
           ` : `
-            <button type="button" onclick="confirmSubmitExam()" style="background:#D97706; color:#FFF; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; gap:6px;">
+            <button type="button" onclick="confirmSubmitExam()" style="background:#D97706; color:#FFF; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.92rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; min-height:44px;">
               🏁 Nộp bài sát hạch
             </button>
           `}
           
-          <button type="button" onclick="goToExamQuestion(${activeExam.currentIndex + 1})" ${activeExam.currentIndex === total - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} style="background:#0F3D6E; color:#FFF; border:none; padding:10px 18px; border-radius:8px; font-weight:700; font-size:0.88rem; cursor:pointer;">
+          <button type="button" onclick="goToExamQuestion(${activeExam.currentIndex + 1})" ${activeExam.currentIndex === total - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} style="background:#0F3D6E; color:#FFF; border:none; padding:10px 16px; border-radius:10px; font-weight:700; font-size:0.9rem; cursor:pointer; min-height:44px;">
             Câu tiếp ➡
           </button>
         </div>

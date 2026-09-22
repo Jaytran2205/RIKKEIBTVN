@@ -430,7 +430,7 @@
 
   --font-body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
 
-  --header-h:64px;
+  --header-h:76px;
 
 
 
@@ -634,27 +634,78 @@ header{
 
 }
 
-.logo{display:flex; align-items:center; gap:10px; flex-shrink:0; cursor:pointer; user-select:none;}
+.logo{display:flex; align-items:center; gap:12px; flex-shrink:0; cursor:pointer; user-select:none; text-decoration:none;}
 
-.logo-icon{
-
-  width:38px; height:38px; border-radius:11px; flex-shrink:0;
-
-  display:flex; align-items:center; justify-content:center;
-
-  background:linear-gradient(150deg,var(--primary-light),var(--fill)); color:var(--on-fill);
-
-  font-weight:800; font-family:var(--font-display);
-
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 5px 12px -4px rgba(11,92,87,.5);
-
+.logo-emblem-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #FFFFFF, rgba(235, 248, 246, 0.95));
+  border: 1.5px solid rgba(14, 124, 116, 0.32);
+  box-shadow: 0 4px 18px rgba(11, 92, 87, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.logo-text{font-family:var(--font-display); font-size:1.14rem; line-height:1; white-space:nowrap; letter-spacing:-.02em; display:flex; align-items:baseline;}
+.logo:hover .logo-emblem-wrap {
+  transform: scale(1.06) translateY(-1px);
+  border-color: var(--primary-light, #0E7C74);
+  box-shadow: 0 8px 24px rgba(11, 92, 87, 0.3), 0 0 0 3px rgba(14, 124, 116, 0.14);
+}
 
-.logo-brand{font-weight:800; color:var(--ink);}
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 11px;
+  filter: drop-shadow(0 2px 5px rgba(11, 92, 87, 0.15));
+}
 
-.logo-digital{font-weight:500; margin-left:5px; color:var(--primary-light);}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.15;
+}
+
+.logo-text-top {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+.logo-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.025em;
+}
+
+.logo-digital {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-left: 6px;
+  background: linear-gradient(135deg, var(--primary-light, #0E7C74), #14B8A6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-tagline {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted, #64748B);
+  margin-top: 2px;
+  white-space: nowrap;
+}
 
 
 
@@ -856,12 +907,34 @@ header{
 
 }
 
-@media(max-width:520px){
+@media(max-width:768px){
+  :root {
+    --header-h: 68px;
+  }
+  .logo-emblem-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+  .logo-brand, .logo-digital {
+    font-size: 1.18rem;
+  }
+  .logo-tagline {
+    display: none;
+  }
+}
 
-  .nav-container{padding:0 14px;}
-
-  .logo-digital{display:none;}
-
+@media(max-width:480px){
+  .nav-container{padding:0 12px;}
+  .logo{gap:9px;}
+  .logo-emblem-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+  .logo-brand, .logo-digital {
+    font-size: 1.08rem;
+  }
 }
 
 
@@ -4091,11 +4164,16 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   <div class="nav-container">
 
     <!-- 1. Logo Chính Thức Ninh Bình Digital -->
-    <div class="logo" onclick="navigateTo('home')" title="Về trang chủ">
-      <img src="images/logo-icon.png" alt="Logo Ninh Bình Digital" class="logo-img" style="width:40px; height:40px; object-fit:contain; border-radius:10px; filter:drop-shadow(0 2px 8px rgba(11,92,87,0.25)); transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+    <div class="logo" onclick="navigateTo('home')" title="Về trang chủ Ninh Bình Digital">
+      <div class="logo-emblem-wrap">
+        <img src="images/logo.png" onerror="this.src='images/logo-icon.png'" alt="Logo Ninh Bình Digital" class="logo-img">
+      </div>
       <div class="logo-text">
-        <span class="logo-brand">Ninh Bình</span>
-        <span class="logo-digital">Digital</span>
+        <div class="logo-text-top">
+          <span class="logo-brand">Ninh Bình</span>
+          <span class="logo-digital">Digital</span>
+        </div>
+        <span class="logo-tagline">Nền Tảng Tiện Ích &amp; Quản Trị Số</span>
       </div>
     </div>
 
@@ -4481,6 +4559,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     <div class="wrap hero-inner">
 
       <div class="hero-copy">
+
+        <div class="hero-brand-pill" style="display:inline-flex; align-items:center; gap:8px; padding:6px 14px; background:rgba(255,255,255,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(14,124,116,0.25); border-radius:30px; box-shadow:0 3px 12px rgba(11,92,87,0.1); margin-bottom:14px;">
+          <img src="images/logo.png" onerror="this.src='images/logo-icon.png'" alt="Ninh Bình Digital" style="width:24px; height:24px; object-fit:contain; border-radius:6px;">
+          <span style="font-size:0.82rem; font-weight:750; color:var(--primary); letter-spacing:0.03em;">NỀN TẢNG CÔNG NGHỆ SỐ NINH BÌNH</span>
+        </div>
 
         <h1 class="hero-title">Công cụ số thông minh cho người dân &amp; hộ kinh doanh Ninh Bình</h1>
 
@@ -8997,19 +9080,22 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     </div>
 
     <!-- Modal Body -->
-    <div style="padding:24px; overflow-y:auto; flex:1; display:grid; grid-template-columns:260px 1fr; gap:24px;">
+    <div class="exam-modal-body">
       <!-- Cột Trái: Bảng Điều Hướng Số Câu -->
-      <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:14px; padding:18px; height:fit-content; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-        <div style="font-size:0.75rem; color:#64748B; font-weight:700; margin-bottom:12px; text-transform:uppercase;">BẢNG CÂU HỎI</div>
-        <div id="modalExamQuestionNumbers" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px;"></div>
+      <div class="exam-sidebar-nav">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div style="font-size:0.75rem; color:#64748B; font-weight:700; text-transform:uppercase;">BẢNG CÂU HỎI</div>
+          <span style="font-size:0.75rem; color:#94A3B8;">25 câu</span>
+        </div>
+        <div id="modalExamQuestionNumbers" class="exam-question-numbers-grid"></div>
 
-        <div style="margin-top:20px; padding-top:14px; border-top:1px solid #F1F5F9;">
-          <button type="button" onclick="submitExamResult()" class="btn btn-accent btn-full" style="background:#D97706; color:#FFF; font-weight:700; padding:10px;">🏁 Nộp bài sát hạch</button>
+        <div style="margin-top:16px; padding-top:14px; border-top:1px solid #F1F5F9;">
+          <button type="button" onclick="submitExamResult()" class="btn btn-accent btn-full" style="background:#D97706; color:#FFF; font-weight:700; padding:12px; width:100%; border-radius:10px; font-size:0.95rem;">🏁 Nộp bài sát hạch</button>
         </div>
       </div>
 
       <!-- Cột Phải: Nội Dung Câu Hỏi -->
-      <div id="modalExamQuestionContent"></div>
+      <div id="modalExamQuestionContent" class="exam-question-main-content"></div>
     </div>
   </div>
 </div>
@@ -9019,17 +9105,17 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
      MODAL 1: VÒNG QUAY NÓN KỲ DIỆU (QUAY NÓN 21H)
      ======================================================== -->
 <div id="wheelFortuneModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(15,23,42,0.75); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#FFFFFF; border-radius:20px; width:100%; max-width:440px; text-align:center; padding:28px; box-shadow:0 25px 50px rgba(0,0,0,0.25); border:1px solid #E2E8F0; position:relative;">
+  <div style="background:#FFFFFF; border-radius:20px; width:100%; max-width:440px; text-align:center; padding:24px 16px; box-shadow:0 25px 50px rgba(0,0,0,0.25); border:1px solid #E2E8F0; position:relative;">
     <button type="button" onclick="closeWheelFortuneModal()" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.6rem; color:#64748B; cursor:pointer; line-height:1;">&times;</button>
     <span style="background:#FEF3C7; color:#D97706; font-size:0.75rem; font-weight:800; padding:4px 12px; border-radius:20px; display:inline-block; margin-bottom:8px;">HỘI TRƯỜNG 21H</span>
     <h3 style="font-size:1.45rem; font-weight:800; color:#0F172A; margin:0 0 6px;">Vòng Quay Nón Kỳ Diệu</h3>
     <p style="color:#64748B; font-size:0.85rem; margin-bottom:18px;">Quay may mắn mỗi ngày để nhận XP và vật phẩm học tập.</p>
 
     <!-- Canvas Wheel -->
-    <div style="position:relative; width:340px; height:340px; margin:0 auto 20px;">
+    <div style="position:relative; width:min(300px, 78vw); height:min(300px, 78vw); margin:0 auto 20px;">
       <!-- Top Needle -->
       <div style="position:absolute; top:-6px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:22px solid #DC2626; z-index:10; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));"></div>
-      <canvas id="wheelFortuneCanvas" width="340" height="340" style="width:340px; height:340px; border-radius:50%; box-shadow:0 8px 24px rgba(0,0,0,0.12);"></canvas>
+      <canvas id="wheelFortuneCanvas" width="340" height="340" style="width:100%; height:100%; border-radius:50%; box-shadow:0 8px 24px rgba(0,0,0,0.12);"></canvas>
     </div>
 
     <div id="wheelResultAlert" style="display:none; margin-bottom:16px;"></div>
@@ -9188,11 +9274,13 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
-          <img src="images/logo-icon.png" alt="Ninh Bình Digital" style="width:44px; height:44px; object-fit:contain; border-radius:12px; background:rgba(255,255,255,0.08); padding:3px; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.2));" />
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+          <div style="width:62px; height:62px; border-radius:16px; background:linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)); border:1.5px solid rgba(255,255,255,0.25); padding:4px; box-shadow:0 8px 24px rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <img src="images/logo.png" onerror="this.src='images/logo-icon.png'" alt="Ninh Bình Digital" style="width:100%; height:100%; object-fit:contain; border-radius:12px;" />
+          </div>
           <div>
-            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; color:#fff; font-size:1.2rem; line-height:1.2;">Ninh Bình Digital</div>
-            <div style="font-size:0.75rem; color:#A8DADC; letter-spacing:0.04em;">Nền tảng số cộng đồng</div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; color:#fff; font-size:1.35rem; line-height:1.2; letter-spacing:-0.02em;">Ninh Bình Digital</div>
+            <div style="font-size:0.75rem; color:#A8DADC; letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-top:3px;">Nền tảng số cộng đồng Ninh Bình</div>
           </div>
         </div>
         <p style="font-size:0.88rem; line-height:1.6;">Nền tảng công nghệ số &amp; thư viện AI phục vụ cộng đồng và doanh nghiệp địa phương tỉnh Ninh Bình.</p>

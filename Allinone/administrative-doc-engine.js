@@ -1227,10 +1227,10 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
             </div>
             <button type="button" onclick="AdministrativeDocEngine.closeRawDocModal()" style="background:none; border:none; font-size:1.4rem; color:var(--muted, #64748B); cursor:pointer; padding:4px;">&times;</button>
           </div>
-          <div style="padding:20px 24px; flex:1; overflow-y:auto;">
-            <textarea id="nbRawDocModalInput" class="form-input" style="width:100%; height:260px; font-family:'Times New Roman', Times, serif; font-size:13pt; line-height:1.4; padding:12px;" placeholder="Dán văn bản thô từ trên xuống dưới vào đây... (Bao gồm Quốc hiệu, Cơ quan, Số ký hiệu, Ngày tháng, Trích yếu, Kính gửi, Nội dung, Nơi nhận, Người ký)"></textarea>
+          <div style="padding:16px 20px; flex:1; overflow-y:auto;">
+            <textarea id="nbRawDocModalInput" class="form-input" style="width:100%; height:260px; font-family:'Times New Roman', Times, serif; font-size:13pt; line-height:1.4; padding:12px; box-sizing:border-box; border-radius:10px;" placeholder="Dán văn bản thô từ trên xuống dưới vào đây... (Bao gồm Quốc hiệu, Cơ quan, Số ký hiệu, Ngày tháng, Trích yếu, Kính gửi, Nội dung, Nơi nhận, Người ký)"></textarea>
           </div>
-          <div style="padding:16px 24px; border-top:1px solid var(--border, #E2E8F0); display:flex; justify-content:flex-end; gap:10px; background:var(--surface-2, #F8FAFC);">
+          <div style="padding:14px 20px; border-top:1px solid var(--border, #E2E8F0); display:flex; justify-content:flex-end; gap:10px; background:var(--surface-2, #F8FAFC); flex-wrap:wrap;">
             <button type="button" class="btn btn-outline" onclick="AdministrativeDocEngine.closeRawDocModal()">Hủy bỏ</button>
             <button type="button" class="btn btn-primary" onclick="AdministrativeDocEngine.submitRawDocModal()" style="background:#2563EB; color:#FFF; font-weight:700; padding:10px 20px; border-radius:8px; border:none; cursor:pointer;">⚡ Bóc Tách &amp; Chuẩn Hóa Ngay</button>
           </div>

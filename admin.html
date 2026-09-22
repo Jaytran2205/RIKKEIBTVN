@@ -744,6 +744,78 @@ body {
   padding: 28px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
+
+/* Responsive Admin Drawer & Touch Enhancements */
+.admin-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9998;
+}
+.admin-mobile-menu-btn {
+  display: none;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  color: var(--ink);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.admin-mobile-menu-btn:hover {
+  background: var(--surface-3);
+  color: var(--primary);
+}
+@media (max-width: 860px) {
+  .admin-mobile-menu-btn {
+    display: inline-flex;
+  }
+  .admin-drawer-backdrop.active {
+    display: block;
+  }
+  .admin-aside {
+    position: fixed !important;
+    left: -300px !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    transition: left 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35) !important;
+  }
+  .admin-aside.drawer-open {
+    left: 0 !important;
+  }
+  .admin-main {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 14px !important;
+  }
+  .admin-topbar {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+  }
+  .topbar-right {
+    gap: 8px !important;
+  }
+  .admin-avatar-info {
+    display: none !important;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .data-table {
+    min-width: 600px;
+  }
+}
 </style>
 </head>
 <body>
@@ -779,13 +851,18 @@ body {
 <!-- Toast notification -->
 <div id="adminToast" class="admin-toast"></div>
 
+<!-- Mobile Drawer Backdrop -->
+<div id="adminDrawerBackdrop" class="admin-drawer-backdrop" onclick="closeAdminDrawer()"></div>
+
 <!-- Sidebar -->
-<aside class="admin-aside">
+<aside class="admin-aside" id="adminSidebar">
   <div class="aside-brand">
-    <img src="images/logo-icon.png" alt="Ninh Bình Digital" style="width:42px; height:42px; object-fit:contain; border-radius:10px; filter:drop-shadow(0 2px 6px rgba(11,92,87,0.25));" />
+    <div style="width:54px; height:54px; border-radius:14px; background:linear-gradient(145deg, rgba(255,255,255,0.95), rgba(240,249,248,0.95)); border:1.5px solid rgba(14,124,116,0.32); padding:3px; box-shadow:0 4px 14px rgba(11,92,87,0.18); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+      <img src="images/logo.png" onerror="this.src='images/logo-icon.png'" alt="Ninh Bình Digital" style="width:100%; height:100%; object-fit:contain; border-radius:11px;" />
+    </div>
     <div class="aside-brand-title">
-      Ninh Bình Digital
-      <span>Quản trị viên &amp; Cấu hình</span>
+      <div style="font-size:1.22rem; font-weight:800; letter-spacing:-0.02em; color:var(--ink);">Ninh Bình Digital</div>
+      <span style="font-size:0.75rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Quản trị viên &amp; Cấu hình</span>
     </div>
   </div>
 
@@ -841,11 +918,16 @@ body {
 <!-- Main Content Area -->
 <main class="admin-main">
   <header class="admin-topbar">
-    <div class="topbar-left">
-      <h1 class="topbar-title" id="pageHeaderTitle">Dashboard Tổng Quan</h1>
-      <div class="online-pill">
-        <span class="online-dot"></span>
-        <span id="liveVisitorsCount">42</span> người đang truy cập trực tiếp
+    <div class="topbar-left" style="display:flex; align-items:center; gap:12px;">
+      <button type="button" class="admin-mobile-menu-btn" onclick="toggleAdminDrawer()" aria-label="Mở menu quản trị">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <div>
+        <h1 class="topbar-title" id="pageHeaderTitle" style="margin:0;">Dashboard Tổng Quan</h1>
+        <div class="online-pill" style="margin-top:3px;">
+          <span class="online-dot"></span>
+          <span id="liveVisitorsCount">0</span> người đang truy cập trực tiếp
+        </div>
       </div>
     </div>
     <div class="topbar-right">
@@ -1615,8 +1697,24 @@ function verifyAdminPin() {
   }
 }
 
+// Mobile Drawer Control
+function toggleAdminDrawer() {
+  const aside = document.getElementById('adminSidebar');
+  const backdrop = document.getElementById('adminDrawerBackdrop');
+  if (aside) aside.classList.toggle('drawer-open');
+  if (backdrop) backdrop.classList.toggle('active');
+}
+
+function closeAdminDrawer() {
+  const aside = document.getElementById('adminSidebar');
+  const backdrop = document.getElementById('adminDrawerBackdrop');
+  if (aside) aside.classList.remove('drawer-open');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
 // 2. Navigation Switch
 function switchAdminNav(panelId, linkEl) {
+  closeAdminDrawer();
   document.querySelectorAll('.aside-link').forEach(l => l.classList.remove('active'));
   if (linkEl) linkEl.classList.add('active');
 
