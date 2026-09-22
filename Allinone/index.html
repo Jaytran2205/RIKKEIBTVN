@@ -5383,28 +5383,94 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 <div id="page-travel" class="page-view" style="position: relative; min-height: 100vh; padding-bottom: 80px;">
   <!-- FULL BACKGROUND VIDEO LAYER (Runs behind everything and blurs as user scrolls up) -->
   <div class="nb-global-video-bg-wrap" id="nbGlobalVideoBgWrap">
-    <video id="nbGlobalVideoBg" class="nb-global-video-bg" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80">
+    <video id="nbGlobalVideoBg" class="nb-global-video-bg" autoplay loop muted playsinline poster="images/nb_travel_hero_poster.jpg">
+      <source src="images/ninhbinh_travel_intro.mp4" type="video/mp4">
       <source src="images/nb_scenic_bg.webm" type="video/webm">
-      <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Fog_covering_mountain_time_lapse.webm/Fog_covering_mountain_time_lapse.webm.480p.vp9.webm" type="video/webm">
     </video>
     <div class="nb-global-video-overlay" id="nbGlobalVideoOverlay"></div>
+  </div>
+
+  <!-- FLOATING ACTION STACK ON RIGHT (MESSENGER, ZALO, MAP, CALL - MATCHING SCREENSHOT) -->
+  <div class="nb-travel-floating-stack" id="nbTravelFloatingStack">
+    <a href="javascript:void(0)" onclick="openFeedbackModal('general')" class="nb-travel-float-btn" title="Gửi tin nhắn / Góp ý">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="float-tooltip">Nhắn tin / Tư vấn</span>
+    </a>
+    <a href="https://zalo.me/0866520567" target="_blank" rel="noopener noreferrer" class="nb-travel-float-btn" title="Chat Zalo: 0866520567">
+      <span style="font-weight:900; font-size:0.8rem; font-family:sans-serif;">Zalo</span>
+      <span class="float-tooltip">Chat Zalo 24/7</span>
+    </a>
+    <a href="https://maps.google.com/?q=Trang+An+Ninh+Binh" target="_blank" rel="noopener noreferrer" class="nb-travel-float-btn" title="Vị trí bản đồ Tràng An - Ninh Bình">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span class="float-tooltip">Bản đồ điểm đến</span>
+    </a>
+    <a href="tel:0866520567" class="nb-travel-float-btn" title="Gọi Hotline: 0866520567">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="float-tooltip">Hotline: 0866520567</span>
+    </a>
   </div>
 
   <div class="wrap" style="position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 20px 16px 60px;">
     
     <!-- 1. SCENIC HERO HEADER OVER VIDEO -->
+    <!-- TOP HEADER BAR (Over Video - Matching Mockup) -->
+    <div class="nb-travel-header-bar">
+      <div class="nb-travel-brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="nb-travel-brand-logo">🏛️</div>
+        <div class="nb-travel-brand-name">Cơm Cổ <span>Hoa Lư</span></div>
+      </div>
+
+      <div class="nb-travel-nav-links">
+        <span class="nb-travel-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">Trang chủ</span>
+        <span class="nb-travel-nav-item" onclick="scrollToHomestayList()">Thực đơn &amp; Phòng</span>
+        <span class="nb-travel-nav-item" onclick="scrollToExplore()">Điểm tham quan</span>
+        <span class="nb-travel-nav-item" onclick="scrollToExplore()">Khuyến mãi</span>
+        <span class="nb-travel-nav-item" onclick="openBookingModal('Tuyển dụng & Hợp tác')">Tuyển dụng</span>
+        <span class="nb-travel-nav-item" onclick="openBookingModal('Liên hệ du lịch')">Liên hệ</span>
+      </div>
+
+      <div class="nb-travel-header-actions">
+        <button type="button" class="nb-travel-admin-btn" onclick="openBookingModal('Quản trị & Đối tác')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Quản trị</span>
+        </button>
+        <button type="button" class="nb-travel-book-btn" onclick="openBookingModal('Đặt bàn nhà hàng Cơm Cổ Hoa Lư / Homestay')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <span>ĐẶT BÀN</span>
+        </button>
+        <!-- Mascot Robot matching screenshot -->
+        <div class="nb-travel-mascot" title="Trợ lý số Ninh Bình">
+          <svg width="38" height="38" viewBox="0 0 100 100" fill="none">
+            <rect width="80" height="70" x="10" y="15" rx="24" fill="#3B82F6" stroke="#1D4ED8" stroke-width="4"/>
+            <rect width="58" height="40" x="21" y="26" rx="14" fill="#0F172A"/>
+            <path d="M36 42 L28 47 L36 52" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M45 53 L55 53" stroke="#60A5FA" stroke-width="3" stroke-linecap="round"/>
+            <path d="M64 42 L72 47 L64 52" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="50" y1="15" x2="50" y2="6" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="50" cy="5" r="4" fill="#60A5FA"/>
+            <circle cx="28" cy="72" r="5" fill="#93C5FD"/>
+            <circle cx="72" cy="72" r="5" fill="#93C5FD"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. SCENIC HERO HEADER OVER VIDEO -->
     <div class="nb-hero-banner" id="nbHeroBanner">
       <div class="nb-hero-content">
         <div class="nb-hero-badge">
-          <span>✨ Non Nước Ninh Bình 2026</span>
+          <span>✨ Di Sản Văn Hóa &amp; Thiên Nhiên Thế Giới Tràng An</span>
         </div>
-        <h1 class="nb-hero-title">Homestay &amp; Khách Sạn</h1>
+        <h1 class="nb-hero-title">CƠM CỔ HOA LƯ &amp; HOMESTAY NINH BÌNH</h1>
         <p class="nb-hero-subtitle">
-          Thư giãn thảnh thơi và thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian bình dị giữa núi non di sản Cố đô.
+          Thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian ẩm thực Cố Đô đặc sắc cùng hệ thống homestay nghỉ dưỡng sinh thái hàng đầu.
         </p>
         <div class="nb-hero-btn-row">
           <button type="button" class="nb-hero-btn" onclick="openNBCinematicVideo()">
             <span>Xem video toàn cảnh 4K ▶</span>
+          </button>
+          <button type="button" class="nb-sound-toggle-btn" id="nbSoundToggleBtn" onclick="toggleNBHeroSound()">
+            <span>🔇 Bật âm thanh</span>
           </button>
           <button type="button" class="nb-hero-btn-outline" onclick="scrollToHomestayList()">
             <span>Khám phá 50+ phòng đẹp ↓</span>
@@ -5412,7 +5478,18 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </div>
       </div>
 
-      <!-- 2. REFINED FLOATING GLASSMORPHISM SEARCH BAR (APPLE SEGMENTED PILL) -->
+      <!-- Scroll Down Indicator matching Screenshot -->
+      <div class="nb-scroll-explore" onclick="scrollToExplore()" title="Bấm để cuộn xuống khám phá">
+        <span class="nb-scroll-text">CUỘN XUỐNG ĐỂ KHÁM PHÁ</span>
+        <div class="nb-scroll-circle-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. REFINED FLOATING GLASSMORPHISM SEARCH BAR (APPLE SEGMENTED PILL) -->
       <div class="nb-glass-search-wrap" id="nbGlassSearchBar">
         <!-- Tabs matching Mockup Image 3 -->
         <div class="nb-search-tabs-header">
@@ -5810,9 +5887,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <button type="button" class="nb-video-close-btn" onclick="closeNBCinematicVideo()">✕</button>
       </div>
       <div class="nb-video-player-wrap">
-        <video id="nbCinematicVideoEl" controls playsinline loop poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80">
+        <video id="nbCinematicVideoEl" controls playsinline loop poster="images/nb_travel_hero_poster.jpg">
+          <source src="images/ninhbinh_travel_intro.mp4" type="video/mp4">
           <source src="images/nb_scenic_bg.webm" type="video/webm">
-          <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Fog_covering_mountain_time_lapse.webm/Fog_covering_mountain_time_lapse.webm.720p.vp9.webm" type="video/webm">
         </video>
       </div>
       <div class="nb-video-modal-footer">
@@ -16484,6 +16561,50 @@ Quản trị tài chính số — Ninh Bình Digital`;
       ]
     }
   ];
+
+  function scrollToExplore() {
+    const el = document.getElementById('nbGlassSearchBar') || document.getElementById('homestaySectionAnchor');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function toggleNBHeroSound() {
+    const video = document.getElementById('nbGlobalVideoBg');
+    const btn = document.getElementById('nbSoundToggleBtn');
+    if (!video || !btn) return;
+    video.muted = !video.muted;
+    if (video.muted) {
+      btn.innerHTML = '<span>🔇 Bật âm thanh</span>';
+      btn.classList.remove('is-active');
+    } else {
+      btn.innerHTML = '<span>🔊 Tắt âm thanh</span>';
+      btn.classList.add('is-active');
+    }
+  }
+
+  function openBookingModal(serviceName = 'Đặt bàn / Đặt phòng') {
+    if (window.showAppAlert) {
+      window.showAppAlert({
+        title: 'Đặt Bàn & Đặt Phòng Trực Tiếp',
+        message: `Chào mừng quý khách đến với <b>Cơm Cổ Hoa Lư & Homestay Ninh Bình</b>!<br><br>Quý khách vui lòng gọi Hotline hoặc liên hệ Zalo <b>0866.520.567</b> để được giữ bàn đẹp, đặt phòng view non nước với ưu đãi tốt nhất!`,
+        icon: '📅',
+        btnText: 'Gọi Hotline Ngay'
+      });
+      const btn = document.getElementById('appAlertBtn');
+      if (btn) {
+        btn.onclick = () => {
+          window.location.href = 'tel:0866520567';
+        };
+      }
+    } else {
+      alert('Vui lòng liên hệ Hotline / Zalo: 0866520567 để đặt bàn và đặt phòng!');
+    }
+  }
+
+  window.scrollToExplore = scrollToExplore;
+  window.toggleNBHeroSound = toggleNBHeroSound;
+  window.openBookingModal = openBookingModal;
 
   function scrollToHomestayList() {
     const el = document.getElementById('homestaySectionAnchor');
