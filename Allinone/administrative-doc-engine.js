@@ -295,26 +295,26 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     }
   };
 
-  // 3. INTERNAL STATE
+  // 3. INTERNAL STATE (Mặc định tinh gọn, không tự điền bừa bãi, hiện placeholder hướng dẫn)
   let state = {
     hinhThuc: "Hành chính (NĐ 30/2020/NĐ-CP)",
     loaiVanBan: "THÔNG BÁO",
     loaiCode: "TB",
     coQuanChuQuan: "",
-    coQuanBanHanh: "SỞ NỘI VỤ",
-    maDonVi: "SNV",
+    coQuanBanHanh: "",
+    maDonVi: "",
     isLienTich: false,
     secondaryUnits: [],
     diaDanh: "Ninh Bình",
     ngayBanHanh: new Date().toISOString().split('T')[0],
-    soVanBan: "01",
-    soKyHieu: "01/TB-SNV",
+    soVanBan: "",
+    soKyHieu: "",
     headerRatio: 35,
-    recipients: ["Ban Giám đốc;", "Các phòng ban chức năng;", "Lưu: VT."],
-    chucVu: "GIÁM ĐỐC",
-    hoTen: "Nguyễn Văn A",
-    trichYeu: "Về việc tổ chức hội nghị tổng kết công tác năm 2026",
-    noiDung: PRESET_TEMPLATES.default.body,
+    recipients: [],
+    chucVu: "",
+    hoTen: "",
+    trichYeu: "",
+    noiDung: "",
     currentStep: 1,
     accordionStates: {
       acc1: true,
@@ -349,9 +349,11 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
 
     const presetSelect = document.getElementById('vbAiTemplateSelect');
     if (presetSelect && presetSelect.options.length <= 1) {
-      presetSelect.innerHTML = Object.keys(PRESET_TEMPLATES).map(k =>
+      let opts = `<option value="" selected>-- Mẫu: Soạn văn bản mới (trống) --</option>`;
+      opts += Object.keys(PRESET_TEMPLATES).map(k =>
         `<option value="${k}">${PRESET_TEMPLATES[k].name}</option>`
       ).join('');
+      presetSelect.innerHTML = opts;
     }
 
     setInputValue('vbHinhThuc', state.hinhThuc);
@@ -393,7 +395,12 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     };
 
     listen('vbAiTemplateSelect', 'change', (e) => {
-      applyPresetTemplate(e.target.value);
+      const val = e.target.value;
+      if (val && PRESET_TEMPLATES[val]) {
+        applyPresetTemplate(val);
+      } else {
+        resetToEmptyDraft();
+      }
     });
 
     listen('vbHinhThuc', 'change', (e) => {
@@ -421,7 +428,7 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     });
 
     listen('vbMaDonVi', 'input', (e) => {
-      state.maDonVi = e.target.value.trim().toUpperCase() || 'XXX';
+      state.maDonVi = e.target.value.trim().toUpperCase();
       recalcSoKyHieu();
       updateLivePreview();
     });
@@ -489,7 +496,7 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     });
 
     listen('vbSoVanBan', 'input', (e) => {
-      state.soVanBan = e.target.value.trim() || '01';
+      state.soVanBan = e.target.value.trim();
       recalcSoKyHieu();
       updateLivePreview();
     });
@@ -641,20 +648,27 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
 
   // 8. RECALC SO KY HIEU THEO NĐ 30/2020
   function recalcSoKyHieu() {
-    const so = state.soVanBan || '01';
+    const so = state.soVanBan ? state.soVanBan.trim() : '';
     let code = state.loaiCode || 'TB';
     if (state.isLienTich && !code.endsWith('LT')) {
       code = code + 'LT';
     }
-    let ma = state.maDonVi ? state.maDonVi.toUpperCase() : 'XXX';
+    const ma = state.maDonVi ? state.maDonVi.trim().toUpperCase() : '';
+
+    if (!so && !ma) {
+      state.soKyHieu = '';
+      setInputValue('vbSoKyHieu', '');
+      return;
+    }
+
+    const soPart = so || '…';
+    let maPart = ma || '…';
 
     if (state.isLienTich && state.secondaryUnits && state.secondaryUnits.length > 0) {
-      const secMas = state.secondaryUnits.map(u => (u.maDonVi || 'XXX').toUpperCase()).join('-');
-      ma = `${ma}-${secMas}`;
-      state.soKyHieu = `${so}/${code}-${ma}`;
-    } else {
-      state.soKyHieu = `${so}/${code}-${ma}`;
+      const secMas = state.secondaryUnits.map(u => (u.maDonVi || '…').toUpperCase()).join('-');
+      maPart = `${maPart}-${secMas}`;
     }
+    state.soKyHieu = `${soPart}/${code}-${maPart}`;
     setInputValue('vbSoKyHieu', state.soKyHieu);
   }
 
@@ -677,10 +691,23 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
   function updateHeaderLayout() {
     const leftCol = document.getElementById('docHeaderLeft');
     const rightCol = document.getElementById('docHeaderRight');
+    const row = document.getElementById('docHeaderRow');
+    if (row) {
+      row.style.display = 'flex';
+      row.style.flexDirection = 'row';
+      row.style.flexWrap = 'nowrap';
+      row.style.justifyContent = 'space-between';
+      row.style.alignItems = 'flex-start';
+      row.style.width = '100%';
+    }
     if (leftCol && rightCol) {
       const ratio = state.headerRatio || 35;
       leftCol.style.width = `${ratio}%`;
+      leftCol.style.maxWidth = `${ratio}%`;
+      leftCol.style.flex = `0 0 ${ratio}%`;
       rightCol.style.width = `${100 - ratio}%`;
+      rightCol.style.maxWidth = `${100 - ratio}%`;
+      rightCol.style.flex = `0 0 ${100 - ratio}%`;
     }
   }
 
@@ -799,13 +826,13 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     }
 
     if (prevSoKyHieu) {
-      prevSoKyHieu.textContent = `Số: ${state.soKyHieu || '01/TB-SNV'}`;
+      prevSoKyHieu.textContent = state.soKyHieu ? `Số: ${state.soKyHieu}` : `Số: …/${state.loaiCode || 'TB'}-…`;
     }
 
     // 2. Header Right (Địa danh, ngày tháng)
     const prevDiaDanhNgay = document.getElementById('docPrevDiaDanhNgay');
     if (prevDiaDanhNgay) {
-      const dd = state.diaDanh ? state.diaDanh : '[Địa danh]';
+      const dd = state.diaDanh ? state.diaDanh : 'Ninh Bình';
       const dObj = state.ngayBanHanh ? new Date(state.ngayBanHanh) : new Date();
       const day = String(dObj.getDate()).padStart(2, '0');
       const month = String(dObj.getMonth() + 1).padStart(2, '0');
@@ -823,25 +850,29 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
     }
 
     if (prevTrichYeu) {
-      let subj = state.trichYeu || 'Về việc ...';
-      if (!subj.toLowerCase().startsWith('về việc') && !subj.toLowerCase().startsWith('v/v') && state.loaiVanBan !== 'QUYẾT ĐỊNH') {
-        subj = `Về việc ${subj}`;
+      if (state.trichYeu) {
+        let subj = state.trichYeu;
+        if (!subj.toLowerCase().startsWith('về việc') && !subj.toLowerCase().startsWith('v/v') && state.loaiVanBan !== 'QUYẾT ĐỊNH') {
+          subj = `Về việc ${subj}`;
+        }
+        prevTrichYeu.textContent = subj;
+      } else {
+        prevTrichYeu.textContent = '[Trích yếu nội dung văn bản]';
       }
-      prevTrichYeu.textContent = subj;
     }
 
     // 4. Nội dung văn bản
     const prevNoiDung = document.getElementById('docPrevNoiDung');
     if (prevNoiDung && prevNoiDung !== document.activeElement) {
-      if (typeof DocumentFormatter !== 'undefined') {
-        prevNoiDung.innerHTML = DocumentFormatter.formatParagraphsHtml(state.noiDung);
-      } else {
-        const paras = (state.noiDung || '').split('\n').filter(p => p.trim().length > 0);
-        if (paras.length > 0) {
-          prevNoiDung.innerHTML = paras.map(p => `<p style="font-family:'Times New Roman', Times, serif; font-size:13pt; text-indent:1cm; margin:0 0 6pt 0; text-align:justify; line-height:1.5;">${escapeHtml(p)}</p>`).join('');
+      if (state.noiDung && state.noiDung.trim().length > 0) {
+        if (typeof DocumentFormatter !== 'undefined') {
+          prevNoiDung.innerHTML = DocumentFormatter.formatParagraphsHtml(state.noiDung);
         } else {
-          prevNoiDung.innerHTML = `<p style="font-family:'Times New Roman', Times, serif; font-size:13pt; text-indent:1cm; margin:0 0 6pt 0; text-align:justify; line-height:1.5; color:#94a3b8;">[Chưa có nội dung văn bản. Nhập nội dung ở bước 2 hoặc dùng AI để tạo dự thảo tự động]</p>`;
+          const paras = state.noiDung.split('\n').filter(p => p.trim().length > 0);
+          prevNoiDung.innerHTML = paras.map(p => `<p style="font-family:'Times New Roman', Times, serif; font-size:13pt; text-indent:1cm; margin:0 0 6pt 0; text-align:justify; line-height:1.5;">${escapeHtml(p)}</p>`).join('');
         }
+      } else {
+        prevNoiDung.innerHTML = `<p style="font-family:'Times New Roman', Times, serif; font-size:13pt; text-indent:1cm; margin:0 0 6pt 0; text-align:justify; line-height:1.5; color:#64748b; font-style:italic;">[Nhập nội dung văn bản tại ô soạn thảo bước 2, chọn mẫu gợi ý từ danh mục hoặc bấm &ldquo;Dán &amp; Bóc tách toàn bộ văn bản thô&rdquo; để tự động căn chỉnh chuẩn Nghị định 30]</p>`;
       }
     }
 
@@ -855,7 +886,7 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
           return `<div style="line-height: 1.35; margin-bottom: 2px;">${escapeHtml(text)}</div>`;
         }).join('');
       } else {
-        prevNoiNhan.innerHTML = `<div>- Lưu: VT.</div>`;
+        prevNoiNhan.innerHTML = `<div>- Như Điều...;</div><div>- Lưu: VT.</div>`;
       }
     }
 
@@ -891,7 +922,7 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
           sigContainer.innerHTML = `
             <div style="display:flex; justify-content:space-between; gap:12px; width:100%; box-sizing:border-box;">
               ${allUnits.map(u => `
-                <div style="text-align:center; flex:1; min-width:0; padding:0 2px;">
+                <div style="width:48%; text-align:center;">
                   <div class="footer-sign-agency" style="font-size:11pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; margin-bottom:4px; word-break:break-word;">
                     ${escapeHtml(u.agency)}
                   </div>
@@ -940,11 +971,11 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
         sigContainer.innerHTML = `
           <div style="text-align:center;">
             <div id="docPrevChucVu" class="footer-sign-role" style="font-size:13pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; white-space:nowrap;">
-              ${escapeHtml(state.chucVu ? state.chucVu.toUpperCase() : 'GIÁM ĐỐC')}
+              ${escapeHtml(state.chucVu ? state.chucVu.toUpperCase() : '[CHỨC VỤ]')}
             </div>
             <div style="height:65px;"></div>
             <div id="docPrevHoTen" class="footer-sign-name" style="font-size:13pt; font-weight:bold; color:#000; line-height:1.25; white-space:nowrap;">
-              ${escapeHtml(state.hoTen ? state.hoTen : 'Nguyễn Văn A')}
+              ${escapeHtml(state.hoTen ? state.hoTen : '[Họ và tên]')}
             </div>
           </div>
         `;
@@ -1101,6 +1132,8 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
       if (/Độc\s*lập\s*-\s*Tự\s*do/i.test(l)) continue;
       if (/^Số\s*:/i.test(l)) continue;
       if (/ngày\s*\d+\s*tháng/i.test(l)) continue;
+      if (/^(căn cứ|nhằm|về việc|v\/v|kính gửi|theo|thực hiện|xét|quy định|điều|khoản|chương)/i.test(l)) continue;
+      if (l.length > 55) continue;
       headerLines.push(l);
     }
 
@@ -1459,12 +1492,42 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     const cleanSubject = (state.trichYeu || 'Van_ban_hanh_chinh_ND30').trim().replace(/[^a-zA-Z0-9\u00C0-\u024F\u1EA0-\u1EF9]/g, '_').substring(0, 50);
     document.title = cleanSubject;
 
-    // Đảm bảo cập nhật tỷ lệ cột 35% / 65% trước khi in
+    // Đảm bảo tỷ lệ cột 38% / 60% và chống tuyệt đối co vỡ cột khi in
+    const headerRow = document.getElementById('docHeaderRow');
     const leftCol = document.getElementById('docHeaderLeft');
     const rightCol = document.getElementById('docHeaderRight');
+    if (headerRow) {
+      headerRow.style.setProperty('display', 'flex', 'important');
+      headerRow.style.setProperty('flex-direction', 'row', 'important');
+      headerRow.style.setProperty('flex-wrap', 'nowrap', 'important');
+      headerRow.style.setProperty('justify-content', 'space-between', 'important');
+      headerRow.style.setProperty('align-items', 'flex-start', 'important');
+      headerRow.style.setProperty('width', '100%', 'important');
+    }
     if (leftCol && rightCol) {
-      leftCol.style.width = '35%';
-      rightCol.style.width = '65%';
+      leftCol.style.setProperty('width', '38%', 'important');
+      leftCol.style.setProperty('max-width', '38%', 'important');
+      leftCol.style.setProperty('flex', '0 0 38%', 'important');
+      rightCol.style.setProperty('width', '60%', 'important');
+      rightCol.style.setProperty('max-width', '60%', 'important');
+      rightCol.style.setProperty('flex', '0 0 60%', 'important');
+    }
+
+    const footerRow = document.getElementById('docFooterRow');
+    const recCol = document.getElementById('docRecipientsCol');
+    const sigCol = document.getElementById('docSignatureContainer');
+    if (footerRow) {
+      footerRow.style.setProperty('display', 'flex', 'important');
+      footerRow.style.setProperty('flex-direction', 'row', 'important');
+      footerRow.style.setProperty('flex-wrap', 'nowrap', 'important');
+      footerRow.style.setProperty('justify-content', 'space-between', 'important');
+      footerRow.style.setProperty('width', '100%', 'important');
+    }
+    if (recCol && sigCol) {
+      recCol.style.setProperty('width', '45%', 'important');
+      recCol.style.setProperty('max-width', '45%', 'important');
+      sigCol.style.setProperty('width', '52%', 'important');
+      sigCol.style.setProperty('max-width', '52%', 'important');
     }
 
     // Kích hoạt hộp thoại in hệ thống
@@ -1721,16 +1784,28 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     try {
       const saved = localStorage.getItem('nb_administrative_doc_draft');
       if (saved) {
-        // Tự động xóa vĩnh viễn nếu bản lưu cũ còn dính bất kỳ dấu vết nào của Lộc Nam / đồ đồng
+        // Tự động xóa vĩnh viễn nếu bản lưu cũ còn dính bất kỳ dấu vết nào của Lộc Nam / đồ đồng hoặc câu văn bản dính vào cơ quan
         const rawLower = saved.toLowerCase();
-        if (rawLower.includes('lộc nam') || rawLower.includes('loc nam') || rawLower.includes('đồ đồng') || rawLower.includes('do dong') || rawLower.includes('"ln"')) {
+        if (
+          rawLower.includes('lộc nam') || rawLower.includes('loc nam') || rawLower.includes('đồ đồng') || rawLower.includes('do dong') || rawLower.includes('"ln"') ||
+          rawLower.includes('căn cứ quy chế') || rawLower.includes('nhằm chủ động thực hiện') || rawLower.includes('khẩn trương rà soát')
+        ) {
           localStorage.removeItem('nb_administrative_doc_draft');
           return;
         }
 
         const parsed = JSON.parse(saved);
+        if (parsed.coQuanBanHanh && (parsed.coQuanBanHanh.length > 50 || parsed.coQuanBanHanh.toLowerCase().startsWith('căn cứ') || parsed.coQuanBanHanh.toLowerCase().startsWith('nhằm'))) {
+          localStorage.removeItem('nb_administrative_doc_draft');
+          return;
+        }
+        if (parsed.coQuanChuQuan && (parsed.coQuanChuQuan.length > 50 || parsed.coQuanChuQuan.toLowerCase().startsWith('căn cứ') || parsed.coQuanChuQuan.toLowerCase().startsWith('nhằm'))) {
+          localStorage.removeItem('nb_administrative_doc_draft');
+          return;
+        }
+
         if (parsed.maDonVi === 'LN') {
-          parsed.maDonVi = 'SNV';
+          parsed.maDonVi = '';
         }
         if (!parsed.headerRatio || parsed.headerRatio > 38) {
           parsed.headerRatio = 35;
@@ -1748,6 +1823,29 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     } catch(e) {
       console.warn('Cannot parse draft', e);
     }
+  }
+
+  function resetToEmptyDraft() {
+    state.coQuanChuQuan = "";
+    state.coQuanBanHanh = "";
+    state.maDonVi = "";
+    state.isLienTich = false;
+    state.secondaryUnits = [];
+    state.diaDanh = "Ninh Bình";
+    state.ngayBanHanh = new Date().toISOString().split('T')[0];
+    state.soVanBan = "";
+    state.soKyHieu = "";
+    state.recipients = [];
+    state.chucVu = "";
+    state.hoTen = "";
+    state.trichYeu = "";
+    state.noiDung = "";
+    try {
+      localStorage.removeItem('nb_administrative_doc_draft');
+    } catch(e) {}
+    renderFormControls();
+    renderSecondaryUnits();
+    updateLivePreview();
   }
 
   function togglePreviewPane() {
@@ -1782,6 +1880,7 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     quickAddSuggestion: quickAddSuggestion,
     applyPresetTemplate: applyPresetTemplate,
     applyPresetFullContent: applyPresetFullContent,
+    resetToEmptyDraft: resetToEmptyDraft,
     generateAiDraft: generateAiDraft,
     refineAi: refineAi,
     printA4: printA4,

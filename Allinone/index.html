@@ -3781,40 +3781,31 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
 
 
-    /* 4. Đầu trang: Căn chỉnh tỷ lệ 35% / 65% giữ Quốc hiệu luôn nằm trên 1 dòng */
-
+    /* 4. Đầu trang: Căn chỉnh tỷ lệ 38% / 60% giữ Quốc hiệu luôn nằm trên 1 dòng */
     #docHeaderRow {
-
       display: flex !important;
-
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
       justify-content: space-between !important;
-
       align-items: flex-start !important;
-
       width: 100% !important;
-
       margin-bottom: 20pt !important;
-
     }
-
     #docHeaderLeft {
-
-      width: 35% !important;
-
+      width: 38% !important;
+      max-width: 38% !important;
+      flex: 0 0 38% !important;
       text-align: center !important;
-
       padding-right: 4px !important;
-
+      box-sizing: border-box !important;
     }
-
     #docHeaderRight {
-
-      width: 65% !important;
-
+      width: 60% !important;
+      max-width: 60% !important;
+      flex: 0 0 60% !important;
       text-align: center !important;
-
       padding-left: 4px !important;
-
+      box-sizing: border-box !important;
     }
 
     .nation-name,
@@ -3961,12 +3952,33 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     }
 
-    .footer-signature {
-
-      text-align: center !important;
-
+        #docFooterRow {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      margin-top: 24pt !important;
       page-break-inside: avoid !important;
-
+    }
+    #docRecipientsCol {
+      width: 45% !important;
+      max-width: 45% !important;
+      flex: 0 0 45% !important;
+      text-align: left !important;
+      box-sizing: border-box !important;
+    }
+    #docSignatureContainer {
+      width: 52% !important;
+      max-width: 52% !important;
+      flex: 0 0 52% !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    .footer-signature {
+      text-align: center !important;
+      page-break-inside: avoid !important;
     }
 
   }
@@ -8959,23 +8971,23 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <!-- Tờ Giấy Trắng A4 Rộng Rãi Chuẩn Thể Thức NĐ 30/2020/NĐ-CP -->
         <div class="vb-a4-sheet" id="a4PaperDoc">
           <!-- Phần Đầu Trang (Header Table 2 Cột) -->
-          <div id="docHeaderRow" class="document-header" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+          <div id="docHeaderRow" class="document-header" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; align-items:flex-start; margin-bottom:20px; width:100%;">
             <!-- Cột Cơ quan ban hành (Trái - Căn giữa nội bộ cột) -->
-            <div id="docHeaderLeft" class="header-left org-header-left" style="width:35%; text-align:center; padding-right:6px;">
+            <div id="docHeaderLeft" class="header-left org-header-left" style="width:38%; max-width:38%; flex:0 0 38%; text-align:center; padding-right:6px; box-sizing:border-box;">
               <div id="docPrevCoQuanChuQuan" class="org-superior" style="font-size:12pt; text-transform:uppercase; color:#000; font-weight:normal; line-height:1.25; display:none;">
                 [CƠ QUAN CHỦ QUẢN]
               </div>
               <div id="docPrevCoQuanBanHanh" class="org-name" style="font-size:13pt; text-transform:uppercase; color:#000; font-weight:bold; line-height:1.25; margin-top:2px;">
-                SỞ NỘI VỤ
+                [CƠ QUAN BAN HÀNH]
               </div>
               <div id="docLeftDivider" class="org-divider" style="width:40%; height:1px; background:#000; margin:4px auto 5px;"></div>
               <div id="docPrevSoKyHieu" class="doc-number" style="font-size:12pt; color:#000; font-weight:normal; line-height:1.25;">
-                Số: 01/TB-SNV
+                Số: &hellip;/TB-&hellip;
               </div>
             </div>
 
             <!-- Cột Quốc hiệu & Tiêu ngữ (Phải - Căn giữa nội bộ cột) -->
-            <div id="docHeaderRight" class="header-right nation-header-right" style="width:65%; text-align:center; padding-left:6px;">
+            <div id="docHeaderRight" class="header-right nation-header-right" style="width:60%; max-width:60%; flex:0 0 60%; text-align:center; padding-left:6px; box-sizing:border-box;">
               <div class="nation-name" style="font-size:12pt; text-transform:uppercase; color:#000; font-weight:bold; line-height:1.25; white-space:nowrap; letter-spacing:-0.2px;">
                 CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
               </div>
@@ -8984,7 +8996,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               </div>
               <div id="docRightDivider" class="motto-divider" style="width:55%; height:1px; background:#000; margin:4px auto 5px;"></div>
               <div id="docPrevDiaDanhNgay" class="doc-date" style="font-size:13pt; font-style:italic; color:#000; line-height:1.25; margin-top:5px;">
-                Ninh Bình, ngày 15 tháng 09 năm 2026
+                Ninh Bình, ngày ... tháng ... năm ...
               </div>
             </div>
           </div>
@@ -8995,45 +9007,35 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               THÔNG BÁO
             </div>
             <div id="docPrevTrichYeu" class="doc-subject" style="font-size:13pt; font-style:italic; font-weight:bold; color:#000; margin-top:4px; line-height:1.35; text-decoration:underline;">
-              Về việc tổ chức hội nghị tổng kết công tác năm 2026
+              [Trích yếu nội dung văn bản]
             </div>
           </div>
 
           <!-- Nội Dung Văn Bản (Căn đều 2 bên, thụt đầu dòng 1cm, Times New Roman 13pt) -->
-          <div id="docPrevNoiDung" class="document-content document-body" contenteditable="true" spellcheck="false" style="font-family:'Times New Roman', Times, serif; font-size:13pt; line-height:1.5; text-align:justify; text-justify:inter-word; color:#000; outline:none; min-height:320px;">
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Căn cứ Nghị định số 30/2020/NĐ-CP ngày 05 tháng 3 năm 2020 của Chính phủ về công tác văn thư;</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Căn cứ Quy chế làm việc và kế hoạch hoạt động năm 2026 của đơn vị;</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Nhằm chủ động thực hiện tốt nhiệm vụ chuyên môn và nâng cao chất lượng công việc;</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Đơn vị thông báo đến toàn thể các bộ phận, phòng ban chức năng nội dung như sau:</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;"><strong>1. Về mục tiêu và nhiệm vụ chung:</strong></p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Khẩn trương rà soát các nhiệm vụ được giao, đề cao trách nhiệm trong từng khâu thực hiện công việc.</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;"><strong>2. Về các biện pháp triển khai cụ thể:</strong></p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">- Đẩy mạnh việc ứng dụng công nghệ số, quản lý hồ sơ và xử lý công việc trên môi trường điện tử;</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">- Kiểm tra nghiêm ngặt chất lượng và tiến độ công việc trước khi hoàn thành và bàn giao.</p>
-            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify;">Thông báo này có hiệu lực kể từ ngày ký. Yêu cầu các bộ phận và cá nhân nghiêm túc thực hiện./.</p>
+          <div id="docPrevNoiDung" class="document-content document-body" contenteditable="true" spellcheck="false" style="font-family:'Times New Roman', Times, serif; font-size:13pt; line-height:1.5; text-align:justify; text-justify:inter-word; color:#000; outline:none; min-height:220px;">
+            <p style="text-indent:1cm; margin-bottom:6pt; line-height:1.5; text-align:justify; color:#64748b; font-style:italic;">[Nhập nội dung văn bản tại ô soạn thảo bước 2, chọn mẫu có sẵn từ danh mục hoặc bấm &ldquo;Dán &amp; Bóc tách toàn bộ văn bản thô&rdquo; để tự động căn chỉnh chuẩn Nghị định 30]</p>
           </div>
 
           <!-- Chân Trang: Nơi Nhận & Chữ Ký (Hỗ trợ ký liên tịch nhiều đơn vị) -->
-          <div id="docFooterRow" style="display:flex; justify-content:space-between; align-items:flex-start; margin-top:36px;">
+          <div id="docFooterRow" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; align-items:flex-start; margin-top:36px; width:100%;">
             <!-- Nơi nhận (Trái) -->
-            <div id="docRecipientsCol" style="width:48%; text-align:left;">
+            <div id="docRecipientsCol" style="width:45%; max-width:45%; flex:0 0 45%; text-align:left; box-sizing:border-box;">
               <div class="footer-recipients-title" style="font-size:11.5pt; font-weight:bold; font-style:italic; margin-bottom:4px;">Nơi nhận:</div>
               <div id="docPrevNoiNhanList" class="footer-recipients" style="font-size:11pt; line-height:1.35; color:#000;">
-                <div>- Thủ trưởng đơn vị;</div>
-                <div>- Các phòng ban chức năng;</div>
+                <div>- Như Điều...;</div>
                 <div>- Lưu: VT.</div>
               </div>
             </div>
 
             <!-- Chữ ký & Họ tên (Phải) -->
-            <div style="width:48%;" class="document-signature footer-signature" id="docSignatureContainer">
+            <div style="width:52%; max-width:52%; flex:0 0 52%; text-align:center; box-sizing:border-box;" class="document-signature footer-signature" id="docSignatureContainer">
               <div style="text-align:center;">
                 <div id="docPrevChucVu" class="signature-title footer-sign-role" style="font-size:13pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25;">
-                  GIÁM ĐỐC
+                  [CHỨC VỤ]
                 </div>
                 <div style="height:65px;"></div>
                 <div id="docPrevHoTen" class="signature-name footer-sign-name" style="font-size:13pt; font-weight:bold; color:#000; line-height:1.25;">
-                  Nguyễn Văn A
+                  [Họ và tên]
                 </div>
               </div>
             </div>
@@ -9078,7 +9080,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <label style="font-size:0.78rem; font-weight:700; color:#334155; text-transform:uppercase; display:block; margin-bottom:6px;">
               CƠ QUAN BAN HÀNH <span style="color:#1D4ED8;">*</span>
             </label>
-            <input type="text" id="vbCoQuanBanHanh" class="form-input" placeholder="VD: Sở Nội vụ" value="SỞ NỘI VỤ" style="font-size:0.92rem; padding:9px 12px;">
+            <input type="text" id="vbCoQuanBanHanh" class="form-input" placeholder="VD: Sở Nội vụ" value="" style="font-size:0.92rem; padding:9px 12px;">
           </div>
 
           <!-- Tùy chọn nâng cao: Cơ quan chủ quản & Mã đơn vị (nhỏ gọn) -->
@@ -9093,7 +9095,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               <label style="font-size:0.75rem; font-weight:700; color:#475569; text-transform:uppercase; margin-bottom:4px; display:block;">
                 MÃ ĐƠN VỊ
               </label>
-              <input type="text" id="vbMaDonVi" class="form-input" placeholder="VD: SNV" value="SNV" style="font-size:0.86rem; padding:7px 10px;">
+              <input type="text" id="vbMaDonVi" class="form-input" placeholder="VD: SNV" value="" style="font-size:0.86rem; padding:7px 10px;">
             </div>
           </div>
 
@@ -9101,6 +9103,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div style="display:flex; gap:10px; margin-bottom:14px; align-items:center;">
             <div style="flex:1;">
               <select id="vbAiTemplateSelect" class="form-input" style="font-size:0.82rem; padding:6px 10px; height:34px; border-color:#CBD5E1;">
+                <option value="" selected>-- Mẫu: Soạn văn bản mới (trống) --</option>
                 <option value="default">★ Mẫu: Thông báo triển khai công tác nội bộ</option>
                 <option value="bc_tongket">Báo cáo tổng kết công tác</option>
                 <option value="tb_hop">Thông báo phân công / lịch họp</option>

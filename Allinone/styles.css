@@ -799,20 +799,28 @@ body.vanban-page-active footer {
   /* 4. Đầu trang: Căn chỉnh tỷ lệ 35% / 65% giữ Quốc hiệu luôn nằm trên 1 dòng */
   #docHeaderRow {
     display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     justify-content: space-between !important;
     align-items: flex-start !important;
     width: 100% !important;
     margin-bottom: 20pt !important;
   }
   #docHeaderLeft {
-    width: 35% !important;
+    width: 38% !important;
+    max-width: 38% !important;
+    flex: 0 0 38% !important;
     text-align: center !important;
     padding-right: 4px !important;
+    box-sizing: border-box !important;
   }
   #docHeaderRight {
-    width: 65% !important;
+    width: 60% !important;
+    max-width: 60% !important;
+    flex: 0 0 60% !important;
     text-align: center !important;
     padding-left: 4px !important;
+    box-sizing: border-box !important;
   }
   .nation-name,
   #docHeaderRight .nation-name {
@@ -877,6 +885,30 @@ body.vanban-page-active footer {
   }
 
   /* 7. Chân trang: Nơi nhận và chữ ký */
+  #docFooterRow {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: 24pt !important;
+    page-break-inside: avoid !important;
+  }
+  #docRecipientsCol {
+    width: 45% !important;
+    max-width: 45% !important;
+    flex: 0 0 45% !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+  #docSignatureContainer {
+    width: 52% !important;
+    max-width: 52% !important;
+    flex: 0 0 52% !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
   .footer-recipients-title {
     font-size: 11.5pt !important;
     font-weight: bold !important;
@@ -2088,40 +2120,18 @@ button, a, input, select, textarea {
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .vb-preview-pane {
     padding: 10px 4px !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
   .vb-a4-sheet {
-    padding: 18px 12px !important;
+    padding: 18px 14px !important;
     min-height: auto !important;
+    min-width: 620px !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-  }
-  #docHeaderRow {
-    flex-direction: column !important;
-    gap: 12px !important;
-  }
-  #docHeaderLeft, #docHeaderRight {
-    width: 100% !important;
-    padding: 0 !important;
-    text-align: center !important;
-  }
-  .nation-name, .motto {
-    white-space: normal !important;
-    font-size: 11.5pt !important;
-  }
-  .doc-type-title {
-    font-size: 13.5pt !important;
-  }
-  #docFooterRow {
-    flex-direction: column !important;
-    gap: 20px !important;
-  }
-  #docRecipientsCol, #docSignatureContainer {
-    width: 100% !important;
   }
 }
 
