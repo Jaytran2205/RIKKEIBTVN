@@ -11723,120 +11723,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div><b>ĐẠI DIỆN BÊN B</b><br><br><br>(Ký tên)</div>
         </div>
         <script>window.print();<\/script>
-      
-<!-- FLOATING COMPARISON DRAWER (SO SÁNH GIÁ 2-3 CƠ SỞ / ĐẶC SẢN) -->
-<div id="compareFloatingBar">
-  <div style="display:flex; align-items:center; gap:8px;">
-    <span>⚖️</span>
-    <span style="font-weight:700;">Đang chọn <b id="compareCountLabel" style="color:var(--gold);">0</b> cơ sở để so sánh</span>
-  </div>
-  <div style="display:flex; gap:8px;">
-    <button type="button" class="btn btn-outline btn-sm" onclick="clearCompareSelection()" style="color:#fff; border-color:rgba(255,255,255,0.4); background:transparent;">Hủy chọn</button>
-    <button type="button" class="btn btn-primary btn-sm" onclick="openCompareModal()" style="background:#0E7C74;">Xem Bảng So Sánh →</button>
-  </div>
-</div>
-
-<!-- COMPARE MODAL -->
-<div id="compareModalOverlay" class="modal-overlay" onclick="if(event.target===this)closeCompareModal()">
-  <div class="modal-box" style="max-width:920px;">
-    <div class="modal-header">
-      <h3>⚖️ Bảng So Sánh Chi Tiết &amp; Đối Chiếu Giá</h3>
-      <span class="modal-close" onclick="closeCompareModal()">&times;</span>
-    </div>
-    <div class="modal-body" id="compareModalBody">
-      <!-- Populated via JS -->
-    </div>
-  </div>
-</div>
-
-<!-- FLOATING FEEDBACK FAB & MODAL -->
-<div id="feedbackFabContainer" class="feedback-fab-container">
-  <button type="button" class="feedback-fab" onclick="openFeedbackModal()" title="Đóng góp ý kiến xây dựng Ninh Bình Digital">
-    <span class="fab-icon">💬</span>
-    <span class="fab-label">Đóng góp ý kiến</span>
-  </button>
-</div>
-
-<!-- FEEDBACK MODAL -->
-<div id="feedbackModalOverlay" class="modal-overlay" onclick="if(event.target===this)closeFeedbackModal()">
-  <div class="modal-box" style="max-width:540px;">
-    <div class="modal-header">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <span style="font-size:1.4rem;">💬</span>
-        <div>
-          <h3 style="margin:0;">Đóng Góp Ý Kiến &amp; Phản Hồi</h3>
-          <div style="font-size:0.75rem; color:#BCCBC5;">Chung tay xây dựng Ninh Bình Digital ngày càng hoàn thiện</div>
-        </div>
-      </div>
-      <span class="modal-close" onclick="closeFeedbackModal()">&times;</span>
-    </div>
-    <div class="modal-body">
-      <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
-        <div style="margin-bottom:14px; text-align:center;">
-          <label style="font-size:0.85rem; font-weight:700; color:var(--ink); display:block; margin-bottom:6px;">
-            Mức độ hài lòng của bạn về nền tảng:
-          </label>
-          <div class="star-rating-select" id="feedbackStarRating" style="justify-content:center;">
-            <span data-star="1" onclick="selectFeedbackStar(1)">★</span>
-            <span data-star="2" onclick="selectFeedbackStar(2)">★</span>
-            <span data-star="3" onclick="selectFeedbackStar(3)">★</span>
-            <span data-star="4" onclick="selectFeedbackStar(4)">★</span>
-            <span data-star="5" class="active" onclick="selectFeedbackStar(5)">★</span>
-          </div>
-          <input type="hidden" id="feedbackStarValue" value="5">
-        </div>
-
-        <div class="form-group">
-          <label>Chủ đề đóng góp *</label>
-          <select id="fbTopic" required>
-            <option value="💡 Đề xuất tính năng / công cụ mới">💡 Đề xuất tính năng / công cụ mới</option>
-            <option value="🏪 Đề xuất quán ăn / homestay / điểm du lịch mới">🏪 Đề xuất quán ăn / homestay / điểm du lịch mới</option>
-            <option value="🛒 Góp ý về mua sắm đặc sản OCOP">🛒 Góp ý về mua sắm đặc sản OCOP</option>
-            <option value="🐛 Báo lỗi giao diện / dữ liệu">🐛 Báo lỗi giao diện / dữ liệu</option>
-            <option value="⭐ Đánh giá chung & đóng góp khác">⭐ Đánh giá chung &amp; đóng góp khác</option>
-          </select>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0;">
-          <div class="form-group">
-            <label>Họ và tên của bạn</label>
-            <input type="text" id="fbName" placeholder="Nguyễn Văn A">
-          </div>
-          <div class="form-group">
-            <label>Số điện thoại / Zalo</label>
-            <input type="text" id="fbPhone" placeholder="0912xxxxxx (để ban quản trị liên hệ)">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Nội dung ý kiến chi tiết *</label>
-          <textarea id="fbContent" rows="4" placeholder="Chia sẻ ý kiến, mong muốn hoặc đề xuất của bạn để chúng tôi phát triển thêm các tính năng phục vụ cộng đồng Ninh Bình tốt hơn..." required></textarea>
-        </div>
-
-        <div style="margin-top:18px; display:flex; justify-content:flex-end; gap:10px;">
-          <button type="button" class="btn btn-outline" onclick="closeFeedbackModal()">Hủy bỏ</button>
-          <button type="submit" class="btn btn-primary">Gửi Ý Kiến Ngay 🚀</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-  <!-- FLOATING QUICK CONTACT WIDGET -->
-  <div id="floatingContactWidget" style="position:fixed; bottom:84px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px;">
-    <!-- Nút Gọi Hotline -->
-    <a href="tel:0866520567" id="floatHotlineBtn" title="Gọi Hotline: 0866520567" style="width:48px; height:48px; border-radius:50%; background:#10B981; color:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 4px 14px rgba(16,185,129,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    </a>
-
-    <!-- Nút Chat Zalo -->
-    <a href="https://zalo.me/0866520567" id="floatZaloBtn" target="_blank" rel="noopener noreferrer" title="Chat Zalo: 0866520567" style="width:48px; height:48px; border-radius:50%; background:#0068FF; color:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-weight:800; font-size:0.85rem; box-shadow:0 4px 14px rgba(0,104,255,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-      Zalo
-    </a>
-  </div>
-
-</body></html>
+      </body></html>
     `);
     w.document.close();
   }
@@ -16306,9 +16193,29 @@ Quản trị tài chính số — Ninh Bình Digital`;
   // ----------------------------------------------------
   // USER FEEDBACK MODULE (ĐÓNG GÓP Ý KIẾN)
   // ----------------------------------------------------
-  function openFeedbackModal() {
+  function openFeedbackModal(type) {
     const modal = document.getElementById('feedbackModalOverlay');
-    if (modal) modal.classList.add('open');
+    if (modal) {
+      modal.classList.add('open');
+      const topicSelect = document.getElementById('fbTopic');
+      if (topicSelect && type) {
+        if (type === 'feature') {
+          topicSelect.value = '💡 Đề xuất tính năng / công cụ mới';
+        } else if (type === 'general') {
+          topicSelect.value = '⭐ Đánh giá chung & đóng góp khác';
+        } else if (type === 'bug') {
+          topicSelect.value = '🐛 Báo lỗi giao diện / dữ liệu';
+        } else if (type === 'place') {
+          topicSelect.value = '🏪 Đề xuất quán ăn / homestay / điểm du lịch mới';
+        } else if (type === 'shop') {
+          topicSelect.value = '🛒 Góp ý về mua sắm đặc sản OCOP';
+        }
+      }
+      setTimeout(() => {
+        const contentInput = document.getElementById('fbContent');
+        if (contentInput) contentInput.focus();
+      }, 100);
+    }
   }
 
   function closeFeedbackModal() {
@@ -16317,7 +16224,8 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function selectFeedbackStar(rating) {
-    document.getElementById('feedbackStarValue').value = rating;
+    const starInput = document.getElementById('feedbackStarValue');
+    if (starInput) starInput.value = rating;
     document.querySelectorAll('#feedbackStarRating span').forEach(s => {
       const val = parseInt(s.getAttribute('data-star'), 10);
       s.classList.toggle('active', val <= rating);
@@ -16326,11 +16234,11 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
   function handleFeedbackSubmit(e) {
     e.preventDefault();
-    const topic = document.getElementById('fbTopic').value;
-    const name = document.getElementById('fbName').value.trim() || 'Người dùng ẩn danh';
-    const phone = document.getElementById('fbPhone').value.trim();
-    const content = document.getElementById('fbContent').value.trim();
-    const rating = parseInt(document.getElementById('feedbackStarValue').value, 10) || 5;
+    const topic = document.getElementById('fbTopic')?.value || '💡 Đề xuất tính năng / công cụ mới';
+    const name = document.getElementById('fbName')?.value.trim() || 'Người dùng ẩn danh';
+    const phone = document.getElementById('fbPhone')?.value.trim() || '';
+    const content = document.getElementById('fbContent')?.value.trim() || '';
+    const rating = parseInt(document.getElementById('feedbackStarValue')?.value, 10) || 5;
 
     const newFeedback = {
       id: Date.now(),
@@ -16342,28 +16250,42 @@ Quản trị tài chính số — Ninh Bình Digital`;
       rating
     };
 
-    const feedbacks = JSON.parse(localStorage.getItem('nb_user_feedbacks') || '[]');
-    feedbacks.unshift(newFeedback);
-    localStorage.setItem('nb_user_feedbacks', JSON.stringify(feedbacks));
+    try {
+      const feedbacks = JSON.parse(localStorage.getItem('nb_user_feedbacks') || '[]');
+      feedbacks.unshift(newFeedback);
+      localStorage.setItem('nb_user_feedbacks', JSON.stringify(feedbacks));
+    } catch(err) {}
 
     if (typeof dbCreateFeedback === 'function') {
       dbCreateFeedback(newFeedback).catch(err => console.warn('[Supabase Feedback Sync]', err));
     }
 
     closeFeedbackModal();
-    document.getElementById('feedbackForm').reset();
+    const form = document.getElementById('feedbackForm');
+    if (form) form.reset();
     selectFeedbackStar(5);
 
-    showAppAlert({
-      title: 'Cảm Ơn Đóng Góp Của Bạn!',
-      message: `Ý kiến của bạn về <b>"${topic}"</b> đã được gửi thành công đến ban quản trị Ninh Bình Digital.<br><br>Chúng tôi sẽ lắng nghe và hoàn thiện hệ thống phục vụ cộng đồng ngày một tốt hơn!`,
-      icon: '🎉',
-      btnText: 'Tuyệt vời'
-    });
+    if (window.showAppAlert) {
+      window.showAppAlert({
+        title: 'Cảm Ơn Đóng Góp Của Bạn!',
+        message: `Ý kiến của bạn về <b>"${topic}"</b> đã được gửi thành công đến ban quản trị Ninh Bình Digital.<br><br>Chúng tôi sẽ lắng nghe và hoàn thiện hệ thống phục vụ cộng đồng ngày một tốt hơn!`,
+        icon: '🎉',
+        btnText: 'Tuyệt vời'
+      });
+    } else {
+      alert(`Cảm ơn đóng góp của bạn về "${topic}"!`);
+    }
   }
 
+  window.openFeedbackModal = openFeedbackModal;
+  window.closeFeedbackModal = closeFeedbackModal;
+  window.selectFeedbackStar = selectFeedbackStar;
+  window.handleFeedbackSubmit = handleFeedbackSubmit;
+  window.openCompareModal = openCompareModal;
+  window.closeCompareModal = closeCompareModal;
+  window.clearCompareSelection = clearCompareSelection;
 
-
+  // ----------------------------------------------------
   // LEAD CAPTURE HANDLER (FORM ĐĂNG KÝ TƯ VẤN HỌC AI & WEBSITE)
   async function handleLeadCaptureSubmit(e) {
     e.preventDefault();
@@ -17066,5 +16988,118 @@ Quản trị tài chính số — Ninh Bình Digital`;
 </div>
 </div>
 </div>
+
+<!-- FLOATING COMPARISON DRAWER (SO SÁNH GIÁ 2-3 CƠ SỞ / ĐẶC SẢN) -->
+<div id="compareFloatingBar">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span>⚖️</span>
+    <span style="font-weight:700;">Đang chọn <b id="compareCountLabel" style="color:var(--gold);">0</b> cơ sở để so sánh</span>
+  </div>
+  <div style="display:flex; gap:8px;">
+    <button type="button" class="btn btn-outline btn-sm" onclick="clearCompareSelection()" style="color:#fff; border-color:rgba(255,255,255,0.4); background:transparent;">Hủy chọn</button>
+    <button type="button" class="btn btn-primary btn-sm" onclick="openCompareModal()" style="background:#0E7C74;">Xem Bảng So Sánh →</button>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div id="compareModalOverlay" class="modal-overlay" style="z-index:999999;" onclick="if(event.target===this)closeCompareModal()">
+  <div class="modal-box" style="max-width:920px;">
+    <div class="modal-header">
+      <h3>⚖️ Bảng So Sánh Chi Tiết &amp; Đối Chiếu Giá</h3>
+      <span class="modal-close" onclick="closeCompareModal()">&times;</span>
+    </div>
+    <div class="modal-body" id="compareModalBody">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING FEEDBACK FAB & MODAL -->
+<div id="feedbackFabContainer" class="feedback-fab-container">
+  <button type="button" class="feedback-fab" onclick="openFeedbackModal()" title="Đóng góp ý kiến xây dựng Ninh Bình Digital">
+    <span class="fab-icon">💬</span>
+    <span class="fab-label">Đóng góp ý kiến</span>
+  </button>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div id="feedbackModalOverlay" class="modal-overlay" style="z-index:999999;" onclick="if(event.target===this)closeFeedbackModal()">
+  <div class="modal-box" style="max-width:540px;">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:1.4rem;">💬</span>
+        <div>
+          <h3 style="margin:0;">Đóng Góp Ý Kiến &amp; Phản Hồi</h3>
+          <div style="font-size:0.75rem; color:#BCCBC5;">Chung tay xây dựng Ninh Bình Digital ngày càng hoàn thiện</div>
+        </div>
+      </div>
+      <span class="modal-close" onclick="closeFeedbackModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+        <div style="margin-bottom:14px; text-align:center;">
+          <label style="font-size:0.85rem; font-weight:700; color:var(--ink); display:block; margin-bottom:6px;">
+            Mức độ hài lòng của bạn về nền tảng:
+          </label>
+          <div class="star-rating-select" id="feedbackStarRating" style="justify-content:center;">
+            <span data-star="1" onclick="selectFeedbackStar(1)">★</span>
+            <span data-star="2" onclick="selectFeedbackStar(2)">★</span>
+            <span data-star="3" onclick="selectFeedbackStar(3)">★</span>
+            <span data-star="4" onclick="selectFeedbackStar(4)">★</span>
+            <span data-star="5" class="active" onclick="selectFeedbackStar(5)">★</span>
+          </div>
+          <input type="hidden" id="feedbackStarValue" value="5">
+        </div>
+
+        <div class="form-group">
+          <label>Chủ đề đóng góp *</label>
+          <select id="fbTopic" required>
+            <option value="💡 Đề xuất tính năng / công cụ mới">💡 Đề xuất tính năng / công cụ mới</option>
+            <option value="🏪 Đề xuất quán ăn / homestay / điểm du lịch mới">🏪 Đề xuất quán ăn / homestay / điểm du lịch mới</option>
+            <option value="🛒 Góp ý về mua sắm đặc sản OCOP">🛒 Góp ý về mua sắm đặc sản OCOP</option>
+            <option value="🐛 Báo lỗi giao diện / dữ liệu">🐛 Báo lỗi giao diện / dữ liệu</option>
+            <option value="⭐ Đánh giá chung & đóng góp khác">⭐ Đánh giá chung &amp; đóng góp khác</option>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0;">
+          <div class="form-group">
+            <label>Họ và tên của bạn</label>
+            <input type="text" id="fbName" placeholder="Nguyễn Văn A">
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại / Zalo</label>
+            <input type="text" id="fbPhone" placeholder="0912xxxxxx (để ban quản trị liên hệ)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nội dung ý kiến chi tiết *</label>
+          <textarea id="fbContent" rows="4" placeholder="Chia sẻ ý kiến, mong muốn hoặc đề xuất của bạn để chúng tôi phát triển thêm các tính năng phục vụ cộng đồng Ninh Bình tốt hơn..." required></textarea>
+        </div>
+
+        <div style="margin-top:18px; display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn btn-outline" onclick="closeFeedbackModal()">Hủy bỏ</button>
+          <button type="submit" class="btn btn-primary">Gửi Ý Kiến Ngay 🚀</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <!-- FLOATING QUICK CONTACT WIDGET -->
+  <div id="floatingContactWidget" style="position:fixed; bottom:84px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px;">
+    <!-- Nút Gọi Hotline -->
+    <a href="tel:0866520567" id="floatHotlineBtn" title="Gọi Hotline: 0866520567" style="width:48px; height:48px; border-radius:50%; background:#10B981; color:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 4px 14px rgba(16,185,129,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+
+    <!-- Nút Chat Zalo -->
+    <a href="https://zalo.me/0866520567" id="floatZaloBtn" target="_blank" rel="noopener noreferrer" title="Chat Zalo: 0866520567" style="width:48px; height:48px; border-radius:50%; background:#0068FF; color:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; font-weight:800; font-size:0.85rem; box-shadow:0 4px 14px rgba(0,104,255,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+      Zalo
+    </a>
+  </div>
+
 </body>
 </html>
