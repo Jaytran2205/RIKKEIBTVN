@@ -77,12 +77,6 @@ export default function BookingTravelPage() {
       {/* 1. Background Video Layer (Autoplay, Loop, Muted with smooth overlay) */}
       <BackgroundVideo isCinematicMode={isCinematicMode} />
 
-      {/* 2. Top Glassmorphic Navigation Bar */}
-      <Navbar
-        isCinematicMode={isCinematicMode}
-        onToggleCinematic={() => setIsCinematicMode(!isCinematicMode)}
-      />
-
       {/* Content Body */}
       <div
         className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
