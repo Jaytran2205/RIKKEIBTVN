@@ -409,7 +409,7 @@
 
 <link rel="stylesheet" href="color-variables.css?v=2026_v11_header">
 
-<link rel="stylesheet" href="styles.css?v=2026_homestay_apple_v5">
+<link rel="stylesheet" href="styles.css?v=2026_homestay_blur_v7">
 
 <script src="document-formatter.js?v=2026_v9"></script>
 
@@ -5368,25 +5368,29 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
      ======================================================== -->
 
-<div id="page-travel" class="page-view" style="padding-bottom: 60px;">
-  <div class="wrap" style="max-width: 1480px; margin: 0 auto; padding: 0 16px;">
+<div id="page-travel" class="page-view" style="position: relative; min-height: 100vh; padding-bottom: 80px;">
+  <!-- FULL BACKGROUND VIDEO LAYER (Runs behind everything and blurs as user scrolls up) -->
+  <div class="nb-global-video-bg-wrap" id="nbGlobalVideoBgWrap">
+    <video id="nbGlobalVideoBg" class="nb-global-video-bg" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80">
+      <source src="images/nb_scenic_bg.webm" type="video/webm">
+      <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Fog_covering_mountain_time_lapse.webm/Fog_covering_mountain_time_lapse.webm.480p.vp9.webm" type="video/webm">
+    </video>
+    <div class="nb-global-video-overlay" id="nbGlobalVideoOverlay"></div>
+  </div>
+
+  <div class="wrap" style="position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 20px 16px 60px;">
     
-    <!-- 1. SCENIC HERO BANNER WITH LOOP VIDEO BACKGROUND -->
+    <!-- 1. SCENIC HERO HEADER OVER VIDEO -->
     <div class="nb-hero-banner" id="nbHeroBanner">
-      <video class="nb-hero-video-bg" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-the-mountains-42732-large.mp4" type="video/mp4">
-      </video>
-      <div class="nb-hero-overlay"></div>
-      
       <div class="nb-hero-content">
         <div class="nb-hero-badge">
           <span>✨ Non Nước Ninh Bình 2026</span>
         </div>
-        <h1 class="nb-hero-title">Homestay &amp; khách sạn</h1>
+        <h1 class="nb-hero-title">Homestay &amp; Khách Sạn</h1>
         <p class="nb-hero-subtitle">
           Thư giãn thảnh thơi và thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian bình dị giữa núi non di sản Cố đô.
         </p>
-        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom: 24px;">
           <button type="button" class="nb-hero-btn" onclick="openNBCinematicVideo()">
             <span>Xem video toàn cảnh 4K ▶</span>
           </button>
@@ -5396,77 +5400,96 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </div>
       </div>
 
-      <!-- 2. FLOATING GLASSMORPHISM SEARCH BAR (APPLE LEVEL) -->
+      <!-- 2. REFINED FLOATING GLASSMORPHISM SEARCH BAR (APPLE SEGMENTED PILL) -->
       <div class="nb-glass-search-wrap" id="nbGlassSearchBar">
-        <div class="nb-search-bar-label">Homestay &amp; khách sạn</div>
         <div class="nb-glass-search">
-          <!-- Dropdown Type -->
-          <div class="nb-search-col">
-            <span style="font-size:1.1rem;">🔍</span>
-            <select id="nbRoomTypeSelect" class="nb-glass-select" onchange="filterNBPlaces()">
-              <option value="all">Homestay &amp; khách sạn ⌵</option>
-              <option value="homestay">Homestay sinh thái</option>
-              <option value="resort">Resort &amp; Spa nghỉ dưỡng</option>
-              <option value="hotel">Khách sạn trung tâm</option>
-            </select>
+          
+          <!-- Field 1: Location -->
+          <div class="nb-search-field nb-field-location">
+            <span class="nb-field-icon">📍</span>
+            <div class="nb-field-content">
+              <span class="nb-field-label">Điểm đến</span>
+              <input type="text" id="nbLocationInput" class="nb-field-input" autocomplete="off" placeholder="Tràng An, Tam Cốc, Hang Múa..." oninput="filterNBPlaces()">
+            </div>
           </div>
 
-          <!-- Quick Filters Pills -->
-          <div class="nb-search-pills-group">
-            <button type="button" class="nb-search-pill nb-search-pill-active" id="btnPillHomestay" onclick="toggleNBPill(this, 'homestay')">
-              Homestay
-            </button>
-            <button type="button" class="nb-search-pill" id="btnPillSelf" onclick="toggleNBPill(this, 'self')">
-              Tự túc
-            </button>
+          <div class="nb-search-divider"></div>
+
+          <!-- Field 2: Room Type -->
+          <div class="nb-search-field nb-field-type">
+            <span class="nb-field-icon">🏡</span>
+            <div class="nb-field-content">
+              <span class="nb-field-label">Loại phòng</span>
+              <select id="nbRoomTypeSelect" class="nb-field-input nb-glass-select" onchange="filterNBPlaces()">
+                <option value="all">Tất cả loại hình</option>
+                <option value="homestay">Homestay sinh thái</option>
+                <option value="resort">Resort &amp; Spa nghỉ dưỡng</option>
+                <option value="hotel">Khách sạn trung tâm</option>
+              </select>
+            </div>
           </div>
 
-          <!-- Location Search Box -->
-          <div class="nb-search-col nb-search-input-box">
-            <input type="text" id="nbLocationInput" placeholder="Địa điểm (Tràng An, Tam Cốc, Hang Múa...)" oninput="filterNBPlaces()">
+          <div class="nb-search-divider"></div>
+
+          <!-- Field 3: Budget -->
+          <div class="nb-search-field nb-field-budget">
+            <span class="nb-field-icon">💵</span>
+            <div class="nb-field-content">
+              <span class="nb-field-label">Mức giá</span>
+              <select id="nbBudgetSelect" class="nb-field-input nb-glass-select" onchange="filterNBPlaces()">
+                <option value="all">Thỏa ngân (Tất cả)</option>
+                <option value="under1">Dưới 1 triệu / đêm</option>
+                <option value="1to3">1 – 3 triệu / đêm</option>
+                <option value="above3">Trên 3 triệu / đêm</option>
+              </select>
+            </div>
           </div>
 
-          <!-- Budget Select -->
-          <div class="nb-search-col">
-            <select id="nbBudgetSelect" class="nb-glass-select" onchange="filterNBPlaces()">
-              <option value="all">1tr. Thỏa ngân ⌵</option>
-              <option value="under1">Dưới 1 triệu / đêm</option>
-              <option value="1to3">1 – 3 triệu / đêm</option>
-              <option value="above3">Trên 3 triệu / đêm</option>
-            </select>
+          <div class="nb-search-divider"></div>
+
+          <!-- Field 4: Guests -->
+          <div class="nb-search-field nb-field-guests">
+            <span class="nb-field-icon">👥</span>
+            <div class="nb-field-content">
+              <span class="nb-field-label">Số lượng khách</span>
+              <select id="nbGuestsSelect" class="nb-field-input nb-glass-select">
+                <option value="2">2 Khách (Cặp đôi)</option>
+                <option value="4">3 – 4 Khách (Gia đình)</option>
+                <option value="group">Đoàn thể (&gt; 5 khách)</option>
+              </select>
+            </div>
           </div>
 
-          <!-- Guests Select -->
-          <div class="nb-search-col">
-            <select id="nbGuestsSelect" class="nb-glass-select">
-              <option value="2">2 Khách (Cặp đôi)</option>
-              <option value="4">3-4 Khách (Gia đình)</option>
-              <option value="group">Đoàn thể (&gt; 5 khách)</option>
-            </select>
-          </div>
-
-          <!-- Submit Button -->
+          <!-- Search Button -->
           <button type="button" class="nb-search-submit-btn" onclick="filterNBPlaces()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             <span>Tìm kiếm</span>
           </button>
         </div>
 
-        <!-- 4 Dots Pagination -->
-        <div class="nb-dots-pagination">
-          <span class="nb-dot active" onclick="switchNBCarouselSlide(0)"></span>
-          <span class="nb-dot" onclick="switchNBCarouselSlide(1)"></span>
-          <span class="nb-dot" onclick="switchNBCarouselSlide(2)"></span>
-          <span class="nb-dot" onclick="switchNBCarouselSlide(3)"></span>
+        <!-- Quick filter chips under search bar -->
+        <div class="nb-search-quick-tags">
+          <span class="nb-quick-tag-label">Gợi ý nhanh:</span>
+          <button type="button" class="nb-quick-tag active" onclick="quickFilterTag(this, 'all')">Tất cả</button>
+          <button type="button" class="nb-quick-tag" onclick="quickFilterTag(this, 'homestay')">🏡 Homestay sinh thái</button>
+          <button type="button" class="nb-quick-tag" onclick="quickFilterTag(this, 'resort')">✨ Resort &amp; Spa</button>
+          <button type="button" class="nb-quick-tag" onclick="quickFilterTag(this, 'trangan')">🛶 Gần Tràng An</button>
+          <button type="button" class="nb-quick-tag" onclick="quickFilterTag(this, 'view')">🌸 View hồ sen &amp; núi</button>
         </div>
       </div>
     </div>
 
-    <!-- 3. SECTION 1: HOMESTAY & KHÁCH SẠN CAROUSEL -->
-    <div class="nb-section-head" id="homestaySectionAnchor" style="margin-top: 10px;">
-      <h2 class="nb-section-title">Homestay &amp; khách sạn</h2>
+    <!-- 3. SECTION 1: HOMESTAY & KHÁCH SẠN NỔI BẬT -->
+    <div class="nb-section-head" id="homestaySectionAnchor" style="margin-top: 30px;">
+      <div>
+        <h2 class="nb-section-title">Homestay &amp; Khách Sạn Nổi Bật</h2>
+        <p style="color: rgba(255,255,255,0.85); font-size: 0.92rem; margin-top: 4px; text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+          Không gian nghỉ dưỡng được yêu thích nhất giữa non nước Tràng An &amp; Tam Cốc
+        </p>
+      </div>
       <a href="javascript:void(0)" class="nb-view-all-link" onclick="openAllHomestayModal()">
-        <span>View All</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        <span>View All (50+)</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
       </a>
     </div>
 
@@ -5476,20 +5499,20 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       <button type="button" class="nb-carousel-nav-btn next" onclick="nextNBCarousel()" aria-label="Sau">›</button>
 
       <div class="nb-carousel-track" id="nbHomestayCarouselTrack">
-        <!-- Card 1 -->
+        <!-- Card 1: Authentic Luxury Pool Overlooking Karst Valley -->
         <div class="nb-card" id="nbCard-1" onclick="expandHomestayDetail(1)">
           <div class="nb-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Tam Coc Rice Fields Resort" class="nb-card-img">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Tam Coc Rice Fields Resort" class="nb-card-img">
             <span class="nb-card-tag">Nổi bật</span>
             <button type="button" class="nb-heart-btn" onclick="toggleNBWishlist(event, this)">♡</button>
             <div class="nb-card-img-overlay-badges">
-              <span>Gần bến thuyền</span>
+              <span>Hồ bơi vô cực</span>
               <span>Chuẩn 4 sao</span>
             </div>
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Tam Coc Rice Fields Resort</h3>
-            <div class="nb-card-location">📍 Thôn Hải Nham, Ninh Hải</div>
+            <div class="nb-card-location">📍 Thôn Hải Nham, Ninh Hải, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá từ</span>
@@ -5515,7 +5538,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Ninh Bình Eco Garden</h3>
-            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân</div>
+            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá tốt nhất</span>
@@ -5531,7 +5554,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <!-- Card 3 -->
         <div class="nb-card" id="nbCard-3" onclick="expandHomestayDetail(3)">
           <div class="nb-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" alt="Emeralda Resort Ninh Bình" class="nb-card-img">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Emeralda Resort Ninh Bình" class="nb-card-img">
             <span class="nb-card-tag">5 Sao Sang Trọng</span>
             <button type="button" class="nb-heart-btn" onclick="toggleNBWishlist(event, this)">♡</button>
             <div class="nb-card-img-overlay-badges">
@@ -5567,7 +5590,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Tam Coc La Montagne Resort</h3>
-            <div class="nb-card-location">📍 Thôn Đam Khê, Ninh Hải</div>
+            <div class="nb-card-location">📍 Thôn Đam Khê, Ninh Hải, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá niêm yết</span>
@@ -5581,18 +5604,23 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </div>
       </div>
 
-      <!-- DYNAMIC CARD EXPANSION DETAIL VIEW (Smoothly reveals on Card Click) -->
+      <!-- DYNAMIC CARD EXPANSION DETAIL VIEW (Reveals on Card Click) -->
       <div class="nb-expanded-detail-container" id="nbDetailExpandArea" style="display: none; margin-top: 24px;">
         <!-- Injected via JavaScript with GSAP Animation -->
       </div>
     </div>
 
     <!-- 4. SECTION 2: HỆ THỐNG DU LỊCH NINH BÌNH (COMPARE & EXPLORE) -->
-    <div class="nb-section-head" style="margin-top: 20px;">
-      <h2 class="nb-section-title">Hệ thống du lịch Ninh Bình</h2>
+    <div class="nb-section-head" style="margin-top: 35px;">
+      <div>
+        <h2 class="nb-section-title">Hệ Thống Nghỉ Dưỡng Tràng An</h2>
+        <p style="color: rgba(255,255,255,0.85); font-size: 0.92rem; margin-top: 4px; text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+          So sánh tiện ích, vị trí và dịch vụ đưa đón để chọn điểm lưu trú tối ưu nhất
+        </p>
+      </div>
       <a href="javascript:void(0)" class="nb-view-all-link" onclick="openAllHomestayModal()">
-        <span>View All</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Khám phá thêm</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
       </a>
     </div>
 
@@ -5611,7 +5639,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Ninh Bình Eco Garden</h3>
-            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân</div>
+            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá tốt nhất</span>
@@ -5636,7 +5664,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Aravinda Resort Ninh Bình</h3>
-            <div class="nb-card-location">📍 Thôn Hải Nham, Ninh Hải</div>
+            <div class="nb-card-location">📍 Thôn Hải Nham, Ninh Hải, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá ưu đãi</span>
@@ -5677,7 +5705,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <!-- Item 4 -->
         <div class="nb-card" onclick="expandHomestayDetail(4)">
           <div class="nb-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Hang Mua Ecolodge" class="nb-card-img">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80" alt="Hang Mua Ecolodge" class="nb-card-img">
             <span class="nb-card-tag">View đẹp</span>
             <label class="nb-card-tag compare" onclick="event.stopPropagation()">
               <input type="checkbox" onchange="toggleNBCompare(304, this.checked)">
@@ -5686,7 +5714,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </div>
           <div class="nb-card-body">
             <h3 class="nb-card-title">Hang Mua Ecolodge</h3>
-            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân</div>
+            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân, Hoa Lư</div>
             <div class="nb-card-footer">
               <div class="nb-card-price-block">
                 <span class="nb-card-price-label">Giá tốt nhất</span>
@@ -5717,8 +5745,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <button type="button" class="nb-video-close-btn" onclick="closeNBCinematicVideo()">✕</button>
       </div>
       <div class="nb-video-player-wrap">
-        <video id="nbCinematicVideoEl" controls playsinline loop>
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-the-mountains-42732-large.mp4" type="video/mp4">
+        <video id="nbCinematicVideoEl" controls playsinline loop poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&q=80">
+          <source src="images/nb_scenic_bg.webm" type="video/webm">
+          <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Fog_covering_mountain_time_lapse.webm/Fog_covering_mountain_time_lapse.webm.720p.vp9.webm" type="video/webm">
         </video>
       </div>
       <div class="nb-video-modal-footer">
@@ -16368,332 +16397,371 @@ Quản trị tài chính số — Ninh Bình Digital`;
   });
 
   // ========================================================
-  // NINH BÌNH HOMESTAY & TRAVEL CONTROLLER (GSAP & APPLE MOTION)
+  // NINH BÌNH HOMESTAY & TRAVEL CONTROLLER (FULL BACKGROUND VIDEO & PROGRESSIVE SCROLL BLUR)
   // ========================================================
-  let nbCarouselCurrentIndex = 0;
-
-  const HOMESTAY_DETAILS_DATA = {
-    1: {
-      title: "Tam Coc Rice Fields Resort",
-      rating: "4.8 (21 đánh giá)",
-      location: "Đội 3, Thôn Hải Nham, Xã Ninh Hải, Hoa Lư, Ninh Bình",
-      oldPrice: "21,396,000đ",
-      price: "13,789,200đ",
-      priceRange: "Giá từ: 700.000 – 3.740.000đ / đêm",
-      thumbs: [
-        { label: "Toàn cảnh", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" },
-        { label: "Hồ bơi", url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" },
-        { label: "Phòng nghỉ", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" },
-        { label: "Cảnh quan", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" }
+  let nbCarouselIndex = 0;
+  const nbHomestayCardsData = [
+    {
+      id: 1,
+      name: "Tam Coc Rice Fields Resort",
+      tag: "Nổi bật",
+      price: "795,500đ",
+      location: "Thôn Hải Nham, Ninh Hải, Hoa Lư, Ninh Bình",
+      rating: "4.9 ★ (1,240 đánh giá)",
+      desc: "Khu nghỉ dưỡng sinh thái bao trọn bởi những rặng núi đá vôi hùng vĩ và cánh đồng lúa Tam Cốc chín vàng. Không gian thoáng đãng hòa mình vào thiên nhiên, hồ bơi vô cực ngắm cảnh hoàng hôn tráng lệ.",
+      images: [
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80"
+      ],
+      features: [
+        "Hồ bơi vô cực view núi",
+        "Bữa sáng buffet đặc sản",
+        "Xe đạp miễn phí khám phá",
+        "Điều hòa, Wifi 5G tốc độ cao",
+        "Hỗ trợ đưa đón ga Ninh Bình"
+      ],
+      rooms: [
+        { type: "Bungalow Hướng Núi", price: "795,500đ / đêm", beds: "1 Giường đôi King", available: "Còn 3 phòng" },
+        { type: "Villa Gia Đình Hồ Bơi", price: "1,450,000đ / đêm", beds: "2 Giường Queen", available: "Còn 2 phòng" }
       ]
     },
-    2: {
-      title: "Ninh Bình Eco Garden",
-      rating: "4.9 (38 đánh giá)",
-      location: "Thôn Khê Hạ, Ninh Xuân, Hoa Lư (Cách Hang Múa 500m)",
-      oldPrice: "16,800,000đ",
-      price: "9,950,000đ",
-      priceRange: "Giá từ: 600.000 – 2.450.000đ / đêm",
-      thumbs: [
-        { label: "Hồ sen", url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" },
-        { label: "Bungalow", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" },
-        { label: "Bể bơi", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" },
-        { label: "Nội thất", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" }
+    {
+      id: 2,
+      name: "Ninh Bình Eco Garden",
+      tag: "Ưu đãi sốc",
+      price: "650,000đ",
+      location: "Thôn Khê Hạ, Ninh Xuân, Hoa Lư, Ninh Bình",
+      rating: "4.8 ★ (980 đánh giá)",
+      desc: "Nằm kề bên Hang Múa và quần thể danh thắng Tràng An. Homestay thiết kế theo phong cách nhà tre mộc mạc, bao quanh bởi đầm sen thơm ngát ngút ngàn, yên bình và thơ mộng.",
+      images: [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80",
+        "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80"
+      ],
+      features: [
+        "View đầm sen và vách núi",
+        "Tiệc BBQ ngoài trời",
+        "Cho thuê xe máy tại chỗ",
+        "Câu cá & chèo thuyền kayak",
+        "Check-in chụp ảnh sống ảo"
+      ],
+      rooms: [
+        { type: "Phòng Superior Đầm Sen", price: "650,000đ / đêm", beds: "1 Giường đôi", available: "Còn 5 phòng" },
+        { type: "Phòng Tập Thể Nhóm Bạn", price: "250,000đ / khách", beds: "Giường tầng cao cấp", available: "Còn 8 chỗ" }
       ]
     },
-    3: {
-      title: "Emeralda Resort Ninh Bình (5 Sao)",
-      rating: "5.0 (64 đánh giá)",
+    {
+      id: 3,
+      name: "Emeralda Resort Ninh Bình",
+      tag: "5 Sao Sang Trọng",
+      price: "1,850,000đ",
       location: "Khu Bảo Tồn Vân Long, Xã Gia Vân, Gia Viễn, Ninh Bình",
-      oldPrice: "28,500,000đ",
-      price: "18,500,000đ",
-      priceRange: "Giá từ: 1.850.000 – 6.200.000đ / đêm",
-      thumbs: [
-        { label: "Khuôn viên", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" },
-        { label: "Villa VIP", url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" },
-        { label: "Hồ bơi 4 mùa", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" },
-        { label: "Nhà hàng", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" }
+      rating: "5.0 ★ (2,150 đánh giá)",
+      desc: "Khu nghỉ dưỡng 5 sao tiêu chuẩn quốc tế mang đậm nét kiến trúc làng quê Bắc Bộ xưa. Hệ thống spa cao cấp, sân golf mini và không gian xanh mát tĩnh lặng bên đầm Vân Long hoang sơ.",
+      images: [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80"
+      ],
+      features: [
+        "Tiêu chuẩn nghỉ dưỡng 5 sao",
+        "Spa La Poésie trị liệu thảo dược",
+        "Hồ bơi nước ấm 4 mùa",
+        "Nhà hàng ẩm thực cung đình",
+        "Xe điện đưa đón nội khu"
+      ],
+      rooms: [
+        { type: "Superior Double Room", price: "1,850,000đ / đêm", beds: "1 King Bed", available: "Còn 4 phòng" },
+        { type: "Duplex Suite Cổ Kính", price: "3,200,000đ / đêm", beds: "2 Tầng King Suite", available: "Còn 1 phòng" }
       ]
     },
-    4: {
-      title: "Tam Coc La Montagne Resort & Spa",
-      rating: "4.9 (45 đánh giá)",
+    {
+      id: 4,
+      name: "Tam Coc La Montagne Resort",
+      tag: "Top View Đẹp",
+      price: "806,000đ",
       location: "Thôn Đam Khê, Ninh Hải, Hoa Lư, Ninh Bình",
-      oldPrice: "24,500,000đ",
-      price: "15,800,000đ",
-      priceRange: "Giá từ: 806.000 – 4.200.000đ / đêm",
-      thumbs: [
-        { label: "Hồ bơi vô cực", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" },
-        { label: "Phòng Suite", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" },
-        { label: "Spa & Chăm sóc", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" },
-        { label: "Hoàng hôn núi", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" }
+      rating: "4.8 ★ (890 đánh giá)",
+      desc: "Biệt thự nghỉ dưỡng lãng mạn bên dòng sông Ngô Đồng hữu tình. Khách sạn sở hữu hồ bơi vô cực hướng thẳng ra những dãy núi đá vôi uốn lượn và cánh đồng lúa thơm ngát.",
+      images: [
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80"
+      ],
+      features: [
+        "Tọa lạc sát bến thuyền Tam Cốc",
+        "Quầy bar ngắm hoàng hôn bên sông",
+        "Bữa tối BBQ bên hồ bơi",
+        "Phục vụ bữa sáng tận phòng",
+        "Hướng dẫn viên du lịch bản địa"
+      ],
+      rooms: [
+        { type: "Deluxe River View", price: "806,000đ / đêm", beds: "1 King hoặc 2 Twin", available: "Còn 6 phòng" },
+        { type: "Executive Suite Panoramic", price: "1,520,000đ / đêm", beds: "1 King Bed + Ban công", available: "Còn 2 phòng" }
       ]
     }
-  };
-
-  // Mở rộng chi tiết Homestay mượt mà (chuẩn hình ảnh 3 & 4)
-  function expandHomestayDetail(cardId) {
-    const data = HOMESTAY_DETAILS_DATA[cardId] || HOMESTAY_DETAILS_DATA[1];
-    const expandArea = document.getElementById('nbDetailExpandArea');
-    if (!expandArea) return;
-
-    expandArea.innerHTML = `
-      <!-- 4 Thumbnails Gallery -->
-      <div class="nb-detail-gallery">
-        ${data.thumbs.map((t, i) => `
-          <div class="nb-gallery-thumb" onclick="previewGalleryPhoto(this, '${t.url}')">
-            <img src="${t.url}" alt="${t.label}">
-            <span class="nb-gallery-tag">${t.label}</span>
-          </div>
-        `).join('')}
-      </div>
-
-      <!-- Detail Header -->
-      <div class="nb-detail-head">
-        <h3 class="nb-detail-title">${data.title}</h3>
-        <div class="nb-detail-rating">
-          <span>★★★★★</span>
-          <span>${data.rating}</span>
-        </div>
-      </div>
-
-      <div class="nb-detail-location">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>${data.location}</span>
-      </div>
-
-      <!-- Amenities Badges -->
-      <div class="nb-amenities-tags">
-        <span class="nb-amenity-pill">📍 Gần điểm du lịch</span>
-        <span class="nb-amenity-pill">☕ Bữa sáng miễn phí</span>
-        <span class="nb-amenity-pill">🏊 Bể bơi vô cực</span>
-        <span class="nb-amenity-pill">🐾 Cho phép thú cưng</span>
-        <span class="nb-amenity-pill">🚲 Miễn phí xe đạp</span>
-      </div>
-
-      <!-- Pricing & Actions Row -->
-      <div class="nb-detail-foot">
-        <div class="nb-detail-price-box">
-          <span class="nb-price-old">${data.oldPrice}</span>
-          <span class="nb-price-main">${data.price}</span>
-          <span class="nb-price-range">${data.priceRange}</span>
-        </div>
-
-        <div class="nb-detail-actions">
-          <select class="nb-room-select" id="nbRoomChoice">
-            <option value="Hạng phòng Deluxe View Núi">Hạng phòng Deluxe View Núi</option>
-            <option value="Bungalow Hồ Sen Lãng Mạn">Bungalow Hồ Sen Lãng Mạn</option>
-            <option value="Biệt Thự Gia Đình 2 Phòng Ngủ">Biệt Thự Gia Đình 2 Phòng Ngủ</option>
-          </select>
-
-          <button type="button" class="nb-book-now-btn" onclick="openBookingModal('${data.title}')">
-            Đặt phòng ngay
-          </button>
-
-          <button type="button" class="nb-collapse-btn" onclick="closeHomestayDetail()">
-            Thu gọn ✕
-          </button>
-        </div>
-      </div>
-    `;
-
-    expandArea.style.display = 'block';
-
-    // GSAP Smooth Expansion Animation
-    if (typeof gsap !== 'undefined') {
-      gsap.fromTo(expandArea, 
-        { opacity: 0, y: 20, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'back.out(1.2)' }
-      );
-      gsap.from(expandArea.querySelectorAll('.nb-gallery-thumb'), {
-        opacity: 0,
-        y: 15,
-        stagger: 0.06,
-        duration: 0.35,
-        ease: 'power2.out'
-      });
-    }
-
-    expandArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function closeHomestayDetail() {
-    const expandArea = document.getElementById('nbDetailExpandArea');
-    if (!expandArea) return;
-    if (typeof gsap !== 'undefined') {
-      gsap.to(expandArea, {
-        opacity: 0,
-        y: -10,
-        duration: 0.25,
-        ease: 'power2.in',
-        onComplete: () => {
-          expandArea.style.display = 'none';
-        }
-      });
-    } else {
-      expandArea.style.display = 'none';
-    }
-  }
-
-  // 4K Video Modal Controls
-  function openNBCinematicVideo() {
-    const modal = document.getElementById('nbCinematicVideoModal');
-    const video = document.getElementById('nbCinematicVideoEl');
-    if (modal) {
-      modal.style.display = 'flex';
-      if (video) {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }
-      if (typeof gsap !== 'undefined') {
-        gsap.fromTo('.nb-video-modal-container', 
-          { scale: 0.92, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }
-        );
-      }
-    }
-  }
-
-  function closeNBCinematicVideo() {
-    const modal = document.getElementById('nbCinematicVideoModal');
-    const video = document.getElementById('nbCinematicVideoEl');
-    if (video) video.pause();
-    if (modal) modal.style.display = 'none';
-  }
-
-  function prevNBCarousel() {
-    const track = document.getElementById('nbHomestayCarouselTrack');
-    if (track) {
-      nbCarouselCurrentIndex = Math.max(0, nbCarouselCurrentIndex - 1);
-      switchNBCarouselSlide(nbCarouselCurrentIndex);
-    }
-  }
-
-  function nextNBCarousel() {
-    const track = document.getElementById('nbHomestayCarouselTrack');
-    if (track) {
-      nbCarouselCurrentIndex = Math.min(3, nbCarouselCurrentIndex + 1);
-      switchNBCarouselSlide(nbCarouselCurrentIndex);
-    }
-  }
-
-  function switchNBCarouselSlide(idx) {
-    nbCarouselCurrentIndex = idx;
-    const dots = document.querySelectorAll('.nb-dots-pagination .nb-dot');
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-
-    const track = document.getElementById('nbHomestayCarouselTrack');
-    if (track && typeof gsap !== 'undefined') {
-      const moveX = -(idx * 24);
-      gsap.to(track, {
-        x: `${moveX}px`,
-        duration: 0.45,
-        ease: 'power2.out'
-      });
-    }
-  }
-
-  function toggleNBWishlist(e, btn) {
-    e.stopPropagation();
-    const isActive = btn.classList.contains('active');
-    btn.classList.toggle('active', !isActive);
-    btn.innerHTML = isActive ? '♡' : '♥';
-    btn.style.color = isActive ? '#64748B' : '#DC2626';
-
-    if (typeof gsap !== 'undefined') {
-      gsap.timeline()
-        .to(btn, { scale: 1.45, duration: 0.15, ease: 'power1.out' })
-        .to(btn, { scale: 1.0, duration: 0.25, ease: 'elastic.out(1.2, 0.4)' });
-    }
-    showToast(isActive ? 'Đã bỏ lưu khỏi danh sách yêu thích' : '❤️ Đã lưu vào danh sách homestay yêu thích!');
-  }
-
-  function previewGalleryPhoto(thumbEl, url) {
-    if (typeof gsap !== 'undefined') {
-      gsap.timeline()
-        .to(thumbEl, { scale: 1.06, duration: 0.15 })
-        .to(thumbEl, { scale: 1.0, duration: 0.2 });
-    }
-    showToast('📸 Đang xem ảnh: ' + (thumbEl.querySelector('.nb-gallery-tag')?.innerText || 'Cảnh quan'));
-  }
+  ];
 
   function scrollToHomestayList() {
     const el = document.getElementById('homestaySectionAnchor');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function openNBDirectMap(e, placeName) {
-    e.stopPropagation();
-    const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(placeName + ' Ninh Bình');
-    window.open(url, '_blank');
-  }
-
-  function openNBFastChat() {
-    window.open('https://zalo.me/0866520567', '_blank');
-  }
-
-  function toggleNBCompare(placeId, isChecked) {
-    showToast(isChecked ? 'Đã thêm vào danh sách so sánh giá' : 'Đã xóa khỏi so sánh giá');
-  }
-
-  function toggleNBPill(el, type) {
-    if (el.classList.contains('nb-search-pill-active')) {
-      el.classList.remove('nb-search-pill-active');
-    } else {
-      document.querySelectorAll('#btnPillHomestay, #btnPillSelf').forEach(b => b.classList.remove('nb-search-pill-active'));
-      el.classList.add('nb-search-pill-active');
-    }
-    filterNBPlaces();
-  }
-
-  function filterNBPlaces() {
-    const q = (document.getElementById('nbLocationInput')?.value || '').toLowerCase().trim();
-    const budget = document.getElementById('nbBudgetSelect')?.value || 'all';
-
-    const cards = document.querySelectorAll('#nbHomestayCarouselTrack .nb-card, #nbSystemGrid .nb-card');
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      let matchQ = !q || text.includes(q);
-      let matchBudget = true;
-
-      if (budget === 'under1') {
-        matchBudget = text.includes('650,000') || text.includes('795,500') || text.includes('806,000') || text.includes('890,000');
-      } else if (budget === '1to3') {
-        matchBudget = text.includes('1,450,000') || text.includes('1,850,000');
+  function openNBCinematicVideo() {
+    const modal = document.getElementById('nbCinematicVideoModal');
+    const vid = document.getElementById('nbCinematicVideoEl');
+    if (modal) {
+      modal.style.display = 'flex';
+      if (vid) {
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
       }
+    }
+  }
 
-      if (matchQ && matchBudget) {
+  function closeNBCinematicVideo() {
+    const modal = document.getElementById('nbCinematicVideoModal');
+    const vid = document.getElementById('nbCinematicVideoEl');
+    if (modal) modal.style.display = 'none';
+    if (vid) vid.pause();
+  }
+
+  function prevNBCarousel() {
+    nbCarouselIndex = Math.max(0, nbCarouselIndex - 1);
+    updateNBCarouselUI();
+  }
+
+  function nextNBCarousel() {
+    nbCarouselIndex = Math.min(3, nbCarouselIndex + 1);
+    updateNBCarouselUI();
+  }
+
+  function updateNBCarouselUI() {
+    const track = document.getElementById('nbHomestayCarouselTrack');
+    if (!track) return;
+    const cards = track.querySelectorAll('.nb-card');
+    cards.forEach((card, idx) => {
+      if (idx === nbCarouselIndex) {
+        card.style.borderColor = '#1B4D3E';
+        card.style.boxShadow = '0 16px 36px -6px rgba(27, 77, 62, 0.4)';
         if (typeof gsap !== 'undefined') {
-          gsap.to(card, { opacity: 1, scale: 1, duration: 0.3, display: 'flex' });
-        } else {
-          card.style.display = 'flex';
-          card.style.opacity = '1';
+          gsap.fromTo(card, { scale: 0.98 }, { scale: 1.02, duration: 0.35, ease: 'power2.out' });
         }
       } else {
+        card.style.borderColor = 'rgba(255, 255, 255, 0.85)';
+        card.style.boxShadow = '0 10px 30px -6px rgba(0, 0, 0, 0.22)';
         if (typeof gsap !== 'undefined') {
-          gsap.to(card, { opacity: 0.25, scale: 0.98, duration: 0.3 });
-        } else {
-          card.style.opacity = '0.25';
+          gsap.to(card, { scale: 1.0, duration: 0.25 });
         }
       }
     });
   }
 
-  function openBookingModal(placeName) {
-    const room = document.getElementById('nbRoomChoice')?.value || 'Hạng phòng tiêu chuẩn';
-    if (window.showAppConfirm) {
-      window.showAppConfirm({
-        title: 'Đặt Phòng Homestay Ninh Bình',
-        message: `Bạn đang chọn đặt phòng tại <b>${placeName}</b>.<br>Hạng phòng: <b>${room}</b>.<br><br>Bạn có muốn chuyển sang tư vấn và xác nhận phòng nhanh qua Zalo hotline không?`,
-        icon: '🏡',
-        confirmText: 'Chat Zalo Tư Vấn',
-        cancelText: 'Xem lại',
+  function quickFilterTag(btn, tag) {
+    document.querySelectorAll('.nb-quick-tag').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const select = document.getElementById('nbRoomTypeSelect');
+    if (select) {
+      if (tag === 'homestay') select.value = 'homestay';
+      else if (tag === 'resort') select.value = 'resort';
+      else select.value = 'all';
+    }
+    filterNBPlaces();
+  }
+
+  function filterNBPlaces() {
+    const locInput = document.getElementById('nbLocationInput');
+    const kw = (locInput ? locInput.value : '').toLowerCase().trim();
+    const type = document.getElementById('nbRoomTypeSelect') ? document.getElementById('nbRoomTypeSelect').value : 'all';
+    const budget = document.getElementById('nbBudgetSelect') ? document.getElementById('nbBudgetSelect').value : 'all';
+
+    const cards = document.querySelectorAll('#nbHomestayCarouselTrack .nb-card, #nbSystemGrid .nb-card');
+    let matched = 0;
+
+    cards.forEach(card => {
+      const title = card.querySelector('.nb-card-title') ? card.querySelector('.nb-card-title').innerText.toLowerCase() : '';
+      const loc = card.querySelector('.nb-card-location') ? card.querySelector('.nb-card-location').innerText.toLowerCase() : '';
+      const priceText = card.querySelector('.nb-card-price-value') ? card.querySelector('.nb-card-price-value').innerText.replace(/[^0-9]/g, '') : '0';
+      const priceNum = parseInt(priceText) || 0;
+
+      let matchKw = !kw || title.includes(kw) || loc.includes(kw);
+      let matchType = (type === 'all');
+      if (type === 'homestay' && (title.includes('homestay') || title.includes('eco') || title.includes('lodge'))) matchType = true;
+      if (type === 'resort' && (title.includes('resort') || title.includes('fields') || title.includes('montagne'))) matchType = true;
+      if (type === 'hotel' && (title.includes('khách sạn') || title.includes('hotel'))) matchType = true;
+
+      let matchBudget = (budget === 'all');
+      if (budget === 'under1' && priceNum < 1000000) matchBudget = true;
+      if (budget === '1to3' && priceNum >= 1000000 && priceNum <= 3000000) matchBudget = true;
+      if (budget === 'above3' && priceNum > 3000000) matchBudget = true;
+
+      if (matchKw && matchType && matchBudget) {
+        card.style.display = 'flex';
+        matched++;
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(card, { opacity: 0.4, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+        }
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (matched === 0) {
+      showToast('Không tìm thấy nơi lưu trú phù hợp với bộ lọc hiện tại.');
+    }
+  }
+
+  function toggleNBWishlist(e, btn) {
+    e.stopPropagation();
+    if (btn.innerText === '♡') {
+      btn.innerText = '♥';
+      btn.style.color = '#EF4444';
+      showToast('Đã lưu homestay vào danh sách yêu thích!');
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(btn, { scale: 0.6 }, { scale: 1.25, yoyo: true, repeat: 1, duration: 0.2 });
+      }
+    } else {
+      btn.innerText = '♡';
+      btn.style.color = '#64748B';
+      showToast('Đã bỏ lưu homestay.');
+    }
+  }
+
+  function openNBDirectMap(e, placeName) {
+    e.stopPropagation();
+    const query = encodeURIComponent(placeName + ', Ninh Bình, Việt Nam');
+    window.open('https://www.google.com/maps/search/?api=1&query=' + query, '_blank');
+  }
+
+  function toggleNBCompare(id, isChecked) {
+    showToast(isChecked ? 'Đã thêm vào danh sách so sánh tiện ích & giá.' : 'Đã bỏ chọn so sánh.');
+  }
+
+  function openNBFastChat() {
+    if (typeof showConfirmModal === 'function') {
+      showConfirmModal({
+        title: 'Hỗ Trợ & Đặt Phòng Ninh Bình 24/7',
+        message: 'Bạn muốn liên hệ với tổng đài du lịch Ninh Bình để được tư vấn phòng đẹp, giá tốt và lịch trình Tràng An?',
+        confirmText: 'Chat qua Zalo Ngay',
+        cancelText: 'Để sau',
         onConfirm: () => {
-          window.open('https://zalo.me/0866520567?text=' + encodeURIComponent(`Xin chào, tôi muốn đặt phòng tại ${placeName} (${room})`), '_blank');
+          window.open('https://zalo.me/0866520567?text=' + encodeURIComponent('Xin chào, tôi muốn được tư vấn đặt phòng Homestay/Khách sạn tại Ninh Bình.'), '_blank');
         }
       });
     } else {
-      window.open('https://zalo.me/0866520567?text=' + encodeURIComponent(`Xin chào, tôi muốn đặt phòng tại ${placeName} (${room})`), '_blank');
+      window.open('https://zalo.me/0866520567?text=' + encodeURIComponent('Xin chào, tôi muốn được tư vấn đặt phòng Homestay/Khách sạn tại Ninh Bình.'), '_blank');
+    }
+  }
+
+  function expandHomestayDetail(id) {
+    const data = nbHomestayCardsData.find(d => d.id === id) || nbHomestayCardsData[0];
+    const container = document.getElementById('nbDetailExpandArea');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="nb-detail-inner">
+        <button type="button" class="nb-detail-close-btn" onclick="closeNBDetail()">✕ Đóng</button>
+        <div class="nb-detail-grid">
+          <div>
+            <div class="nb-detail-badge">${data.tag} • ${data.rating}</div>
+            <h2 class="nb-detail-title">${data.name}</h2>
+            <div class="nb-detail-location">📍 ${data.location}</div>
+            <p class="nb-detail-desc">${data.desc}</p>
+            <div class="nb-detail-features">
+              ${data.features.map(f => `<span>✓ ${f}</span>`).join('')}
+            </div>
+            <div class="nb-detail-rooms-box">
+              <h4 style="font-size:0.95rem; font-weight:800; color:#1B4D3E; margin-bottom:8px;">Hạng phòng trống hôm nay:</h4>
+              ${data.rooms.map(r => `
+                <div class="nb-room-row">
+                  <div>
+                    <div style="font-weight:750; font-size:0.92rem; color:#0F172A;">${r.type}</div>
+                    <div style="font-size:0.78rem; color:#64748B;">${r.beds} • <span style="color:#059669; font-weight:700;">${r.available}</span></div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="font-weight:850; font-size:1.05rem; color:#1B4D3E;">${r.price}</div>
+                    <button type="button" class="btn btn-accent btn-sm" style="margin-top:4px;" onclick="bookDirectHomestay('${data.name}', '${r.type}')">Đặt ngay</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div>
+            <div class="nb-detail-main-img-wrap">
+              <img id="nbDetailMainImg" src="${data.images[0]}" alt="${data.name}" class="nb-detail-main-img">
+            </div>
+            <div class="nb-detail-gallery">
+              ${data.images.map((img, i) => `
+                <img src="${img}" alt="Thumb" class="nb-detail-thumb ${i === 0 ? 'active' : ''}" onclick="changeNBDetailImage('${img}', this)">
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.style.display = 'block';
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(container, 
+        { opacity: 0, y: 25, scale: 0.98 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power3.out' }
+      );
+    }
+  }
+
+  function changeNBDetailImage(src, thumbEl) {
+    const main = document.getElementById('nbDetailMainImg');
+    if (main) {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(main, { opacity: 0.3, duration: 0.15, onComplete: () => {
+          main.src = src;
+          gsap.to(main, { opacity: 1, duration: 0.25 });
+        }});
+      } else {
+        main.src = src;
+      }
+    }
+    document.querySelectorAll('.nb-detail-thumb').forEach(t => t.classList.remove('active'));
+    if (thumbEl) thumbEl.classList.add('active');
+  }
+
+  function closeNBDetail() {
+    const container = document.getElementById('nbDetailExpandArea');
+    if (!container) return;
+    if (typeof gsap !== 'undefined') {
+      gsap.to(container, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => { container.style.display = 'none'; }
+      });
+    } else {
+      container.style.display = 'none';
+    }
+  }
+
+  function bookDirectHomestay(placeName, room) {
+    if (typeof showConfirmModal === 'function') {
+      showConfirmModal({
+        title: 'Xác Nhận Đặt Phòng',
+        message: 'Bạn đang đặt: ' + placeName + ' (' + room + '). Bạn muốn kết nối với bộ phận lễ tân để giữ phòng ngay?',
+        confirmText: 'Giữ phòng qua Zalo',
+        cancelText: 'Hủy',
+        onConfirm: () => {
+          window.open('https://zalo.me/0866520567?text=' + encodeURIComponent('Xin chào, tôi muốn đặt phòng tại ' + placeName + ' (' + room + ')'), '_blank');
+        }
+      });
+    } else {
+      window.open('https://zalo.me/0866520567?text=' + encodeURIComponent('Xin chào, tôi muốn đặt phòng tại ' + placeName + ' (' + room + ')'), '_blank');
     }
   }
 
@@ -16702,28 +16770,71 @@ Quản trị tài chính số — Ninh Bình Digital`;
     scrollToHomestayList();
   }
 
+  // BUTTERY-SMOOTH PROGRESSIVE SCROLL BLUR LOGIC
+  // As user scrolls down (kéo trang lên), background video blurs gradually from 0px up to 24px
+  let travelScrollTicking = false;
+  function handleTravelScrollBlur() {
+    if (!travelScrollTicking) {
+      window.requestAnimationFrame(() => {
+        const pageTravel = document.getElementById('page-travel');
+        if (pageTravel && pageTravel.classList.contains('active')) {
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          const video = document.getElementById('nbGlobalVideoBg');
+          const overlay = document.getElementById('nbGlobalVideoOverlay');
+          const maxScroll = 480;
+          const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+          
+          if (video) {
+            const blurPx = (progress * 24).toFixed(1);
+            const brightness = (1 - progress * 0.28).toFixed(2);
+            const scale = (1.05 + progress * 0.05).toFixed(3);
+            video.style.filter = `blur(${blurPx}px) brightness(${brightness})`;
+            video.style.transform = `translate3d(-50%, -50%, 0) scale(${scale})`;
+          }
+          if (overlay) {
+            const alpha = (0.35 + progress * 0.45).toFixed(2);
+            overlay.style.backgroundColor = `rgba(11, 29, 22, ${alpha})`;
+          }
+        }
+        travelScrollTicking = false;
+      });
+      travelScrollTicking = true;
+    }
+  }
+
+  window.addEventListener('scroll', handleTravelScrollBlur, { passive: true });
+
   function initHomestayGSAP() {
-    if (typeof gsap === 'undefined') return;
     const pageTravel = document.getElementById('page-travel');
     if (!pageTravel || !pageTravel.classList.contains('active')) return;
+
+    // Autoplay video
+    const video = document.getElementById('nbGlobalVideoBg');
+    if (video) {
+      video.play().catch(() => {});
+    }
+
+    handleTravelScrollBlur();
+
+    if (typeof gsap === 'undefined') return;
 
     const cards = document.querySelectorAll('.nb-card');
     cards.forEach(card => {
       const img = card.querySelector('.nb-card-img');
       card.onmouseenter = () => {
         gsap.to(card, {
-          y: -6,
-          boxShadow: '0 18px 30px -8px rgba(27, 77, 62, 0.25)',
+          y: -8,
+          boxShadow: '0 20px 40px -8px rgba(27, 77, 62, 0.35)',
           duration: 0.3,
           ease: 'power2.out'
         });
-        if (img) gsap.to(img, { scale: 1.06, duration: 0.4, ease: 'power2.out' });
+        if (img) gsap.to(img, { scale: 1.07, duration: 0.4, ease: 'power2.out' });
       };
 
       card.onmouseleave = () => {
         gsap.to(card, {
           y: 0,
-          boxShadow: '0 4px 16px -2px rgba(15, 23, 42, 0.05)',
+          boxShadow: '0 10px 30px -6px rgba(0, 0, 0, 0.22)',
           duration: 0.3,
           ease: 'power2.out'
         });
@@ -16753,6 +16864,9 @@ Quản trị tài chính số — Ninh Bình Digital`;
     if (typeof oldNavigateTo === 'function') oldNavigateTo(page, updateHash);
     if (page === 'travel') {
       setTimeout(initHomestayGSAP, 80);
+    } else {
+      const video = document.getElementById('nbGlobalVideoBg');
+      if (video) video.pause();
     }
   };
 </script>
