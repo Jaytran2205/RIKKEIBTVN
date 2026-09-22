@@ -115,7 +115,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Mẹo: Phần đường = 2 chữ = Chọn đáp án 2",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 2,
@@ -128,7 +129,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Điều khiển xe, được người khác chở, dẫn dắt súc vật hay đi bộ trên đường đều là tham gia giao thông.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 3,
@@ -141,7 +143,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Lạng lách rú ga – Chống đối công an – Cả hai đều cấm !",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 4,
@@ -154,7 +157,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Tuân thủ: ̉“Người – Đèn – Biển” (Thứ tự ưu tiên từ cao xuống thấp). “Nghe người trước, nhìn đèn sau, biển báo đứng cuối hàng!”",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 5,
@@ -167,7 +171,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Còi 5 đến 22 – Đêm ngủ yên, “Còi thì chỉ bấm ban ngày, 5 giờ sáng đến 10 giờ tối, ban đêm để người ta ngủ thôi!”",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 6,
@@ -181,7 +186,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "“Buông tay – Kéo đẩy – Quệt chân, dễ tai nạn, tuyệt đối cấm!”",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 7,
@@ -195,7 +201,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Người ngồi sau không đội mũ bảo hiểm khi tham gia giao thông, sẽ bị xử phạt cả người điều khiển và người ngồi sau theo nghị định 168/2024/NĐ-CP",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 8,
@@ -208,7 +215,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đường giao nhau không có báo hiệu đi theo vòng xuyến nhường bên phải, có báo hiệu nhường bên trái. “Có trái – không phải!”",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 9,
@@ -221,7 +229,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Bình thường vượt trái, khi gặp Xe rẽ trái hoặc đang làm việc (xe chuyên dùng ) mới được vượt phải.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 10,
@@ -233,7 +242,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "12 tháng không bị trừ điểm → phục hồi đủ 12 điểm!",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 11,
@@ -247,7 +257,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Tuân luật + Nhường nhịn + Giúp đỡ = Văn hóa giao thông!",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 12,
@@ -260,7 +271,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Xuống dốc tay ga hợp lý, phanh trước phanh sau giảm tốc an toàn.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 13,
@@ -274,7 +286,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Muốn quay đầu thì nhớ bật đèn, chọn nơi cho phép, quan sát và nhường đường.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 14,
@@ -288,7 +301,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1 là biển cấm xe rẽ trái. Biển 2 là biển cấm xe quay đầu. Biển báo cấm quay đầu không có giá trị cấm rẽ trái.",
-    "image": "images/driving_a1/q_14.jpg"
+    "image": "images/driving_a1/q_14.jpg",
+    "chapter": 4
   },
   {
     "id": 15,
@@ -301,7 +315,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Đường cấm không áp dụng với xe ưu tiên - Biển 2: dừng lại áp dụng với tất cả phương tiện kể cả xe ưu tiên - Biển 3: Cấm đi ngược chiều không áp dụng với xe ưu tiên. Nên đáp án 2",
-    "image": "images/driving_a1/q_15.jpg"
+    "image": "images/driving_a1/q_15.jpg",
+    "chapter": 4
   },
   {
     "id": 16,
@@ -314,7 +329,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển chính: cấm dừng và đỗ xe - Biển phụ: hướng mũi tên chỉ bên phải - Cấm dừng và đỗ xe theo hướng bên phải.",
-    "image": "images/driving_a1/q_16.jpg"
+    "image": "images/driving_a1/q_16.jpg",
+    "chapter": 4
   },
   {
     "id": 17,
@@ -328,7 +344,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: Giao nhau với đường sắt có rào chắn - Biển 2: Giao nhau với đường ưu tiên - Biển 3: Giao nhau với tin hiệu đèn ( chú ý đèn giao thông trong biển). Hỏi đèn thì kiếm đèn mà chọn.",
-    "image": "images/driving_a1/q_17.jpg"
+    "image": "images/driving_a1/q_17.jpg",
+    "chapter": 4
   },
   {
     "id": 18,
@@ -341,7 +358,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Giao nhau tuyến đường cùng cấp - Biển 2: Giao nhau với đường không ưu tiên - Biển 3: Giao nhau với đường ưu tiên ( biển tam giác ngược)",
-    "image": "images/driving_a1/q_18.jpg"
+    "image": "images/driving_a1/q_18.jpg",
+    "chapter": 4
   },
   {
     "id": 19,
@@ -354,7 +372,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Cầu tạm - Biển 2: Cầu hẹp - Biển 3: Cầu quay – cầu cất.",
-    "image": "images/driving_a1/q_19.jpg"
+    "image": "images/driving_a1/q_19.jpg",
+    "chapter": 4
   },
   {
     "id": 20,
@@ -367,7 +386,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Hướng đi phải theo các xe bắt buộc đi thẳng - Biển 2: Hướng đi phải theo các xe rẽ phải hoặc rẽ trái ( lưu ý biển này đặt “SAU” ngã 3, ngã 4) - Nên đáp án không có biển nào. Mẹo nhớ: đặt trước ngã ba chọn đáp án 3.",
-    "image": "images/driving_a1/q_20.jpg"
+    "image": "images/driving_a1/q_20.jpg",
+    "chapter": 4
   },
   {
     "id": 21,
@@ -380,7 +400,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Hết cấm đỗ xe theo giờ trong khu vực - Biển 2: Hết cấm đỗ xe trong khu vực - Biển 3: Hết khu vực đỗ xe.",
-    "image": "images/driving_a1/q_21.jpg"
+    "image": "images/driving_a1/q_21.jpg",
+    "chapter": 4
   },
   {
     "id": 22,
@@ -392,7 +413,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển số R.412 Làn đường dành riêng cho từng loại xe hoặc nhóm xe: Khi đến gần nơi đường bộ giao nhau, xe được phép chuyển làn để đi theo hành trình mong muốn. Việc chuyển làn phải thực hiện theo đúng quy định.",
-    "image": "images/driving_a1/q_22.jpg"
+    "image": "images/driving_a1/q_22.jpg",
+    "chapter": 4
   },
   {
     "id": 23,
@@ -404,7 +426,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Xe con và xe khách đèn xanh nên được phép đi. Xe mô tô đèn đỏ dừng lại.",
-    "image": "images/driving_a1/q_23.jpg"
+    "image": "images/driving_a1/q_23.jpg",
+    "chapter": 5
   },
   {
     "id": 24,
@@ -416,7 +439,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái Xe mô tô đang trên đường ưu tiên và biển phụ ưu tiên rẽ trái qua đường ưu tiên nên được quyền đi trước.",
-    "image": "images/driving_a1/q_24.jpg"
+    "image": "images/driving_a1/q_24.jpg",
+    "chapter": 5
   },
   {
     "id": 25,
@@ -428,7 +452,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Phía trước là đường ưu tiên (biển báo tam giác ngược), không được vượt mà phải nhường.",
-    "image": "images/driving_a1/q_25.jpg"
+    "image": "images/driving_a1/q_25.jpg",
+    "chapter": 1
   },
   {
     "id": 26,
@@ -441,7 +466,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Làn đường có chiều rộng cho xe chạy an toàn",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 27,
@@ -454,7 +480,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": true,
     "explain": "Không cấm đi xe đạp trên quốc lộ, nhưng rải vật nhọn hoặc đổ chất gây trơn trượt gây nguy hiểm sẽ bị cấm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 28,
@@ -466,7 +493,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hễ có từ :trái phép, can thiệp sai lệch, tẩy xóa, đục sửa thì chắc chắn là hành vi bị cấm. Mục đích quốc phòng, an ninh nếu được cấp phép thì không bị cấm.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 29,
@@ -479,7 +507,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển tạm thời = Ưu tiên xử lý tình huống giao thông bất thường, nên phải chấp hành trước.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 30,
@@ -492,7 +521,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Đáp án đúng là: 1, Vì đây là những tình huống tiềm ẩn nguy cơ tai nạn cao và bị cấm vượt theo luật.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 31,
@@ -506,7 +536,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Người ngồi sau: không vác, bám kéo phương tiện khác nhưng Được sử dụng điện thoại nhé.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 32,
@@ -519,7 +550,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đáp án đúng là: 1. Vì đây là phương án phù hợp nhất với quy định pháp luật và nguyên tắc an toàn giao thông.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 33,
@@ -532,7 +564,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Gặp Xe ưu tiên đang làm nhiệm vụ bắt buộc phải nhường!",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 34,
@@ -545,7 +578,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Xe sau xin vượt thi phải giảm tốc độ và đi sát về bên phải.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 35,
@@ -558,7 +592,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "• Phục hồi điểm: Sau khi thi lại bài kiểm tra nội dung kiến thức pháp luật giao thông đường bộ. Đây là quy định.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 36,
@@ -571,7 +606,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Đáp án đúng: 3. Vì văn hóa giao thông gồm cả ý thức pháp luật và cách ứng xử có văn hóa trên đường.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 37,
@@ -583,7 +619,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Qua đường vòng ưu tiên giảm tốc độ để đảm bảo an toàn, không nên tăng tốc vì dễ xảy ra tình huống nguy hiểm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 38,
@@ -597,7 +634,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Tay ga trên xe tay ga giúp điều tiết tốc độ của xe và giúp xe đi về phía trước, không có tác dụng cho xe chạy lùi.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 39,
@@ -610,7 +648,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Cấm rẽ trái không cấm quay đầu - Biển 2: Cấm quay đầu không cấm rẽ trái. Nên chọn biển 1.",
-    "image": "images/driving_a1/q_39.jpg"
+    "image": "images/driving_a1/q_39.jpg",
+    "chapter": 4
   },
   {
     "id": 40,
@@ -623,7 +662,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Đường cấm không áp dụng với xe ưu tiên - Biển 2: Dừng lại áp dụng với tất cả các phương tiện với cả xe ưu tiên. Nên chọn biển 1.",
-    "image": "images/driving_a1/q_40.jpg"
+    "image": "images/driving_a1/q_40.jpg",
+    "chapter": 4
   },
   {
     "id": 41,
@@ -636,7 +676,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Tốc độ tối đa cho phép về ban đêm cho các phương tiện là 70km/h/ Biển 2: Tốc độ tối đa 50km/h.",
-    "image": "images/driving_a1/q_41.jpg"
+    "image": "images/driving_a1/q_41.jpg",
+    "chapter": 4
   },
   {
     "id": 42,
@@ -650,7 +691,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Giao nhau đường sắt có rào chắm - Biển 2: Báo hiệu giao nhau đường 2 chiều - Biển 3: Giao nhau đường sắt vuông góc với đường bộ. Nên chọn biển 1 và 3.",
-    "image": "images/driving_a1/q_42.jpg"
+    "image": "images/driving_a1/q_42.jpg",
+    "chapter": 4
   },
   {
     "id": 43,
@@ -663,7 +705,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Đường 2 chiều - Biển 2: Nhường đường cho xe cơ giới ngược chiều qua đường hẹp - Biển 3: Được ưu tiên qua nơi đường hẹp.",
-    "image": "images/driving_a1/q_43.jpg"
+    "image": "images/driving_a1/q_43.jpg",
+    "chapter": 4
   },
   {
     "id": 44,
@@ -675,7 +718,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Nhường đường dành cho người đi bộ - Biển 2: Báo hiệu thường có trẻ em ngang, trường học.",
-    "image": "images/driving_a1/q_44.jpg"
+    "image": "images/driving_a1/q_44.jpg",
+    "chapter": 4
   },
   {
     "id": 45,
@@ -687,7 +731,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Biển báo hiệu lệnh hướng đi thẳng phải theo - Biển 2: Đường 1 chiều.",
-    "image": "images/driving_a1/q_45.jpg"
+    "image": "images/driving_a1/q_45.jpg",
+    "chapter": 4
   },
   {
     "id": 46,
@@ -701,7 +746,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Người đi bộ sử dụng Cầu vượt ( đi lên là cầu vượt) - Biển 2: Người đi bộ sử dụng hầm chui ( đi xuống là hầm chui).",
-    "image": "images/driving_a1/q_46.jpg"
+    "image": "images/driving_a1/q_46.jpg",
+    "chapter": 4
   },
   {
     "id": 47,
@@ -713,7 +759,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Chỉ dẫn hưỡng rẽ bên phải - Biển 2: Chỉ dẫn đi cả 2 hướng.",
-    "image": "images/driving_a1/q_47.jpg"
+    "image": "images/driving_a1/q_47.jpg",
+    "chapter": 4
   },
   {
     "id": 48,
@@ -725,7 +772,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Xe con và xe khách đèn xanh nên được phép đi. Xe mô tô đèn đỏ dừng lại.",
-    "image": "images/driving_a1/q_48.jpg"
+    "image": "images/driving_a1/q_48.jpg",
+    "chapter": 5
   },
   {
     "id": 49,
@@ -738,7 +786,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Khổ giới hạn của đường bộ là khoảng trống có kích thước giới hạn về chiều rộng, chiều cao.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 50,
@@ -751,7 +800,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Cảnh sát giao thông điều phối luồng xe ngoài đường.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 51,
@@ -764,7 +814,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Cả đáp 1 và 2 đều là hành vi bị nghiêm cấm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 52,
@@ -777,7 +828,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Tín hiệu đèn vàng có hai trường hợp, một là đèn tín hiệu giao thông đỏ vàng xanh nếu chuyển qua giây vàng mà lỡ qua vạch dừng thì đi tiếp. Còn lại là tín hiệu vàng nhấp nháy báo đi chậm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 53,
@@ -789,7 +841,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Đáp án 1 là đúng vì Hành vi sử dụng điện thoại khi tham gia giao thông là bị nghiêm cấm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 54,
@@ -803,7 +856,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Không được phép đẩy kéo các phương tiện khác.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 55,
@@ -816,7 +870,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Khi xuống phà, xe cơ giới, xe máy chuyên dùng xuống trước, xe thô sơ, người đi bộ xuống sau; khi lên bến, người đi bộ lên trước, các phương tiện giao thông đường bộ lên sau theo hướng dẫn của người điều khiển giao thông. Đây là quy định hiện hành.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 56,
@@ -829,7 +884,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Gặp xe ưu tiên đang phát tín hiệu ưu tiên, các phương tiện bắt buộc phải Giảm tốc độ, đi sát lề đường bên phải hoặc dừng lại để nhường đường.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 57,
@@ -842,7 +898,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đáp án đúng: 1. Vì đây là tập hợp đầy đủ và chính xác các phương tiện và đối tượng không được phép đi vào đường cao tốc theo luật.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 58,
@@ -854,7 +911,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Chưa sang tên – Trách nhiệm còn nguyên. Muốn hết trách nhiệm → Phải thu hồi biển số và đăng ký xe theo đúng thủ tục. Đáp án 1 là đúng.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 59,
@@ -866,7 +924,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Các hành vi trên không chỉ là hành vi thiếu văn hóa giao thông mà còn gây mất an toàn giao thông đường bộ, vi phạm pháp luật.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 60,
@@ -879,7 +938,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Cả hai đáp án tương ứng với 2 tình huống đều tuân theo quy tắc đảm bảo an toàn khi qua đường sắt, đúng với Luật Trật tự, an toàn giao thông đường bộ hiện hành.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 61,
@@ -893,7 +953,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Chiếu hậu có nghĩa là phía sau, gương chiếu hậu sẽ giúp bạn quan sát được phía sau cả bên phải lẫn bên trái.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 62,
@@ -906,7 +967,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: cấm rẽ trái được quay đầu - Biển 2: cấm quay đầu được rẽ trái.",
-    "image": "images/driving_a1/q_62.jpg"
+    "image": "images/driving_a1/q_62.jpg",
+    "chapter": 4
   },
   {
     "id": 63,
@@ -918,7 +980,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo có viền đỏ tương ứng với loại biển báo cấm, kèm theo ghi chú thêm 70 (có nghĩa là 70km/h), có ý nghĩa là không được vượt quá con số đó –&gt; tối đa chỉ tới 70km/h.",
-    "image": "images/driving_a1/q_63.jpg"
+    "image": "images/driving_a1/q_63.jpg",
+    "chapter": 4
   },
   {
     "id": 64,
@@ -930,7 +993,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Biển báo tốc độ tối thiểu - Biển 2: Biển báo tốc độ tối đa.",
-    "image": "images/driving_a1/q_64.jpg"
+    "image": "images/driving_a1/q_64.jpg",
+    "chapter": 4
   },
   {
     "id": 65,
@@ -944,7 +1008,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: Giao nhau với đường sát có rào chắn - Biển 2: Giao nhau với đường sắt không rào chắn - Biển 3: Nơi đường sắt giao vuông góc với đường bộ.",
-    "image": "images/driving_a1/q_65.jpg"
+    "image": "images/driving_a1/q_65.jpg",
+    "chapter": 4
   },
   {
     "id": 66,
@@ -957,7 +1022,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Đường 2 chiều - Biển 2: Giảm tốc độ nhường đường cho xe cơ giới đi ngược chiều - Biển 3: Được ưu tiên qua nơi đường hẹp.",
-    "image": "images/driving_a1/q_66.jpg"
+    "image": "images/driving_a1/q_66.jpg",
+    "chapter": 5
   },
   {
     "id": 67,
@@ -970,7 +1036,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Nhường đường dành cho người đi bộ - Biển 2: Bắt đầu đoạn đường dành (màu xanh) cho người đi bộ - Biển 3: Báo hiệu có trẻ em cắt ngang qua.",
-    "image": "images/driving_a1/q_67.jpg"
+    "image": "images/driving_a1/q_67.jpg",
+    "chapter": 4
   },
   {
     "id": 68,
@@ -983,7 +1050,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Hướng đi thẳng phải theo (hình tròn nền xanh phải theo) - Biển 2: Đường 1 chiều. (Một = mập, chọn mũi tên mập hơn) hơn là chọn)",
-    "image": "images/driving_a1/q_68.jpg"
+    "image": "images/driving_a1/q_68.jpg",
+    "chapter": 4
   },
   {
     "id": 69,
@@ -997,7 +1065,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hầm chui đi xuống, cầu vượt đi lên.",
-    "image": "images/driving_a1/q_69.jpg"
+    "image": "images/driving_a1/q_69.jpg",
+    "chapter": 4
   },
   {
     "id": 70,
@@ -1010,7 +1079,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Xe con và xe tải đang trên làn đường có tín hiệu đèn xanh nên được phép đi. Đèn xanh được đi – đèn đỏ phải dừng.",
-    "image": "images/driving_a1/q_70.jpg"
+    "image": "images/driving_a1/q_70.jpg",
+    "chapter": 5
   },
   {
     "id": 71,
@@ -1024,7 +1094,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Vạch màu vàng nét liền không được đè. Xe con quay đầu đè vạch vàng nên sai.",
-    "image": "images/driving_a1/q_71.jpg"
+    "image": "images/driving_a1/q_71.jpg",
+    "chapter": 5
   },
   {
     "id": 72,
@@ -1038,7 +1109,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Biển báo hiệu lệnh hướng đi thẳng: nhưng xe con phát tín hiệu rẽ trái, xe mô tô rẽ phải nên sai cả 2 xe.",
-    "image": "images/driving_a1/q_72.jpg"
+    "image": "images/driving_a1/q_72.jpg",
+    "chapter": 5
   },
   {
     "id": 73,
@@ -1051,7 +1123,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Dải phân cách để phân chia 2 chiều xe chạy riêng biệt.",
-    "image": "images/driving_a1/q_73.jpg"
+    "image": "images/driving_a1/q_73.jpg",
+    "chapter": 1
   },
   {
     "id": 74,
@@ -1064,7 +1137,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Người điều khiển phương tiện giao thông gồm cả xe cơ giới và xe máy chuyên dùng.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 75,
@@ -1077,7 +1151,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển số xe là tài sản do cơ quan nhà nước có thẩm quyền cấp phát, việc làm giả, mua bán, sử dụng trái phép biển số bị nghiêm cấm.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 76,
@@ -1090,7 +1165,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Không được vượt quá tốc độ cho phép.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 77,
@@ -1103,7 +1179,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Trong khu đông dân cư chỉ bật đèn chiếu gần (đèn cốt), tránh bật đèn pha gây ảnh hưởng người đối diện.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 78,
@@ -1116,7 +1193,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Cứ đi xe mô tô, xe gắn máy: Phải đội mũ (), + cài quai = đúng luật.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 79,
@@ -1129,7 +1207,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Còi 5 đến 22 – Đêm ngủ yên, “Còi thì chỉ bấm ban ngày, 5 giờ sáng đến 10 giờ tối, ban đêm để người ta ngủ thôi!”",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 80,
@@ -1142,7 +1221,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Xe ưu tiên không có tín hiệu → không có quyền ưu tiên.➡ Đáp án có chữ “bảo đảm an toàn” thường là đáp án đúng nếu không có cấm rõ ràng.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 81,
@@ -1155,7 +1235,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "👉18 tuổi – A1, B, C1. Đủ 18 tuổi là đủ điều kiện thi và được cấp bằng lái xe mô tô đến 125 cm³ và ô tô đến 8 chỗ hoặc tải trọng đến 3.500 kg.",
-    "image": "images/driving_a1/q_81.jpg"
+    "image": "images/driving_a1/q_81.jpg",
+    "chapter": 1
   },
   {
     "id": 82,
@@ -1168,7 +1249,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Trong khu vực đông dân cư: Đường đôi có 2 làn đường: 60km/h - Đường 1 chiều có 1 làn đường: 50km/h.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 83,
@@ -1180,7 +1262,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "👉 Có văn hóa – Là phải hiểu luật, nhường nhịn và ứng xử đúng mực.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 84,
@@ -1193,7 +1276,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Cứ sinh học – là sạch môi trường.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 85,
@@ -1207,7 +1291,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Cách điều khiển tay ga an toàn: tăng ga từ từ, giảm ga thật nhanh.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 86,
@@ -1221,7 +1306,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Cấm các phương tiện rẽ phải - Biển 2: Cấm các phương tiện rẽ phải và quay đầu - Biển 3: Cấm xe ô tô rẽ phải và quay đầu - Nên chọn biển 1 và biển 2.",
-    "image": "images/driving_a1/q_86.jpg"
+    "image": "images/driving_a1/q_86.jpg",
+    "chapter": 4
   },
   {
     "id": 87,
@@ -1233,7 +1319,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Cấm 2 bánh và 4 bánh cấm luôn cả 3 bánh.",
-    "image": "images/driving_a1/q_87.jpg"
+    "image": "images/driving_a1/q_87.jpg",
+    "chapter": 4
   },
   {
     "id": 88,
@@ -1245,7 +1332,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển tròn viền đỏ là biển báo cấm, kèm chú thích con số bên trong. Đây là con số không được vượt quá (tối đa).",
-    "image": "images/driving_a1/q_88.jpg"
+    "image": "images/driving_a1/q_88.jpg",
+    "chapter": 4
   },
   {
     "id": 89,
@@ -1259,7 +1347,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Giao nhau đường sắt không rào chắn - Biển 2: Giao nhau với đường ưu tiên - Biển 3: Giao nhau với tàu điện.",
-    "image": "images/driving_a1/q_89.jpg"
+    "image": "images/driving_a1/q_89.jpg",
+    "chapter": 4
   },
   {
     "id": 90,
@@ -1273,7 +1362,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: Đường 2 chiều - Biển 2: Giảm tốc độ nhường đường cho xe cơ giới đi ngược chiều - Biển 3: Được ưu tiên qua nơi đường hẹp.",
-    "image": "images/driving_a1/q_90.jpg"
+    "image": "images/driving_a1/q_90.jpg",
+    "chapter": 4
   },
   {
     "id": 91,
@@ -1287,7 +1377,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Nhường đường cho người đi bộ - Biển 2: Có trẻ em đi ngang qua - Biển 3: Đường người đi xe đạp cắt qua.",
-    "image": "images/driving_a1/q_91.jpg"
+    "image": "images/driving_a1/q_91.jpg",
+    "chapter": 4
   },
   {
     "id": 92,
@@ -1301,7 +1392,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Hết hạn chế tốc độ tối đa cho phép - Biển 2: Hết mọi lệnh cấm - Biển 3: Hết hạn chế tốc độ tối thiểu.",
-    "image": "images/driving_a1/q_92.jpg"
+    "image": "images/driving_a1/q_92.jpg",
+    "chapter": 4
   },
   {
     "id": 93,
@@ -1314,7 +1406,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Đường dành cho xe thô sơ - Biển 2: Nơi đỗ xe dành cho người khuyết tật - Biển 3: Dành cho người đi bộ.",
-    "image": "images/driving_a1/q_93.jpg"
+    "image": "images/driving_a1/q_93.jpg",
+    "chapter": 4
   },
   {
     "id": 94,
@@ -1328,7 +1421,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Vạch 1: rẽ phải - Vạch 2: đi thẳng và rẽ trái - Vạch 3: đi thẳng và rẽ phải.",
-    "image": "images/driving_a1/q_94.jpg"
+    "image": "images/driving_a1/q_94.jpg",
+    "chapter": 1
   },
   {
     "id": 95,
@@ -1342,7 +1436,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Tại vòng xuyến không có biển báo nhường xe đi bên phải ( có biển báo nhường xe đi bên trái) Thứ tự: Xe mô tô – xe tải – xe khách – xe con.",
-    "image": "images/driving_a1/q_95.jpg"
+    "image": "images/driving_a1/q_95.jpg",
+    "chapter": 5
   },
   {
     "id": 96,
@@ -1356,7 +1451,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Gặp CSGT ưu tiên chọn đáp án 3, trừ trường hợp CSGT đừng trên bục giơ 2 tay sẽ chọn đáp án 4.",
-    "image": "images/driving_a1/q_96.jpg"
+    "image": "images/driving_a1/q_96.jpg",
+    "chapter": 5
   },
   {
     "id": 97,
@@ -1370,7 +1466,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hướng mũi tên đỏ xe đang di chuyển, không có mũi tên đỏ là đang dừng. Xe con trên làn rẽ phải có tín hiệu đèn xanh– rẽ phải đúng -&gt; Xe tải trên làn đi thẳng có tín hiệu đèn đỏ dừng lại nhưng đi thẳng là sai -&gt; Xe khách trên làn rẽ trái có tín hiệu đèn xanh nhưng đi thẳng sai -&gt; Xe mô tô trên làn có tín hiệu đỏ dừng lại nhưng đi thẳng là sai.",
-    "image": "images/driving_a1/q_97.jpg"
+    "image": "images/driving_a1/q_97.jpg",
+    "chapter": 5
   },
   {
     "id": 98,
@@ -1384,7 +1481,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Câu hỏi có chữ Vạch thì chọn đáp án có chữ Vạch đầu câu",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 99,
@@ -1397,7 +1495,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Xe không kiểm định hoặc quá hạn = cấm.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 100,
@@ -1410,7 +1509,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Các hành vi như lạng lách, đánh võng, rú ga là đặc trưng của việc phá hoại trật tự an toàn giao thông → luôn chọn là hành vi bị cấm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 101,
@@ -1423,7 +1523,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Chậm (nhường) phải, nhanh (vượt) trái ➡ Nhớ câu nói này để dễ dàng chọn đáp án đúng khi hỏi về vị trí di chuyển của phương tiện tốc độ thấp.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 102,
@@ -1436,7 +1537,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Cấm quay đầu xe trên cầu và trong hầm, đây là quy định.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 103,
@@ -1449,7 +1551,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Chở 2 khi thật cần: áp giải, người bệnh, trẻ nhỏ, người yếu. ➡ Nhớ kỹ những trường hợp đặc biệt cho phép chở 2 người.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 104,
@@ -1462,7 +1565,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Chậm (nhường) phải, nhanh (vượt) trái ➡ Nhớ câu nói này để dễ dàng chọn đáp án đúng khi hỏi về vị trí di chuyển của phương tiện tốc độ thấp",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 105,
@@ -1476,7 +1580,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Gặp Xe ưu tiên đang làm nhiệm vụ bắt buộc phải nhường, không được vượt.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 106,
@@ -1490,7 +1595,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "16 - dưới 18 tuổi chỉ được điều khiển xe gắn máy.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 107,
@@ -1503,7 +1609,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Trong khu vực đông dân cư: Đường đôi có 2 làn đường: 60km/h - Đường 1 chiều có 1 làn đường: 50km/h.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 108,
@@ -1516,7 +1623,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đi đúng làn, bên phải, mũ bảo hiểm chuẩn ➡ Câu trả lời đầy đủ nhất, đầy đủ các quy định cơ bản về văn hóa giao thông.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 109,
@@ -1529,7 +1637,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Chăm xe tốt + chạy hợp lý = tiết kiệm nhiên liệu. Nên chọn cả hai ý trên.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 110,
@@ -1543,7 +1652,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Đi chậm, quan sát sớm, phanh nhẹ, giữ cân bằng -&gt; bình tĩnh xử lý để đảm bảo an toàn.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 111,
@@ -1557,7 +1667,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Cấm các phương tiện rẽ trái - Biển 2: Cấm các phương tiện rẽ trái và quay đầu - Biển 3: Cấm xe ô tô rẽ trái và quay đầu.",
-    "image": "images/driving_a1/q_111.jpg"
+    "image": "images/driving_a1/q_111.jpg",
+    "chapter": 4
   },
   {
     "id": 112,
@@ -1570,7 +1681,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Thứ nhất: Đây là loại biển báo cấm kèm chú thích xe ô tô (xe cơ giới) và xe mô tô (có người ngồi trên). Thứ 2, biển phụ chỉ định hai chiều trái phải. Vì thế chọn đáp án 2.",
-    "image": "images/driving_a1/q_112.jpg"
+    "image": "images/driving_a1/q_112.jpg",
+    "chapter": 4
   },
   {
     "id": 113,
@@ -1582,7 +1694,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Đây là biển báo hiệu lệnh đi kèm số chỉ định, thể hiện rằng người lái xe cần duy trì tốc độ từ 60 trở lên -&gt; biển báo tốc độ tối thiểu.",
-    "image": "images/driving_a1/q_113.jpg"
+    "image": "images/driving_a1/q_113.jpg",
+    "chapter": 4
   },
   {
     "id": 114,
@@ -1595,7 +1708,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: Đường cần vòng - Biển 2: Cửa chui - Biển 3: Đường hầm (có chiều sâu).",
-    "image": "images/driving_a1/q_114.jpg"
+    "image": "images/driving_a1/q_114.jpg",
+    "chapter": 4
   },
   {
     "id": 115,
@@ -1608,7 +1722,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Đường 2 chiều (mũi tên lên xuống trước mặt) - Biển 2: Giao nhau (cắt ngang) đường 2 chiều - Biển 3: Đường đôi.",
-    "image": "images/driving_a1/q_115.jpg"
+    "image": "images/driving_a1/q_115.jpg",
+    "chapter": 4
   },
   {
     "id": 116,
@@ -1620,7 +1735,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "9 Lên 10 Xuống.",
-    "image": "images/driving_a1/q_116.jpg"
+    "image": "images/driving_a1/q_116.jpg",
+    "chapter": 4
   },
   {
     "id": 117,
@@ -1634,7 +1750,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: Hết cấm tốc độ tối đa - Biển 2: Hết mọi lệnh cấm - Biển 3: Hết tốc độ tối thiểu.",
-    "image": "images/driving_a1/q_117.jpg"
+    "image": "images/driving_a1/q_117.jpg",
+    "chapter": 4
   },
   {
     "id": 118,
@@ -1647,7 +1764,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển báo này báo trước vị trí trạm Cảnh sát Giao thông đường bộ để người tham gia giao thông nhận biết khu vực có lực lượng CSGT làm nhiệm vụ kiểm tra, kiểm soát giao thông. Phải giảm tốc độ và không được vượt.",
-    "image": "images/driving_a1/q_118.jpg"
+    "image": "images/driving_a1/q_118.jpg",
+    "chapter": 4
   },
   {
     "id": 119,
@@ -1661,7 +1779,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hai chiều màu vàng, cùng chiều (một chiều) màu trắng. Vạch đứt được đè, vạch liền thì không!",
-    "image": "images/driving_a1/q_119.jpg"
+    "image": "images/driving_a1/q_119.jpg",
+    "chapter": 4
   },
   {
     "id": 120,
@@ -1675,7 +1794,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo chính cấm dừng và cấm đỗ, biển phụ hình xe tải, nên chỉ cấm tải.",
-    "image": "images/driving_a1/q_120.jpg"
+    "image": "images/driving_a1/q_120.jpg",
+    "chapter": 5
   },
   {
     "id": 121,
@@ -1688,7 +1808,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hướng mũi tên đỏ xe đang di chuyển, không có mũi tên đỏ là đang dừng. Xe con đang trên làn có tín hiệu đèn xanh làn rẽ phải – rẽ phải đúng. Xe tải trên làn đi thẳng có tín hiệu đèn xanh - đi thẳng đúng. Xe khách trên làn rẽ trái có tín hiệu đèn đỏ dừng lại đúng/ Xe mô tô trên làn rẽ trái có tín hiệu đỏ dừng lại là đúng.",
-    "image": "images/driving_a1/q_121.jpg"
+    "image": "images/driving_a1/q_121.jpg",
+    "chapter": 5
   },
   {
     "id": 122,
@@ -1702,7 +1823,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hướng mũi tên đỏ xe đang di chuyển, không có mũi tên đỏ là đang dừng. Xe con trên làn rẽ phải có tín hiệu đèn đỏ nhưng rẽ phải sai. Xe tải trên làn đi thẳng có tín hiệu đèn đỏ - đi thẳng sai. Xe khách trên làn rẽ trái có tín hiệu đèn xanh- rẽ trái đúng. Xe mô tô trên làn rẽ trái có tín hiệu đèn xanh – rẽ trái đúng.",
-    "image": "images/driving_a1/q_122.jpg"
+    "image": "images/driving_a1/q_122.jpg",
+    "chapter": 5
   },
   {
     "id": 123,
@@ -1715,7 +1837,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Nếu hỏi người điều khiển phương tiện → chọn nhóm người trực tiếp cầm lái.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 124,
@@ -1728,7 +1851,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Đua xe phải được cấp phép – Không tự ý dù vắng người hay được ủng hộ.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 125,
@@ -1741,7 +1865,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Có 5 nhóm biển báo.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 126,
@@ -1754,7 +1879,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Xe thô sơ đi làm bên phải trong cùng, xe cơ giới đi làn bên trái.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 127,
@@ -1768,7 +1894,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Quan sát trước – Báo hiệu sau – Đi đúng làn ➡ Ba bước chuẩn: Nhìn – Xi nhan – Lấn đúng làn → mới được rẽ.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 128,
@@ -1782,7 +1909,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": true,
     "explain": "👉 Dàn hàng – Kéo đẩy – Diễn xiếc ➡ Hành vi nào gây nguy hiểm, mất kiểm soát, cản trở giao thông.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 129,
@@ -1795,7 +1923,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Nguyên tắc vàng: Giảm tốc độ + Đi về bên phải khi gặp xe đi ngược chiều.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 130,
@@ -1808,7 +1937,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Không rào chắn – Dừng bên phải – Quan sát kỹ – Tàu không đến – Mới được qua. Cứ đến đường sắt không chắn thì luôn dừng lại, quan sát, và chỉ qua khi an toàn tuyệt đối.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 131,
@@ -1821,7 +1951,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hạng A1: điều khiển xe moto 2 bánh có dung tích từ 125cc và động cơ điện 11kw",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 132,
@@ -1835,7 +1966,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Ngoài khu vực dân cư xe mô tô chạy được: Đường 2 làn đường: 70km/h .Đường 1 làn đường: 60km/h. Mẹo nhỏ: bạn đang thi bằng mô tô thấy đáp án có mô tô thì chọn nhé!",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 133,
@@ -1848,7 +1980,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đã uống rượu bia, thì không được lái xe.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 134,
@@ -1861,7 +1994,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Khi tầm nhìn hạn chế thì phải giảm tốc độ.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 135,
@@ -1875,7 +2009,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Cấm nhỏ cấm luôn lớn theo thứ tự: xe con – xe khách - xe tải - xe máy kéo - xe kéo kéo rơ móc. Nên cấm tải cấm luôn máy kéo chọn cả 2 và 3.",
-    "image": "images/driving_a1/q_135.jpg"
+    "image": "images/driving_a1/q_135.jpg",
+    "chapter": 4
   },
   {
     "id": 136,
@@ -1888,7 +2023,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: cấm rẽ trái. Biển 2: Khu vực được phép quay đầu xe, rẽ trái được.",
-    "image": "images/driving_a1/q_136.jpg"
+    "image": "images/driving_a1/q_136.jpg",
+    "chapter": 4
   },
   {
     "id": 137,
@@ -1901,7 +2037,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển phụ báo hiệu chiều dài đoạn đường cấp bóp còi.",
-    "image": "images/driving_a1/q_137.jpg"
+    "image": "images/driving_a1/q_137.jpg",
+    "chapter": 4
   },
   {
     "id": 138,
@@ -1914,7 +2051,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Nhường đường cho người đi bộ - Biển 2: Cấm người đi bộ - Biển 3: Dành cho người đi bộ.",
-    "image": "images/driving_a1/q_138.jpg"
+    "image": "images/driving_a1/q_138.jpg",
+    "chapter": 5
   },
   {
     "id": 139,
@@ -1927,7 +2065,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo nơi giao nhau vuông góc đường bộ không rào chắn.",
-    "image": "images/driving_a1/q_139.jpg"
+    "image": "images/driving_a1/q_139.jpg",
+    "chapter": 4
   },
   {
     "id": 140,
@@ -1940,7 +2079,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: đường 2 chiều - Biển 2: đường đôi - Biển 3: kết thúc đường đôi.",
-    "image": "images/driving_a1/q_140.jpg"
+    "image": "images/driving_a1/q_140.jpg",
+    "chapter": 4
   },
   {
     "id": 141,
@@ -1952,7 +2092,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo hiệu đường ổ gà, lồi lõm ( 1 là gồ, 2 là ổ gà).",
-    "image": "images/driving_a1/q_141.jpg"
+    "image": "images/driving_a1/q_141.jpg",
+    "chapter": 4
   },
   {
     "id": 142,
@@ -1966,7 +2107,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Biển 1: Hết tốc độ tối đa - Biển 2: Hết mọi lệnh cấm - Biển 3: Hết cấm vượt.",
-    "image": "images/driving_a1/q_142.jpg"
+    "image": "images/driving_a1/q_142.jpg",
+    "chapter": 4
   },
   {
     "id": 143,
@@ -1978,7 +2120,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo dạng hình tròn, nền xanh là biển báo hiệu lệnh bắt buộc phải tuân thủ theo!",
-    "image": "images/driving_a1/q_143.jpg"
+    "image": "images/driving_a1/q_143.jpg",
+    "chapter": 5
   },
   {
     "id": 144,
@@ -1992,7 +2135,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Hướng mũi tên đỏ xe đang di chuyển, không có mũi tên đỏ là đang dừng. Xe con trên làn rẽ phải có tín hiệu đèn xanh - rẽ phải đúng. Xe tải trên làn đi thẳng có tín hiệu đèn đỏ dừng lại rẽ trái sai. Xe tải trên làn rẽ phải có tín hiệu đèn xanh nhưng rẽ trái sai. Xe khách trên làn rẽ trái có tín hiệu đèn xanh nhưng đi thẳng sai. Xe mô tô trên làn rẽ trái có tín hiệu đèn xanh nhưng rẽ phải sai. Nên chỉ có xe con đúng",
-    "image": "images/driving_a1/q_144.jpg"
+    "image": "images/driving_a1/q_144.jpg",
+    "chapter": 5
   },
   {
     "id": 145,
@@ -2005,7 +2149,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "💡 Cần phân biệt rõ: - Biển ở hướng 2 là biển CẤM MÔ TÔ (xe ≥ 50 phân khối). Biển này KHÔNG cấm xe gắn máy (xe &lt; 50 phân khối). - Biển ở hướng 3 là biển CẤM Ô TÔ. Cũng KHÔNG cấm xe gắn máy. Đề bài đang hỏi xe của người lái là &quot;xe gắn máy&quot; (xe nhỏ dưới 50cc). Do đó, xe gắn máy không bị cấm ở hướng nào cả và được phép đi CẢ 3 HƯỚNG. (Mẹo dễ nhớ: Hỏi Mô tô -&gt; Chọn 2 hướng. Hỏi Gắn máy -&gt; Chọn 3 hướng).",
-    "image": "images/driving_a1/q_145.jpg"
+    "image": "images/driving_a1/q_145.jpg",
+    "chapter": 5
   },
   {
     "id": 146,
@@ -2019,7 +2164,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Hỏi moto chọn 2 hướng, hỏi gắn máy chọn 3 hướng.",
-    "image": "images/driving_a1/q_146.jpg"
+    "image": "images/driving_a1/q_146.jpg",
+    "chapter": 5
   },
   {
     "id": 147,
@@ -2032,7 +2178,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Phía trước có biển báo giao nhau với đường ưu tiên (tam giác ngược) vì thế bạn phải nhường đường và đi sau cùng. Chọn đáp án số 3.",
-    "image": "images/driving_a1/q_147.jpg"
+    "image": "images/driving_a1/q_147.jpg",
+    "chapter": 5
   },
   {
     "id": 148,
@@ -2045,7 +2192,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Người lái xe là điều khiển xe cơ giới",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 149,
@@ -2057,7 +2205,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": true,
     "explain": "Đua xe trái phép sẽ bị phạt hành chính hoặc hình sự nếu gây ra hậu quả nghiêm trọng (tai nạn chết người, thương tích nặng, thiệt hại tài sản lớn...).",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 150,
@@ -2070,7 +2219,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Tại nơi có vạch kẻ đường dành cho người đi bộ hoặc khi người đi bộ, người khuyết tật sử dụng xe lăn đang qua đường, người lái xe bắt buộc phải: • Quan sát kỹ lưỡng tình huống phía trước. • Giảm tốc độ hoặc dừng lại hẳn để nhường đường. • Bảo đảm tuyệt đối an toàn cho người đi bộ và người khuyết tật.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 151,
@@ -2084,7 +2234,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Xe sau xin vượt – nếu an toàn thì nhường.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 152,
@@ -2097,7 +2248,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Muốn rẽ thì phải báo trước (bật xi – nhan)",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 153,
@@ -2111,7 +2263,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Gần chỗ tránh – phải tránh, xuống dốc – phải nhường lên dốc, có vật cản – phải dừng. Nên chọn cả ba ý trên.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 154,
@@ -2124,7 +2277,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Hễ có đèn đỏ, chuông, chắn, là dừng bên phải trước vạch.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 155,
@@ -2137,7 +2291,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Hạng A1: Xe mô tô hai bánh có dung tích xi-lanh “ĐẾN’’125 cm3 hoặc có công suất động cơ điện đến 11 kW. Hạng A: bao gồm hạng A1 và trên 125cc.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 156,
@@ -2151,7 +2306,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Ngoài khu vực dân cư xe mô tô chạy được: Có 2 làn đường: 70km/h - Có 1 làn đường: 60km/h Tốc độ có xe mô tô là chọn.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 157,
@@ -2165,7 +2321,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Còi – chỉ dùng khi cần, không kéo dài, không ồn ào.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 158,
@@ -2178,7 +2335,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Giảm tốc độ để có thể xử lý kịp thời nếu có tình huống bất ngờ. Giữ vững tay lái tránh mất kiểm soát. Nhìn chếch sang lề đường bên phải để tránh ánh sáng chói trực tiếp, giảm mỏi mắt và đảm bảo quan sát an toàn.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 159,
@@ -2192,7 +2350,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Cấm xe mô tô - Biển 2: Cấm xe oto - Biển 3: Cấm xe tải - Cấm mô tô, cấm ô tô: cấm luôn cả 3 bánh.",
-    "image": "images/driving_a1/q_159.jpg"
+    "image": "images/driving_a1/q_159.jpg",
+    "chapter": 4
   },
   {
     "id": 160,
@@ -2205,7 +2364,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: cấm rẽ trái được quay đầu. Biển 2: báo hiệu nơi quay đầu. Nên cả 2 biển.",
-    "image": "images/driving_a1/q_160.jpg"
+    "image": "images/driving_a1/q_160.jpg",
+    "chapter": 4
   },
   {
     "id": 161,
@@ -2217,7 +2377,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Gặp đáp án có “KHÔNG ĐƯỢC PHÉP” thì chọn ngay là chắc chắn đúng.",
-    "image": "images/driving_a1/q_161.jpg"
+    "image": "images/driving_a1/q_161.jpg",
+    "chapter": 4
   },
   {
     "id": 162,
@@ -2231,7 +2392,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: NHƯỜNG đường cho người đi bộ. Biển 2: CẤM người đi bộ. Biển 3: DÀNH cho người đi bộ. Đường dành là biển màu xanh!",
-    "image": "images/driving_a1/q_162.jpg"
+    "image": "images/driving_a1/q_162.jpg",
+    "chapter": 4
   },
   {
     "id": 163,
@@ -2244,7 +2406,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau đường không ưu tiên. Biển 2: giao nhau với đường ưu tiên. Biển 3: hết đoạn đường ưu tiên.",
-    "image": "images/driving_a1/q_163.jpg"
+    "image": "images/driving_a1/q_163.jpg",
+    "chapter": 4
   },
   {
     "id": 164,
@@ -2257,7 +2420,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau đường 2 chiều. Biển 2: báo hiệu đường đôi. Biển 3: tuyến đường cùng cấp.",
-    "image": "images/driving_a1/q_164.jpg"
+    "image": "images/driving_a1/q_164.jpg",
+    "chapter": 4
   },
   {
     "id": 165,
@@ -2270,7 +2434,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đây là biển cảnh báo trước gần tới đoạn đường có hiện tượng đất đá từ trên ta luy dương sụt lở bất ngờ gây nguy hiểm cho xe cộ và người đi đường.",
-    "image": "images/driving_a1/q_165.jpg"
+    "image": "images/driving_a1/q_165.jpg",
+    "chapter": 4
   },
   {
     "id": 166,
@@ -2284,7 +2449,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: hết tốc độ tối đa - Biển 2: hết mọi lệnh cấm - Biển 3: hết tốc độ tối thiểu.",
-    "image": "images/driving_a1/q_166.jpg"
+    "image": "images/driving_a1/q_166.jpg",
+    "chapter": 4
   },
   {
     "id": 167,
@@ -2298,7 +2464,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1 và Biển 3: báo hiệu cầu vượt liên thông - Biển 2: hiệu cầu vượt cắt qua hình tròn. (Cầu vượt liên thông là có chữ trên biển báo)",
-    "image": "images/driving_a1/q_167.jpg"
+    "image": "images/driving_a1/q_167.jpg",
+    "chapter": 4
   },
   {
     "id": 168,
@@ -2312,7 +2479,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái. Trường hợp 3 biển báo đường ưu tiên: 1. Xe tải, xe mô tô trên đường ưu tiên, xe tải đi thẳng đi trước mới đến moto rẽ trái đi sau. 2. Xe khác, xe con trên đường không ưu sẽ đi sau xe tải và moto, tương tự xe khách đi thẳng – xe con rẽ trái",
-    "image": "images/driving_a1/q_168.jpg"
+    "image": "images/driving_a1/q_168.jpg",
+    "chapter": 5
   },
   {
     "id": 169,
@@ -2326,7 +2494,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo chính cấm dừng dỗ và biển phụ hướng trước sau nên cả 2 xe.",
-    "image": "images/driving_a1/q_169.jpg"
+    "image": "images/driving_a1/q_169.jpg",
+    "chapter": 5
   },
   {
     "id": 170,
@@ -2339,7 +2508,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "rong sa hình xuất hiện xe ưu tiên, chúng ta sẽ xét theo thứ tự Quân sự làm nhiệm vụ -&gt; xe công an làm nhiệm vụ, sau đó sẽ tới xe dân thường.",
-    "image": "images/driving_a1/q_170.jpg"
+    "image": "images/driving_a1/q_170.jpg",
+    "chapter": 5
   },
   {
     "id": 171,
@@ -2352,7 +2522,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi theo từng trường hợp: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái. Trường hợp 5: rẽ phải- đi thẳng- xe trái. Xe con rẽ phải- xe của bạn thi thẳng- xe moto cuối.",
-    "image": "images/driving_a1/q_171.jpg"
+    "image": "images/driving_a1/q_171.jpg",
+    "chapter": 5
   },
   {
     "id": 172,
@@ -2364,7 +2535,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Hỏi thô sơ hay cơ giới đều chọn đáp án có chữ “tương tự” cuối câu",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 173,
@@ -2377,7 +2549,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Điều khiển phương tiện có nồng độ cồn đều bị nghiêm cấm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 174,
@@ -2391,7 +2564,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Thấy nguy hiểm – phải quan sát, giảm tốc, có thể dừng. Tất cả các trường hợp trên đều gây nguy hiểm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 175,
@@ -2405,7 +2579,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Gặp CSGT ưu tiên chọn đáp án 3, còn lại trường hợp CSGT đứng trên bục giơ 2 tay như hình trên sẽ chọn đáp án 4.",
-    "image": "images/driving_a1/q_175.jpg"
+    "image": "images/driving_a1/q_175.jpg",
+    "chapter": 1
   },
   {
     "id": 176,
@@ -2418,7 +2593,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Không được dừng xe trên cống nước nơi không được phép và trong phạm vi đường sắt.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 177,
@@ -2431,7 +2607,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": true,
     "explain": "Không đi xe dàn hàng ngang và đi xe vào phần đường người đi bộ.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 178,
@@ -2444,7 +2621,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Gặp đường cong – phải giảm tốc độ, từ từ quan sát, không vượt ẩu.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 179,
@@ -2458,7 +2636,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Đến đường ray gặp đèn đỏ, chuông kêu, chắn hạ – phải dừng bên phải trước vạch. Chọn cả ba ý trên.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 180,
@@ -2471,7 +2650,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Hạng A: bao gồm hạng A1 và Xe mô tô hai bánh có dung tích xi-lanh trên 125 cm3 hoặc có công suất động cơ điện trên 11 kW.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 181,
@@ -2485,7 +2665,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Khi thấy biển báo nguy hiểm – phải giảm tốc, quan sát kỹ.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 182,
@@ -2499,7 +2680,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Khi gặp tai nạn phía trước nên dừng lại, hỗ trợ, giữ nguyên hiện trường, trình báo đầy đủ.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 183,
@@ -2512,7 +2694,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Để phanh hiệu quả cần: giảm hết ga, sử dụng cả 2 phanh trước và sau.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 184,
@@ -2525,7 +2708,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: cấm xe mô tô ( không cấm xe gắn máy) - Biển 2: cấm xe oto ( không cấm xe gắn máy) - Nên chọn cả 2 biển.",
-    "image": "images/driving_a1/q_184.jpg"
+    "image": "images/driving_a1/q_184.jpg",
+    "chapter": 4
   },
   {
     "id": 185,
@@ -2538,7 +2722,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Cấm rẽ trái nhưng được quay đầu xe - Biển 2: Bắt buộc rẽ trái. Nên chọn biển 1",
-    "image": "images/driving_a1/q_185.jpg"
+    "image": "images/driving_a1/q_185.jpg",
+    "chapter": 4
   },
   {
     "id": 186,
@@ -2551,7 +2736,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: cấm xe oto không cấm moto - Biển 2: cấm xe mô tô - Biển 3: cấm xe tải không cấm mô tô. Nên chọn 1 và 3",
-    "image": "images/driving_a1/q_186.jpg"
+    "image": "images/driving_a1/q_186.jpg",
+    "chapter": 4
   },
   {
     "id": 187,
@@ -2564,7 +2750,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: Đường dành cho xe thô sơ - Biển 2: cấm xe đạp - Biển 3: báo hiệu xe đạp cắt ngang. Nên chọn biển 1",
-    "image": "images/driving_a1/q_187.jpg"
+    "image": "images/driving_a1/q_187.jpg",
+    "chapter": 4
   },
   {
     "id": 188,
@@ -2578,7 +2765,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau với đường không ưu tiên (bạn được ưu tiên đi trước) - Biển 2: giao nhau với đường ưu tiên (bạn phải nhường) - Biển 3: bắt đầu đường ưu tiên (bạn được ưu tiên đi trước). Nên chọn biển 1 và 3",
-    "image": "images/driving_a1/q_188.jpg"
+    "image": "images/driving_a1/q_188.jpg",
+    "chapter": 4
   },
   {
     "id": 189,
@@ -2591,7 +2779,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: đường 2 chiều - Biển 2: giao nhau đường 2 chiều - Biển 3: đường cùng cấp.",
-    "image": "images/driving_a1/q_189.jpg"
+    "image": "images/driving_a1/q_189.jpg",
+    "chapter": 4
   },
   {
     "id": 190,
@@ -2604,7 +2793,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: Biển ghép tốc độ tối đa cho phép trên từng làn đường - Biển 2: Biển ghép tốc độ tối đa cho phép theo phương tiện, trên từng làn đường. Nên chọn cả 2 biển quy định tốc độ tối đa trên từng làn đường.",
-    "image": "images/driving_a1/q_190.jpg"
+    "image": "images/driving_a1/q_190.jpg",
+    "chapter": 4
   },
   {
     "id": 191,
@@ -2618,7 +2808,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: bắt buộc rẽ trái - Biển 2: bắt buộc rẽ trái và rẽ phải (lưu ý biển đạt sau ngã 3, ngã 4) - Biển 3: bắt buộc đi thẳng hoặc rẽ trái (được phép quay đầu xe). Nên chọn biển 3",
-    "image": "images/driving_a1/q_191.jpg"
+    "image": "images/driving_a1/q_191.jpg",
+    "chapter": 4
   },
   {
     "id": 192,
@@ -2631,7 +2822,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: báo hiệu cầu vượt liên thông - Biển 2, biển 3: báo hiệu cầu vượt cắt qua",
-    "image": "images/driving_a1/q_192.jpg"
+    "image": "images/driving_a1/q_192.jpg",
+    "chapter": 4
   },
   {
     "id": 193,
@@ -2645,7 +2837,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái. Trường hợp 4: bên phải xe nào trống xe đó đi trước Xe mô tô bên tay phải trống nên đi trước – xe con đi thẳng- xe tải rẽ trái.",
-    "image": "images/driving_a1/q_193.jpg"
+    "image": "images/driving_a1/q_193.jpg",
+    "chapter": 5
   },
   {
     "id": 194,
@@ -2659,7 +2852,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Xe tải đỗ ngược chiều, còn xe ô tô và mô tô đỗ trên vạch người đi bộ nên cả 3 đều sai.",
-    "image": "images/driving_a1/q_194.jpg"
+    "image": "images/driving_a1/q_194.jpg",
+    "chapter": 5
   },
   {
     "id": 195,
@@ -2673,7 +2867,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Xe con E đi và làn dành cho xe mô tô - Xe mô tô C đi vào làn danh cho xe ô tô. Mẹo thấy E là chọn!",
-    "image": "images/driving_a1/q_195.jpg"
+    "image": "images/driving_a1/q_195.jpg",
+    "chapter": 5
   },
   {
     "id": 196,
@@ -2686,7 +2881,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái. Trường hợp 4: bên phải xe nào trống xe đó đi trước. Xe đạp bên tay phải trống đi trước – xe mô tô đi thẳng- xe của bạn rẽ trái đi cuối.",
-    "image": "images/driving_a1/q_196.jpg"
+    "image": "images/driving_a1/q_196.jpg",
+    "chapter": 5
   },
   {
     "id": 197,
@@ -2699,7 +2895,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Hỏi thô sơ hay cơ giới đều chọn đáp án có chữ “tương tự” cuối câu",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 198,
@@ -2712,7 +2909,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Đã uống rượu bia thì không lái xe, đồng nghĩa là Người điều khiển xe ô tô, xe mô tô, xe đạp, xe gắn máy không được vi phạm. Người ngồi sau có thể là rơi vào trường hợp say và nhờ người khác chở về, không vi phạm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 199,
@@ -2725,7 +2923,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": true,
     "explain": "Trên đường cong hạn chế tầm nhìn thì không được vượt vì rất nguy hiểm!",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 200,
@@ -2739,7 +2938,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": true,
     "explain": "Hành vi kéo, đẩy phương tiện khác khi tham gia giao thông cực kỳ nguy hiểm nên không được phép.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 201,
@@ -2753,7 +2953,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Việc sử dụng ô khi ngồi trên xe máy có thể gây mất cân bằng, che khuất tầm nhìn và ảnh hưởng đến an toàn giao thông. Vì thế người ngồi sau không được phép sử dụng.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 202,
@@ -2766,7 +2967,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Đang trên đường không ưu tiên, bắt buộc phải nhường đường cho xe từ bất kỳ hướng nào tới.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 203,
@@ -2779,7 +2981,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Trong hầm đường bộ không được dừng đỗ xe, đây là quy định!",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 204,
@@ -2792,7 +2995,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Khi tham gia giao thông yêu cầu người điều khiển phải đủ độ tuổi theo quy định, phải có GPLX còn điểm và còn thời hạn sử dụng được cấp bởi cơ quan có thẩm quyền.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 205,
@@ -2805,7 +3009,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Gặp xe buýt nên dừng – quan sát, giảm tốc, đảm bảo an toàn. Không nên vượt vì rất nguy hiểm.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 206,
@@ -2818,7 +3023,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Gặp tai nạn nên cứu người, báo tin, bảo vệ hiện trường, cung cấp thông tin cho cơ quan có thẩm quyền.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 207,
@@ -2831,7 +3037,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Khi điều khiển phương tiện mô tô hoặc ô tô thì không được phép sử dụng điện thoại, vì thế chúng ta nên giảm tốc độ và lựa chọn nơi cho phép dừng đỗ để sử dụng theo đúng quy định.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 208,
@@ -2844,7 +3051,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: cấm xe mô tô - Biển 2: cấm xe ô tô - Biển 3: cấm xe tải.",
-    "image": "images/driving_a1/q_208.jpg"
+    "image": "images/driving_a1/q_208.jpg",
+    "chapter": 4
   },
   {
     "id": 209,
@@ -2857,7 +3065,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: biển báo cấm - Biển 2: cấm đi ngược chiều - Biển 3: cấm đỗ xe.",
-    "image": "images/driving_a1/q_209.jpg"
+    "image": "images/driving_a1/q_209.jpg",
+    "chapter": 4
   },
   {
     "id": 210,
@@ -2870,7 +3079,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: cấm xe ô tô - Biển 2: cấm xe mô tô - Biển 3: cấm xe tải.",
-    "image": "images/driving_a1/q_210.jpg"
+    "image": "images/driving_a1/q_210.jpg",
+    "chapter": 4
   },
   {
     "id": 211,
@@ -2884,7 +3094,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau với đường sắt có rào chắn - Biển 2: giao nhau đường ưu tiên - Biển 3: giao nhau tín hiệu đèn. Biển báo hình tam giác nền vàng viền đỏ là biển báo nguy hiểm nên chọn cả 3 biển.",
-    "image": "images/driving_a1/q_211.jpg"
+    "image": "images/driving_a1/q_211.jpg",
+    "chapter": 4
   },
   {
     "id": 212,
@@ -2898,7 +3109,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau với đường không ưu tiên - Biển 2: giao nhau với đường ưu tiên (tam giác ngược) - Biển 3: bắt đầu đường ưu tiên. Nên chọn biển 1",
-    "image": "images/driving_a1/q_212.jpg"
+    "image": "images/driving_a1/q_212.jpg",
+    "chapter": 4
   },
   {
     "id": 213,
@@ -2911,7 +3123,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: báo hiệu kết thúc đường đôi - Biển 2, biển 3: chú ý chướng ngoại vật.",
-    "image": "images/driving_a1/q_213.jpg"
+    "image": "images/driving_a1/q_213.jpg",
+    "chapter": 4
   },
   {
     "id": 214,
@@ -2923,7 +3136,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: bắt đầu đoạn đường dành cho ô tôvà mô tô - Biển 2: kết thúc đoạn đường dành cho ô tô và mô tô.",
-    "image": "images/driving_a1/q_214.jpg"
+    "image": "images/driving_a1/q_214.jpg",
+    "chapter": 4
   },
   {
     "id": 215,
@@ -2937,7 +3151,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: bắt buộc rẽ trái - Biển 2: rẽ trái, rẽ phải - Biển 3: đi thẳng, rẽ phải. Nên chọn biển 1.",
-    "image": "images/driving_a1/q_215.jpg"
+    "image": "images/driving_a1/q_215.jpg",
+    "chapter": 4
   },
   {
     "id": 216,
@@ -2950,7 +3165,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1, Biển 2: cầu vượt cắt qua - Biển 3: biển báo cầu vồng. (Cầu vượt liên thông là có chữ trên biển báo)",
-    "image": "images/driving_a1/q_216.jpg"
+    "image": "images/driving_a1/q_216.jpg",
+    "chapter": 4
   },
   {
     "id": 217,
@@ -2962,7 +3178,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo stop nên xe mô tô dừng lại xe con đi.",
-    "image": "images/driving_a1/q_217.jpg"
+    "image": "images/driving_a1/q_217.jpg",
+    "chapter": 5
   },
   {
     "id": 218,
@@ -2974,7 +3191,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Cả 2 xe đều đèn xanh: xe mô tô rẽ phải trước, xe con rẽ trái sau",
-    "image": "images/driving_a1/q_218.jpg"
+    "image": "images/driving_a1/q_218.jpg",
+    "chapter": 5
   },
   {
     "id": 219,
@@ -2988,7 +3206,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Xe con E đi làn đường dành cho xe mô tô - Xe mô tô D đi vào làn dành cho xe ô tô.",
-    "image": "images/driving_a1/q_219.jpg"
+    "image": "images/driving_a1/q_219.jpg",
+    "chapter": 5
   },
   {
     "id": 220,
@@ -3001,7 +3220,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Dừng trước vạch dừng 5m: xe con 6m đúng, xe moto 3m sai",
-    "image": "images/driving_a1/q_220.jpg"
+    "image": "images/driving_a1/q_220.jpg",
+    "chapter": 5
   },
   {
     "id": 221,
@@ -3014,7 +3234,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Phương tiện giao thông đường bộ gồm: xe xơ giới, xe thô sơ, xe máy chuyên dùng và các loại xe tương tự.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 222,
@@ -3028,7 +3249,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": true,
     "explain": "Chưa tuổi – không bằng – hết 12 điểm, tuyệt đối không giao xe!",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 223,
@@ -3042,7 +3264,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Gặp CSGT ưu tiên chọn đáp án 3, trừ trường hợp CSGT đứng trên bục giơ 2 tay sẽ chọn đáp án 4.",
-    "image": "images/driving_a1/q_223.jpg"
+    "image": "images/driving_a1/q_223.jpg",
+    "chapter": 1
   },
   {
     "id": 224,
@@ -3055,7 +3278,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Muốn vượt – nháy đèn, bấm còi đúng lúc, không ga rú ồn gây mất trật tự.",
-    "image": null
+    "image": null,
+    "chapter": 2
   },
   {
     "id": 225,
@@ -3067,7 +3291,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": true,
     "explain": "Ở đáp án 1 là các hành vi bị nghiêm cấm, còn lại đáp án 2 là trường hợp được cho phép.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 226,
@@ -3080,7 +3305,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Người được chở trên xe mô tô không được kéo đẩy xe khác khi tham gia giao thông vì sẽ dễ gây ra tai nạn, mất an toàn.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 227,
@@ -3093,7 +3319,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Có báo hiệu đi theo vòng xuyến nhường đường bên trái, không có báo hiệu nhường đường bên phải. (Có trái, không phải)",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 228,
@@ -3107,7 +3334,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Các tình huống ở 3 đáp án 1, 2, 3 đều là nguy hiểm, vì thế khi gặp các trường hợp này người lái xe nên quan sát, giảm tốc độ hoặc dừng lại để đảm bảo an toàn.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 229,
@@ -3121,7 +3349,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Khi tham gia giao thông người lái xe cần có: chứng nhận đăng ký xe. Giấy phép lái xe phù hợp hoặc xuất trình vneid định danh điện tử cấp 2 trở lên.",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 230,
@@ -3134,7 +3363,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Để vận chuyển khách hoặc hàng hóa, người lái xe phải đảm bảo phương tiện đủ điều kiện an toàn đi kèm các loại giấy tờ cũng như tuân thủ theo quy định vận chuyển mà pháp luật đưa ra.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 231,
@@ -3147,7 +3377,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Giữ bình tĩnh, tuân thủ luật giao thông chính là cách thể hiện văn hóa, trách nhiệm và an toàn khi tham gia giao thông. Đường tắc không vội – Đúng luật là hay – Nhường nhau mới thoát!",
-    "image": "images/driving_a1/q_231.jpg"
+    "image": "images/driving_a1/q_231.jpg",
+    "chapter": 5
   },
   {
     "id": 232,
@@ -3160,7 +3391,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Khi điều khiển xe mô tô tay ga, chỉ sử dụng phanh trước sẽ rất nguy hiểm vì:Gây mất cân bằng, đặc biệt khi đi trên đường trơn trượt hoặc đang chạy với tốc độ cao và Dễ khiến bánh trước bị khóa, xe bị trượt hoặc lật, gây tai nạn nghiêm trọng.",
-    "image": "images/driving_a1/q_232.jpg"
+    "image": "images/driving_a1/q_232.jpg",
+    "chapter": 3
   },
   {
     "id": 233,
@@ -3174,7 +3406,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: cấm xe mô tô - Biển 2: cấm xe ô tô ( xe mô tô được phép đi vào) - Biển 3: cấm xe tải ( xe mô tô được phép đi vào). Nên chọn biển 2 và biển 3.",
-    "image": "images/driving_a1/q_233.jpg"
+    "image": "images/driving_a1/q_233.jpg",
+    "chapter": 4
   },
   {
     "id": 234,
@@ -3187,7 +3420,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: biển đường cấm - Biển 2: biển báo cấm đi ngược chiều - Biển 3: cấm đỗ xe. Nên chọn biển 1 và biển 2.",
-    "image": "images/driving_a1/q_234.jpg"
+    "image": "images/driving_a1/q_234.jpg",
+    "chapter": 4
   },
   {
     "id": 235,
@@ -3199,7 +3433,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển báo cấm các loại xe biển phụ.",
-    "image": "images/driving_a1/q_235.jpg"
+    "image": "images/driving_a1/q_235.jpg",
+    "chapter": 4
   },
   {
     "id": 236,
@@ -3212,7 +3447,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau đường sắt có rào chắn - Biển 2: giao nhau đường ưu tiên - Biển 3: giao nhau tín hiệu đèn.",
-    "image": "images/driving_a1/q_236.jpg"
+    "image": "images/driving_a1/q_236.jpg",
+    "chapter": 4
   },
   {
     "id": 237,
@@ -3226,7 +3462,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Biển 1: giao nhau tuyến đường cùng cấp - Biển 2: giao nhau đường không ưu tiên - Biển 3: giao nhau đường ưu tiên.",
-    "image": "images/driving_a1/q_237.jpg"
+    "image": "images/driving_a1/q_237.jpg",
+    "chapter": 4
   },
   {
     "id": 238,
@@ -3239,7 +3476,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển 1: cửa chui - Biển 2: đường hầm ( có chiều sâu) - Biển 3: cầu vồng",
-    "image": "images/driving_a1/q_238.jpg"
+    "image": "images/driving_a1/q_238.jpg",
+    "chapter": 4
   },
   {
     "id": 239,
@@ -3252,7 +3490,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Biển báo hiệu cho người lái xe biết số lượng làn đường trên mặt đường và hướng đi trên mỗi làn đường phải theo.",
-    "image": "images/driving_a1/q_239.jpg"
+    "image": "images/driving_a1/q_239.jpg",
+    "chapter": 4
   },
   {
     "id": 240,
@@ -3266,7 +3505,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Biển 1: bắt buộc rẽ trái - Biển 2: bắt buộc rẽ trái, rẽ phải - Biển 3: bắt buộc đi thẳng, rẽ phải.",
-    "image": "images/driving_a1/q_240.jpg"
+    "image": "images/driving_a1/q_240.jpg",
+    "chapter": 4
   },
   {
     "id": 241,
@@ -3280,7 +3520,8 @@ const DRIVING_DATA_2026 = {
     "answer": 1,
     "isParalyzed": false,
     "explain": "Đây là Chỉ dẫn khoảng cách đến làn đường cứu nạn (làn thoát xe khẩn cấp) dựa theo quy chuẩn kỹ thuật quốc gia.",
-    "image": "images/driving_a1/q_241.jpg"
+    "image": "images/driving_a1/q_241.jpg",
+    "chapter": 4
   },
   {
     "id": 242,
@@ -3292,7 +3533,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Gặp xe cứu thương (xe ưu tiên) đang làm nhiệm vụ bắt buộc phải nhường.",
-    "image": "images/driving_a1/q_242.jpg"
+    "image": "images/driving_a1/q_242.jpg",
+    "chapter": 5
   },
   {
     "id": 243,
@@ -3306,7 +3548,8 @@ const DRIVING_DATA_2026 = {
     "answer": 4,
     "isParalyzed": false,
     "explain": "Thứ tự xét xe đi: Xe trong giao lộ – Xe ưu tiên – Đường ưu tiên – Bên phải trống – rẽ phải – đi thẳng – rẽ trái. Trường hợp 4: bên phải xe nào trống xe đó được quyền đi trước. Xe mô tô + xe đạp bên phải trống đi trước, xe ô tô A đi thẳng, xe ô tô B rẽ trái đi cuối.",
-    "image": "images/driving_a1/q_243.jpg"
+    "image": "images/driving_a1/q_243.jpg",
+    "chapter": 5
   },
   {
     "id": 244,
@@ -3319,7 +3562,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "LƯU Ý: Rất nhiều học viên nhầm lẫn đây là Biển báo. Tuy nhiên, biển màu đen treo phía trên mỗi làn đường chính là HỆ THỐNG ĐÈN TÍN HIỆU GIAO THÔNG (nhìn kỹ sẽ thấy đèn sáng xanh/đỏ). Dựa theo tín hiệu đèn: Đèn xanh được đi, đèn đỏ phải dừng lại. Vì thế xe con và xe tải (đang gặp đèn đỏ) phải dừng lại; xe khách và mô tô (gặp đèn xanh) được đi.",
-    "image": "images/driving_a1/q_244.jpg"
+    "image": "images/driving_a1/q_244.jpg",
+    "chapter": 5
   },
   {
     "id": 245,
@@ -3332,7 +3576,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Không đi vào góc khuất của xe đầu kéo vì đây là điểm mù, rất nhiều vụ tai nạn giao thông xảy ra vì điều do đi và điểm mù của xe đầu kéo.",
-    "image": "images/driving_a1/q_245.jpg"
+    "image": "images/driving_a1/q_245.jpg",
+    "chapter": 1
   },
   {
     "id": 246,
@@ -3345,7 +3590,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Quy tắc vượt xe: chỉ vượt khi đủ điều kiện an toàn, có tín hiệu, giữ khoảng cách, không vượt ở cầu hẹp/đường cong/tầm nhìn hạn chế/giao cắt. Đáp án đúng mô tả đúng trình tự/tình huống an toàn: “Báo hiệu nhấp nháy bằng đèn chiếu sáng phía trước hoặc còi.”. (Câu điểm liệt – bắt buộc nắm chắc).",
-    "image": null
+    "image": null,
+    "chapter": 3
   },
   {
     "id": 247,
@@ -3358,7 +3604,8 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Quy tắc an toàn và pháp luật cấm tuyệt đối hành vi/điều kiện nêu trong đáp án đúng: “Từ 05 giờ đến 22 giờ.”, nhằm phòng ngừa nguy hiểm và vi phạm. Các đáp án còn lại không bao trùm đầy đủ hoặc không phù hợp.",
-    "image": null
+    "image": null,
+    "chapter": 4
   },
   {
     "id": 248,
@@ -3371,7 +3618,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": true,
     "explain": "Chọn đáp án đúng “Cả hai ý trên.” vì phù hợp với quy tắc/định nghĩa chính thức của Luật GTĐB và quy chuẩn báo hiệu. Các lựa chọn khác thiếu, sai hoặc trái quy tắc. (Câu điểm liệt – bắt buộc nắm chắc).",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 249,
@@ -3385,7 +3633,8 @@ const DRIVING_DATA_2026 = {
     "answer": 3,
     "isParalyzed": false,
     "explain": "Đây là câu hỏi khái niệm/định nghĩa. Đáp án đúng chính là nội dung định nghĩa chuẩn: “Xe buýt; ô tô đầu kéo kéo sơ mi rơ moóc (trừ ô tô đầu kéo kéo sơ mi rơ moóc xi téc); xe mô tô; ô tô chuyên dùng (trừ ô tô trộn vữa, ô tô trộn bê tông lưu động).”. Hãy ghi nhớ từ khóa trong câu hỏi và so khớp với định nghĩa đầy đủ nhất.",
-    "image": null
+    "image": null,
+    "chapter": 1
   },
   {
     "id": 250,
@@ -3398,11 +3647,12 @@ const DRIVING_DATA_2026 = {
     "answer": 2,
     "isParalyzed": false,
     "explain": "Mẹo nhớ: Đỗ xe là trạng thái đứng yên KHÔNG giới hạn thời gian. Dừng xe là trạng thái đứng yên CÓ giới hạn thời gian.",
-    "image": null
+    "image": null,
+    "chapter": 1
   }
 ],
-  // 5. Mẹo thi sát hạch lý thuyết siêu tốc
-    carParalyzed60: [
+
+  carParalyzed60: [
   {
     "id": 1,
     "question": "Hành vi nào dưới đây bị nghiêm cấm trên đường cao tốc?",
@@ -4306,8 +4556,9 @@ function generateA1ExamQuestions(mode = 'random') {
     return all.filter(q => /biển/i.test(q.question));
   }
   if (mode === 'chapter5') {
-    // Giải thế sa hình giao thông (41 câu)
-    return all.filter(q => q.image && !/biển/i.test(q.question));
+    // Giải thế sa hình giao thông (35 câu chuẩn Bộ GTVT)
+    const falseSaHinhIds = [73, 81, 94, 119, 231, 232];
+    return all.filter(q => q.image && !/biển/i.test(q.question) && !falseSaHinhIds.includes(q.id));
   }
 
   // Đề Thi Ngẫu Nhiên 25 câu chuẩn cấu trúc Cục Đường Bộ:
@@ -4381,6 +4632,7 @@ function startExamSimulation(rank = 'A1', mode = 'random', title = 'Đề Thi Th
     const regularSample = shuffle(all.filter(q => !q.isParalyzed)).slice(0, 33);
     activeExam.questions = shuffle([...pSample, ...regularSample]);
     activeExam.timeLeft = 22 * 60;
+    activeExam.modeNotice = 'Đề thi mô phỏng cấu trúc Hạng B (35 câu, thời gian 22 phút, đạt ≥ 32/35, không sai câu liệt), kết hợp ngân hàng 60 câu điểm liệt ô tô chính thức.';
   } else if (rank === 'C') {
     const all = DRIVING_DATA_2026.examA1Questions || [];
     const carP = DRIVING_DATA_2026.carParalyzed60 || [];
@@ -4389,6 +4641,7 @@ function startExamSimulation(rank = 'A1', mode = 'random', title = 'Đề Thi Th
     const regularSample = shuffle(all.filter(q => !q.isParalyzed)).slice(0, 38);
     activeExam.questions = shuffle([...pSample, ...regularSample]);
     activeExam.timeLeft = 24 * 60;
+    activeExam.modeNotice = 'Đề thi mô phỏng cấu trúc Hạng C (40 câu, thời gian 24 phút, đạt ≥ 36/40, không sai câu liệt), kết hợp ngân hàng 60 câu điểm liệt ô tô chính thức.';
   } else {
     activeExam.questions = generateA1ExamQuestions(mode);
     activeExam.timeLeft = 19 * 60;
@@ -4612,6 +4865,14 @@ function selectExamAnswer(ansNumber) {
   if (activeExam.isLearningMode) {
     if (ansNumber === q.answer) {
       if (typeof playDrivingSound === 'function') playDrivingSound('correct');
+      try {
+        let mastered = JSON.parse(localStorage.getItem('nb_mastered_question_ids') || '[]');
+        if (!mastered.includes(q.id)) {
+          mastered.push(q.id);
+          localStorage.setItem('nb_mastered_question_ids', JSON.stringify(mastered));
+          updateLearningDashboard();
+        }
+      } catch(e) {}
     } else {
       if (typeof playDrivingSound === 'function') playDrivingSound('wrong');
     }
@@ -4656,14 +4917,33 @@ function submitExamResult() {
   });
 
   const total = activeExam.questions.length;
-  // Quy chuẩn sát hạch A1/A: Đạt tối thiểu 24/25 câu và không sai câu điểm liệt
-  const passScore = (total === 25) ? 24 : Math.ceil(total * 0.96);
+  // Quy chuẩn sát hạch chính thức:
+  // - Hạng A1/A: 25 câu, đạt tối thiểu 24/25, không sai câu điểm liệt
+  // - Hạng B: 35 câu, đạt tối thiểu 32/35, không sai câu điểm liệt
+  // - Hạng C: 40 câu, đạt tối thiểu 36/40, không sai câu điểm liệt
+  let passScore = 24;
+  if (activeExam.type === 'B') passScore = 32;
+  else if (activeExam.type === 'C') passScore = 36;
+  else if (total === 25) passScore = 24;
+  else passScore = Math.ceil(total * 0.96);
+
   const isPass = (correctCount >= passScore) && !failedParalyzed;
 
   // Lưu câu sai vào localStorage
   if (currentWrongIds.length > 0) {
     saveWrongQuestions(currentWrongIds);
   }
+
+  // Lưu các câu đã làm đúng duy nhất để thống kê chính xác thực tế
+  try {
+    let mastered = JSON.parse(localStorage.getItem('nb_mastered_question_ids') || '[]');
+    activeExam.questions.forEach((q, idx) => {
+      if (activeExam.userAnswers[idx] === q.answer) {
+        if (!mastered.includes(q.id)) mastered.push(q.id);
+      }
+    });
+    localStorage.setItem('nb_mastered_question_ids', JSON.stringify(mastered));
+  } catch(e) {}
 
   // Lưu kết quả thi vào lịch sử nếu là bộ đề cố định
   if (activeExam.modeName && activeExam.modeName.includes('Đề Số ')) {
@@ -4784,21 +5064,30 @@ function previewQuestionDetail(idx) {
   `;
 }
 
-function renderQuestionLookup(filterChapter = 0, keyword = '') {
+function renderQuestionLookup(filterChapter = 0, keyword = '', btnEl = null) {
   const container = document.getElementById('drivingQuestionListContainer');
   if (!container) return;
 
-  let list = DRIVING_DATA_2026.examA1Questions;
+  const buttonsContainer = container.previousElementSibling;
+  if (buttonsContainer) {
+    const btns = buttonsContainer.querySelectorAll('button');
+    btns.forEach((b, idx) => {
+      const isActive = btnEl ? (b === btnEl) : (idx === filterChapter);
+      b.className = isActive ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm';
+    });
+  }
+
+  let list = DRIVING_DATA_2026.examA1Questions || [];
   if (filterChapter > 0) {
     list = list.filter(q => q.chapter === filterChapter);
   }
   if (keyword && keyword.trim() !== '') {
     const kw = keyword.toLowerCase().trim();
-    list = list.filter(q => q.question.toLowerCase().includes(kw) || q.explain.toLowerCase().includes(kw));
+    list = list.filter(q => (q.question && q.question.toLowerCase().includes(kw)) || (q.explain && q.explain.toLowerCase().includes(kw)));
   }
 
   if (list.length === 0) {
-    container.innerHTML = '<div style="text-align:center; padding:30px; color:#64748B;">Không tìm thấy câu hỏi nào phù hợp với từ khóa.</div>';
+    container.innerHTML = '<div style="text-align:center; padding:30px; color:#64748B;">Không tìm thấy câu hỏi nào phù hợp với từ khóa hoặc chương đã chọn.</div>';
     return;
   }
 
@@ -4809,10 +5098,11 @@ function renderQuestionLookup(filterChapter = 0, keyword = '') {
         ${q.isParalyzed ? '<span style="background:#FEF2F2; color:#DC2626; border:1px solid #FCA5A5; padding:2px 8px; border-radius:14px; font-size:0.72rem; font-weight:800;">⚠️ CÂU ĐIỂM LIỆT</span>' : ''}
       </div>
       <h4 style="font-size:1.02rem; color:#0F172A; line-height:1.5; margin-bottom:12px;">${q.question}</h4>
+      ${q.image ? `<div style="text-align:center; margin:12px 0; background:#F8FAFC; padding:10px; border-radius:8px; border:1px solid #E2E8F0;"><img src="${q.image}" class="question-img" alt="Hình minh họa câu ${q.id}" style="max-width:100%; max-height:280px; object-fit:contain; border-radius:6px;" onerror="this.onerror=null; handleDrivingImageError(this, ${q.id});"></div>` : ''}
       <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
         ${q.options.map((opt, oIdx) => `
-          <div style="padding:8px 12px; border-radius:6px; font-size:0.88rem; background:${(oIdx + 1 === q.answer) ? '#ECFDF5' : '#F8FAFC'}; color:${(oIdx + 1 === q.answer) ? '#065F46' : '#334155'}; font-weight:${(oIdx + 1 === q.answer) ? '700' : '400'}; border:1px solid ${(oIdx + 1 === q.answer) ? '#A7F3D0' : 'transparent'};">
-            ${(oIdx + 1 === q.answer) ? '✔ ' : ''}${opt}
+          <div style="padding:10px 14px; border-radius:8px; font-size:0.92rem; background:${(oIdx + 1 === q.answer) ? '#ECFDF5' : '#FFFFFF'}; color:${(oIdx + 1 === q.answer) ? '#065F46' : '#0F172A'}; font-weight:${(oIdx + 1 === q.answer) ? '700' : '600'}; border:1.5px solid ${(oIdx + 1 === q.answer) ? '#10B981' : '#CBD5E1'}; line-height:1.5; box-shadow:0 1px 3px rgba(15,23,42,0.03);">
+            ${(oIdx + 1 === q.answer) ? '<span style="color:#10B981; font-weight:900; margin-right:6px;">✔</span>' : ''}<b style="color:${(oIdx + 1 === q.answer) ? '#059669' : '#0F172A'}; margin-right:6px;">${oIdx + 1}.</b>${opt.replace(/^(\d+[\.\)]\s*)+/, '')}
           </div>
         `).join('')}
       </div>
@@ -4919,27 +5209,28 @@ function renderParalyzedQuestions(keyword = '') {
     const orderNum = (originalIndex >= 0 ? originalIndex + 1 : idx + 1);
 
     const optionsHtml = q.options.map((opt, oIdx) => {
+      const cleanOpt = opt.replace(/^(\d+[\.\)]\s*)+/, '');
       const isCorrect = (oIdx + 1 === q.answer);
       if (isCorrect) {
         return `
-          <div style="background:rgba(16,185,129,0.12); border:2px solid #10B981; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 4px 14px rgba(16,185,129,0.15); transition:all 0.2s;">
-            <div style="width:30px; height:30px; border-radius:50%; background:#10B981; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.95rem; flex-shrink:0; box-shadow:0 2px 6px rgba(16,185,129,0.35);">✓</div>
+          <div style="background:linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); border:2px solid #10B981; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 4px 14px rgba(16,185,129,0.12); transition:all 0.2s;">
+            <div style="width:32px; height:32px; border-radius:50%; background:#10B981; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1rem; flex-shrink:0; box-shadow:0 2px 6px rgba(16,185,129,0.35);">✓</div>
             <div style="flex:1;">
-              <div style="font-size:0.95rem; color:#F8FAFC; font-weight:700; line-height:1.6;">
-                <span style="color:#34D399; font-weight:800; margin-right:4px;">${oIdx + 1}.</span> ${highlightDangerKeywords(opt, keyword)}
+              <div style="font-size:0.98rem; color:#064E3B; font-weight:750; line-height:1.6;">
+                <span style="color:#059669; font-weight:900; margin-right:6px;">${oIdx + 1}.</span> ${highlightDangerKeywords(cleanOpt, keyword)}
               </div>
             </div>
-            <span style="background:#10B981; color:#FFF; font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; white-space:nowrap; letter-spacing:0.04em; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 4px rgba(16,185,129,0.2);">
+            <span style="background:#10B981; color:#FFF; font-size:0.75rem; font-weight:800; padding:5px 12px; border-radius:20px; white-space:nowrap; letter-spacing:0.04em; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 6px rgba(16,185,129,0.25);">
               <span>✔</span> ĐÁP ÁN ĐÚNG
             </span>
           </div>
         `;
       } else {
         return `
-          <div style="background:rgba(255,255,255,0.03); border:1.5px solid rgba(255,255,255,0.08); border-radius:12px; padding:13px 18px; display:flex; align-items:flex-start; gap:14px; transition:all 0.15s;" onmouseenter="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.15)';" onmouseleave="this.style.background='rgba(255,255,255,0.03)'; this.style.borderColor='rgba(255,255,255,0.08)';">
-            <div style="width:30px; height:30px; border-radius:50%; background:rgba(255,255,255,0.08); color:#94A3B8; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.86rem; flex-shrink:0;">${oIdx + 1}</div>
-            <div style="flex:1; font-size:0.92rem; color:#CBD5E1; line-height:1.55;">
-              ${highlightDangerKeywords(opt, keyword)}
+          <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 2px 6px rgba(15,23,42,0.04); transition:all 0.15s;" onmouseenter="this.style.background='#F8FAFC'; this.style.borderColor='#94A3B8';" onmouseleave="this.style.background='#FFFFFF'; this.style.borderColor='#CBD5E1';">
+            <div style="width:32px; height:32px; border-radius:50%; background:#F1F5F9; border:1.5px solid #CBD5E1; color:#0F172A; display:flex; align-items:center; justify-content:center; font-weight:850; font-size:0.92rem; flex-shrink:0;">${oIdx + 1}</div>
+            <div style="flex:1; font-size:0.96rem; color:#0F172A; font-weight:600; line-height:1.6;">
+              ${highlightDangerKeywords(cleanOpt, keyword)}
             </div>
           </div>
         `;
@@ -4948,12 +5239,12 @@ function renderParalyzedQuestions(keyword = '') {
 
     const imgHtml = (q.image || q.source_image) ? `
       <div style="margin:14px 0 16px; text-align:center;">
-        <img src="./images/driving_a1/q_${q.id}.jpg" alt="Minh họa câu ${q.id}" onerror="handleDrivingImageError(this, ${q.id})" style="max-height:220px; max-width:100%; border-radius:12px; border:1.5px solid rgba(255,255,255,0.1); box-shadow:0 4px 14px rgba(0,0,0,0.3);">
+        <img src="./images/driving_a1/q_${q.id}.jpg" alt="Minh họa câu ${q.id}" onerror="handleDrivingImageError(this, ${q.id})" style="max-height:220px; max-width:100%; border-radius:12px; border:1.5px solid rgba(0,0,0,0.1); box-shadow:0 4px 14px rgba(0,0,0,0.08);">
       </div>
     ` : '';
 
     return `
-      <div class="promax-paralyzed-card" style="border-radius:18px; padding:24px 28px 24px 32px; margin-bottom:22px; position:relative; overflow:hidden;">
+      <div class="promax-paralyzed-card" style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:18px; padding:24px 28px 24px 32px; margin-bottom:22px; box-shadow:0 4px 20px -2px rgba(15,23,42,0.04), 0 2px 6px -1px rgba(15,23,42,0.02); position:relative; overflow:hidden; transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
         
         <!-- Dải sọc cảnh báo ProMax đỏ son bên trái -->
         <div style="position:absolute; left:0; top:0; bottom:0; width:5px; background:linear-gradient(180deg, #EF4444 0%, #DC2626 100%);"></div>
@@ -4961,30 +5252,30 @@ function renderParalyzedQuestions(keyword = '') {
         <!-- Hàng thông tin thẻ trên cùng -->
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
           <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-            <span style="background:#0A0E27; color:#F8FAFC; border:1px solid rgba(255,255,255,0.15); font-weight:900; font-size:0.82rem; padding:4px 12px; border-radius:20px; letter-spacing:0.03em;">
+            <span style="background:#0F172A; color:#FFFFFF; font-weight:900; font-size:0.82rem; padding:4px 12px; border-radius:20px; letter-spacing:0.03em;">
               CÂU #${orderNum < 10 ? '0' + orderNum : orderNum} / 20
             </span>
-            <span style="background:rgba(255,255,255,0.06); color:#94A3B8; font-weight:700; font-size:0.78rem; padding:4px 10px; border-radius:8px;">
+            <span style="background:#F1F5F9; color:#475569; font-weight:700; font-size:0.78rem; padding:4px 10px; border-radius:8px;">
               Mã gốc: Câu ${q.id}
             </span>
-            <span style="background:rgba(56,189,248,0.12); color:#38BDF8; font-weight:700; font-size:0.78rem; padding:4px 10px; border-radius:8px;">
+            <span style="background:#E0F2FE; color:#0284C7; font-weight:700; font-size:0.78rem; padding:4px 10px; border-radius:8px;">
               Chương ${q.chapter || 1}
             </span>
           </div>
 
           <div style="display:flex; align-items:center; gap:8px;">
-            <button type="button" onclick="playQuestionSpeech('${q.id}')" style="background:#1E293B; border:1px solid rgba(255,255,255,0.12); color:#F8FAFC; padding:5px 12px; border-radius:8px; font-size:0.78rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition:all 0.15s;" onmouseenter="this.style.background='#27354E'; this.style.borderColor='rgba(56,189,248,0.3)';" onmouseleave="this.style.background='#1E293B'; this.style.borderColor='rgba(255,255,255,0.12)';" title="Nghe giọng đọc AI">
+            <button type="button" onclick="playQuestionSpeech('${q.id}')" style="background:#0F172A; border:1px solid #334155; color:#F8FAFC; padding:5px 12px; border-radius:8px; font-size:0.78rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition:all 0.15s;" title="Nghe giọng đọc AI">
               🔊 Đọc câu hỏi
             </button>
-            <span style="display:inline-flex; align-items:center; gap:7px; background:rgba(239,68,68,0.12); color:#F87171; border:1.5px solid rgba(239,68,68,0.35); padding:4px 12px; border-radius:30px; font-size:0.75rem; font-weight:800; letter-spacing:0.04em;">
-              <span style="width:7px; height:7px; background:#EF4444; border-radius:50%; display:inline-block; box-shadow:0 0 0 3px rgba(239,68,68,0.3);"></span>
+            <span style="display:inline-flex; align-items:center; gap:7px; background:#FEF2F2; color:#DC2626; border:1.5px solid #FCA5A5; padding:4px 12px; border-radius:30px; font-size:0.75rem; font-weight:800; letter-spacing:0.04em;">
+              <span style="width:7px; height:7px; background:#DC2626; border-radius:50%; display:inline-block; box-shadow:0 0 0 3px rgba(220,38,38,0.25);"></span>
               SAI LÀ RỚT TRỰC TIẾP
             </span>
           </div>
         </div>
 
         <!-- Tiêu đề câu hỏi -->
-        <h3 style="font-size:1.15rem; font-weight:800; color:#F8FAFC; line-height:1.6; margin:0 0 16px;">
+        <h3 style="font-size:1.15rem; font-weight:800; color:#0F172A; line-height:1.6; margin:0 0 16px;">
           ${highlightDangerKeywords(q.question, keyword)}
         </h3>
 
@@ -4997,11 +5288,11 @@ function renderParalyzedQuestions(keyword = '') {
         </div>
 
         <!-- Hộp mẹo ghi nhớ vàng & Căn cứ luật (ProMax Insight Box) -->
-        <div style="background:rgba(245,158,11,0.08); border:1.5px solid rgba(245,158,11,0.25); border-radius:12px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-          <div style="display:flex; align-items:center; gap:8px; color:#FBBF24; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+        <div style="background:linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border:1.5px solid #FCD34D; border-radius:12px; padding:14px 18px; box-shadow:0 2px 8px rgba(217,119,6,0.05);">
+          <div style="display:flex; align-items:center; gap:8px; color:#92400E; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
             <span style="font-size:1.1rem;">💡</span> MẸO GHI NHỚ &amp; CĂN CỨ PHÁP LÝ:
           </div>
-          <div style="color:#FDE68A; font-size:0.92rem; line-height:1.6; font-weight:500;">
+          <div style="color:#78350F; font-size:0.92rem; line-height:1.6; font-weight:600;">
             ${highlightDangerKeywords(q.explain || 'Bắt buộc tuân thủ đúng quy tắc an toàn giao thông đường bộ.', keyword)}
           </div>
         </div>
@@ -5425,27 +5716,28 @@ function renderCar60Paralyzed(keyword = '') {
     const orderNum = (originalIndex >= 0 ? originalIndex + 1 : idx + 1);
 
     const optionsHtml = q.options.map((opt, oIdx) => {
+      const cleanOpt = opt.replace(/^(\d+[\.\)]\s*)+/, '');
       const isCorrect = (oIdx + 1 === q.answer);
       if (isCorrect) {
         return `
-          <div style="background:linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); border:2px solid #10B981; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 4px 14px rgba(16,185,129,0.08); transition:all 0.2s;">
-            <div style="width:30px; height:30px; border-radius:50%; background:#10B981; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.95rem; flex-shrink:0; box-shadow:0 2px 6px rgba(16,185,129,0.35);">✓</div>
+          <div style="background:linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); border:2px solid #10B981; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 4px 14px rgba(16,185,129,0.12); transition:all 0.2s;">
+            <div style="width:32px; height:32px; border-radius:50%; background:#10B981; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1rem; flex-shrink:0; box-shadow:0 2px 6px rgba(16,185,129,0.35);">✓</div>
             <div style="flex:1;">
-              <div style="font-size:0.95rem; color:#064E3B; font-weight:700; line-height:1.6;">
-                <span style="color:#059669; font-weight:800; margin-right:4px;">${oIdx + 1}.</span> ${highlightDangerKeywords(opt, keyword)}
+              <div style="font-size:0.98rem; color:#064E3B; font-weight:750; line-height:1.6;">
+                <span style="color:#059669; font-weight:900; margin-right:6px;">${oIdx + 1}.</span> ${highlightDangerKeywords(cleanOpt, keyword)}
               </div>
             </div>
-            <span style="background:#10B981; color:#FFF; font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; white-space:nowrap; letter-spacing:0.04em; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 4px rgba(16,185,129,0.2);">
+            <span style="background:#10B981; color:#FFF; font-size:0.75rem; font-weight:800; padding:5px 12px; border-radius:20px; white-space:nowrap; letter-spacing:0.04em; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 6px rgba(16,185,129,0.25);">
               <span>✔</span> ĐÁP ÁN ĐÚNG
             </span>
           </div>
         `;
       } else {
         return `
-          <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:12px; padding:13px 18px; display:flex; align-items:flex-start; gap:14px; transition:all 0.15s;" onmouseenter="this.style.background='#F1F5F9'; this.style.borderColor='#CBD5E1';" onmouseleave="this.style.background='#F8FAFC'; this.style.borderColor='#E2E8F0';">
-            <div style="width:30px; height:30px; border-radius:50%; background:#E2E8F0; color:#475569; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.86rem; flex-shrink:0;">${oIdx + 1}</div>
-            <div style="flex:1; font-size:0.92rem; color:#334155; line-height:1.55;">
-              ${highlightDangerKeywords(opt, keyword)}
+          <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:12px; padding:14px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 2px 6px rgba(15,23,42,0.04); transition:all 0.15s;" onmouseenter="this.style.background='#F8FAFC'; this.style.borderColor='#94A3B8';" onmouseleave="this.style.background='#FFFFFF'; this.style.borderColor='#CBD5E1';">
+            <div style="width:32px; height:32px; border-radius:50%; background:#F1F5F9; border:1.5px solid #CBD5E1; color:#0F172A; display:flex; align-items:center; justify-content:center; font-weight:850; font-size:0.92rem; flex-shrink:0;">${oIdx + 1}</div>
+            <div style="flex:1; font-size:0.96rem; color:#0F172A; font-weight:600; line-height:1.6;">
+              ${highlightDangerKeywords(cleanOpt, keyword)}
             </div>
           </div>
         `;
@@ -5517,16 +5809,21 @@ function renderCar60Paralyzed(keyword = '') {
 // =========================================================================
 function updateLearningDashboard() {
   const history = getExamHistory();
-  const wrongIds = getStoredWrongQuestions();
   const allQs = DRIVING_DATA_2026.examA1Questions || [];
+  let masteredIds = [];
+  try {
+    masteredIds = JSON.parse(localStorage.getItem('nb_mastered_question_ids') || '[]');
+  } catch(e) {
+    masteredIds = [];
+  }
 
   let totalExams = Object.keys(history).length;
   let passedExams = Object.values(history).filter(h => h.passed).length;
   let passRate = totalExams > 0 ? Math.round((passedExams / totalExams) * 100) : 0;
 
-  // Tính số câu đã làm đúng ít nhất 1 lần
-  let masteredCount = Math.min(250, passedExams * 24 + Math.max(0, 20 - wrongIds.length));
-  if (totalExams === 0) masteredCount = 0;
+  // Đếm câu duy nhất đã trả lời đúng thực tế thay vì công thức nhân ước tính
+  let masteredCount = Math.min(allQs.length || 250, masteredIds.length);
+  if (totalExams === 0 && masteredIds.length === 0) masteredCount = 0;
 
   const totalEl = document.getElementById('statTotalQuestions');
   if (totalEl) totalEl.textContent = allQs.length || 250;

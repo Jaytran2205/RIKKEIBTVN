@@ -881,21 +881,25 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
         ];
 
         if (allUnits.length === 2) {
-          // 2 cơ quan: Dàn 2 cột song song cân đối, rộng rãi
-          if (recipientsCol) recipientsCol.style.width = '36%';
-          sigContainer.style.width = '62%';
+          // 2 cơ quan: Dàn 2 cột song song cân đối, rộng rãi, không tràn lề
+          if (recipientsCol) {
+            recipientsCol.style.width = '30%';
+            recipientsCol.style.maxWidth = '30%';
+          }
+          sigContainer.style.width = '68%';
+          sigContainer.style.maxWidth = '68%';
           sigContainer.innerHTML = `
-            <div style="display:flex; justify-content:space-between; gap:16px;">
+            <div style="display:flex; justify-content:space-between; gap:12px; width:100%; box-sizing:border-box;">
               ${allUnits.map(u => `
-                <div style="text-align:center; flex:1; min-width:0;">
+                <div style="text-align:center; flex:1; min-width:0; padding:0 2px;">
                   <div class="footer-sign-agency" style="font-size:11pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; margin-bottom:4px; word-break:break-word;">
                     ${escapeHtml(u.agency)}
                   </div>
-                  <div class="footer-sign-role" style="font-size:13pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; white-space:nowrap;">
+                  <div class="footer-sign-role" style="font-size:13pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; word-break:keep-all;">
                     ${escapeHtml(u.role)}
                   </div>
                   <div style="height:55px;"></div>
-                  <div class="footer-sign-name" style="font-size:13pt; font-weight:bold; color:#000; line-height:1.25; white-space:nowrap;">
+                  <div class="footer-sign-name" style="font-size:13pt; font-weight:bold; color:#000; line-height:1.25; word-break:keep-all;">
                     ${escapeHtml(u.name)}
                   </div>
                 </div>
@@ -904,20 +908,24 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
           `;
         } else {
           // 3 hoặc 4 cơ quan: Bố cục lưới 2 cột x 2 hàng, mỗi ô rộng rãi (không bị cụt chữ GIÁM ĐỐC)
-          if (recipientsCol) recipientsCol.style.width = '32%';
-          sigContainer.style.width = '66%';
+          if (recipientsCol) {
+            recipientsCol.style.width = '28%';
+            recipientsCol.style.maxWidth = '28%';
+          }
+          sigContainer.style.width = '70%';
+          sigContainer.style.maxWidth = '70%';
           sigContainer.innerHTML = `
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px 16px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px 12px; width:100%; box-sizing:border-box;">
               ${allUnits.map(u => `
-                <div style="text-align:center; min-width:0;">
+                <div style="text-align:center; min-width:0; padding:0 2px;">
                   <div class="footer-sign-agency" style="font-size:10.5pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; margin-bottom:4px; word-break:break-word;">
                     ${escapeHtml(u.agency)}
                   </div>
-                  <div class="footer-sign-role" style="font-size:12.5pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; white-space:nowrap;">
+                  <div class="footer-sign-role" style="font-size:12.5pt; font-weight:bold; text-transform:uppercase; color:#000; line-height:1.25; word-break:keep-all;">
                     ${escapeHtml(u.role)}
                   </div>
                   <div style="height:48px;"></div>
-                  <div class="footer-sign-name" style="font-size:12.5pt; font-weight:bold; color:#000; line-height:1.25; white-space:nowrap;">
+                  <div class="footer-sign-name" style="font-size:12.5pt; font-weight:bold; color:#000; line-height:1.25; word-break:keep-all;">
                     ${escapeHtml(u.name)}
                   </div>
                 </div>

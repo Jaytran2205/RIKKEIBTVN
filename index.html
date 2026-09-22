@@ -2,6 +2,12 @@
 <html lang="vi">
 
 <head>
+<script>
+  // Chuyển hướng bắt buộc sang HTTPS trên production ninhbinhdigital.id.vn
+  if (location.protocol === 'http:' && (location.hostname === 'ninhbinhdigital.id.vn' || location.hostname === 'www.ninhbinhdigital.id.vn')) {
+    location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+  }
+</script>
 
 <meta charset="UTF-8">
 
@@ -33,6 +39,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
 
 
@@ -402,7 +409,7 @@
 
 <link rel="stylesheet" href="color-variables.css?v=2026_v11_header">
 
-<link rel="stylesheet" href="styles.css?v=2026_v11_header">
+<link rel="stylesheet" href="styles.css?v=2026_homestay_gsap_v3">
 
 <script src="document-formatter.js?v=2026_v9"></script>
 
@@ -626,9 +633,9 @@ header{
 
 .nav-container{
 
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
 
-  height:var(--header-h); max-width:1320px; margin:0 auto; padding:0 24px;
+  height:var(--header-h); max-width:1440px; margin:0 auto; padding:0 20px;
 
   position:relative; width:100%;
 
@@ -709,15 +716,15 @@ header{
 
 
 
-.nav-links{display:flex; align-items:center; gap:2px; flex:1; justify-content:center; min-width:0;}
+.nav-links{display:flex; align-items:center; gap:3px; flex:1; justify-content:center; min-width:0; margin:0 8px;}
 
 .nav-link{
 
-  position:relative; padding:8px 12px; border-radius:10px;
+  position:relative; padding:7px 11px; border-radius:10px;
 
-  font-size:.875rem; font-weight:500; color:var(--ink-2);
+  font-size:.85rem; font-weight:550; color:var(--ink-2);
 
-  display:inline-flex; align-items:center; gap:7px; white-space:nowrap; flex-shrink:0;
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap; flex-shrink:0;
 
   cursor:pointer; user-select:none; border:0;
 
@@ -726,6 +733,7 @@ header{
 }
 
 .nav-link:hover{background:var(--surface-3); color:var(--ink);}
+.nav-link:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:8px;}
 
 .nav-link .nav-item-icon{opacity:.72; color:currentColor !important;}
 
@@ -823,7 +831,7 @@ header{
 
 
 
-.header-actions{display:flex; align-items:center; gap:8px; flex-shrink:0;}
+.header-actions{display:flex; align-items:center; gap:8px; flex-shrink:0; margin-left:auto; z-index:20;}
 
 .header-action-btn{
 
@@ -875,7 +883,15 @@ header{
 
 
 
-@media(max-width:1080px){
+@media(max-width:1340px){
+  .logo-tagline{display:none;}
+  .nav-container{padding:0 14px; gap:8px;}
+  .nav-link{padding:6px 8px; font-size:.81rem; gap:4px;}
+  .nav-link .nav-item-icon{width:13.5px; height:13.5px;}
+  .nav-links{gap:2px; margin:0 4px;}
+}
+
+@media(max-width:1160px){
 
   .nav-links{
 
@@ -905,6 +921,36 @@ header{
 
   .nav-toggle{display:block;}
 
+}
+
+/* =====================================================================
+   DỰ ÁN TIÊU BIỂU & SHOWCASE RESPONSIVE STYLES (TRÁNH TRÀN TRÊN MOBILE)
+   ===================================================================== */
+.project-showcase-box {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+}
+.project-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .project-showcase-box {
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+    margin-bottom: 24px !important;
+  }
+  .project-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  #form-register-service {
+    padding: 20px 14px !important;
+  }
 }
 
 @media(max-width:768px){
@@ -1295,9 +1341,9 @@ body.midnight-mode{
 
 .modal-header h3{color:#fff; font-size:1.12rem;}
 
-.modal-close{color:#fff; font-size:1.5rem; cursor:pointer; line-height:1; opacity:.8;}
-
+.modal-close{background:transparent; border:none; color:#fff; font-size:1.5rem; cursor:pointer; line-height:1; opacity:.8; display:inline-flex; align-items:center; justify-content:center; padding:4px;}
 .modal-close:hover{opacity:1;}
+.modal-close:focus-visible{outline:2px solid #fff; border-radius:4px;}
 
 .modal-body{padding:24px;}
 
@@ -4183,7 +4229,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     <nav class="nav-links" id="mainNavLinks">
 
-      <div class="nav-link active" id="nav-home" onclick="navigateTo('home')">
+      <div class="nav-link active" id="nav-home" role="link" tabindex="0" onclick="navigateTo('home')">
 
         <span class="active-dot"></span>
 
@@ -4197,7 +4243,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
       <div class="nav-item-dropdown" id="nav-tools-dropdown">
 
-        <div class="nav-link nav-link-has-sub" id="nav-tools" onclick="navigateTo('tools')">
+        <div class="nav-link nav-link-has-sub" id="nav-tools" role="link" tabindex="0" onclick="navigateTo('tools')">
 
           <span>Công cụ</span>
 
@@ -4325,45 +4371,33 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
 
 
-      <div class="nav-link" id="nav-travel" onclick="navigateTo('travel')">
+      <div class="nav-link" id="nav-travel" role="link" tabindex="0" onclick="navigateTo('travel')">
         <svg class="nav-item-icon nav-ic-travel" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
         <span>Du lịch Ninh Bình</span>
       </div>
 
-
-
-      <div class="nav-link" id="nav-ai" onclick="navigateTo('ai')">
-
+      <div class="nav-link" id="nav-ai" role="link" tabindex="0" onclick="navigateTo('ai')">
         <svg class="nav-item-icon nav-ic-ai" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
-
         <span>Thư viện AI</span>
-
       </div>
 
-
-
-      <div class="nav-link" id="nav-vanban" onclick="navigateTo('vanban')">
-
+      <div class="nav-link" id="nav-vanban" role="link" tabindex="0" onclick="navigateTo('vanban')">
         <svg class="nav-item-icon nav-ic-vanban" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-
         <span>Soạn văn bản</span>
-
       </div>
 
-
-
-      <div class="nav-link nav-link-dev" id="nav-grading" onclick="showGradingDevAlert()">
+      <div class="nav-link nav-link-dev" id="nav-grading" role="button" tabindex="0" onclick="showGradingDevAlert()">
         <svg class="nav-item-icon nav-ic-grading" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="m9 10 2 2 4-4"/></svg>
         <span>Chấm điểm AI</span>
       </div>
 
-      <div class="nav-link" id="nav-services" onclick="navigateTo('services')">
+      <div class="nav-link" id="nav-services" role="link" tabindex="0" onclick="navigateTo('services')">
         <span class="active-dot"></span>
         <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <span>Dịch vụ</span>
       </div>
 
-      <div class="nav-link" id="nav-community" onclick="navigateTo('community')">
+      <div class="nav-link" id="nav-community" role="link" tabindex="0" onclick="navigateTo('community')">
         <span class="active-dot"></span>
         <span>Cộng đồng</span>
       </div>
@@ -4458,7 +4492,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
       <button type="button" class="driving-subnav-btn" data-tab="meo-c" onclick="switchDrivingTab('meo-c', this)" style="padding:6px 14px; border-radius:20px; font-size:0.84rem; font-weight:600; cursor:pointer;">Mẹo C</button>
 
-      <button type="button" class="driving-subnav-btn" data-tab="tracuu600" onclick="switchDrivingTab('tracuu600', this)" style="padding:6px 14px; border-radius:20px; font-size:0.84rem; font-weight:600; cursor:pointer;">🔍 Tra cứu 600 câu</button>
+      <button type="button" class="driving-subnav-btn" data-tab="tracuu600" onclick="switchDrivingTab('tracuu600', this)" style="padding:6px 14px; border-radius:20px; font-size:0.84rem; font-weight:600; cursor:pointer;">🔍 Tra cứu 250 câu A1 (Bộ Công An)</button>
 
       <button type="button" class="driving-subnav-btn" data-tab="cau-liet-20" onclick="switchDrivingTab('cau-liet-20', this)" style="padding:6px 14px; border-radius:20px; font-size:0.84rem; font-weight:700; color:#DC2626; border:1px solid #FECACA; background:#FEF2F2; cursor:pointer;">⚠️ 20 Câu Liệt</button>
 
@@ -4800,7 +4834,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
 
       <!-- DỰ ÁN TIÊU BIỂU ĐÃ THỰC HIỆN -->
-      <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:16px; padding:28px 32px; margin-bottom:40px;">
+      <div class="project-showcase-box">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div>
             <h4 style="font-size:1.2rem; font-weight:800; color:var(--ink); margin:0;">
@@ -4811,36 +4845,36 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <span style="font-size:0.82rem; font-weight:700; background:#E2E8F0; padding:4px 12px; border-radius:999px;">100% Khách hàng hài lòng</span>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:24px;">
+        <div class="project-showcase-grid">
           <!-- Dự án 1: quatanglocnam.com -->
           <a href="https://quatanglocnam.com" target="_blank" rel="noopener noreferrer" style="background:#fff; border:1.5px solid #E2E8F0; border-radius:18px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:all 0.25s ease;" onmouseover="this.style.borderColor='#0B5C57'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 14px 32px rgba(11,92,87,0.15)';" onmouseout="this.style.borderColor='#E2E8F0'; this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)';">
             <!-- Browser Mockup Window Bar -->
-            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px;">
-              <div style="display:flex; gap:5px;">
+            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden;">
+              <div style="display:flex; gap:5px; flex-shrink:0;">
                 <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
               </div>
-              <div style="flex:1; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                https://quatanglocnam.com
+              <div style="flex:1; min-width:0; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span style="overflow:hidden; text-overflow:ellipsis;">https://quatanglocnam.com</span>
               </div>
-              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap;">Online ↗</span>
+              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap; flex-shrink:0;">Online ↗</span>
             </div>
             <!-- Real Website Screenshot -->
             <div style="position:relative; width:100%; height:230px; overflow:hidden; background:#0F172A;">
               <img src="images/preview_quatanglocnam.png" alt="Ảnh chụp thực tế website quatanglocnam.com" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <!-- Card Content -->
-            <div style="padding:20px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+            <div style="padding:18px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
                   <h5 style="font-size:1.1rem; font-weight:800; color:#0B5C57; margin:0;">Quà Tặng Lộc Nam</h5>
                   <span style="font-size:0.75rem; font-weight:700; color:#64748B; background:#F1F5F9; padding:3px 8px; border-radius:6px;">quatanglocnam.com</span>
                 </div>
                 <p style="font-size:0.86rem; color:var(--muted); line-height:1.55; margin:0 0 14px;">Tổng thầu Thiết kế - Đúc - Thi công các công trình mỹ nghệ &amp; hệ thống phân phối quà tặng cao cấp trên toàn quốc.</p>
               </div>
-              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid #F1F5F9;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding-top:12px; border-top:1px solid #F1F5F9;">
                 <span style="font-size:0.82rem; font-weight:700; color:#0B5C57; display:inline-flex; align-items:center; gap:4px;">
                   Trải nghiệm website thực tế 
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -4853,32 +4887,32 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <!-- Dự án 2: xteco.com.vn -->
           <a href="https://xteco.com.vn" target="_blank" rel="noopener noreferrer" style="background:#fff; border:1.5px solid #E2E8F0; border-radius:18px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:all 0.25s ease;" onmouseover="this.style.borderColor='#D97706'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 14px 32px rgba(217,119,6,0.15)';" onmouseout="this.style.borderColor='#E2E8F0'; this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)';">
             <!-- Browser Mockup Window Bar -->
-            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px;">
-              <div style="display:flex; gap:5px;">
+            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden;">
+              <div style="display:flex; gap:5px; flex-shrink:0;">
                 <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
               </div>
-              <div style="flex:1; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                https://xteco.com.vn
+              <div style="flex:1; min-width:0; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span style="overflow:hidden; text-overflow:ellipsis;">https://xteco.com.vn</span>
               </div>
-              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap;">Online ↗</span>
+              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap; flex-shrink:0;">Online ↗</span>
             </div>
             <!-- Real Website Screenshot -->
             <div style="position:relative; width:100%; height:230px; overflow:hidden; background:#0F172A;">
               <img src="images/preview_xteco.png" alt="Ảnh chụp thực tế website xteco.com.vn" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <!-- Card Content -->
-            <div style="padding:20px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+            <div style="padding:18px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
                   <h5 style="font-size:1.1rem; font-weight:800; color:#D97706; margin:0;">XTÉCO Việt Nam</h5>
                   <span style="font-size:0.75rem; font-weight:700; color:#64748B; background:#F1F5F9; padding:3px 8px; border-radius:6px;">xteco.com.vn</span>
                 </div>
                 <p style="font-size:0.86rem; color:var(--muted); line-height:1.55; margin:0 0 14px;">Tổng thầu Thiết kế và Thi công trọn gói biệt thự, nhà phố, lâu đài cao cấp &amp; dự án phát triển hạ tầng chuẩn quốc tế.</p>
               </div>
-              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid #F1F5F9;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding-top:12px; border-top:1px solid #F1F5F9;">
                 <span style="font-size:0.82rem; font-weight:700; color:#D97706; display:inline-flex; align-items:center; gap:4px;">
                   Trải nghiệm website thực tế 
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -4905,20 +4939,20 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               Điền thông tin bên dưới, chuyên gia chuyển đổi số sẽ liên hệ lại qua Zalo/Điện thoại trong vòng 15 phút.
             </p>
 
-            <form id="leadCaptureForm" onsubmit="handleLeadCaptureSubmit(event)">
+            <form id="leadCaptureFormHome" class="lead-capture-form" onsubmit="handleLeadCaptureSubmit(event)">
               <div style="display:flex; flex-direction:column; gap:12px;">
                 <div>
                   <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Họ và tên của bạn *</label>
-                  <input type="text" id="leadName" class="form-control" placeholder="Ví dụ: Trần Quốc Anh" required>
+                  <input type="text" id="leadNameHome" name="leadName" class="form-control" placeholder="Ví dụ: Trần Quốc Anh" required>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Số điện thoại / Zalo *</label>
-                    <input type="tel" id="leadPhone" class="form-control" placeholder="0866520567" required>
+                    <input type="tel" id="leadPhoneHome" name="leadPhone" class="form-control" placeholder="0866520567" required>
                   </div>
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Dịch vụ quan tâm</label>
-                    <select id="leadService" class="form-control">
+                    <select id="leadServiceHome" name="leadService" class="form-control">
                       <option value="Học cách sử dụng AI cơ bản">🤖 Học cách sử dụng AI cơ bản</option>
                       <option value="Thiết kế website theo yêu cầu">💻 Thiết kế website theo yêu cầu</option>
                       <option value="Cả hai dịch vụ trên">🚀 Cả hai dịch vụ trên</option>
@@ -4928,7 +4962,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 </div>
                 <div>
                   <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Nhu cầu chi tiết / Ghi chú</label>
-                  <textarea id="leadNote" class="form-control" rows="2" placeholder="Ví dụ: Cần làm web cho quán dê núi Tam Cốc có bản đồ chỉ đường..."></textarea>
+                  <textarea id="leadNoteHome" name="leadNote" class="form-control" rows="2" placeholder="Ví dụ: Cần làm web cho quán dê núi Tam Cốc có bản đồ chỉ đường..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:700; font-size:1rem; border-radius:10px; margin-top:4px;">
                   📩 Gửi Đăng Ký Tư Vấn Ngay
@@ -5334,150 +5368,410 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
      ======================================================== -->
 
-<div id="page-travel" class="page-view">
-  <!-- Banner Top -->
-  <div class="tv-band">
-    <div class="wrap tv-band-inner">
-      <div>
-        <h1 class="tv-title">Du lịch Ninh Bình</h1>
-        <p class="tv-sub">Khám phá các dịch vụ trải nghiệm văn hóa, ẩm thực, lưu trú đặc sắc và mua sắm đặc sản OCOP chính gốc cố đô.</p>
-      </div>
-      <button class="btn btn-outline btn-sm tv-crawl" onclick="runLiveCrawler()">
-        <span id="crawlSpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span> Quét lại giá mới nhất
-      </button>
-    </div>
-  </div>
-
-  <!-- 2 Option Lớn: Đề Xuất Trải Nghiệm vs Mua Sắm Đặc Sản -->
-  <div class="tv-main-mode-tabs-wrap">
-    <div class="wrap" style="max-width:1500px;">
-      <div class="tv-main-mode-tabs" role="tablist">
-        <button type="button" class="tv-main-mode-tab active" id="tabModeExperience" onclick="switchTravelMainTab('experience')">
-          <span class="mode-icon">✨</span>
-          <div class="mode-info">
-            <div class="mode-title">Đề xuất Dịch vụ Trải nghiệm</div>
-            <div class="mode-sub">Homestay, Quán dê núi, Quán cơm, Cà phê, Xe máy, Check-in &amp; Spa</div>
-          </div>
-        </button>
-        <button type="button" class="tv-main-mode-tab" id="tabModeShopping" onclick="switchTravelMainTab('shopping')">
-          <span class="mode-icon">🛍️</span>
-          <div class="mode-info">
-            <div class="mode-title">
-              Mua sắm Đặc sản Ninh Bình
-              <span class="mode-badge">OCOP Giao Tận Nơi</span>
-            </div>
-            <div class="mode-sub">Cơm cháy chà bông, Rượu Kim Sơn, Mắm tép, Cói mỹ nghệ &amp; Hộp quà biếu</div>
-          </div>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Thẻ Con (Sub-categories Toolbar) -->
-  <div class="tv-toolbar">
-    <div class="wrap" style="max-width:1500px;">
-      <!-- Sub-tabs khi ở chế độ Đề Xuất Trải Nghiệm -->
-      <div class="tv-cats" id="travelExperienceCats" role="tablist" aria-label="Nhóm dịch vụ trải nghiệm">
-        <button type="button" role="tab" class="tv-cat c-homestay active" id="travelTabHomestay" data-cat="homestay" onclick="selectTravelCategory('homestay', this)">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-          Homestay &amp; khách sạn <span class="n">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-food" id="travelTabFood" data-cat="food" onclick="selectTravelCategory('food', this)">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>
-          Quán ăn &amp; Dê núi đặc sản <span class="n">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-cafe" id="travelTabCafe" data-cat="cafe" onclick="selectTravelCategory('cafe', this)">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v4"/></svg></span>
-          Cà phê view đẹp <span class="n">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-xemay" id="travelTabXemay" data-cat="xemay" onclick="selectTravelCategory('xemay', this)">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
-          Thuê xe máy <span class="n">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-spot" id="travelTabSpot" data-cat="spot" onclick="selectTravelCategory('spot', this)">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-          Cảnh đẹp &amp; check-in <span class="n">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-spa" id="travelTabSpa" data-cat="spa" onclick="selectTravelCategory('spa', this)">
-          <span class="ic">💆‍♀️</span>
-          Spa &amp; massage <span class="n">0</span>
-        </button>
+<div id="page-travel" class="page-view" style="padding-bottom: 60px;">
+  <!-- 1. Travel Sub-Navigation Bar (Matching Images 2 & 3) -->
+  <div class="nb-travel-subnav-bar">
+    <div class="nb-travel-subnav-inner">
+      <!-- Brand Logo -->
+      <div class="nb-travel-brand" onclick="navigateTo('travel')">
+        <span>Du lịch Ninh Bình</span>
       </div>
 
-      <!-- Sub-tabs khi ở chế độ Mua Sắm Đặc Sản -->
-      <div class="tv-cats" id="travelShoppingCats" role="tablist" aria-label="Nhóm đặc sản OCOP" style="display:none;">
-        <button type="button" role="tab" class="tv-cat c-shop active" data-shop-type="all" onclick="selectShopSubtype('all', this)">
-          <span class="ic">🎁</span> Tất cả đặc sản <span class="n" id="shopCountAll">0</span>
-        </button>
-        <button type="button" role="tab" class="tv-cat c-shop" data-shop-type="comchay" onclick="selectShopSubtype('comchay', this)">
-          <span class="ic">🌾</span> Cơm cháy chà bông
-        </button>
-        <button type="button" role="tab" class="tv-cat c-shop" data-shop-type="ruou" onclick="selectShopSubtype('ruou', this)">
-          <span class="ic">🍶</span> Rượu nếp Kim Sơn
-        </button>
-        <button type="button" role="tab" class="tv-cat c-shop" data-shop-type="mamtep" onclick="selectShopSubtype('mamtep', this)">
-          <span class="ic">🦐</span> Mắm tép Gia Viễn
-        </button>
-        <button type="button" role="tab" class="tv-cat c-shop" data-shop-type="coi" onclick="selectShopSubtype('coi', this)">
-          <span class="ic">🧶</span> Cói mỹ nghệ
-        </button>
-        <button type="button" role="tab" class="tv-cat c-shop" data-shop-type="tra" onclick="selectShopSubtype('tra', this)">
-          <span class="ic">🍵</span> Trà &amp; Thảo dược
-        </button>
-      </div>
-    </div>
-  </div>
+      <!-- Main Navigation Tabs -->
+      <nav class="nb-travel-main-tabs" aria-label="Du lịch Ninh Bình">
+        <span class="nb-travel-tab-link active" onclick="selectNBTravelTab('dulich', this)">Du lịch</span>
+        <span class="nb-travel-tab-link" onclick="selectNBTravelTab('tour', this)">Tour phố bình</span>
+        <span class="nb-travel-tab-link" onclick="selectNBTravelTab('tutuc', this)">Tự túc</span>
+        <span class="nb-travel-tab-link" onclick="selectNBTravelTab('khachsan', this)">Khách sạn</span>
+        <span class="nb-travel-tab-link" onclick="selectNBTravelTab('trainghiem', this)">Trải nghiệm</span>
+      </nav>
 
-  <!-- Khung nội dung chính: Tìm kiếm, Lọc khu vực & Danh sách Card Grid -->
-  <div class="wrap" style="max-width:1500px; margin:0 auto; padding:24px 20px 60px;">
-    <!-- Filter Card: Tìm kiếm & Lọc khu vực -->
-    <div class="tv-filter-card" style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:18px 22px; margin-bottom:24px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:14px;">
-      <!-- Search Input -->
-      <div class="tv-search" style="position:relative; width:100%;">
-        <svg style="position:absolute; left:16px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--muted); pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="travelSearch" placeholder="🔍 Tìm kiếm tên homestay, nhà hàng dê núi, cà phê, đặc sản hoặc địa chỉ..." oninput="filterTravelPlaces()" autocomplete="off" style="width:100%; padding:13px 20px 13px 48px; border-radius:12px; border:1px solid var(--border); background:var(--surface-2); font-size:0.95rem; color:var(--ink); outline:none; transition:border-color 0.2s ease;">
-      </div>
-
-      <!-- Area Chips -->
-      <div class="tv-areas" id="travelAreas" aria-label="Khu vực" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-        <span style="font-size:0.84rem; font-weight:750; color:var(--ink-2); margin-right:4px;">📍 Khu vực:</span>
-        <button type="button" class="tv-area area-filter-btn active" data-area="all" onclick="selectAreaFilter('all', this)">Tất cả <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="phoco" onclick="selectAreaFilter('phoco', this)">Phố Cổ Hoa Lư <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="tamcoc" onclick="selectAreaFilter('tamcoc', this)">Tam Cốc <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="trangan" onclick="selectAreaFilter('trangan', this)">Tràng An <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="hangmua" onclick="selectAreaFilter('hangmua', this)">Hang Múa <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="tpnb" onclick="selectAreaFilter('tpnb', this)">TP. Ninh Bình <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="baidinh" onclick="selectAreaFilter('baidinh', this)">Bái Đính <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="cucphuong" onclick="selectAreaFilter('cucphuong', this)">Cúc Phương <span class="n"></span></button>
-        <button type="button" class="tv-area area-filter-btn" data-area="kimson" onclick="selectAreaFilter('kimson', this)">Kim Sơn <span class="n"></span></button>
-      </div>
-    </div>
-
-    <!-- Results Header & Sort -->
-    <div class="tv-results-head" style="padding:0 0 16px;">
-      <div class="tv-results-row" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-        <div>
-          <h2 id="currentCategoryTitle" class="place-card-title" style="font-size:1.3rem; font-weight:850; color:var(--ink); line-height:1.3; margin-bottom:4px;">Homestay &amp; khách sạn Ninh Bình</h2>
-          <span id="currentPlaceCount" class="tv-count" style="font-size:0.88rem; color:var(--muted); font-weight:600;">Đang tải…</span>
+      <!-- Right Utility Actions -->
+      <div class="nb-travel-tools-right">
+        <!-- Search Pill -->
+        <div class="nb-search-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="nbTravelSearchInput" placeholder="Search Ninh Bình" oninput="onNBSearch(this.value)">
         </div>
-        <div class="tv-head-tools" style="display:flex; align-items:center; gap:10px;">
-          <button class="btn btn-accent btn-sm" id="btnSpecialtyCart" onclick="openSpecialtyCartModal()" style="display:none;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            <span>Giỏ hàng (<span id="cartCountBadge">0</span>)</span>
+
+        <!-- Dark Mode Toggle Button -->
+        <button type="button" class="nb-circle-btn" onclick="toggleAppTheme()" title="Chuyển chế độ sáng/tối" aria-label="Dark Mode Toggle">
+          🌙
+        </button>
+
+        <!-- User Profile Avatar Circle -->
+        <div class="nb-user-avatar" title="Tài khoản người dùng">
+          J
+        </div>
+
+        <!-- Media / Gallery Button -->
+        <button type="button" class="nb-circle-btn" onclick="openPhotoModal()" title="Xem thư viện ảnh Ninh Bình">
+          🖼️
+        </button>
+      </div>
+    </div>
+
+    <!-- Secondary Subnav -->
+    <div class="nb-travel-subbar">
+      <span class="nb-subbar-item active" onclick="selectNBSubbar('homestay', this)">Du lịch ở Ninh Bình</span>
+      <span class="nb-subbar-item" onclick="selectNBSubbar('trangan', this)">Tràng An &amp; Lịch trình gợi ý</span>
+      <span class="nb-subbar-item" onclick="selectNBSubbar('tamcoc', this)">Tam Cốc Bích Động</span>
+      <span class="nb-subbar-item" onclick="selectNBSubbar('hangmua', this)">Hang Múa check-in</span>
+    </div>
+  </div>
+
+  <div class="wrap" style="max-width: 1480px; margin: 0 auto; padding: 0 16px;">
+    <!-- 2. Scenic Hero Banner (Matching Images 2 & 3) -->
+    <div class="nb-hero-banner" id="nbHeroBanner">
+      <div class="nb-hero-overlay"></div>
+      
+      <div class="nb-hero-content">
+        <h1 class="nb-hero-title">Homestay &amp; khách sạn</h1>
+        <p class="nb-hero-subtitle">
+          Thấu cảm từng ngóc ngách và không vội vã cùng con khát khao, dẫn trường thiết bao đời. Hòa mình vào không gian bình dị giữa núi non di sản Cố đô.
+        </p>
+        <button type="button" class="nb-hero-btn" onclick="scrollToHomestayList()">
+          <span>Xem thêm</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- 3. Floating Glassmorphism Filter Bar (Matching Images 2 & 3) -->
+      <div class="nb-glass-search-wrap">
+        <div class="nb-glass-search" id="nbGlassSearchBar">
+          <!-- Category Select -->
+          <div style="position:relative;">
+            <select class="nb-search-select-btn" id="nbFilterCatSelect" onchange="filterNBPlaces()" style="appearance:none; padding-right:28px;">
+              <option value="homestay">🏠 Homestay &amp; khách sạn</option>
+              <option value="resort">🏰 Resort sinh thái</option>
+              <option value="bungalow">🛖 Bungalow view núi</option>
+            </select>
+            <svg style="position:absolute; right:10px; top:50%; transform:translateY(-50%); width:12px; height:12px; pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+
+          <!-- Type Pill: Homestay -->
+          <button type="button" class="nb-search-select-btn nb-search-pill-active" id="btnPillHomestay" onclick="toggleNBPill(this, 'homestay')">
+            Homestay
           </button>
-          <select class="tv-sort" id="travelSort" onchange="setTravelSort(this.value)" aria-label="Sắp xếp &amp; so sánh giá" style="padding:8px 16px; border-radius:10px; font-weight:600; font-size:0.85rem; border:1px solid var(--border); background:var(--surface);">
-            <option value="default">Mặc định (Nổi bật)</option>
-            <option value="price-asc">💰 Giá: Thấp đến Cao (So sánh giá)</option>
-            <option value="price-desc">💰 Giá: Cao đến Thấp</option>
-            <option value="rating">⭐ Đánh giá cao nhất</option>
-            <option value="reviews">🔥 Nhiều đánh giá nhất</option>
-          </select>
+
+          <!-- Type Pill: Tự đặt / Tất cả -->
+          <button type="button" class="nb-search-select-btn" id="btnPillSelf" onclick="toggleNBPill(this, 'all')">
+            Tự đặt
+          </button>
+
+          <!-- Budget Select -->
+          <div style="position:relative;">
+            <select class="nb-search-select-btn" id="nbBudgetSelect" onchange="filterNBPlaces()" style="appearance:none; padding-right:28px;">
+              <option value="all">🏷️ Tất cả ngân sách</option>
+              <option value="1to3">1tr – 3tr</option>
+              <option value="under1">Dưới 1 triệu</option>
+              <option value="above3">Trên 3 triệu (Cao cấp)</option>
+            </select>
+            <svg style="position:absolute; right:10px; top:50%; transform:translateY(-50%); width:12px; height:12px; pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+
+          <!-- Location Search Input -->
+          <div class="nb-search-input-box">
+            <input type="text" id="nbLocationInput" placeholder="📍 Gần bến thuyền / Em ở đâu tại Ninh Bình..." oninput="filterNBPlaces()">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="nb-search-submit-btn" onclick="filterNBPlaces()">
+            <span>Tìm kiếm</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+
+        <!-- Carousel Pagination Dots -->
+        <div class="nb-dots-pagination">
+          <span class="nb-dot active" onclick="switchNBCarouselSlide(0)"></span>
+          <span class="nb-dot" onclick="switchNBCarouselSlide(1)"></span>
+          <span class="nb-dot" onclick="switchNBCarouselSlide(2)"></span>
+          <span class="nb-dot" onclick="switchNBCarouselSlide(3)"></span>
         </div>
       </div>
     </div>
 
-    <!-- Dynamic Items Grid -->
-    <div class="tv-grid" id="travelGrid" aria-live="polite"></div>
+    <!-- 4. Section 1: Homestay & Khách Sạn (Matching Images 3 & 4) -->
+    <div class="nb-section-head" id="homestaySectionAnchor" style="margin-top: 40px;">
+      <h2 class="nb-section-title">Homestay &amp; khách sạn</h2>
+      <a href="javascript:void(0)" class="nb-view-all-link" onclick="openAllHomestayModal()">
+        <span>View All</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+
+    <!-- Carousel Cards Container -->
+    <div class="nb-carousel-wrapper">
+      <!-- Carousel Arrow Buttons -->
+      <button type="button" class="nb-carousel-nav-btn prev" onclick="slideNBCarousel(-1)" title="Thẻ trước" aria-label="Previous">
+        ‹
+      </button>
+      <button type="button" class="nb-carousel-nav-btn next" onclick="slideNBCarousel(1)" title="Thẻ tiếp theo" aria-label="Next">
+        ›
+      </button>
+
+      <!-- Carousel Cards Track (Dynamic with GSAP) -->
+      <div class="nb-carousel-track" id="nbHomestayCarouselTrack">
+        <!-- Card 1: Tam Coc Rice Fields Resort (Standard) -->
+        <div class="nb-card" id="nbCard1" onclick="expandHomestayDetail(1)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Tam Coc Rice Fields Resort" class="nb-card-img">
+            <span class="nb-card-tag">Nổi bật</span>
+            <button type="button" class="nb-heart-btn" onclick="toggleNBWishlist(event, this)">♡</button>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Tam Coc Rice Fields Resort</h3>
+            <div class="nb-card-location">📍 Đội 3, Ninh Hải, Hoa Lư</div>
+            <div class="nb-card-footer">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <select class="nb-search-select-btn" style="padding:4px 10px; font-size:0.8rem;" onclick="event.stopPropagation()">
+                  <option>8 Khách</option>
+                  <option>4 Khách</option>
+                  <option>2 Khách</option>
+                </select>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc Rice Fields Resort')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Tràng An Riverside Homestay (Standard) -->
+        <div class="nb-card" id="nbCard2" onclick="expandHomestayDetail(2)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Tràng An Riverside Homestay" class="nb-card-img">
+            <span class="nb-card-tag">Giá tốt</span>
+            <button type="button" class="nb-heart-btn active" onclick="toggleNBWishlist(event, this)">♥</button>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Tràng An Riverside Homestay</h3>
+            <div class="nb-card-location">📍 Xã Trường Yên, Hoa Lư</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Thông tin</span>
+                <span class="nb-card-price-value">795,500đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tràng An Riverside Homestay')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Expanded Detail Card (Matching Image 4!) -->
+        <div class="nb-detail-card-expanded" id="nbCard3Expanded">
+          <!-- 4 Thumbnail Gallery -->
+          <div class="nb-detail-gallery">
+            <span class="nb-card-tag" style="position:absolute; top:12px; left:12px;">Nổi bật</span>
+            <button type="button" class="nb-heart-btn" style="position:absolute; top:12px; right:12px;" onclick="toggleNBWishlist(event, this)">♡</button>
+            
+            <div class="nb-gallery-thumb" onclick="previewGalleryPhoto(this, 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=85')">
+              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=500&q=80" alt="Toàn cảnh">
+              <span class="nb-gallery-tag">Toàn cảnh</span>
+            </div>
+            <div class="nb-gallery-thumb" onclick="previewGalleryPhoto(this, 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=85')">
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&q=80" alt="Hồ bơi">
+              <span class="nb-gallery-tag">Hồ bơi</span>
+            </div>
+            <div class="nb-gallery-thumb" onclick="previewGalleryPhoto(this, 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=85')">
+              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500&q=80" alt="Phòng ngủ">
+              <span class="nb-gallery-tag">Nội thất</span>
+            </div>
+            <div class="nb-gallery-thumb" onclick="previewGalleryPhoto(this, 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=85')">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&q=80" alt="Cảnh quan">
+              <span class="nb-gallery-tag">Cảnh quan</span>
+            </div>
+          </div>
+
+          <!-- Details Content -->
+          <div class="nb-detail-body">
+            <div class="nb-detail-head">
+              <h3 class="nb-detail-title" id="nbExpandedTitle">Tam Coc Rice Fields Resort</h3>
+              <div class="nb-detail-rating">
+                <span>★★★★★</span>
+                <span>4.8 (21)</span>
+              </div>
+            </div>
+
+            <div class="nb-detail-location">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Thôn Hải Nham, Xã Ninh Hải, Hoa Lư, Ninh Bình</span>
+            </div>
+
+            <!-- Amenities Tags -->
+            <div class="nb-amenities-tags">
+              <span class="nb-amenity-pill">📍 Gần điểm du lịch</span>
+              <span class="nb-amenity-pill">☕ Bữa sáng miễn phí</span>
+              <span class="nb-amenity-pill">🏊 Bể bơi vô cực</span>
+              <span class="nb-amenity-pill">🐾 Cho phép thú cưng</span>
+            </div>
+
+            <!-- Pricing & Booking Row -->
+            <div class="nb-detail-foot">
+              <div class="nb-detail-price-box">
+                <span class="nb-price-old">21,396,000đ</span>
+                <span class="nb-price-main">13,789,200đ</span>
+                <span class="nb-price-range">Giá từ: 700.000 – 3.740.000đ</span>
+              </div>
+
+              <div class="nb-detail-actions">
+                <select class="nb-room-select" id="nbRoomChoice">
+                  <option>Hạng phòng tiêu chuẩn</option>
+                  <option>Bungalow view biển lúa</option>
+                  <option>Villa gia đình 2 phòng ngủ</option>
+                </select>
+                <button type="button" class="nb-detail-btn-main" onclick="openBookingModal('Tam Coc Rice Fields Resort')">
+                  Đặt phòng ngay
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Tam Coc La Montagne Resort (Standard) -->
+        <div class="nb-card" id="nbCard4" onclick="expandHomestayDetail(4)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Tam Coc La Montagne Resort" class="nb-card-img">
+            <span class="nb-card-tag">Nổi bật</span>
+            <button type="button" class="nb-heart-btn" onclick="toggleNBWishlist(event, this)">♡</button>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Tam Coc La Montagne Resort</h3>
+            <div class="nb-card-location">📍 Thôn Đam Khê, Ninh Hải</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Thông tin</span>
+                <span class="nb-card-price-value">806,000đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Tam Coc La Montagne Resort')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Section 2: Hệ Thống Du Lịch Ninh Bình (Matching Images 3 & 4 Bottom) -->
+    <div class="nb-section-head" style="margin-top: 30px;">
+      <h2 class="nb-section-title">Hệ thống du lịch Ninh Bình</h2>
+      <a href="javascript:void(0)" class="nb-view-all-link" onclick="openAllHomestayModal()">
+        <span>View All</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+
+    <!-- System Compare Grid -->
+    <div class="nb-carousel-wrapper" style="margin-bottom: 60px;">
+      <div class="nb-carousel-track" id="nbSystemGrid">
+        <!-- Item 1 -->
+        <div class="nb-card" onclick="expandHomestayDetail(1)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Ninh Binh Eco Garden" class="nb-card-img">
+            <span class="nb-card-tag">Nổi bật</span>
+            <label class="nb-card-tag compare" onclick="event.stopPropagation()">
+              <input type="checkbox" onchange="toggleNBCompare(308, this.checked)">
+              <span>So sánh</span>
+            </label>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Ninh Bình Eco Garden</h3>
+            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Giá tốt nhất</span>
+                <span class="nb-card-price-value">650,000đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Ninh Binh Eco Garden')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="nb-card" onclick="expandHomestayDetail(2)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Aravinda Resort" class="nb-card-img">
+            <span class="nb-card-tag">Giá tốt</span>
+            <label class="nb-card-tag compare" onclick="event.stopPropagation()">
+              <input type="checkbox" onchange="toggleNBCompare(306, this.checked)">
+              <span>So sánh</span>
+            </label>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Aravinda Resort Ninh Bình</h3>
+            <div class="nb-card-location">📍 Thôn Hải Nham, Ninh Hải</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Giá ưu đãi</span>
+                <span class="nb-card-price-value">1,450,000đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Aravinda Resort Ninh Bình')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="nb-card" onclick="expandHomestayDetail(3)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" alt="Emeralda Resort" class="nb-card-img">
+            <span class="nb-card-tag">5 Sao</span>
+            <label class="nb-card-tag compare" onclick="event.stopPropagation()">
+              <input type="checkbox" onchange="toggleNBCompare(305, this.checked)">
+              <span>So sánh</span>
+            </label>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Emeralda Resort Ninh Bình (5 Sao)</h3>
+            <div class="nb-card-location">📍 Khu Bảo Tồn Vân Long, Gia Viễn</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Giá niêm yết</span>
+                <span class="nb-card-price-value">1,850,000đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Emeralda Resort Ninh Bình')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="nb-card" onclick="expandHomestayDetail(4)">
+          <div class="nb-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Hang Mua Ecolodge" class="nb-card-img">
+            <span class="nb-card-tag">View đẹp</span>
+            <label class="nb-card-tag compare" onclick="event.stopPropagation()">
+              <input type="checkbox" onchange="toggleNBCompare(304, this.checked)">
+              <span>So sánh</span>
+            </label>
+          </div>
+          <div class="nb-card-body">
+            <h3 class="nb-card-title">Hang Mua Ecolodge</h3>
+            <div class="nb-card-location">📍 Thôn Khê Hạ, Ninh Xuân</div>
+            <div class="nb-card-footer">
+              <div class="nb-card-price-block">
+                <span class="nb-card-price-label">Giá tốt nhất</span>
+                <span class="nb-card-price-value">890,000đ</span>
+              </div>
+              <button type="button" class="nb-card-action-btn" onclick="openNBDirectMap(event, 'Hang Mua Ecolodge')">
+                + Chỉ đường
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Floating Messenger / Zalo Chat Button -->
+  <div class="nb-floating-chat" onclick="openNBFastChat()" title="Hỗ trợ du lịch Ninh Bình trực tuyến">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
   </div>
 </div>
 
@@ -5773,7 +6067,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
 
       <!-- DỰ ÁN TIÊU BIỂU ĐÃ THỰC HIỆN -->
-      <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:16px; padding:28px 32px; margin-bottom:40px;">
+      <div class="project-showcase-box">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div>
             <h4 style="font-size:1.2rem; font-weight:800; color:var(--ink); margin:0;">
@@ -5784,36 +6078,36 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <span style="font-size:0.82rem; font-weight:700; background:#E2E8F0; padding:4px 12px; border-radius:999px;">100% Khách hàng hài lòng</span>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:24px;">
+        <div class="project-showcase-grid">
           <!-- Dự án 1: quatanglocnam.com -->
           <a href="https://quatanglocnam.com" target="_blank" rel="noopener noreferrer" style="background:#fff; border:1.5px solid #E2E8F0; border-radius:18px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:all 0.25s ease;" onmouseover="this.style.borderColor='#0B5C57'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 14px 32px rgba(11,92,87,0.15)';" onmouseout="this.style.borderColor='#E2E8F0'; this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)';">
             <!-- Browser Mockup Window Bar -->
-            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px;">
-              <div style="display:flex; gap:5px;">
+            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden;">
+              <div style="display:flex; gap:5px; flex-shrink:0;">
                 <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
               </div>
-              <div style="flex:1; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                https://quatanglocnam.com
+              <div style="flex:1; min-width:0; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span style="overflow:hidden; text-overflow:ellipsis;">https://quatanglocnam.com</span>
               </div>
-              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap;">Online ↗</span>
+              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap; flex-shrink:0;">Online ↗</span>
             </div>
             <!-- Real Website Screenshot -->
             <div style="position:relative; width:100%; height:230px; overflow:hidden; background:#0F172A;">
               <img src="images/preview_quatanglocnam.png" alt="Ảnh chụp thực tế website quatanglocnam.com" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <!-- Card Content -->
-            <div style="padding:20px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+            <div style="padding:18px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
                   <h5 style="font-size:1.1rem; font-weight:800; color:#0B5C57; margin:0;">Quà Tặng Lộc Nam</h5>
                   <span style="font-size:0.75rem; font-weight:700; color:#64748B; background:#F1F5F9; padding:3px 8px; border-radius:6px;">quatanglocnam.com</span>
                 </div>
                 <p style="font-size:0.86rem; color:var(--muted); line-height:1.55; margin:0 0 14px;">Tổng thầu Thiết kế - Đúc - Thi công các công trình mỹ nghệ &amp; hệ thống phân phối quà tặng cao cấp trên toàn quốc.</p>
               </div>
-              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid #F1F5F9;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding-top:12px; border-top:1px solid #F1F5F9;">
                 <span style="font-size:0.82rem; font-weight:700; color:#0B5C57; display:inline-flex; align-items:center; gap:4px;">
                   Trải nghiệm website thực tế 
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -5826,32 +6120,32 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <!-- Dự án 2: xteco.com.vn -->
           <a href="https://xteco.com.vn" target="_blank" rel="noopener noreferrer" style="background:#fff; border:1.5px solid #E2E8F0; border-radius:18px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:all 0.25s ease;" onmouseover="this.style.borderColor='#D97706'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 14px 32px rgba(217,119,6,0.15)';" onmouseout="this.style.borderColor='#E2E8F0'; this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)';">
             <!-- Browser Mockup Window Bar -->
-            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px;">
-              <div style="display:flex; gap:5px;">
+            <div style="background:#F1F5F9; border-bottom:1px solid #E2E8F0; padding:10px 14px; display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden;">
+              <div style="display:flex; gap:5px; flex-shrink:0;">
                 <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
                 <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
               </div>
-              <div style="flex:1; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                https://xteco.com.vn
+              <div style="flex:1; min-width:0; background:#fff; border-radius:6px; padding:3px 10px; font-size:0.75rem; color:#64748B; font-family:monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span style="overflow:hidden; text-overflow:ellipsis;">https://xteco.com.vn</span>
               </div>
-              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap;">Online ↗</span>
+              <span style="font-size:0.7rem; background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:6px; white-space:nowrap; flex-shrink:0;">Online ↗</span>
             </div>
             <!-- Real Website Screenshot -->
             <div style="position:relative; width:100%; height:230px; overflow:hidden; background:#0F172A;">
               <img src="images/preview_xteco.png" alt="Ảnh chụp thực tế website xteco.com.vn" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)';" onmouseout="this.style.transform='scale(1)';">
             </div>
             <!-- Card Content -->
-            <div style="padding:20px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+            <div style="padding:18px; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
                   <h5 style="font-size:1.1rem; font-weight:800; color:#D97706; margin:0;">XTÉCO Việt Nam</h5>
                   <span style="font-size:0.75rem; font-weight:700; color:#64748B; background:#F1F5F9; padding:3px 8px; border-radius:6px;">xteco.com.vn</span>
                 </div>
                 <p style="font-size:0.86rem; color:var(--muted); line-height:1.55; margin:0 0 14px;">Tổng thầu Thiết kế và Thi công trọn gói biệt thự, nhà phố, lâu đài cao cấp &amp; dự án phát triển hạ tầng chuẩn quốc tế.</p>
               </div>
-              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid #F1F5F9;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding-top:12px; border-top:1px solid #F1F5F9;">
                 <span style="font-size:0.82rem; font-weight:700; color:#D97706; display:inline-flex; align-items:center; gap:4px;">
                   Trải nghiệm website thực tế 
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -5878,20 +6172,20 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               Điền thông tin bên dưới, chuyên gia chuyển đổi số sẽ liên hệ lại qua Zalo/Điện thoại trong vòng 15 phút.
             </p>
 
-            <form id="leadCaptureForm" onsubmit="handleLeadCaptureSubmit(event)">
+            <form id="leadCaptureFormServices" class="lead-capture-form" onsubmit="handleLeadCaptureSubmit(event)">
               <div style="display:flex; flex-direction:column; gap:12px;">
                 <div>
                   <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Họ và tên của bạn *</label>
-                  <input type="text" id="leadName" class="form-control" placeholder="Ví dụ: Trần Quốc Anh" required>
+                  <input type="text" id="leadNameServices" name="leadName" class="form-control" placeholder="Ví dụ: Trần Quốc Anh" required>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Số điện thoại / Zalo *</label>
-                    <input type="tel" id="leadPhone" class="form-control" placeholder="0866520567" required>
+                    <input type="tel" id="leadPhoneServices" name="leadPhone" class="form-control" placeholder="0866520567" required>
                   </div>
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Dịch vụ quan tâm</label>
-                    <select id="leadService" class="form-control">
+                    <select id="leadServiceServices" name="leadService" class="form-control">
                       <option value="Học cách sử dụng AI cơ bản">🤖 Học cách sử dụng AI cơ bản</option>
                       <option value="Thiết kế website theo yêu cầu">💻 Thiết kế website theo yêu cầu</option>
                       <option value="Cả hai dịch vụ trên">🚀 Cả hai dịch vụ trên</option>
@@ -5901,7 +6195,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 </div>
                 <div>
                   <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Nhu cầu chi tiết / Ghi chú</label>
-                  <textarea id="leadNote" class="form-control" rows="2" placeholder="Ví dụ: Cần làm web cho quán dê núi Tam Cốc có bản đồ chỉ đường..."></textarea>
+                  <textarea id="leadNoteServices" name="leadNote" class="form-control" rows="2" placeholder="Ví dụ: Cần làm web cho quán dê núi Tam Cốc có bản đồ chỉ đường..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:700; font-size:1rem; border-radius:10px; margin-top:4px;">
                   📩 Gửi Đăng Ký Tư Vấn Ngay
@@ -6846,10 +7140,10 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
 
       <!-- KHỐI MỚI: TRUNG TÂM MINIGAME & LUYỆN PHẢN XẠ SÁT HẠCH -->
-      <div style="margin-bottom:36px; background:linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%); border-radius:18px; padding:32px; color:#FFF; box-shadow:0 8px 24px rgba(15,23,42,0.15);">
+      <div class="minigame-banner" style="margin-bottom:36px; background:linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%); border-radius:18px; padding:32px; color:#FFF; box-shadow:0 8px 24px rgba(15,23,42,0.15);">
         <div style="text-align:center; max-width:680px; margin:0 auto 24px;">
           <h2 style="font-size:1.75rem; font-weight:800; color:#FFF; margin-bottom:8px;">🎮 Đấu Trí &amp; Minigame Luyện Thi Sát Hạch</h2>
-          <p style="color:#94A3B8; font-size:0.92rem; line-height:1.5;">Học mà chơi, chơi mà đỗ! Thử thách bản lĩnh với vòng quay may mắn, biển báo siêu tốc, sa hình và thi đấu trực tiếp với Giám thị AI.</p>
+          <p class="minigame-desc" style="color:#94A3B8; font-size:0.92rem; line-height:1.5;">Học mà chơi, chơi mà đỗ! Thử thách bản lĩnh với vòng quay may mắn, biển báo siêu tốc, sa hình và thi đấu trực tiếp với Giám thị AI.</p>
         </div>
 
         <div class="ui-grid ui-grid-4" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
@@ -7005,11 +7299,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           <div class="promax-card" style="padding:22px; text-align:center; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <h3 style="font-size:1.1rem; font-weight:800; color:#0F172A; margin-bottom:2px;">Giải Thế Sa Hình</h3>
-              <div style="font-size:0.78rem; color:#64748B; margin-bottom:8px;">(chuyên đề - 41 câu)</div>
+              <div style="font-size:0.78rem; color:#64748B; margin-bottom:8px;">(chuyên đề - 35 câu)</div>
               <p style="font-size:0.8rem; color:#64748B; line-height:1.4; margin-bottom:16px;">Thành thạo thứ tự ưu tiên các xe qua giao lộ, áp dụng chuẩn thần chú 5 bước.</p>
             </div>
             <div class="ui-grid ui-grid-actions" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-              <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Học Chuyên Đề Sa Hình (41 Câu Kèm Mẹo)', true)" class="btn btn-outline btn-sm" style="font-weight:700;">📖 Học</button>
+              <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Học Chuyên Đề Sa Hình (35 Câu Kèm Mẹo)', true)" class="btn btn-outline btn-sm" style="font-weight:700;">📖 Học</button>
               <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Thi Chuyên Đề Giải Thế Sa Hình', false)" class="btn btn-primary btn-sm" style="font-weight:700;">✍️ Thi</button>
             </div>
           </div>
@@ -7667,8 +7961,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <div>
               💡 <b>Mẹo nhớ nhanh:</b> Sa hình không phải đoán xe nào “có vẻ nhanh hơn”, mà là tìm xe có quyền ưu tiên hợp pháp hơn. Hãy đọc biển, hướng đi và vị trí xe trước khi nhìn đáp án.
             </div>
-            <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Học Chuyên Đề Sa Hình (41 Câu Kèm Mẹo)', true)" style="background:#D97706; color:#FFF; border:none; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
-              🏎️ Luyện 41 Câu Sa Hình →
+            <button type="button" onclick="startExamSimulation('A1', 'chapter5', 'Học Chuyên Đề Sa Hình (35 Câu Kèm Mẹo)', true)" style="background:#D97706; color:#FFF; border:none; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.82rem; cursor:pointer;">
+              🏎️ Luyện 35 Câu Sa Hình →
             </button>
           </div>
         </div>
@@ -8126,12 +8420,12 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
 
       <div style="display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; padding-bottom:6px;">
-        <button type="button" onclick="renderQuestionLookup(0, document.getElementById('drivingSearchInput').value)" class="btn btn-primary btn-sm">Tất cả (250 câu)</button>
-        <button type="button" onclick="renderQuestionLookup(1, document.getElementById('drivingSearchInput').value)" class="btn btn-outline btn-sm">Chương 1: Quy tắc</button>
-        <button type="button" onclick="renderQuestionLookup(2, document.getElementById('drivingSearchInput').value)" class="btn btn-outline btn-sm">Chương 2: Văn hóa</button>
-        <button type="button" onclick="renderQuestionLookup(3, document.getElementById('drivingSearchInput').value)" class="btn btn-outline btn-sm">Chương 3: Kỹ thuật</button>
-        <button type="button" onclick="renderQuestionLookup(4, document.getElementById('drivingSearchInput').value)" class="btn btn-outline btn-sm">Chương 4: Biển báo</button>
-        <button type="button" onclick="renderQuestionLookup(5, document.getElementById('drivingSearchInput').value)" class="btn btn-outline btn-sm">Chương 5: Sa hình</button>
+        <button type="button" onclick="renderQuestionLookup(0, document.getElementById('drivingSearchInput').value, this)" class="btn btn-primary btn-sm">Tất cả (250 câu)</button>
+        <button type="button" onclick="renderQuestionLookup(1, document.getElementById('drivingSearchInput').value, this)" class="btn btn-outline btn-sm">Chương 1: Quy tắc</button>
+        <button type="button" onclick="renderQuestionLookup(2, document.getElementById('drivingSearchInput').value, this)" class="btn btn-outline btn-sm">Chương 2: Văn hóa</button>
+        <button type="button" onclick="renderQuestionLookup(3, document.getElementById('drivingSearchInput').value, this)" class="btn btn-outline btn-sm">Chương 3: Kỹ thuật</button>
+        <button type="button" onclick="renderQuestionLookup(4, document.getElementById('drivingSearchInput').value, this)" class="btn btn-outline btn-sm">Chương 4: Biển báo</button>
+        <button type="button" onclick="renderQuestionLookup(5, document.getElementById('drivingSearchInput').value, this)" class="btn btn-outline btn-sm">Chương 5: Sa hình</button>
       </div>
 
       <div id="drivingQuestionListContainer"></div>
@@ -9256,11 +9550,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 <!-- ========================================================
      UNIVERSAL MODAL DIALOG (CHỨC NĂNG CÔNG CỤ & AUTH)
      ======================================================== -->
-<div class="modal-overlay" id="mainModal" onclick="if(event.target===this) closeModal();">
+<div class="modal-overlay" id="mainModal" onclick="if(event.target===this) closeModal();" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-box" id="modalBox">
     <div class="modal-header">
       <h3 id="modalTitle">Tiêu đề</h3>
-      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <button type="button" class="modal-close" onclick="closeModal()" aria-label="Đóng hộp thoại">&times;</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
@@ -9345,13 +9639,115 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   // WELCOME PROMOTIONAL POPUP CONTROLLER (GPLX 2026 & AI STUDIO)
   // Tự động mở sau khi tải trang, đếm ngược 10 giây hoặc bấm ✕
   // ========================================================
+  // ========================================================
+  // POPUP & BANNER PROMOTION ENGINE (ĐỒNG BỘ CÙNG ADMIN DASHBOARD)
+  // Tự động kiểm tra thiết bị (Bỏ qua popup trên điện thoại lúc vào web)
+  // ========================================================
   let promoTimerId = null;
   let promoIntervalId = null;
   let promoRemainingSeconds = 10;
 
-  function openWelcomePromo() {
+  function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  function getPopupsConfig() {
+    const defaultConfig = {
+      welcomePopup: {
+        active: true,
+        targetDevice: 'desktop', // MẶC ĐỊNH: Chỉ máy tính (Desktop), tự động tắt trên điện thoại
+        autoShowMobile: false,   // Bỏ pop-up lúc vào web trên điện thoại
+        title: 'Khám Phá 2 Tiện Ích Đột Phá Trên Ninh Bình Digital',
+        subTitle: 'CỔNG TIỆN ÍCH CHUYỂN ĐỔI SỐ NINH BÌNH',
+        badge: '✨ NỔI BẬT NĂM 2026',
+        bannerImg: 'images/gplx_doc_banner.jpg',
+        bannerOverlayTag: '🚗 Ôn Thi GPLX 2026 & 📜 Soạn Văn Bản NĐ 30 Chuẩn A4',
+        desc: 'Hệ thống vừa cập nhật 2 nền tảng số trọng điểm phục vụ người dân, cán bộ và hộ kinh doanh:',
+        feat1Title: 'Ôn Luyện & Sát Hạch GPLX 2026',
+        feat1Desc: 'Trọn bộ 600 câu Cục Đường Bộ, 20 & 60 câu điểm liệt chống trượt, mẹo thi nhanh A1, A, B, C.',
+        feat1Link: 'driving',
+        feat2Title: 'Tạo Văn Bản Hành Chính Nhanh Gọn',
+        feat2Desc: 'Chuẩn thể thức Nghị định 30/2020/NĐ-CP, tự động căn lề A4, trích yếu, xuất file Word & in ấn chuẩn xác.',
+        feat2Link: 'vanban',
+        btnText: '🚗 Vào Ôn Luyện GPLX Ngay',
+        btnLink: 'driving',
+        countdownSec: 10
+      },
+      bannerAds: []
+    };
+    try {
+      const raw = localStorage.getItem('nb_popups_config');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return Object.assign({}, defaultConfig, parsed);
+      }
+    } catch(e) {}
+    return defaultConfig;
+  }
+
+  function applyPopupConfigToModal(cfg) {
+    if (!cfg) return;
+    const overlay = document.getElementById('welcomePromoModal');
+    if (!overlay) return;
+
+    const titleEl = overlay.querySelector('.promo-title');
+    if (titleEl && cfg.title) titleEl.textContent = cfg.title;
+
+    const subEl = overlay.querySelector('.promo-sub-title');
+    if (subEl && cfg.subTitle) subEl.textContent = cfg.subTitle;
+
+    const badgeEl = overlay.querySelector('.promo-banner-badge');
+    if (badgeEl && cfg.badge) badgeEl.textContent = cfg.badge;
+
+    const bannerImg = overlay.querySelector('.promo-banner-img');
+    if (bannerImg && cfg.bannerImg) bannerImg.src = cfg.bannerImg;
+
+    const bannerTag = overlay.querySelector('.promo-banner-tag');
+    if (bannerTag && cfg.bannerOverlayTag) bannerTag.innerHTML = cfg.bannerOverlayTag;
+
+    const descEl = overlay.querySelector('.promo-desc');
+    if (descEl && cfg.desc) descEl.textContent = cfg.desc;
+
+    const btnMain = overlay.querySelector('.promo-btn-main span:first-child');
+    if (btnMain && cfg.btnText) btnMain.textContent = cfg.btnText;
+
+    const feat1H4 = overlay.querySelector('.promo-feat-driving h4');
+    if (feat1H4 && cfg.feat1Title) feat1H4.textContent = cfg.feat1Title;
+    const feat1P = overlay.querySelector('.promo-feat-driving p');
+    if (feat1P && cfg.feat1Desc) feat1P.textContent = cfg.feat1Desc;
+
+    const feat2H4 = overlay.querySelector('.promo-feat-vanban h4');
+    if (feat2H4 && cfg.feat2Title) feat2H4.textContent = cfg.feat2Title;
+    const feat2P = overlay.querySelector('.promo-feat-vanban p');
+    if (feat2P && cfg.feat2Desc) feat2P.textContent = cfg.feat2Desc;
+  }
+
+  function openWelcomePromo(force = false) {
     // Không hiện nếu người dùng đang trực tiếp làm bài thi hay tra cứu sâu
     if (window.location.hash.includes('exam') || window.location.hash.includes('driving')) return;
+
+    const cfg = getPopupsConfig().welcomePopup;
+    if (!cfg || !cfg.active) return;
+
+    const onMobile = isMobileDevice();
+
+    // BỎ POP-UP LÚC VÀO WEB TRÊN ĐIỆN THOẠI THEO YÊU CẦU
+    if (!force) {
+      if (onMobile) {
+        // Trên điện thoại: Nếu targetDevice là 'desktop' hoặc autoShowMobile là false => BỎ QUA POP-UP
+        if (cfg.targetDevice === 'desktop' || !cfg.autoShowMobile) {
+          console.log('[Popup] Đã bỏ qua pop-up lúc vào web trên điện thoại theo yêu cầu của bạn.');
+          return;
+        }
+      } else {
+        // Trên máy tính: Nếu targetDevice là 'mobile' => bỏ qua
+        if (cfg.targetDevice === 'mobile') {
+          return;
+        }
+      }
+    }
+
+    applyPopupConfigToModal(cfg);
 
     const overlay = document.getElementById('welcomePromoModal');
     const bar = document.getElementById('promoTimerBar');
@@ -9363,12 +9759,13 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       overlay.classList.add('open');
     });
 
-    // Reset countdown timer (10s)
-    promoRemainingSeconds = 10;
-    if (secEl) secEl.textContent = '10';
+    const duration = parseInt(cfg.countdownSec, 10) || 10;
+    promoRemainingSeconds = duration;
+    if (secEl) secEl.textContent = String(duration);
     if (bar) {
       bar.classList.remove('draining');
       void bar.offsetWidth; // trigger reflow
+      bar.style.animationDuration = duration + 's';
       bar.classList.add('draining');
     }
 
@@ -9385,7 +9782,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     if (promoTimerId) clearTimeout(promoTimerId);
     promoTimerId = setTimeout(() => {
       closeWelcomePromo();
-    }, 10000);
+    }, duration * 1000);
   }
 
   function closeWelcomePromo() {
@@ -9417,8 +9814,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     if (typeof AdministrativeDocEngine !== 'undefined') {
       AdministrativeDocEngine.init();
     }
-    // Tự động mở popup chào mừng giới thiệu sau 1 giây khi vào trang
-    setTimeout(openWelcomePromo, 1000);
+    // Tự động mở popup chào mừng giới thiệu sau 1.2 giây khi vào trang (Kiểm tra thiết bị & cấu hình)
+    setTimeout(() => { openWelcomePromo(false); }, 1200);
     // Kích hoạt nhịp tim theo dõi phiên trực tiếp cho Admin Dashboard
     initActivePresenceHeartbeat();
   });
@@ -9463,9 +9860,54 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     } catch(e) {}
   }
 
-  // Lắng nghe phím ESC để tắt popup
+  // Lắng nghe phím ESC để tắt popup hoặc hộp thoại công cụ
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeWelcomePromo();
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('mainModal');
+      if (modal && modal.classList.contains('open')) {
+        closeModal();
+        return;
+      }
+      closeWelcomePromo();
+    }
+  // 28 / P2: Hỗ trợ phím Enter / Space cho các mục Menu điều hướng
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.classList && e.target.classList.contains('nav-link')) {
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+
+  // 22 / P2: Kéo thả file thực tế cho toàn bộ vùng .drop-zone
+  document.addEventListener('dragover', (e) => {
+    const zone = e.target.closest('.drop-zone');
+    if (zone) {
+      e.preventDefault();
+      zone.style.borderColor = 'var(--primary)';
+      zone.style.background = 'var(--surface-3, #EFF6FF)';
+    }
+  });
+
+  document.addEventListener('dragleave', (e) => {
+    const zone = e.target.closest('.drop-zone');
+    if (zone && !zone.contains(e.relatedTarget)) {
+      zone.style.borderColor = '';
+      zone.style.background = '';
+    }
+  });
+
+  document.addEventListener('drop', (e) => {
+    const zone = e.target.closest('.drop-zone');
+    if (zone) {
+      e.preventDefault();
+      zone.style.borderColor = '';
+      zone.style.background = '';
+      const fileInput = zone.querySelector('input[type="file"]');
+      if (fileInput && e.dataTransfer && e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
   });
 
   window.addEventListener('hashchange', handleHashNavigation);
@@ -9473,9 +9915,26 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   function handleHashNavigation() {
     const raw = window.location.hash.replace('#', '') || 'home';
     const [pagePart, queryPart] = raw.split('?');
-    const params = new URLSearchParams(queryPart || '');
 
-    // Hỗ trợ alias & chặn truy cập sớm grading
+    // 1. Kiểm tra nếu hash là anchor phần tử trong trang (ví dụ #form-register-service)
+    const anchorEl = document.getElementById(pagePart);
+    const targetPage = document.getElementById('page-' + pagePart);
+
+    if (!targetPage && anchorEl) {
+      const parentPage = anchorEl.closest('.page-view');
+      if (parentPage) {
+        const parentPageId = parentPage.id.replace('page-', '');
+        if (!parentPage.classList.contains('active')) {
+          navigateTo(parentPageId, false);
+        }
+      }
+      setTimeout(() => {
+        anchorEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
+      return;
+    }
+
+    // 2. Hỗ trợ alias & chặn truy cập sớm grading
     if (pagePart === 'cham-bai' || pagePart === 'chamdiem' || pagePart === 'grading') {
       navigateTo('home', true);
       showGradingDevAlert();
@@ -9485,6 +9944,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     let pageId = pagePart;
     if (pagePart === 'soanthao' || pagePart === 'congvan' || pagePart === 'nghidinh30' || pagePart === 'van-ban') pageId = 'vanban';
     
+    // Dự phòng an toàn: nếu pageId không tồn tại thì giữ nguyên hoặc về home
+    if (!document.getElementById('page-' + pageId)) {
+      pageId = 'home';
+    }
+
     navigateTo(pageId, false);
 
     if (pageId === 'vanban' && typeof AdministrativeDocEngine !== 'undefined') {
@@ -9553,28 +10017,30 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       return;
     }
 
+    const targetPage = document.getElementById('page-' + pageId);
+    if (!targetPage) {
+      return; // Không ẩn trang đang hiển thị nếu pageId không hợp lệ
+    }
+
     document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
 
-    const targetPage = document.getElementById('page-' + pageId);
-    if(targetPage) {
-      targetPage.classList.add('active');
-      let activeNavId = 'nav-' + pageId;
-      if (pageId === 'driving' || pageId === 'blog' || pageId === 'tools') {
-        activeNavId = 'nav-tools';
-      }
-      const activeNav = document.getElementById(activeNavId);
-      if(activeNav) activeNav.classList.add('active');
-      if(updateHash) window.location.hash = pageId;
-      if (pageId === 'travel') {
-        setTimeout(() => {
-          if (typeof initNinhBinhMap === 'function') initNinhBinhMap();
-          if (window.ninhbinhMap) window.ninhbinhMap.invalidateSize();
-        }, 120);
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    targetPage.classList.add('active');
+    let activeNavId = 'nav-' + pageId;
+    if (pageId === 'driving' || pageId === 'blog' || pageId === 'tools') {
+      activeNavId = 'nav-tools';
     }
+    const activeNav = document.getElementById(activeNavId);
+    if(activeNav) activeNav.classList.add('active');
+    if(updateHash) window.location.hash = pageId;
+    if (pageId === 'travel') {
+      setTimeout(() => {
+        if (typeof initNinhBinhMap === 'function') initNinhBinhMap();
+        if (window.ninhbinhMap) window.ninhbinhMap.invalidateSize();
+      }, 120);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Nối liền thanh subnav GPLX trực tiếp dưới thanh header khi dùng chức năng Bằng lái xe (#driving)
     const drivingHeaderSubnav = document.getElementById('drivingHeaderSubnav');
@@ -9631,17 +10097,34 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     }, 2800);
   }
 
-  // Modal Control
+  // Modal Control & Focus Management (Chuẩn Dialog / Trợ Năng)
+  let lastFocusedElementBeforeModal = null;
+
   function openModal(title, html) {
+    lastFocusedElementBeforeModal = document.activeElement;
+    const modal = document.getElementById('mainModal');
     document.getElementById('modalTitle').innerHTML = title;
     document.getElementById('modalBody').innerHTML = html;
-    document.getElementById('mainModal').classList.add('open');
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    // Đưa focus vào phần tử tương tác đầu tiên hoặc nút đóng
+    setTimeout(() => {
+      const focusable = modal.querySelectorAll('input:not([type="hidden"]), select, textarea, button, [tabindex="0"]');
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      }
+    }, 60);
   }
 
   function closeModal() {
-    document.getElementById('mainModal').classList.remove('open');
+    const modal = document.getElementById('mainModal');
+    modal.classList.remove('open');
     document.body.style.overflow = '';
+    // Khôi phục focus về phần tử trước khi mở modal
+    if (lastFocusedElementBeforeModal && typeof lastFocusedElementBeforeModal.focus === 'function') {
+      try { lastFocusedElementBeforeModal.focus(); } catch(e) {}
+    }
   }
 
   // ========================================================
@@ -9802,24 +10285,22 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     }
 
     if (foundUser) {
-      if (foundUser.password_hash) {
-        if (foundUser.password_hash !== passwordHash) {
-          showToast('Mật khẩu không chính xác! Vui lòng thử lại.');
-          return;
-        }
+      if (!foundUser.password_hash) {
+        showToast('Tài khoản này chưa tạo mật khẩu đăng nhập trực tiếp. Vui lòng đăng nhập qua Google!');
+        return;
+      }
+      if (foundUser.password_hash !== passwordHash) {
+        showToast('Mật khẩu không chính xác! Vui lòng thử lại.');
+        return;
       }
       currentUser = {
         name: foundUser.name,
         email: foundUser.email,
-        role: foundUser.role || (email.includes('admin') ? 'admin' : 'member')
+        role: foundUser.role === 'admin' ? 'admin' : 'member'
       };
     } else {
-      if (email.includes('admin')) {
-        currentUser = { name: "Quản Trị Viên", email: email, role: "admin" };
-      } else {
-        showToast('Tài khoản chưa tồn tại, vui lòng đăng ký thành viên mới!');
-        return;
-      }
+      showToast('Tài khoản chưa tồn tại hoặc sai thông tin, vui lòng đăng ký thành viên mới!');
+      return;
     }
 
     localStorage.setItem('nb_user', JSON.stringify(currentUser));
@@ -9829,11 +10310,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   }
 
   function loginAsAdminDemo() {
-    currentUser = { name: "Quản Trị Viên (Admin)", email: "admin@ninhbinh.vn", role: "admin" };
-    localStorage.setItem('nb_user', JSON.stringify(currentUser));
-    updateAuthUI();
-    navigateTo('admin');
-    showToast('Đã đăng nhập quyền Admin thành công!');
+    showToast('Chức năng demo tự cấp quyền admin đã bị vô hiệu hóa vì lý do an toàn bảo mật.');
   }
 
   async function handleRegisterSubmit() {
@@ -11361,9 +11838,12 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   }
 
   function calcComboDiscount() {
-    const unit = parseFloat(document.getElementById('dcUnit')?.value) || 0;
-    const qty = parseInt(document.getElementById('dcQty')?.value) || 1;
-    const pct = parseFloat(document.getElementById('dcPercent')?.value) || 0;
+    const unitInput = document.getElementById('dcUnit')?.value;
+    const qtyInput = document.getElementById('dcQty')?.value;
+    const unit = Math.max(0, parseFloat(unitInput) || 0);
+    const rawQty = parseInt(qtyInput, 10);
+    const qty = isNaN(rawQty) ? 0 : Math.max(0, rawQty);
+    const pct = Math.max(0, Math.min(100, parseFloat(document.getElementById('dcPercent')?.value) || 0));
 
     const subtotal = unit * qty;
     const saved = subtotal * (pct / 100);
@@ -11813,8 +12293,10 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       `;
     });
 
-    const disc = parseFloat(document.getElementById('invDiscountVal')?.value) || 0;
-    const vatRate = parseFloat(document.getElementById('invVatVal')?.value) || 0;
+    const rawDisc = parseFloat(document.getElementById('invDiscountVal')?.value) || 0;
+    // Chặn giảm giá âm để không làm tăng tổng tiền vô lý và giải trình minh bạch
+    const disc = Math.max(0, Math.min(rawDisc, subtotal));
+    const vatRate = Math.max(0, parseFloat(document.getElementById('invVatVal')?.value) || 0);
     
     const afterDisc = Math.max(0, subtotal - disc);
     const vatAmt = Math.round(afterDisc * vatRate);
@@ -13413,6 +13895,9 @@ Quản trị tài chính số — Ninh Bình Digital`;
             <button class="btn btn-primary btn-sm" onclick="downloadVietQRPNG()">Tải ảnh mã QR (.png)</button>
             <button class="btn btn-outline btn-sm" onclick="printVietQR()">In dán quầy</button>
           </div>
+          <div style="margin-top:12px; font-size:0.72rem; color:var(--muted); text-align:center; line-height:1.4;">
+            🔒 Cổng thanh toán kết nối trực tiếp với cổng Napas 247 qua hệ thống VietQR.io tiêu chuẩn Ngân hàng Nhà nước.
+          </div>
         </div>
       </div>
     `;
@@ -13420,49 +13905,78 @@ Quản trị tài chính số — Ninh Bình Digital`;
     generateVietQR();
   }
 
-  function generateVietQR() {
-    const bank = document.getElementById('vqrBank').value;
-    const acc = document.getElementById('vqrAccount').value.trim();
-    const name = document.getElementById('vqrName').value.trim();
-    const amount = document.getElementById('vqrAmount').value.trim();
-    const memo = document.getElementById('vqrMemo').value.trim();
+  let isVietQrLoadedSuccessfully = false;
 
-    document.getElementById('vqrDispBank').textContent = bank;
+  function generateVietQR() {
+    const bank = document.getElementById('vqrBank')?.value || 'TCB';
+    const acc = (document.getElementById('vqrAccount')?.value || '').trim().replace(/\s+/g, '');
+    const name = (document.getElementById('vqrName')?.value || '').trim();
+    const amount = (document.getElementById('vqrAmount')?.value || '').trim();
+    const memo = (document.getElementById('vqrMemo')?.value || '').trim();
+
+    const bankObj = (typeof VN_BANKS !== 'undefined' ? VN_BANKS.find(b => b.code === bank) : null) || { name: bank };
+    document.getElementById('vqrDispBank').textContent = bankObj.name || bank;
     document.getElementById('vqrDispAcc').textContent = acc;
     document.getElementById('vqrDispName').textContent = name || 'CHỦ TÀI KHOẢN';
 
     const qrContainer = document.getElementById('vqrQrContainer');
-    qrContainer.innerHTML = '';
+    qrContainer.innerHTML = '<div style="padding:20px; color:var(--muted); font-size:0.85rem;">⏳ Đang kết nối Napas tạo mã VietQR...</div>';
+    isVietQrLoadedSuccessfully = false;
 
-    // Render client-side QRCode canvas directly for crisp image
-    const rawData = `https://img.vietqr.io/image/${bank}-${acc}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(name)}`;
+    const cleanAmt = amount ? Math.max(0, parseInt(amount, 10) || 0) : '';
+    const rawData = `https://img.vietqr.io/image/${bank}-${acc}-compact2.png?amount=${cleanAmt}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(name)}`;
     const img = document.createElement('img');
     img.crossOrigin = 'anonymous';
-    img.src = rawData;
     img.style.maxWidth = '210px';
-    img.onerror = () => {
+    img.style.borderRadius = '6px';
+    img.alt = 'Mã thanh toán VietQR Napas 247';
+
+    img.onload = () => {
+      isVietQrLoadedSuccessfully = true;
       qrContainer.innerHTML = '';
-      new QRCode(qrContainer, { text: `STK:${acc}|BANK:${bank}|AMT:${amount}`, width: 180, height: 180 });
+      qrContainer.appendChild(img);
     };
-    qrContainer.appendChild(img);
+
+    img.onerror = () => {
+      isVietQrLoadedSuccessfully = false;
+      qrContainer.innerHTML = `
+        <div style="padding:14px; background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; color:#DC2626; font-size:0.82rem; line-height:1.5;">
+          ⚠️ <b>Không thể tạo mã VietQR lúc này</b><br>
+          Không thể kết nối cổng Napas VietQR hoặc số tài khoản/ngân hàng chưa hợp lệ. Vui lòng kiểm tra lại mạng và thông tin STK.
+        </div>
+      `;
+    };
+
+    img.src = rawData;
   }
 
   function downloadVietQRPNG() {
+    if (!isVietQrLoadedSuccessfully) {
+      if (window.showAppAlert) {
+        window.showAppAlert({
+          title: 'Chưa tải được mã QR',
+          message: 'Mã VietQR chưa tải thành công từ cổng Napas. Không thể tải file ảnh thanh toán.',
+          icon: '⚠️'
+        });
+      } else {
+        alert('Mã VietQR chưa tải thành công. Vui lòng thử lại!');
+      }
+      return;
+    }
     const img = document.querySelector('#vqrQrContainer img');
-    if(!img) return;
-    fetch(img.src).then(res => res.blob()).then(blob => {
+    if (!img) return;
+    fetch(img.src).then(res => {
+      if (!res.ok) throw new Error('Network response not ok');
+      return res.blob();
+    }).then(blob => {
       downloadBlobFile(blob, `VietQR-${document.getElementById('vqrAccount').value}.png`);
-      showToast('Đã tải mã QR dạng file .PNG chuẩn!');
+      showToast('Đã tải mã QR dạng file .PNG chuẩn Napas!');
     }).catch(() => {
-      // Canvas fallback
-      const canvas = document.createElement('canvas');
-      canvas.width = 300; canvas.height = 300;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,300,300);
-      new QRCode(canvas, { text: document.getElementById('vqrAccount').value, width: 260, height: 260 });
-      canvas.toBlob(blob => {
-        downloadBlobFile(blob, `VietQR-${document.getElementById('vqrAccount').value}.png`);
-      }, 'image/png');
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.target = '_blank';
+      a.download = `VietQR-${document.getElementById('vqrAccount').value}.png`;
+      a.click();
     });
   }
 
@@ -13474,6 +13988,14 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   // 2. WiFi QR
+  function escapeWifiField(str) {
+    return (str || '').replace(/\\/g, '\\\\')
+                     .replace(/;/g, '\\;')
+                     .replace(/,/g, '\\,')
+                     .replace(/:/g, '\\:')
+                     .replace(/"/g, '\\"');
+  }
+
   function renderWifiQR() {
     const html = `
       <div class="form-grid">
@@ -13511,15 +14033,18 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function generateWifiQR() {
-    const ssid = document.getElementById('wifiSsid').value.trim();
-    const pass = document.getElementById('wifiPass').value.trim();
-    const auth = document.getElementById('wifiAuth').value;
+    const ssid = (document.getElementById('wifiSsid')?.value || '').trim();
+    const pass = document.getElementById('wifiPass')?.value || '';
+    const auth = document.getElementById('wifiAuth')?.value || 'WPA';
     document.getElementById('wifiDispSsid').textContent = ssid;
 
     const qrDiv = document.getElementById('wifiQrCode');
+    if (!qrDiv) return;
     qrDiv.innerHTML = '';
+    const cleanSsid = escapeWifiField(ssid);
+    const cleanPass = escapeWifiField(pass);
     new QRCode(qrDiv, {
-      text: `WIFI:S:${ssid};T:${auth};P:${pass};;`,
+      text: `WIFI:S:${cleanSsid};T:${auth};P:${cleanPass};;`,
       width: 170, height: 170,
       colorDark: "#092545", colorLight: "#ffffff"
     });
@@ -13708,22 +14233,70 @@ Quản trị tài chính số — Ninh Bình Digital`;
     }, mime, 0.92);
   }
 
-  // 6. PDF Merge & Split
+  // 6. PDF Merge & Split (Gộp & Tách trang PDF)
   let pdfList = [];
+  let pdfSplitFile = null;
+
   function renderPdfMerge() {
     pdfList = [];
+    pdfSplitFile = null;
     const html = `
       <div>
-        <div class="drop-zone" onclick="document.getElementById('pdfInp').click()">
-          <input type="file" id="pdfInp" accept="application/pdf" multiple style="display:none;" onchange="handlePdfFiles(event)">
-          <div style="font-size:2rem; margin-bottom:8px;">📑</div>
-          <div style="font-weight:700; color:var(--primary);">Chọn các file PDF cần gộp</div>
+        <div style="display:flex; gap:8px; margin-bottom:16px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+          <button type="button" class="btn btn-sm btn-primary" id="pdfTabMergeBtn" onclick="switchPdfMode('merge')" style="font-weight:700;">📑 Gộp File PDF</button>
+          <button type="button" class="btn btn-sm btn-outline" id="pdfTabSplitBtn" onclick="switchPdfMode('split')" style="font-weight:700;">✂️ Tách / Trích Trang PDF</button>
         </div>
-        <div id="pdfListShow" style="margin:14px 0;"></div>
-        <button id="pdfRunBtn" class="btn btn-primary btn-full" style="display:none;" onclick="runMergePdf()">Gộp &amp; Tải File PDF Mới (.pdf)</button>
+
+        <!-- Chế độ 1: Gộp file -->
+        <div id="pdfMergePanel">
+          <div class="drop-zone" onclick="document.getElementById('pdfInp').click()">
+            <input type="file" id="pdfInp" accept="application/pdf" multiple style="display:none;" onchange="handlePdfFiles(event)">
+            <div style="font-size:2rem; margin-bottom:8px;">📑</div>
+            <div style="font-weight:700; color:var(--primary);">Kéo thả hoặc chọn các file PDF cần gộp</div>
+            <div style="font-size:0.75rem; color:var(--muted); margin-top:4px;">Hỗ trợ ghép nhiều tài liệu, hợp đồng, báo cáo</div>
+          </div>
+          <div id="pdfListShow" style="margin:14px 0;"></div>
+          <button id="pdfRunBtn" class="btn btn-primary btn-full" style="display:none;" onclick="runMergePdf()">Gộp &amp; Tải File PDF Mới (.pdf)</button>
+        </div>
+
+        <!-- Chế độ 2: Tách / Trích xuất trang -->
+        <div id="pdfSplitPanel" style="display:none;">
+          <div class="drop-zone" onclick="document.getElementById('pdfSplitInp').click()">
+            <input type="file" id="pdfSplitInp" accept="application/pdf" style="display:none;" onchange="handlePdfSplitFile(event)">
+            <div style="font-size:2rem; margin-bottom:8px;">✂️</div>
+            <div style="font-weight:700; color:var(--primary);">Chọn 1 file PDF cần tách hoặc trích xuất trang</div>
+            <div style="font-size:0.75rem; color:var(--muted); margin-top:4px;" id="pdfSplitFileInfo">Định dạng .pdf</div>
+          </div>
+          <div id="pdfSplitControls" style="display:none; margin-top:14px;">
+            <div class="form-group">
+              <label>Khoảng trang cần trích xuất (Ví dụ: 1-3 hoặc 1,3,5):</label>
+              <input type="text" id="pdfPageRange" class="form-control" placeholder="1-3 hoặc 1, 2, 5">
+              <small style="color:var(--muted); font-size:0.75rem;">Tổng số trang file hiện tại: <b id="pdfTotalPagesCount">0</b> trang</small>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="runSplitPdf()">✂️ Trích Xuất &amp; Tải Trang Đã Chọn (.pdf)</button>
+          </div>
+        </div>
       </div>
     `;
-    openModal('Gộp Nhiều File PDF Thành 1 File', html);
+    openModal('Gộp &amp; Tách Trang File PDF Trực Tuyến', html);
+  }
+
+  function switchPdfMode(mode) {
+    const mergePanel = document.getElementById('pdfMergePanel');
+    const splitPanel = document.getElementById('pdfSplitPanel');
+    const mergeBtn = document.getElementById('pdfTabMergeBtn');
+    const splitBtn = document.getElementById('pdfTabSplitBtn');
+    if (mode === 'merge') {
+      if (mergePanel) mergePanel.style.display = 'block';
+      if (splitPanel) splitPanel.style.display = 'none';
+      if (mergeBtn) mergeBtn.className = 'btn btn-sm btn-primary';
+      if (splitBtn) splitBtn.className = 'btn btn-sm btn-outline';
+    } else {
+      if (mergePanel) mergePanel.style.display = 'none';
+      if (splitPanel) splitPanel.style.display = 'block';
+      if (mergeBtn) mergeBtn.className = 'btn btn-sm btn-outline';
+      if (splitBtn) splitBtn.className = 'btn btn-sm btn-primary';
+    }
   }
 
   function handlePdfFiles(e) {
@@ -13753,6 +14326,75 @@ Quản trị tài chính số — Ninh Bình Digital`;
       showToast('Đã gộp và tải file .PDF thành công!');
     } catch(err) {
       showToast('Có lỗi khi gộp PDF. Vui lòng thử lại!');
+    }
+  }
+
+  async function handlePdfSplitFile(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    pdfSplitFile = file;
+    try {
+      const { PDFDocument } = PDFLib;
+      const buf = await file.arrayBuffer();
+      const doc = await PDFDocument.load(buf);
+      const total = doc.getPageCount();
+      document.getElementById('pdfSplitFileInfo').innerHTML = `Đã nạp: <b>${file.name}</b> (${total} trang)`;
+      document.getElementById('pdfTotalPagesCount').textContent = total;
+      document.getElementById('pdfPageRange').value = `1-${Math.min(total, 3)}`;
+      document.getElementById('pdfSplitControls').style.display = 'block';
+    } catch(err) {
+      alert('Không thể đọc file PDF. File có thể bị mã hóa mật khẩu hoặc bị lỗi!');
+    }
+  }
+
+  async function runSplitPdf() {
+    if (!pdfSplitFile) {
+      alert('Vui lòng chọn file PDF trước!');
+      return;
+    }
+    const rangeStr = (document.getElementById('pdfPageRange')?.value || '').trim();
+    if (!rangeStr) {
+      alert('Vui lòng nhập khoảng trang cần trích xuất!');
+      return;
+    }
+
+    try {
+      const { PDFDocument } = PDFLib;
+      const buf = await pdfSplitFile.arrayBuffer();
+      const srcDoc = await PDFDocument.load(buf);
+      const total = srcDoc.getPageCount();
+
+      const selectedIndices = new Set();
+      const parts = rangeStr.split(',');
+      for (const p of parts) {
+        const item = p.trim();
+        if (item.includes('-')) {
+          const [startStr, endStr] = item.split('-');
+          const start = Math.max(1, parseInt(startStr, 10) || 1);
+          const end = Math.min(total, parseInt(endStr, 10) || total);
+          for (let i = start; i <= end; i++) selectedIndices.add(i - 1);
+        } else {
+          const pageNum = parseInt(item, 10);
+          if (pageNum >= 1 && pageNum <= total) selectedIndices.add(pageNum - 1);
+        }
+      }
+
+      const indices = Array.from(selectedIndices).sort((a, b) => a - b);
+      if (indices.length === 0) {
+        alert('Khoảng trang nhập không hợp lệ hoặc vượt quá số trang của tài liệu!');
+        return;
+      }
+
+      const newPdf = await PDFDocument.create();
+      const copiedPages = await newPdf.copyPages(srcDoc, indices);
+      copiedPages.forEach(page => newPdf.addPage(page));
+
+      const bytes = await newPdf.save();
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      downloadBlobFile(blob, `Trich-Trang-${pdfSplitFile.name}`);
+      showToast(`Đã trích xuất thành công ${indices.length} trang!`);
+    } catch(err) {
+      showToast('Có lỗi khi trích xuất trang PDF. Vui lòng thử lại!');
     }
   }
 
@@ -14243,30 +14885,40 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   // 10. Room Price Calculator
+  // 10. Room Price Calculator
   function renderRoomPrice() {
     const html = `
       <div class="form-grid">
         <div>
           <div class="form-group">
             <label>Giá phòng ngày thường (đ/đêm):</label>
-            <input type="number" id="rpBase" value="600000" oninput="calcRp()">
+            <input type="number" id="rpBase" value="600000" min="0" oninput="calcRp()">
           </div>
           <div class="form-group">
             <label>Số đêm ngày thường:</label>
-            <input type="number" id="rpWeek" value="2" oninput="calcRp()">
+            <input type="number" id="rpWeek" value="2" min="0" oninput="calcRp()">
           </div>
           <div class="form-group">
             <label>Số đêm cuối tuần (T6, T7):</label>
-            <input type="number" id="rpEnd" value="1" oninput="calcRp()">
+            <input type="number" id="rpEnd" value="1" min="0" oninput="calcRp()">
+          </div>
+          <div class="form-group">
+            <label>Phụ thu mỗi đêm cuối tuần (VNĐ):</label>
+            <input type="number" id="rpEndSurcharge" value="150000" min="0" oninput="calcRp()">
           </div>
           <div class="form-group">
             <label>Phụ thu mùa lễ hội Tràng An / Tết (+25%):</label>
-            <input type="checkbox" id="rpFest" style="width:auto;" onchange="calcRp()"> Có áp dụng
+            <input type="checkbox" id="rpFest" style="width:auto;" onchange="calcRp()"> Có áp dụng (+25%)
+          </div>
+          <div class="form-group">
+            <label>Bao gồm suất ăn sáng:</label>
+            <input type="checkbox" id="rpBreakfast" style="width:auto;" checked onchange="calcRp()"> Đã tính suất ăn sáng
           </div>
         </div>
         <div style="background:#F8FAFC; border-radius:10px; padding:20px; text-align:center;">
           <span style="font-size:0.85rem; color:var(--muted);">TỔNG CHI PHÍ DỰ KIẾN:</span>
           <b id="rpTotalDisp" style="display:block; font-size:1.8rem; color:var(--primary); margin:10px 0;">0 VNĐ</b>
+          <div id="rpBreakfastNotice" style="font-size:0.8rem; color:#16A34A; margin-bottom:12px; font-weight:600;">✓ Đã bao gồm suất ăn sáng</div>
           <button class="btn btn-primary btn-sm" onclick="copyRpQuotation()">Sao chép báo giá gửi khách</button>
         </div>
       </div>
@@ -14276,18 +14928,28 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function calcRp() {
-    const base = parseFloat(document.getElementById('rpBase').value) || 0;
-    const w = parseInt(document.getElementById('rpWeek').value) || 0;
-    const e = parseInt(document.getElementById('rpEnd').value) || 0;
-    const fest = document.getElementById('rpFest').checked ? 1.25 : 1.0;
+    const base = Math.max(0, parseFloat(document.getElementById('rpBase')?.value) || 0);
+    const w = Math.max(0, parseInt(document.getElementById('rpWeek')?.value, 10) || 0);
+    const e = Math.max(0, parseInt(document.getElementById('rpEnd')?.value, 10) || 0);
+    const surcharge = Math.max(0, parseFloat(document.getElementById('rpEndSurcharge')?.value) || 0);
+    const fest = document.getElementById('rpFest')?.checked ? 1.25 : 1.0;
+    const hasBreakfast = document.getElementById('rpBreakfast')?.checked;
 
-    const total = (w * base + e * (base + 150000)) * fest;
-    document.getElementById('rpTotalDisp').textContent = total.toLocaleString('vi-VN') + ' VNĐ';
+    const total = (w * base + e * (base + surcharge)) * fest;
+    document.getElementById('rpTotalDisp').textContent = Math.round(total).toLocaleString('vi-VN') + ' VNĐ';
+
+    const bNotice = document.getElementById('rpBreakfastNotice');
+    if (bNotice) {
+      bNotice.textContent = hasBreakfast ? '✓ Đã bao gồm suất ăn sáng' : 'ⓘ Chưa bao gồm ăn sáng';
+      bNotice.style.color = hasBreakfast ? '#16A34A' : '#64748B';
+    }
   }
 
   function copyRpQuotation() {
     const amt = document.getElementById('rpTotalDisp').textContent;
-    navigator.clipboard.writeText(`Dạ chào anh/chị, tổng tiền phòng homestay dự kiến là ${amt}. Đã bao gồm ăn sáng ạ!`);
+    const hasBreakfast = document.getElementById('rpBreakfast')?.checked;
+    const breakfastText = hasBreakfast ? 'Đã bao gồm ăn sáng' : 'Chưa bao gồm ăn sáng';
+    navigator.clipboard.writeText(`Dạ chào anh/chị, tổng tiền phòng homestay dự kiến là ${amt}. ${breakfastText} ạ!`);
     showToast('Đã sao chép báo giá phòng!');
   }
 
@@ -14297,8 +14959,8 @@ Quản trị tài chính số — Ninh Bình Digital`;
       <div>
         <div class="form-grid">
           <div class="form-group">
-            <label>Nhập số lượng:</label>
-            <input type="number" id="uVal" value="1" oninput="runUnitCv()">
+            <label>Nhập số lượng (≥ 0):</label>
+            <input type="number" id="uVal" value="1" min="0" step="any" oninput="runUnitCv()">
           </div>
           <div class="form-group">
             <label>Đơn vị:</label>
@@ -14318,8 +14980,9 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function runUnitCv() {
-    const val = parseFloat(document.getElementById('uVal').value) || 0;
-    const t = document.getElementById('uType').value;
+    const rawVal = parseFloat(document.getElementById('uVal')?.value);
+    const val = isNaN(rawVal) ? 0 : Math.max(0, rawVal);
+    const t = document.getElementById('uType')?.value;
     let m2 = 0;
     if(t === 'sao') m2 = val * 360;
     else if(t === 'thuoc') m2 = val * 24;
@@ -14333,25 +14996,27 @@ Quản trị tài chính số — Ninh Bình Digital`;
     `;
   }
 
-  // AI Prompt Studio Helpers
-  function switchPromptTab(tab, btn) {
-    document.querySelectorAll('.tabs .tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  // AI Prompt Studio Helpers (Bug 30 / P3: Kết hợp đồng thời bộ lọc Tab + Từ khóa Tìm kiếm)
+  let currentPromptActiveTab = 'all';
+
+  function applyPromptFilters() {
+    const q = (document.getElementById('aiSearchInput')?.value || '').toLowerCase().trim();
     document.querySelectorAll('.prompt-card').forEach(c => {
-      c.classList.toggle('show', c.dataset.tab === tab);
+      const matchTab = (currentPromptActiveTab === 'all' || !c.dataset.tab || c.dataset.tab === currentPromptActiveTab);
+      const matchQuery = !q || c.textContent.toLowerCase().includes(q);
+      c.classList.toggle('show', matchTab && matchQuery);
     });
   }
 
+  function switchPromptTab(tab, btn) {
+    document.querySelectorAll('.tabs .tab-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    currentPromptActiveTab = tab;
+    applyPromptFilters();
+  }
+
   function searchPrompts() {
-    const q = document.getElementById('aiSearchInput').value.toLowerCase().trim();
-    const activeTab = document.querySelector('.tabs .tab-btn.active')?.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || 'dulich';
-    document.querySelectorAll('.prompt-card').forEach(c => {
-      if(!q) {
-        c.classList.toggle('show', c.dataset.tab === activeTab);
-      } else {
-        c.classList.toggle('show', c.textContent.toLowerCase().includes(q));
-      }
-    });
+    applyPromptFilters();
   }
 
   function copyPrompt(btn) {
@@ -15661,12 +16326,13 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
 
   // LEAD CAPTURE HANDLER (FORM ĐĂNG KÝ TƯ VẤN HỌC AI & WEBSITE)
-  function handleLeadCaptureSubmit(e) {
+  async function handleLeadCaptureSubmit(e) {
     e.preventDefault();
-    const name = document.getElementById('leadName')?.value.trim();
-    const phone = document.getElementById('leadPhone')?.value.trim();
-    const service = document.getElementById('leadService')?.value;
-    const note = document.getElementById('leadNote')?.value.trim();
+    const form = e.currentTarget || e.target;
+    const name = (form.querySelector('[name="leadName"], #leadName, #leadNameHome, #leadNameServices')?.value || '').trim();
+    const phone = (form.querySelector('[name="leadPhone"], #leadPhone, #leadPhoneHome, #leadPhoneServices')?.value || '').trim();
+    const service = form.querySelector('[name="leadService"], #leadService, #leadServiceHome, #leadServiceServices')?.value || 'Tư vấn chung';
+    const note = (form.querySelector('[name="leadNote"], #leadNote, #leadNoteHome, #leadNoteServices')?.value || '').trim();
 
     if (!name || !phone) {
       if (window.showAppAlert) {
@@ -15693,16 +16359,26 @@ Quản trị tài chính số — Ninh Bình Digital`;
       localStorage.setItem('nb_service_leads', JSON.stringify(leads));
     } catch(err) {}
 
+    let syncOk = true;
     if (typeof dbCreateLead === 'function') {
-      dbCreateLead(newLead).catch(err => console.warn('[Supabase Lead Sync]', err));
+      try {
+        const res = await dbCreateLead(newLead);
+        if (res && res.error) {
+          syncOk = false;
+          console.warn('[Supabase Lead Sync]', res.error);
+        }
+      } catch(err) {
+        syncOk = false;
+        console.warn('[Supabase Lead Sync Error]', err);
+      }
     }
 
-    document.getElementById('leadCaptureForm')?.reset();
+    form.reset();
 
     if (window.showAppAlert) {
       window.showAppAlert({
         title: 'Đăng Ký Thành Công!',
-        message: 'Cảm ơn <b>' + name + '</b>! Chúng tôi đã nhận được thông tin và sẽ gọi/chat Zalo qua số <b>' + phone + '</b> trong vòng 15 phút.',
+        message: 'Cảm ơn <b>' + name + '</b>! Chúng tôi đã nhận được thông tin và sẽ gọi/chat Zalo qua số <b>' + phone + '</b> trong vòng 15 phút.' + (syncOk ? '' : '<br><small style="color:#64748B;">(Đã ghi nhận trên máy, sẽ đồng bộ máy chủ khi có mạng)</small>'),
         icon: '🎉'
       });
     } else {
@@ -15737,6 +16413,365 @@ Quản trị tài chính số — Ninh Bình Digital`;
     applyDynamicSiteConfig();
   });
 
+  // ========================================================
+  // NINH BÌNH HOMESTAY & TRAVEL REDESIGN CONTROLLER (WITH GSAP)
+  // ========================================================
+  let nbCarouselCurrentIndex = 0;
+
+  function selectNBTravelTab(tab, el) {
+    document.querySelectorAll('.nb-travel-tab-link').forEach(t => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+    
+    if (tab === 'khachsan' || tab === 'dulich') {
+      scrollToHomestayList();
+    } else {
+      showToast(`Đang hiển thị mục: ${el ? el.innerText : tab}`);
+    }
+  }
+
+  function selectNBSubbar(topic, el) {
+    document.querySelectorAll('.nb-subbar-item').forEach(s => s.classList.remove('active'));
+    if (el) el.classList.add('active');
+    
+    const locationInput = document.getElementById('nbLocationInput');
+    if (locationInput) {
+      if (topic === 'trangan') locationInput.value = 'Tràng An';
+      else if (topic === 'tamcoc') locationInput.value = 'Tam Cốc';
+      else if (topic === 'hangmua') locationInput.value = 'Hang Múa';
+      else locationInput.value = '';
+      filterNBPlaces();
+    }
+  }
+
+  function toggleNBPill(el, type) {
+    if (el.classList.contains('nb-search-pill-active')) {
+      el.classList.remove('nb-search-pill-active');
+    } else {
+      document.querySelectorAll('#btnPillHomestay, #btnPillSelf').forEach(b => b.classList.remove('nb-search-pill-active'));
+      el.classList.add('nb-search-pill-active');
+    }
+    filterNBPlaces();
+  }
+
+  function onNBSearch(val) {
+    const locInput = document.getElementById('nbLocationInput');
+    if (locInput) locInput.value = val;
+    filterNBPlaces();
+  }
+
+  function filterNBPlaces() {
+    const q = (document.getElementById('nbLocationInput')?.value || document.getElementById('nbTravelSearchInput')?.value || '').toLowerCase().trim();
+    const budget = document.getElementById('nbBudgetSelect')?.value || 'all';
+
+    const cards = document.querySelectorAll('#nbHomestayCarouselTrack .nb-card, #nbSystemGrid .nb-card');
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      let matchQ = !q || text.includes(q);
+      let matchBudget = true;
+
+      if (budget === 'under1') {
+        matchBudget = text.includes('650,000') || text.includes('795,500') || text.includes('806,000') || text.includes('890,000');
+      } else if (budget === '1to3') {
+        matchBudget = text.includes('1,450,000') || text.includes('1,850,000') || text.includes('13,789,200') || text.includes('700.000 – 3.740.000');
+      }
+
+      if (matchQ && matchBudget) {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(card, { opacity: 1, scale: 1, duration: 0.3, display: 'flex' });
+        } else {
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+        }
+      } else {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(card, { opacity: 0.25, scale: 0.98, duration: 0.3 });
+        } else {
+          card.style.opacity = '0.25';
+        }
+      }
+    });
+  }
+
+  function slideNBCarousel(dir) {
+    nbCarouselCurrentIndex += dir;
+    if (nbCarouselCurrentIndex < 0) nbCarouselCurrentIndex = 3;
+    if (nbCarouselCurrentIndex > 3) nbCarouselCurrentIndex = 0;
+    switchNBCarouselSlide(nbCarouselCurrentIndex);
+  }
+
+  function switchNBCarouselSlide(idx) {
+    nbCarouselCurrentIndex = idx;
+    const dots = document.querySelectorAll('.nb-dots-pagination .nb-dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+    const track = document.getElementById('nbHomestayCarouselTrack');
+    if (track && typeof gsap !== 'undefined') {
+      const moveX = -(idx * 28);
+      gsap.to(track, {
+        x: `${moveX}px`,
+        duration: 0.45,
+        ease: 'power2.out'
+      });
+    }
+  }
+
+  function toggleNBWishlist(e, btn) {
+    e.stopPropagation();
+    const isActive = btn.classList.contains('active');
+    btn.classList.toggle('active', !isActive);
+    btn.innerHTML = isActive ? '♡' : '♥';
+    btn.style.color = isActive ? '#64748B' : '#DC2626';
+
+    if (typeof gsap !== 'undefined') {
+      gsap.timeline()
+        .to(btn, { scale: 1.45, duration: 0.15, ease: 'power1.out' })
+        .to(btn, { scale: 1.0, duration: 0.25, ease: 'elastic.out(1.2, 0.4)' });
+    }
+
+    showToast(isActive ? 'Đã bỏ lưu khỏi danh sách yêu thích' : '❤️ Đã lưu vào danh sách homestay yêu thích!');
+  }
+
+  const HOMESTAY_DETAILS_DATA = {
+    1: {
+      title: "Tam Coc Rice Fields Resort",
+      rating: "4.8 (21)",
+      location: "Đội 3, Thôn Hải Nham, Xã Ninh Hải, Hoa Lư, Ninh Bình",
+      oldPrice: "21,396,000đ",
+      price: "13,789,200đ",
+      priceRange: "Giá từ: 700.000 – 3.740.000đ",
+      thumbs: [
+        { label: "Toàn cảnh", url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" },
+        { label: "Hồ bơi", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" },
+        { label: "Phòng ngủ", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" },
+        { label: "Cảnh quan", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" }
+      ]
+    },
+    2: {
+      title: "Tràng An Riverside Homestay",
+      rating: "4.9 (38)",
+      location: "Xã Trường Yên, Hoa Lư (Sát bến thuyền Tràng An)",
+      oldPrice: "18,500,000đ",
+      price: "11,250,000đ",
+      priceRange: "Giá từ: 650.000 – 2.890.000đ",
+      thumbs: [
+        { label: "Bờ sông", url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" },
+        { label: "Bungalow", url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" },
+        { label: "Nội thất", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" },
+        { label: "Hoàng hôn", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" }
+      ]
+    },
+    3: {
+      title: "Ninh Bình Eco Garden",
+      rating: "4.7 (19)",
+      location: "Thôn Khê Hạ, Ninh Xuân (Cách Hang Múa 500m)",
+      oldPrice: "16,800,000đ",
+      price: "9,950,000đ",
+      priceRange: "Giá từ: 600.000 – 2.450.000đ",
+      thumbs: [
+        { label: "Hồ sen", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" },
+        { label: "Sân vườn", url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" },
+        { label: "Bể bơi", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" },
+        { label: "Phòng nghỉ", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" }
+      ]
+    },
+    4: {
+      title: "Tam Coc La Montagne Resort & Spa",
+      rating: "4.9 (45)",
+      location: "Thôn Đam Khê, Ninh Hải, Hoa Lư, Ninh Bình",
+      oldPrice: "24,500,000đ",
+      price: "15,800,000đ",
+      priceRange: "Giá từ: 850.000 – 4.200.000đ",
+      thumbs: [
+        { label: "Hồ bơi", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80" },
+        { label: "Villa", url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" },
+        { label: "Spa", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" },
+        { label: "Phòng ngủ", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" }
+      ]
+    }
+  };
+
+  function expandHomestayDetail(cardId) {
+    const data = HOMESTAY_DETAILS_DATA[cardId] || HOMESTAY_DETAILS_DATA[1];
+    const expandedCard = document.getElementById('nbCard3Expanded');
+    if (!expandedCard) return;
+
+    // Update Content
+    const titleEl = document.getElementById('nbExpandedTitle');
+    if (titleEl) titleEl.textContent = data.title;
+
+    const locEl = expandedCard.querySelector('.nb-detail-location span');
+    if (locEl) locEl.textContent = data.location;
+
+    const ratingEl = expandedCard.querySelector('.nb-detail-rating span:last-child');
+    if (ratingEl) ratingEl.textContent = data.rating;
+
+    const oldPriceEl = expandedCard.querySelector('.nb-price-old');
+    if (oldPriceEl) oldPriceEl.textContent = data.oldPrice;
+
+    const mainPriceEl = expandedCard.querySelector('.nb-price-main');
+    if (mainPriceEl) mainPriceEl.textContent = data.price;
+
+    const priceRangeEl = expandedCard.querySelector('.nb-price-range');
+    if (priceRangeEl) priceRangeEl.textContent = data.priceRange;
+
+    // Update Thumbs
+    const thumbs = expandedCard.querySelectorAll('.nb-gallery-thumb');
+    thumbs.forEach((t, idx) => {
+      const d = data.thumbs[idx];
+      if (d) {
+        const img = t.querySelector('img');
+        const tag = t.querySelector('.nb-gallery-tag');
+        if (img) img.src = d.url;
+        if (tag) tag.textContent = d.label;
+      }
+    });
+
+    // GSAP Expansion Animation
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(expandedCard, 
+        { scale: 0.96, opacity: 0.8 },
+        { scale: 1.0, opacity: 1.0, duration: 0.35, ease: 'back.out(1.4)' }
+      );
+
+      gsap.from(expandedCard.querySelectorAll('.nb-gallery-thumb'), {
+        y: 12,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+
+      gsap.from(expandedCard.querySelectorAll('.nb-amenity-pill'), {
+        y: 8,
+        opacity: 0,
+        stagger: 0.04,
+        duration: 0.25,
+        ease: 'power2.out',
+        delay: 0.1
+      });
+    }
+
+    scrollToHomestayList();
+  }
+
+  function previewGalleryPhoto(thumbEl, url) {
+    if (typeof gsap !== 'undefined') {
+      gsap.timeline()
+        .to(thumbEl, { scale: 1.08, duration: 0.15 })
+        .to(thumbEl, { scale: 1.0, duration: 0.2 });
+    }
+    showToast('📸 Đang phóng to ảnh: ' + (thumbEl.querySelector('.nb-gallery-tag')?.innerText || 'Cảnh quan'));
+  }
+
+  function scrollToHomestayList() {
+    const el = document.getElementById('homestaySectionAnchor');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function openNBDirectMap(e, placeName) {
+    e.stopPropagation();
+    const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(placeName + ' Ninh Bình');
+    window.open(url, '_blank');
+  }
+
+  function openNBFastChat() {
+    window.open('https://zalo.me/0866520567', '_blank');
+  }
+
+  function toggleNBCompare(placeId, isChecked) {
+    if (typeof toggleComparePlace === 'function') {
+      toggleComparePlace(placeId, isChecked);
+    } else {
+      showToast(isChecked ? 'Đã thêm vào danh sách so sánh giá' : 'Đã xóa khỏi so sánh giá');
+    }
+  }
+
+  function openBookingModal(placeName) {
+    const room = document.getElementById('nbRoomChoice')?.value || 'Hạng phòng tiêu chuẩn';
+    if (window.showAppConfirm) {
+      window.showAppConfirm({
+        title: 'Đặt Phòng Homestay',
+        message: `Bạn đang chọn đặt phòng tại <b>${placeName}</b>.<br>Hạng phòng: <b>${room}</b>.<br><br>Bạn có muốn chuyển tiếp sang tư vấn đặt phòng nhanh qua Zalo hotline không?`,
+        icon: '🏡',
+        confirmText: 'Chat Zalo Tư Vấn',
+        cancelText: 'Xem lại',
+        onConfirm: () => {
+          window.open('https://zalo.me/0866520567?text=' + encodeURIComponent(`Xin chào, tôi muốn đặt phòng tại ${placeName} (${room})`), '_blank');
+        }
+      });
+    } else {
+      window.open('https://zalo.me/0866520567', '_blank');
+    }
+  }
+
+  function openAllHomestayModal() {
+    showToast('Đang tải danh mục tất cả 50+ Homestay Ninh Bình...');
+    const track = document.getElementById('nbHomestayCarouselTrack');
+    if (track) track.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function openPhotoModal() {
+    showToast('🏞️ Đang mở bộ sưu tập 100+ ảnh di sản Ninh Bình chất lượng cao');
+  }
+
+  // Khởi tạo GSAP hover animations cho toàn bộ cards
+  function initHomestayGSAP() {
+    if (typeof gsap === 'undefined') return;
+    const pageTravel = document.getElementById('page-travel');
+    if (!pageTravel || !pageTravel.classList.contains('active')) return;
+
+    const cards = document.querySelectorAll('.nb-card');
+    cards.forEach(card => {
+      const img = card.querySelector('.nb-card-img');
+      
+      // Clear old listeners if any by re-animating cleanly
+      card.onmouseenter = () => {
+        gsap.to(card, {
+          y: -6,
+          boxShadow: '0 18px 30px -8px rgba(30, 58, 47, 0.22)',
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        if (img) gsap.to(img, { scale: 1.06, duration: 0.4, ease: 'power2.out' });
+      };
+
+      card.onmouseleave = () => {
+        gsap.to(card, {
+          y: 0,
+          boxShadow: '0 4px 16px -2px rgba(15, 23, 42, 0.05)',
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        if (img) gsap.to(img, { scale: 1.0, duration: 0.4, ease: 'power2.out' });
+      };
+    });
+
+    // Glass search bar entrance animation with clearProps so it never disappears
+    const glassBar = document.getElementById('nbGlassSearchBar');
+    if (glassBar) {
+      gsap.killTweensOf(glassBar);
+      glassBar.style.opacity = '1';
+      gsap.fromTo(glassBar, 
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', clearProps: 'opacity,transform' }
+      );
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash.includes('travel')) {
+      setTimeout(initHomestayGSAP, 150);
+    }
+  });
+
+  // Gọi lại khi chuyển sang tab travel
+  const oldNavigateTo = window.navigateTo;
+  window.navigateTo = function(page, updateHash) {
+    if (typeof oldNavigateTo === 'function') oldNavigateTo(page, updateHash);
+    if (page === 'travel') {
+      setTimeout(initHomestayGSAP, 80);
+    }
+  };
 </script>
 <!-- ========================================================
      MODAL ĐẶT MUA ĐẶC SẢN NINH BÌNH (TÍCH HỢP VIETQR & ZALO)

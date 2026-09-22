@@ -31,3 +31,16 @@ scratch/
 .agents/
 .codex/
 .impeccable/
+
+# Node / Web dependencies & builds
+node_modules/
+*/node_modules/
+.next/
+*/.next/
+dist/
+*/dist/
+build/
+*/build/
+out/
+*/out/
+*.log

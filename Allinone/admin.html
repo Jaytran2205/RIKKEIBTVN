@@ -470,8 +470,42 @@ body {
   margin-top: 16px;
 }
 @media (max-width: 768px) {
-  .form-grid { grid-template-columns: 1fr; }
+  .form-grid, .form-grid[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
 }
+.admin-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.admin-switch-btn.active {
+  background: #DCFCE7;
+  color: #15803D;
+  border-color: #86EFAC;
+}
+.admin-switch-btn.inactive {
+  background: #F1F5F9;
+  color: #64748B;
+  border-color: #CBD5E1;
+}
+.device-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.device-pill.desktop { background: #E0E7FF; color: #3730A3; }
+.device-pill.mobile { background: #FEF3C7; color: #92400E; }
+.device-pill.all { background: #E0F2FE; color: #0369A1; }
 .form-group {
   display: flex;
   flex-direction: column;
@@ -891,6 +925,10 @@ body {
     </a>
     <a class="aside-link" onclick="switchAdminNav('config', this)">
       <span class="ic">⚙️</span> Cấu hình Hotline &amp; Dự án
+    </a>
+    <a class="aside-link" id="linkNavPopups" onclick="switchAdminNav('popups', this)">
+      <span class="ic">📢</span> Quản lý Pop-up &amp; Quảng cáo
+      <span class="badge" id="asidePopupsBadge" style="background:#E0F2FE; color:#0369A1;">1 Bật</span>
     </a>
 
     <div class="nav-group-title">Tương tác &amp; Khách hàng</div>
@@ -1592,8 +1630,233 @@ body {
         </form>
       </div>
     </section>
+
+    <!-- PANEL: QUẢN LÝ POP-UP & QUẢNG CÁO -->
+    <section id="panel-popups" class="tab-panel">
+      <!-- Banner Hướng Dẫn Thiết Bị -->
+      <div style="background:linear-gradient(135deg, #ECFDF5, #F0FDF4); border:1.5px solid #A7F3D0; border-radius:16px; padding:18px 22px; margin-bottom:24px; display:flex; align-items:flex-start; gap:16px; box-shadow:0 4px 14px rgba(16,185,129,0.08);">
+        <div style="font-size:1.8rem; line-height:1; flex-shrink:0;">📱</div>
+        <div style="flex:1;">
+          <h4 style="font-size:1.02rem; font-weight:800; color:#065F46; margin:0 0 4px;">Kiểm soát thiết bị & Bỏ pop-up lúc vào web trên điện thoại</h4>
+          <p style="font-size:0.86rem; color:#047857; margin:0; line-height:1.55;">
+            Theo yêu cầu của bạn, hệ thống mặc định <b>KHÔNG tự động mở pop-up</b> khi người dùng vào trang bằng điện thoại di động để tránh gây phiền. Bạn có thể bật/tắt toàn bộ, hoặc chọn hiển thị riêng cho máy tính (Desktop), điện thoại (Mobile) hoặc cả hai bất kỳ lúc nào dưới đây.
+          </p>
+        </div>
+      </div>
+
+      <!-- CARD 1: CẤU HÌNH POP-UP CHÀO MỪNG -->
+      <div class="crud-card" style="margin-bottom:28px;">
+        <div class="sec-head" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h3>🎉 Pop-up Giới Thiệu Chào Mừng (Welcome Modal)</h3>
+            <p>Hiển thị khi khách mở trang web Ninh Bình Digital (Có đếm ngược tự đóng hoặc đóng bằng ✕)</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button type="button" id="btnTogglePopupStatus" class="admin-switch-btn active" onclick="togglePopupStatusAdmin()">
+              <span id="popupStatusDot">🟢</span> <span id="popupStatusText">Đang Bật (Active)</span>
+            </button>
+            <a href="index.html" target="_blank" class="btn btn-outline btn-sm">
+              👁️ Mở Web Chính Xem Thử
+            </a>
+          </div>
+        </div>
+
+        <form id="formAdminPopup" onsubmit="handleSavePopupConfig(event)">
+          <input type="hidden" id="popupActiveState" value="true">
+
+          <div class="form-grid" style="gap:18px;">
+            <div class="form-group">
+              <label>🖥️📱 Thiết bị hiển thị mong muốn *</label>
+              <select id="popupTargetDevice" class="form-control" onchange="handlePopupDeviceChange(this.value)">
+                <option value="desktop">🖥️ Chỉ máy tính (Desktop) — Bỏ qua trên điện thoại</option>
+                <option value="all">🌐 Tất cả thiết bị (Cả Máy tính & Điện thoại)</option>
+                <option value="mobile">📱 Chỉ điện thoại (Mobile)</option>
+              </select>
+              <small style="color:var(--muted); font-size:0.75rem;">Kiểm soát chính xác popup xuất hiện trên loại thiết bị nào</small>
+            </div>
+
+            <div class="form-group">
+              <label>⏱️ Thời gian tự động đóng (Giây)</label>
+              <input type="number" id="popupCountdownSec" class="form-control" min="0" max="60" value="10" placeholder="10">
+              <small style="color:var(--muted); font-size:0.75rem;">Mặc định 10 giây (nhập 0 nếu không muốn thanh đếm ngược tự tắt)</small>
+            </div>
+
+            <div class="form-group full" style="background:#F8FAFC; border:1px dashed #CBD5E1; padding:14px 18px; border-radius:10px;">
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer; margin:0; font-weight:700; color:var(--ink);">
+                <input type="checkbox" id="popupAutoShowMobile" style="width:18px; height:18px; cursor:pointer;">
+                <span>Cho phép tự động bật pop-up lúc vừa vào web trên điện thoại di động</span>
+              </label>
+              <p style="font-size:0.78rem; color:var(--muted); margin:4px 0 0 28px;">
+                Mặc định: <b>Tắt (Không chọn)</b>. Khi tắt, người dùng truy cập bằng điện thoại sẽ không bị che màn hình lúc tải trang.
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label>🏷️ Tiêu đề phụ (Sub-title)</label>
+              <input type="text" id="popupSubTitle" class="form-control" placeholder="CỔNG TIỆN ÍCH CHUYỂN ĐỔI SỐ NINH BÌNH" required>
+            </div>
+
+            <div class="form-group">
+              <label>✨ Huy hiệu nổi bật (Badge)</label>
+              <input type="text" id="popupBadge" class="form-control" placeholder="✨ NỔI BẬT NĂM 2026" required>
+            </div>
+
+            <div class="form-group full">
+              <label>📢 Tiêu đề chính Pop-up</label>
+              <input type="text" id="popupTitle" class="form-control" placeholder="Khám Phá 2 Tiện Ích Đột Phá Trên Ninh Bình Digital" required>
+            </div>
+
+            <div class="form-group full">
+              <label>📝 Đoạn mô tả giới thiệu</label>
+              <textarea id="popupDesc" rows="2" class="form-control" placeholder="Hệ thống vừa cập nhật 2 nền tảng số trọng điểm phục vụ người dân, cán bộ và hộ kinh doanh..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>🖼️ Đường dẫn ảnh Banner (Banner Image URL)</label>
+              <input type="text" id="popupBannerImg" class="form-control" placeholder="images/gplx_doc_banner.jpg" oninput="updatePopupBannerPreview(this.value)">
+            </div>
+
+            <div class="form-group">
+              <label>🏷️ Chữ nhãn hiển thị đè trên ảnh Banner</label>
+              <input type="text" id="popupBannerTag" class="form-control" placeholder="🚗 Ôn Thi GPLX 2026 &amp; 📜 Soạn Văn Bản NĐ 30 Chuẩn A4">
+            </div>
+
+            <div class="form-group full">
+              <label>Xem trước Banner Pop-up:</label>
+              <div style="max-width:480px; height:150px; border-radius:12px; overflow:hidden; border:1px solid #CBD5E1; background:#0F172A; position:relative;">
+                <img id="popupBannerPreviewImg" src="images/gplx_doc_banner.jpg" alt="Preview" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+            </div>
+
+            <!-- Ô Tiện ích 1 -->
+            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:14px; border-radius:12px;">
+              <h5 style="margin-bottom:8px; color:var(--primary); font-size:0.92rem;">🚗 Ô tiện ích 1</h5>
+              <input type="text" id="popupFeat1Title" class="form-control" placeholder="Tiêu đề: Ôn Luyện & Sát Hạch GPLX 2026" style="margin-bottom:8px;">
+              <textarea id="popupFeat1Desc" rows="2" class="form-control" placeholder="Mô tả: Trọn bộ 600 câu Cục Đường Bộ, 20 & 60 câu điểm liệt..." style="margin-bottom:8px;"></textarea>
+              <input type="text" id="popupFeat1Link" class="form-control" placeholder="Mã điều hướng (vd: driving)">
+            </div>
+
+            <!-- Ô Tiện ích 2 -->
+            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:14px; border-radius:12px;">
+              <h5 style="margin-bottom:8px; color:var(--primary); font-size:0.92rem;">📜 Ô tiện ích 2</h5>
+              <input type="text" id="popupFeat2Title" class="form-control" placeholder="Tiêu đề: Tạo Văn Bản Hành Chính Nhanh Gọn" style="margin-bottom:8px;">
+              <textarea id="popupFeat2Desc" rows="2" class="form-control" placeholder="Mô tả: Chuẩn thể thức Nghị định 30/2020/NĐ-CP..." style="margin-bottom:8px;"></textarea>
+              <input type="text" id="popupFeat2Link" class="form-control" placeholder="Mã điều hướng (vd: vanban)">
+            </div>
+
+            <div class="form-group">
+              <label>🔘 Chữ nút bấm hành động chính</label>
+              <input type="text" id="popupBtnText" class="form-control" placeholder="🚗 Vào Ôn Luyện GPLX Ngay">
+            </div>
+
+            <div class="form-group">
+              <label>🔗 Liên kết đích nút bấm chính</label>
+              <input type="text" id="popupBtnLink" class="form-control" placeholder="driving (hoặc URL ngoài https://...)">
+            </div>
+          </div>
+
+          <div style="margin-top:24px; display:flex; justify-content:flex-end; gap:12px;">
+            <button type="submit" class="btn btn-primary" style="padding:12px 28px; font-weight:700;">
+              💾 Lưu Cấu Hình Pop-up
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- CARD 2: GẮN BANNER QUẢNG CÁO & KHUYẾN MÃI -->
+      <div class="crud-card">
+        <div class="sec-head" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h3>🎯 Danh Sách Banner Quảng Cáo &amp; Khuyến Mãi</h3>
+            <p>Quản lý các banner quảng cáo xuất hiện trên website (Góc nổi, thanh thông báo hoặc chuyên mục)</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openAddAdModal()">
+            ➕ Thêm Quảng Cáo Mới
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:70px;">Hình ảnh</th>
+                <th>Tiêu đề quảng cáo</th>
+                <th>Vị trí / Loại</th>
+                <th>Thiết bị hiển thị</th>
+                <th>Trạng thái</th>
+                <th style="text-align:right;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="adminAdsTableBody">
+              <!-- Render dynamic ads -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
+
+<!-- MODAL THÊM / SỬA BANNER QUẢNG CÁO -->
+<div id="adminAdModal" class="admin-lightbox-overlay" style="display:none; align-items:center; justify-content:center;" onclick="if(event.target===this)closeAdModal()">
+  <div class="crud-card" style="width:100%; max-width:540px; max-height:90vh; overflow-y:auto; margin:16px;">
+    <div class="sec-head" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+      <h3 id="adModalTitle" style="margin:0;">➕ Thêm Banner Quảng Cáo Mới</h3>
+      <button type="button" onclick="closeAdModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted);">&times;</button>
+    </div>
+    <form id="formAdminAd" onsubmit="handleSaveAd(event)">
+      <input type="hidden" id="adEditId" value="">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Tiêu đề quảng cáo *</label>
+        <input type="text" id="adTitle" class="form-control" placeholder="Ví dụ: Đặt phòng Homestay Tràng An view núi" required>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Huy hiệu / Tag nổi bật</label>
+        <input type="text" id="adTag" class="form-control" placeholder="Ví dụ: 🔥 KHUYẾN MÃI, ĐẶC BIỆT">
+      </div>
+      <div class="form-grid" style="gap:12px; margin-bottom:12px; margin-top:0;">
+        <div class="form-group">
+          <label>Vị trí hiển thị *</label>
+          <select id="adType" class="form-control">
+            <option value="floating_banner">Banner nổi góc dưới (Floating Card)</option>
+            <option value="top_banner">Thanh thông báo đầu trang (Top Header Bar)</option>
+            <option value="inline_banner">Banner trong nội dung trang (Inline)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Thiết bị hiển thị *</label>
+          <select id="adTargetDevice" class="form-control">
+            <option value="all">🌐 Tất cả thiết bị</option>
+            <option value="desktop">🖥️ Chỉ máy tính (Desktop)</option>
+            <option value="mobile">📱 Chỉ điện thoại (Mobile)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Đường link ảnh Banner (Image URL)</label>
+        <input type="text" id="adImg" class="form-control" placeholder="images/preview_quatanglocnam.png">
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Đường link khi click vào quảng cáo (Target URL) *</label>
+        <input type="text" id="adLink" class="form-control" placeholder="#travel hoặc https://..." required>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Mô tả ngắn</label>
+        <textarea id="adDesc" rows="2" class="form-control" placeholder="Ưu đãi giảm giá 15% cho du khách đặt phòng trong tháng này..."></textarea>
+      </div>
+      <div class="form-group" style="margin-bottom:18px;">
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="adActiveState" checked style="width:16px; height:16px;">
+          <span>Bật hoạt động ngay sau khi lưu</span>
+        </label>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button type="button" class="btn btn-outline" onclick="closeAdModal()">Hủy</button>
+        <button type="submit" class="btn btn-primary">💾 Lưu Quảng Cáo</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <!-- LIGHTBOX MODAL XEM HÌNH ẢNH LỚN -->
 <div id="adminLightboxOverlay" class="admin-lightbox-overlay" onclick="if(event.target===this)closeImageLightbox()">
@@ -1731,6 +1994,7 @@ function switchAdminNav(panelId, linkEl) {
     'tools': 'Cấu Hình Chức Năng / Tiện Ích',
     'leads': 'Báo Cáo Khách Hàng Đăng Ký Tư Vấn (Lead CRM)',
     'config': 'Cấu Hình Hotline, Liên Hệ & Dự Án Web Chính',
+    'popups': 'Quản Lý Pop-up Chào Mừng & Gắn Banner Quảng Cáo',
     'feedback': 'Hộp Thư Đóng Góp Ý Kiến',
     'orders': 'Quản Lý Đơn Đặt Hàng'
   };
@@ -1738,6 +2002,7 @@ function switchAdminNav(panelId, linkEl) {
 
   if (panelId === 'leads') renderLeadsTable();
   if (panelId === 'config') loadSiteConfigToForm();
+  if (panelId === 'popups') renderPopupsAdmin();
 }
 
 // 3. Toast
@@ -1758,6 +2023,7 @@ function initAdminData() {
   renderCustomToolsTable();
   renderLeadsTable();
   loadSiteConfigToForm();
+  renderPopupsAdmin();
   renderFeedbackTable();
   renderOrdersTable();
   updateDashboardCounts();
@@ -2712,6 +2978,341 @@ function handleSaveSiteConfig(e) {
     localStorage.setItem('nb_site_config', JSON.stringify(cfg));
   }
   showAdminToast('Đã lưu cấu hình hotline, liên hệ & dự án thành công!');
+}
+
+// ========================================================
+// 11. QUẢN LÝ POP-UP CHÀO MỪNG & BANNER QUẢNG CÁO (ADMIN)
+// ========================================================
+function escapeAdminHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function getAdminPopupsData() {
+  const defaultConfig = {
+    welcomePopup: {
+      active: true,
+      targetDevice: 'desktop', // Mặc định chỉ hiển thị trên máy tính (bỏ qua điện thoại)
+      autoShowMobile: false,   // Bỏ pop-up lúc vào web trên điện thoại
+      title: 'Khám Phá 2 Tiện Ích Đột Phá Trên Ninh Bình Digital',
+      subTitle: 'CỔNG TIỆN ÍCH CHUYỂN ĐỔI SỐ NINH BÌNH',
+      badge: '✨ NỔI BẬT NĂM 2026',
+      bannerImg: 'images/gplx_doc_banner.jpg',
+      bannerOverlayTag: '🚗 Ôn Thi GPLX 2026 & 📜 Soạn Văn Bản NĐ 30 Chuẩn A4',
+      desc: 'Hệ thống vừa cập nhật 2 nền tảng số trọng điểm phục vụ người dân, cán bộ và hộ kinh doanh:',
+      feat1Title: 'Ôn Luyện & Sát Hạch GPLX 2026',
+      feat1Desc: 'Trọn bộ 600 câu Cục Đường Bộ, 20 & 60 câu điểm liệt chống trượt, mẹo thi nhanh A1, A, B, C.',
+      feat1Link: 'driving',
+      feat2Title: 'Tạo Văn Bản Hành Chính Nhanh Gọn',
+      feat2Desc: 'Chuẩn thể thức Nghị định 30/2020/NĐ-CP, tự động căn lề A4, trích yếu, xuất file Word & in ấn chuẩn xác.',
+      feat2Link: 'vanban',
+      btnText: '🚗 Vào Ôn Luyện GPLX Ngay',
+      btnLink: 'driving',
+      countdownSec: 10
+    },
+    bannerAds: [
+      {
+        id: 'ad_homestay_booking',
+        title: 'Đặt Phòng Homestay View Núi Tràng An & Tam Cốc',
+        tag: '🔥 KHUYẾN MÃI',
+        type: 'floating_banner',
+        targetDevice: 'all',
+        img: 'images/preview_quatanglocnam.png',
+        link: '#travel',
+        desc: 'Ưu đãi đặt phòng trải nghiệm sinh thái Ninh Bình giảm đến 15% trong tháng.',
+        active: true
+      },
+      {
+        id: 'ad_top_promo',
+        title: 'Cổng tra cứu & học bổng chuyển đổi số cho thanh niên Ninh Bình',
+        tag: '⚡ MỚI',
+        type: 'top_banner',
+        targetDevice: 'desktop',
+        img: '',
+        link: '#community',
+        desc: 'Tham gia nhóm Zalo kết nối học tập & cơ hội việc làm công nghệ số.',
+        active: false
+      }
+    ]
+  };
+  try {
+    const raw = localStorage.getItem('nb_popups_config');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return Object.assign({}, defaultConfig, parsed);
+    }
+  } catch(e) {}
+  return defaultConfig;
+}
+
+function saveAdminPopupsData(data) {
+  localStorage.setItem('nb_popups_config', JSON.stringify(data));
+  updatePopupsBadge(data);
+}
+
+function updatePopupsBadge(data) {
+  let count = 0;
+  if (data.welcomePopup && data.welcomePopup.active) count++;
+  if (data.bannerAds) {
+    count += data.bannerAds.filter(a => a.active).length;
+  }
+  const badge = document.getElementById('asidePopupsBadge');
+  if (badge) badge.textContent = count + ' Bật';
+}
+
+function renderPopupsAdmin() {
+  const data = getAdminPopupsData();
+  updatePopupsBadge(data);
+
+  // 1. Fill Welcome Popup Form
+  const wp = data.welcomePopup;
+  if (wp) {
+    const activeHidden = document.getElementById('popupActiveState');
+    if (activeHidden) activeHidden.value = String(wp.active);
+
+    const btn = document.getElementById('btnTogglePopupStatus');
+    const dot = document.getElementById('popupStatusDot');
+    const text = document.getElementById('popupStatusText');
+    if (btn) {
+      if (wp.active) {
+        btn.className = 'admin-switch-btn active';
+        if (dot) dot.textContent = '🟢';
+        if (text) text.textContent = 'Đang Bật (Active)';
+      } else {
+        btn.className = 'admin-switch-btn inactive';
+        if (dot) dot.textContent = '⚪';
+        if (text) text.textContent = 'Đã Tắt (Tạm ẩn)';
+      }
+    }
+
+    if (document.getElementById('popupTargetDevice')) document.getElementById('popupTargetDevice').value = wp.targetDevice || 'desktop';
+    if (document.getElementById('popupCountdownSec')) document.getElementById('popupCountdownSec').value = wp.countdownSec ?? 10;
+    if (document.getElementById('popupAutoShowMobile')) document.getElementById('popupAutoShowMobile').checked = !!wp.autoShowMobile;
+    if (document.getElementById('popupSubTitle')) document.getElementById('popupSubTitle').value = wp.subTitle || '';
+    if (document.getElementById('popupBadge')) document.getElementById('popupBadge').value = wp.badge || '';
+    if (document.getElementById('popupTitle')) document.getElementById('popupTitle').value = wp.title || '';
+    if (document.getElementById('popupDesc')) document.getElementById('popupDesc').value = wp.desc || '';
+    if (document.getElementById('popupBannerImg')) document.getElementById('popupBannerImg').value = wp.bannerImg || '';
+    if (document.getElementById('popupBannerTag')) document.getElementById('popupBannerTag').value = wp.bannerOverlayTag || '';
+    if (document.getElementById('popupFeat1Title')) document.getElementById('popupFeat1Title').value = wp.feat1Title || '';
+    if (document.getElementById('popupFeat1Desc')) document.getElementById('popupFeat1Desc').value = wp.feat1Desc || '';
+    if (document.getElementById('popupFeat1Link')) document.getElementById('popupFeat1Link').value = wp.feat1Link || '';
+    if (document.getElementById('popupFeat2Title')) document.getElementById('popupFeat2Title').value = wp.feat2Title || '';
+    if (document.getElementById('popupFeat2Desc')) document.getElementById('popupFeat2Desc').value = wp.feat2Desc || '';
+    if (document.getElementById('popupFeat2Link')) document.getElementById('popupFeat2Link').value = wp.feat2Link || '';
+    if (document.getElementById('popupBtnText')) document.getElementById('popupBtnText').value = wp.btnText || '';
+    if (document.getElementById('popupBtnLink')) document.getElementById('popupBtnLink').value = wp.btnLink || '';
+
+    updatePopupBannerPreview(wp.bannerImg || 'images/gplx_doc_banner.jpg');
+  }
+
+  // 2. Render Ads Table
+  renderAdsTable(data.bannerAds || []);
+}
+
+function updatePopupBannerPreview(url) {
+  const img = document.getElementById('popupBannerPreviewImg');
+  if (img) {
+    img.src = url || 'images/gplx_doc_banner.jpg';
+  }
+}
+
+function togglePopupStatusAdmin() {
+  const data = getAdminPopupsData();
+  data.welcomePopup.active = !data.welcomePopup.active;
+  saveAdminPopupsData(data);
+  renderPopupsAdmin();
+  showAdminToast(data.welcomePopup.active ? '🟢 Đã BẬT pop-up chào mừng!' : '⚪ Đã TẮT pop-up chào mừng!');
+}
+
+function handlePopupDeviceChange(device) {
+  const check = document.getElementById('popupAutoShowMobile');
+  if (check) {
+    if (device === 'desktop') {
+      check.checked = false;
+    } else if (device === 'mobile') {
+      check.checked = true;
+    }
+  }
+}
+
+function handleSavePopupConfig(e) {
+  e.preventDefault();
+  const data = getAdminPopupsData();
+  const activeState = document.getElementById('popupActiveState').value === 'true';
+
+  data.welcomePopup = {
+    active: activeState,
+    targetDevice: document.getElementById('popupTargetDevice').value,
+    autoShowMobile: document.getElementById('popupAutoShowMobile').checked,
+    countdownSec: parseInt(document.getElementById('popupCountdownSec').value, 10) || 10,
+    subTitle: document.getElementById('popupSubTitle').value.trim(),
+    badge: document.getElementById('popupBadge').value.trim(),
+    title: document.getElementById('popupTitle').value.trim(),
+    desc: document.getElementById('popupDesc').value.trim(),
+    bannerImg: document.getElementById('popupBannerImg').value.trim() || 'images/gplx_doc_banner.jpg',
+    bannerOverlayTag: document.getElementById('popupBannerTag').value.trim(),
+    feat1Title: document.getElementById('popupFeat1Title').value.trim(),
+    feat1Desc: document.getElementById('popupFeat1Desc').value.trim(),
+    feat1Link: document.getElementById('popupFeat1Link').value.trim(),
+    feat2Title: document.getElementById('popupFeat2Title').value.trim(),
+    feat2Desc: document.getElementById('popupFeat2Desc').value.trim(),
+    feat2Link: document.getElementById('popupFeat2Link').value.trim(),
+    btnText: document.getElementById('popupBtnText').value.trim(),
+    btnLink: document.getElementById('popupBtnLink').value.trim()
+  };
+
+  saveAdminPopupsData(data);
+  renderPopupsAdmin();
+  showAdminToast('💾 Đã lưu cấu hình Pop-up thành công!');
+}
+
+// Ads Table & Management
+function renderAdsTable(ads) {
+  const tbody = document.getElementById('adminAdsTableBody');
+  if (!tbody) return;
+
+  if (!ads || ads.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--muted);">Chưa có banner quảng cáo nào. Bấm "➕ Thêm Quảng Cáo Mới" để tạo.</td></tr>`;
+    return;
+  }
+
+  const typeLabels = {
+    'floating_banner': 'Banner nổi góc dưới',
+    'top_banner': 'Thanh thông báo đầu trang',
+    'inline_banner': 'Banner nội dung'
+  };
+
+  const deviceBadges = {
+    'all': '<span class="device-pill all">🌐 Tất cả</span>',
+    'desktop': '<span class="device-pill desktop">🖥️ Máy tính</span>',
+    'mobile': '<span class="device-pill mobile">📱 Điện thoại</span>'
+  };
+
+  tbody.innerHTML = ads.map((ad, idx) => {
+    const imgSrc = ad.img || 'images/logo-icon.png';
+    return `
+      <tr>
+        <td>
+          <div style="width:50px; height:36px; border-radius:6px; overflow:hidden; background:#0F172A; cursor:pointer;" onclick="openImageLightbox('${imgSrc}', '${escapeAdminHtml(ad.title)}')">
+            <img src="${imgSrc}" alt="${escapeAdminHtml(ad.title)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='images/logo-icon.png'">
+          </div>
+        </td>
+        <td>
+          <div style="font-weight:700; color:var(--ink);">${escapeAdminHtml(ad.title)}</div>
+          <div style="font-size:0.75rem; color:var(--muted);">${escapeAdminHtml(ad.link || '')}</div>
+        </td>
+        <td>
+          <span style="font-size:0.8rem; font-weight:600; color:#0B5C57; background:#E6F4F1; padding:3px 8px; border-radius:6px;">
+            ${typeLabels[ad.type] || ad.type}
+          </span>
+        </td>
+        <td>${deviceBadges[ad.targetDevice] || deviceBadges['all']}</td>
+        <td>
+          <button type="button" class="admin-switch-btn ${ad.active ? 'active' : 'inactive'}" onclick="toggleAdStatus(${idx})" style="padding:4px 10px; font-size:0.75rem;">
+            ${ad.active ? '🟢 Bật' : '⚪ Tắt'}
+          </button>
+        </td>
+        <td style="text-align:right;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="editAd(${idx})" style="padding:4px 8px; margin-right:4px;">Sửa</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="deleteAd(${idx})" style="padding:4px 8px; color:#DC2626; border-color:#FCA5A5;">Xóa</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function toggleAdStatus(idx) {
+  const data = getAdminPopupsData();
+  if (data.bannerAds && data.bannerAds[idx]) {
+    data.bannerAds[idx].active = !data.bannerAds[idx].active;
+    saveAdminPopupsData(data);
+    renderPopupsAdmin();
+    showAdminToast(data.bannerAds[idx].active ? '🟢 Đã BẬT quảng cáo!' : '⚪ Đã TẮT quảng cáo!');
+  }
+}
+
+function openAddAdModal() {
+  document.getElementById('adModalTitle').textContent = '➕ Thêm Banner Quảng Cáo Mới';
+  document.getElementById('adEditId').value = '';
+  document.getElementById('adTitle').value = '';
+  document.getElementById('adTag').value = '';
+  document.getElementById('adType').value = 'floating_banner';
+  document.getElementById('adTargetDevice').value = 'all';
+  document.getElementById('adImg').value = '';
+  document.getElementById('adLink').value = '';
+  document.getElementById('adDesc').value = '';
+  document.getElementById('adActiveState').checked = true;
+
+  const modal = document.getElementById('adminAdModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeAdModal() {
+  const modal = document.getElementById('adminAdModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function editAd(idx) {
+  const data = getAdminPopupsData();
+  const ad = (data.bannerAds || [])[idx];
+  if (!ad) return;
+
+  document.getElementById('adModalTitle').textContent = '✏️ Chỉnh Sửa Banner Quảng Cáo';
+  document.getElementById('adEditId').value = String(idx);
+  document.getElementById('adTitle').value = ad.title || '';
+  document.getElementById('adTag').value = ad.tag || '';
+  document.getElementById('adType').value = ad.type || 'floating_banner';
+  document.getElementById('adTargetDevice').value = ad.targetDevice || 'all';
+  document.getElementById('adImg').value = ad.img || '';
+  document.getElementById('adLink').value = ad.link || '';
+  document.getElementById('adDesc').value = ad.desc || '';
+  document.getElementById('adActiveState').checked = !!ad.active;
+
+  const modal = document.getElementById('adminAdModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function deleteAd(idx) {
+  if (!confirm('Bạn có chắc chắn muốn xóa banner quảng cáo này không?')) return;
+  const data = getAdminPopupsData();
+  if (data.bannerAds) {
+    data.bannerAds.splice(idx, 1);
+    saveAdminPopupsData(data);
+    renderPopupsAdmin();
+    showAdminToast('🗑️ Đã xóa banner quảng cáo!');
+  }
+}
+
+function handleSaveAd(e) {
+  e.preventDefault();
+  const data = getAdminPopupsData();
+  if (!data.bannerAds) data.bannerAds = [];
+
+  const editId = document.getElementById('adEditId').value;
+  const newAd = {
+    id: editId !== '' && data.bannerAds[editId] ? data.bannerAds[editId].id : 'ad_' + Date.now(),
+    title: document.getElementById('adTitle').value.trim(),
+    tag: document.getElementById('adTag').value.trim(),
+    type: document.getElementById('adType').value,
+    targetDevice: document.getElementById('adTargetDevice').value,
+    img: document.getElementById('adImg').value.trim(),
+    link: document.getElementById('adLink').value.trim(),
+    desc: document.getElementById('adDesc').value.trim(),
+    active: document.getElementById('adActiveState').checked
+  };
+
+  if (editId !== '' && !isNaN(parseInt(editId, 10))) {
+    data.bannerAds[parseInt(editId, 10)] = newAd;
+    showAdminToast('💾 Đã cập nhật quảng cáo!');
+  } else {
+    data.bannerAds.unshift(newAd);
+    showAdminToast('➕ Đã thêm banner quảng cáo mới!');
+  }
+
+  saveAdminPopupsData(data);
+  closeAdModal();
+  renderPopupsAdmin();
 }
 
 // Auto run

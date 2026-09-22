@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+:root {
+  --apple-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --forest-primary: #1B4D3E;
+  --coral-accent: #FF6B4A;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #F8F9FA;
+  background-color: #0E1A17;
+}
+
+/* Custom Glassmorphism Utilities strictly matching user specs */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s var(--apple-ease);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 9999px;
+  transition: all 0.3s var(--apple-ease);
+}
+
+.glass-pill-active {
+  background: #1B4D3E !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 20px -4px rgba(27, 77, 62, 0.5);
+}
+
+/* Custom Swiper container adjustments */
+.swiper {
+  width: 100%;
+  padding-top: 12px !important;
+  padding-bottom: 28px !important;
+  overflow: visible !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+/* Hide scrollbars for clean aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}

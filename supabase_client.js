@@ -280,12 +280,7 @@ async function dbCreateUser(user) {
   if (user.password_hash) {
     payload.password_hash = user.password_hash;
   }
-  let res = await supabaseFetch('nb_users', { method: 'POST', body: payload });
-  // Fallback nếu database chưa bổ sung cột password_hash
-  if (res.error && res.error.includes('password_hash')) {
-    delete payload.password_hash;
-    res = await supabaseFetch('nb_users', { method: 'POST', body: payload });
-  }
+  const res = await supabaseFetch('nb_users', { method: 'POST', body: payload });
   return res;
 }
 
