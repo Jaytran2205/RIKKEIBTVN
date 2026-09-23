@@ -865,7 +865,7 @@ body {
     <div style="display:flex; flex-direction:column; gap:12px;">
       <div>
         <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:5px;">Tài khoản</label>
-        <input type="text" id="adminUserInput" class="login-input" style="text-align:left; letter-spacing:normal; margin-bottom:0;" placeholder="Nhập tài khoản (jaytran225)..." value="" autofocus onkeydown="if(event.key==='Enter')document.getElementById('adminPassInput').focus()">
+        <input type="text" id="adminUserInput" class="login-input" style="text-align:left; letter-spacing:normal; margin-bottom:0;" placeholder="Nhập tài khoản quản trị..." value="" autofocus onkeydown="if(event.key==='Enter')document.getElementById('adminPassInput').focus()">
       </div>
       <div>
         <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:5px;">Mật khẩu</label>
@@ -877,7 +877,7 @@ body {
       </button>
     </div>
     <div style="font-size:0.75rem; color:var(--muted); margin-top:14px; text-align:center; background:#F8FAFC; padding:8px; border-radius:8px; border:1px dashed #CBD5E1;">
-      🔐 Tài khoản được cấp riêng: <b>jaytran225</b>
+      🛡️ Khu vực bảo mật dành riêng cho Quản trị viên hệ thống
     </div>
   </div>
 </div>
@@ -1938,7 +1938,7 @@ body {
 // ADMIN APPLICATION LOGIC
 // ========================================================
 
-// 1. Authentication (jaytran225 / Linhxinhdep.03)
+// 1. Authentication Admin Portal
 function verifyAdminPin() {
   const user = (document.getElementById('adminUserInput')?.value || '').trim();
   const pass = (document.getElementById('adminPassInput')?.value || '').trim();
@@ -1948,11 +1948,11 @@ function verifyAdminPin() {
     sessionStorage.setItem('nb_admin_logged', 'true');
     sessionStorage.setItem('nb_admin_user', 'jaytran225');
     document.getElementById('adminLoginOverlay').style.display = 'none';
-    showAdminToast('Chào mừng Quản trị viên jaytran225 trở lại!');
+    showAdminToast('Đăng nhập thành công! Chào mừng Quản trị viên trở lại.');
     initAdminData();
   } else {
     if (errEl) {
-      errEl.textContent = 'Sai tài khoản hoặc mật khẩu! Vui lòng nhập đúng: jaytran225 / Linhxinhdep.03';
+      errEl.textContent = 'Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.';
       errEl.style.display = 'block';
     } else {
       alert('Tài khoản hoặc mật khẩu không chính xác!');

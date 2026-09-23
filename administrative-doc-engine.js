@@ -552,6 +552,15 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
         if (editor) editor.value = state.noiDung;
       });
     }
+
+    // Đảm bảo cuộn lên đầu trang khi người dùng in bằng phím tắt Ctrl+P hoặc từ trình duyệt
+    window.addEventListener('beforeprint', () => {
+      const previewPane = document.getElementById('vbPreviewPane');
+      if (previewPane) previewPane.scrollTop = 0;
+      window.scrollTo(0, 0);
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+    });
   }
 
   // 7. SECONDARY UNITS MANAGEMENT (VĂN BẢN LIÊN TỊCH)
@@ -1492,6 +1501,14 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     const cleanSubject = (state.trichYeu || 'Van_ban_hanh_chinh_ND30').trim().replace(/[^a-zA-Z0-9\u00C0-\u024F\u1EA0-\u1EF9]/g, '_').substring(0, 50);
     document.title = cleanSubject;
 
+    // Cuộn lên đầu pane xem trước & window để nội dung không bị trôi/cắt mất đầu trang khi in
+    const previewPane = document.getElementById('vbPreviewPane');
+    const prevScroll = previewPane ? previewPane.scrollTop : 0;
+    if (previewPane) previewPane.scrollTop = 0;
+    window.scrollTo(0, 0);
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+
     // Đảm bảo tỷ lệ cột 38% / 60% và chống tuyệt đối co vỡ cột khi in
     const headerRow = document.getElementById('docHeaderRow');
     const leftCol = document.getElementById('docHeaderLeft');
@@ -1530,13 +1547,16 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
       sigCol.style.setProperty('max-width', '52%', 'important');
     }
 
-    // Kích hoạt hộp thoại in hệ thống
-    window.print();
+    // Delay 50ms cho trình duyệt repaint về tọa độ đỉnh trước khi mở hộp thoại in
+    setTimeout(() => {
+      window.print();
+    }, 50);
 
-    // Khôi phục lại title gốc
+    // Khôi phục lại title gốc và vị trí cuộn
     setTimeout(() => {
       document.title = oldTitle;
       updateHeaderLayout();
+      if (previewPane) previewPane.scrollTop = prevScroll;
     }, 1000);
   }
 

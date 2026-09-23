@@ -294,7 +294,7 @@ async function dbGetUserByEmail(email) {
 }
 
 async function dbGetUsers() {
-  const res = await supabaseFetch('nb_users', { query: 'select=*&order=id.desc' });
+  const res = await supabaseFetch('nb_users', { query: 'select=id,name,email,role,phone,avatar,created_at&order=id.desc' });
   return res.data || [];
 }
 
@@ -404,21 +404,27 @@ async function handleGoogleIdTokenResponse(response) {
   return currentUser;
 }
 
+let isGoogleIdentityInitialized = false;
+
 function initGoogleIdentity(containerId) {
   if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
     return false;
   }
   try {
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleGoogleIdTokenResponse,
-      auto_select: false,
-      cancel_on_tap_outside: true
-    });
+    if (!isGoogleIdentityInitialized) {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleIdTokenResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+      isGoogleIdentityInitialized = true;
+    }
 
     if (containerId) {
       const el = document.getElementById(containerId);
       if (el) {
+        el.innerHTML = '';
         google.accounts.id.renderButton(el, {
           theme: 'outline',
           size: 'large',
@@ -440,11 +446,14 @@ function initGoogleIdentity(containerId) {
 function promptGoogleOneTap() {
   if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
     try {
-      google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: handleGoogleIdTokenResponse,
-        auto_select: false
-      });
+      if (!isGoogleIdentityInitialized) {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleIdTokenResponse,
+          auto_select: false
+        });
+        isGoogleIdentityInitialized = true;
+      }
       google.accounts.id.prompt();
     } catch(e) {}
   }

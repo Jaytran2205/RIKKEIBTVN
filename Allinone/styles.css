@@ -735,6 +735,8 @@ body.vanban-page-active footer {
   header,
   footer,
   nav,
+  .main-header,
+  .site-footer,
   .toolbar,
   .vb-top-bar,
   .vb-control-pane,
@@ -743,10 +745,27 @@ body.vanban-page-active footer {
   .btn-toggle-preview,
   #btnTogglePreviewPane,
   .modal,
+  .modal-overlay,
   .toast,
   #toastContainer,
+  #compareFloatingBar,
+  #floatingContactWidget,
+  .floating-contact-btn,
+  #floatHotlineBtn,
+  #floatZaloBtn,
+  #floatMessengerBtn,
+  .feedback-fab,
+  #feedbackModalOverlay,
+  #compareModalOverlay,
+  #specialtyCartModalOverlay,
+  #ttsModal,
+  #drivingHeaderSubnav,
+  .a-no-print,
+  .no-print,
   .page-view:not(#page-vanban) {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
 
   /* 2. Giải phóng hoàn toàn các thẻ cha khỏi overflow:hidden và height:100vh để không bị cắt trang */

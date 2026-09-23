@@ -16,14 +16,29 @@
 <meta name="theme-color" content="#0B5C57">
 
 <title>Ninh Bình Digital — Nền tảng Công cụ số &amp; Quản trị cho cộng đồng Ninh Bình</title>
+<meta name="description" content="Ninh Bình Digital — Hệ sinh thái số hóa, tiện ích trực tuyến, tra cứu du lịch, homestay và hỗ trợ doanh nghiệp, hộ kinh doanh tỉnh Ninh Bình.">
+<meta name="keywords" content="ninh bình digital, du lịch ninh bình, homestay ninh bình, văn bản hành chính, trắc nghiệm gplx 2026">
+<link rel="canonical" href="https://ninhbinhdigital.id.vn/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ninhbinhdigital.id.vn/">
+<meta property="og:title" content="Ninh Bình Digital — Nền tảng Công nghệ số &amp; Quản trị cộng đồng">
+<meta property="og:description" content="Hệ sinh thái số hóa, tiện ích trực tuyến, tra cứu du lịch, homestay và hỗ trợ doanh nghiệp, hộ kinh doanh tỉnh Ninh Bình.">
+<meta property="og:image" content="https://ninhbinhdigital.id.vn/images/logo.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://ninhbinhdigital.id.vn/">
+<meta name="twitter:title" content="Ninh Bình Digital — Nền tảng Công nghệ số &amp; Quản trị cộng đồng">
+<meta name="twitter:description" content="Hệ sinh thái số hóa, tiện ích trực tuyến, tra cứu du lịch, homestay và hỗ trợ doanh nghiệp, hộ kinh doanh tỉnh Ninh Bình.">
+<meta name="twitter:image" content="https://ninhbinhdigital.id.vn/images/logo.png">
 
 <!-- Favicon & Brand Icons -->
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta property="og:image" content="https://ninhbinhdigital.id.vn/images/logo.png">
-<meta property="og:title" content="Ninh Bình Digital — Nền tảng Công nghệ số &amp; Quản trị cộng đồng">
 
 <!-- Phông chữ: Bricolage Grotesque (tiêu đề) + Be Vietnam Pro (nội dung) — đều có bộ ký tự tiếng Việt -->
 
@@ -3719,39 +3734,41 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
 
   @media print {
-
     /* 1. Ẩn toàn bộ các thành phần giao diện thừa không in */
-
     header,
-
     footer,
-
     nav,
-
+    .main-header,
+    .site-footer,
     .toolbar,
-
     .vb-top-bar,
-
     .vb-control-pane,
-
     .vb-preview-toolbar,
-
     .vb-preview-disclaimer,
-
     .btn-toggle-preview,
-
     #btnTogglePreviewPane,
-
     .modal,
-
+    .modal-overlay,
     .toast,
-
     #toastContainer,
-
+    #compareFloatingBar,
+    #floatingContactWidget,
+    .floating-contact-btn,
+    #floatHotlineBtn,
+    #floatZaloBtn,
+    #floatMessengerBtn,
+    .feedback-fab,
+    #feedbackModalOverlay,
+    #compareModalOverlay,
+    #specialtyCartModalOverlay,
+    #ttsModal,
+    #drivingHeaderSubnav,
+    .a-no-print,
+    .no-print,
     .page-view:not(#page-vanban) {
-
       display: none !important;
-
+      visibility: hidden !important;
+      opacity: 0 !important;
     }
 
 
@@ -4216,10 +4233,16 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   align-items: center;
   gap: 16px;
   z-index: 1000;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, visibility 0.2s ease;
   border: 1px solid rgba(255,255,255,0.2);
 }
 #compareFloatingBar.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
   transform: translateX(-50%) translateY(0);
 }
 
@@ -5026,7 +5049,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Số điện thoại / Zalo *</label>
-                    <input type="tel" id="leadPhoneHome" name="leadPhone" class="form-control" placeholder="0866520567" required>
+                    <input type="tel" id="leadPhoneHome" name="leadPhone" class="form-control" placeholder="0866520567" pattern="(0|\\+84)[3|5|7|8|9][0-9]{8}" required>
                   </div>
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Dịch vụ quan tâm</label>
@@ -5059,22 +5082,22 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
             <div style="display:flex; flex-direction:column; gap:10px;">
               <!-- Hotline -->
-              <a href="tel:0866520567" id="dynBtnHotline" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#DCFCE7; color:#15803D; font-weight:800; padding:12px; border-radius:10px; text-decoration:none; border:1px solid #86EFAC;">
+              <a href="tel:0866520567" id="dynBtnHotline" class="dynBtnHotline" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#DCFCE7; color:#15803D; font-weight:800; padding:12px; border-radius:10px; text-decoration:none; border:1px solid #86EFAC;">
                 <span>📞 Hotline: <b>0866.520.567</b></span>
               </a>
 
               <!-- Zalo cá nhân -->
-              <a href="https://zalo.me/0866520567" id="dynBtnZalo" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0068FF; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none; box-shadow:0 4px 12px rgba(0,104,255,0.25);">
+              <a href="https://zalo.me/0866520567" id="dynBtnZalo" class="dynBtnZalo" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0068FF; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none; box-shadow:0 4px 12px rgba(0,104,255,0.25);">
                 <span>💬 Chat Zalo Cá Nhân (0866520567)</span>
               </a>
 
               <!-- Group Zalo Cộng Đồng -->
-              <a href="https://zalo.me/g/owbmlx898" id="dynBtnZaloGroup" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0B5C57; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
+              <a href="https://zalo.me/g/owbmlx898" id="dynBtnZaloGroup" class="dynBtnZaloGroup" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0B5C57; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
                 <span>👥 Tham Gia Nhóm Zalo Cộng Đồng</span>
               </a>
 
               <!-- Facebook -->
-              <a href="https://web.facebook.com/jaytran0522" id="dynBtnFacebook" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#1877F2; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
+              <a href="https://web.facebook.com/jaytran0522" id="dynBtnFacebook" class="dynBtnFacebook" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#1877F2; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
                 <span>🌐 Facebook: Jay Trần (jaytran0522)</span>
               </a>
             </div>
@@ -5126,7 +5149,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     <div class="wrap">
 
-      <h1 class="tools-banner-title" style="font-size:2.2rem; margin-bottom:8px;">Danh mục Công cụ số Ninh Bình</h1>
+      <h2 class="tools-banner-title" style="font-size:2.2rem; margin-bottom:8px;">Danh mục Công cụ số Ninh Bình</h2>
 
       <p class="tools-banner-desc" style="color:var(--muted); font-size:1.05rem;">Tất cả công cụ đều chạy an toàn 100% trên trình duyệt của bạn, không lưu dữ liệu cá nhân.</p>
 
@@ -5468,7 +5491,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <div class="nb-hero-badge">
           <span>✨ Di Sản Văn Hóa &amp; Thiên Nhiên Thế Giới Tràng An</span>
         </div>
-        <h1 class="nb-hero-title">HOMESTAY NINH BÌNH</h1>
+        <h2 class="nb-hero-title">HOMESTAY NINH BÌNH</h2>
         <p class="nb-hero-subtitle">
           Thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian ẩm thực Cố Đô đặc sắc cùng hệ thống homestay nghỉ dưỡng sinh thái hàng đầu.
         </p>
@@ -5587,7 +5610,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </p>
       </div>
       <a href="javascript:void(0)" class="nb-view-all-link" onclick="openAllHomestayModal()">
-        <span>View All (50+)</span>
+        <span>Xem tất cả cơ sở (50+)</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
       </a>
     </div>
@@ -5907,7 +5930,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
       <div class="badge-tag" style="background:rgba(166,95,0,0.2); color:#FBBF24;">AI Prompt Studio</div>
 
-      <h1 style="color:#fff; font-size:2.3rem; margin-bottom:10px;">Thư viện Prompt AI Chuyên Ngành</h1>
+      <h2 style="color:#fff; font-size:2.3rem; margin-bottom:10px;">Thư viện Prompt AI Chuyên Ngành</h2>
 
       <p style="color:#BCCBC5; font-size:1.05rem;">Chọn ngành nghề, tùy biến thông tin và sao chép để dán thẳng vào ChatGPT / Gemini.</p>
 
@@ -6059,7 +6082,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     <div class="wrap">
 
-      <h1 class="page-banner-title" style="font-size:2.2rem; margin-bottom:8px;">Blog &amp; Cẩm nang Số</h1>
+      <h2 class="page-banner-title" style="font-size:2.2rem; margin-bottom:8px;">Blog &amp; Cẩm nang Số</h2>
 
       <p class="page-banner-desc" style="font-size:1.05rem;">Bài viết thực chiến về ứng dụng công cụ số và AI cho người Ninh Bình.</p>
 
@@ -6157,7 +6180,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <li>✓ Tạo hình ảnh sản phẩm OCOP &amp; món ăn bằng trí tuệ nhân tạo</li>
             <li>✓ Soạn thảo báo cáo, văn bản, xử lý bảng biểu Excel thần tốc</li>
           </ul>
-          <a href="#form-register-service" style="display:block; text-align:center; background:#0B5C57; color:#fff; padding:12px 20px; border-radius:10px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(11,92,87,0.25);">
+          <a href="#form-register-services-page" style="display:block; text-align:center; background:#0B5C57; color:#fff; padding:12px 20px; border-radius:10px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(11,92,87,0.25);">
             Đăng Ký Khóa Học AI Ngay →
           </a>
         </div>
@@ -6180,7 +6203,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <li>✓ Website Doanh nghiệp giới thiệu năng lực, hồ sơ thầu, dịch vụ</li>
             <li>✓ Bàn giao mã nguồn, hướng dẫn quản trị tận tình 100%</li>
           </ul>
-          <a href="#form-register-service" style="display:block; text-align:center; background:#D97706; color:#fff; padding:12px 20px; border-radius:10px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(217,119,6,0.25);">
+          <a href="#form-register-services-page" style="display:block; text-align:center; background:#D97706; color:#fff; padding:12px 20px; border-radius:10px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(217,119,6,0.25);">
             Đăng Ký Tư Vấn Website →
           </a>
         </div>
@@ -6278,7 +6301,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
 
       <!-- FORM ĐĂNG KÝ TƯ VẤN & CỤM NÚT LIÊN HỆ ZALO / HOTLINE -->
-      <div id="form-register-service" style="background:#fff; border:1.5px solid #0B5C57; border-radius:20px; padding:36px; box-shadow:0 12px 36px rgba(11,92,87,0.08);">
+      <div id="form-register-services-page" style="background:#fff; border:1.5px solid #0B5C57; border-radius:20px; padding:36px; box-shadow:0 12px 36px rgba(11,92,87,0.08);">
         <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:36px; align-items:center;">
           <!-- Cột Form -->
           <div>
@@ -6301,7 +6324,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Số điện thoại / Zalo *</label>
-                    <input type="tel" id="leadPhoneServices" name="leadPhone" class="form-control" placeholder="0866520567" required>
+                    <input type="tel" id="leadPhoneServices" name="leadPhone" class="form-control" placeholder="0866520567" pattern="(0|\\+84)[3|5|7|8|9][0-9]{8}" required>
                   </div>
                   <div>
                     <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px;">Dịch vụ quan tâm</label>
@@ -6334,22 +6357,22 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
             <div style="display:flex; flex-direction:column; gap:10px;">
               <!-- Hotline -->
-              <a href="tel:0866520567" id="dynBtnHotline" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#DCFCE7; color:#15803D; font-weight:800; padding:12px; border-radius:10px; text-decoration:none; border:1px solid #86EFAC;">
+              <a href="tel:0866520567" id="dynBtnHotlineServices" class="dynBtnHotline" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#DCFCE7; color:#15803D; font-weight:800; padding:12px; border-radius:10px; text-decoration:none; border:1px solid #86EFAC;">
                 <span>📞 Hotline: <b>0866.520.567</b></span>
               </a>
 
               <!-- Zalo cá nhân -->
-              <a href="https://zalo.me/0866520567" id="dynBtnZalo" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0068FF; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none; box-shadow:0 4px 12px rgba(0,104,255,0.25);">
+              <a href="https://zalo.me/0866520567" id="dynBtnZaloServices" class="dynBtnZalo" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0068FF; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none; box-shadow:0 4px 12px rgba(0,104,255,0.25);">
                 <span>💬 Chat Zalo Cá Nhân (0866520567)</span>
               </a>
 
               <!-- Group Zalo Cộng Đồng -->
-              <a href="https://zalo.me/g/owbmlx898" id="dynBtnZaloGroup" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0B5C57; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
+              <a href="https://zalo.me/g/owbmlx898" id="dynBtnZaloGroupServices" class="dynBtnZaloGroup" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#0B5C57; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
                 <span>👥 Tham Gia Nhóm Zalo Cộng Đồng</span>
               </a>
 
               <!-- Facebook -->
-              <a href="https://web.facebook.com/jaytran0522" id="dynBtnFacebook" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#1877F2; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
+              <a href="https://web.facebook.com/jaytran0522" id="dynBtnFacebookServices" class="dynBtnFacebook" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#1877F2; color:#fff; font-weight:700; padding:12px; border-radius:10px; text-decoration:none;">
                 <span>🌐 Facebook: Jay Trần (jaytran0522)</span>
               </a>
             </div>
@@ -6402,7 +6425,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
       <div class="badge-tag">Cộng Đồng Số Ninh Bình</div>
 
-      <h1 style="font-size:2rem; margin:12px 0;">Không làm một mình — Cùng nhau phát triển</h1>
+      <h2 style="font-size:2rem; margin:12px 0;">Không làm một mình — Cùng nhau phát triển</h2>
 
       <p class="community-desc" style="font-size:1.02rem; margin-bottom:28px;">
 
@@ -6468,11 +6491,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
           </span>
 
-          <h1 style="font-size:2.4rem; font-weight:800; color:#10231F; line-height:1.25; margin:14px 0 12px;">
+          <h2 style="font-size:2.4rem; font-weight:800; color:#10231F; line-height:1.25; margin:14px 0 12px;">
 
             Bằng lái xe 2026: chọn đúng hạng trước khi học và thi
 
-          </h1>
+          </h2>
 
           <p style="color:#3F534D; font-size:1.05rem; line-height:1.6; margin-bottom:24px;">
 
@@ -7042,7 +7065,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       
       <!-- Tiêu Đề Trung Tâm -->
       <div style="text-align:center; margin-bottom:32px;">
-        <h1 style="font-size:2.2rem; font-weight:800; color:var(--ink); margin-bottom:8px;">Thi Thử Bằng Lái Xe Hạng A1</h1>
+        <h2 style="font-size:2.2rem; font-weight:800; color:var(--ink); margin-bottom:8px;">Thi Thử Bằng Lái Xe Hạng A1</h2>
         <p style="color:var(--muted); font-size:1.02rem;">Chọn một bộ đề dưới đây để bắt đầu làm bài thi.</p>
       </div>
 
@@ -7467,7 +7490,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <span style="background:#FEF3C7; color:#B45309; border:1px solid #FDE68A; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:800;">
               🏍️ MÔ TÔ PHÂN KHỐI LỚN &gt; 125cc
             </span>
-            <h1 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng A</h1>
+            <h2 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng A</h2>
             <p style="color:#475569; font-size:0.95rem; line-height:1.6; max-width:600px;">
               Dành cho xe mô tô hai bánh có dung tích xi-lanh trên 125cm³ hoặc công suất điện trên 11kW. Được phép điều khiển toàn bộ xe thuộc hạng A1.
             </p>
@@ -7522,7 +7545,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <span style="background:#EFF6FF; color:#2563EB; border:1px solid #BFDBFE; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:800;">
               🚗 Ô TÔ CON ĐẾN 8 CHỖ &amp; TẢI NHỎ &lt; 3.5 TẤN
             </span>
-            <h1 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng B</h1>
+            <h2 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng B</h2>
             <p style="color:#475569; font-size:0.95rem; line-height:1.6; max-width:600px;">
               Quy định mới: Hạng B cấp cho người điều khiển ô tô chở người đến 8 chỗ và ô tô tải có khối lượng toàn bộ thiết kế đến 3.500 kg.
             </p>
@@ -7577,7 +7600,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <span style="background:#FEF2F2; color:#DC2626; border:1px solid #FECACA; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:800;">
               🚛 Ô TÔ TẢI TRÊN 7.5 TẤN &amp; ĐẦU KÉO
             </span>
-            <h1 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng C</h1>
+            <h2 style="font-size:2rem; font-weight:800; color:#0F172A; margin:10px 0 8px;">Sát Hạch Giấy Phép Lái Xe Hạng C</h2>
             <p style="color:#475569; font-size:0.95rem; line-height:1.6; max-width:600px;">
               Cấp cho người lái xe ô tô tải có khối lượng toàn bộ thiết kế trên 7.500 kg, máy kéo kéo rơ moóc và các loại xe hạng B, C1.
             </p>
@@ -7641,9 +7664,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </span>
         </div>
 
-        <h1 style="font-size:2.2rem; font-weight:900; color:#FFF; margin-bottom:14px; line-height:1.25;">
+        <h2 style="font-size:2.2rem; font-weight:900; color:#FFF; margin-bottom:14px; line-height:1.25;">
           Mẹo thi A1 2026: 250 câu, 20 câu liệt, biển báo, sa hình
-        </h1>
+        </h2>
         
         <p style="color:#E2E8F0; font-size:1.02rem; line-height:1.65; margin-bottom:24px; max-width:860px;">
           <strong>Mẹo thi A1</strong> không nên hiểu là học tủ vài đáp án rời rạc. Cách học an toàn hơn là nắm cấu trúc đề, học chắc 20 câu điểm liệt, nhận diện nhanh nhóm biển báo, xử lý sa hình theo thứ tự ưu tiên và luyện đề đủ nhiều để quen áp lực thời gian. Cẩm nang này tổng hợp các mẹo thi bằng lái xe A1 mới nhất cho người cần ôn nhanh nhưng vẫn muốn hiểu bản chất.
@@ -8311,7 +8334,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <span style="background:rgba(255,255,255,0.15); color:#FDE047; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; padding:4px 14px; border-radius:20px; display:inline-block; margin-bottom:10px;">
           🏍️ HẠNG A - MÔ TÔ PHÂN KHỐI LỚN &gt; 125CC
         </span>
-        <h1 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Lý Thuyết &amp; Kỹ Thuật Lái Xe Hạng A 2026</h1>
+        <h2 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Lý Thuyết &amp; Kỹ Thuật Lái Xe Hạng A 2026</h2>
         <p style="color:#CBD5E1; font-size:0.95rem; line-height:1.5; margin:0;">Tổng hợp trọn bộ mẹo 250 câu hỏi sát hạch Hạng A (thay thế bằng A2 cũ), kỹ thuật điều khiển xe PKL và 4 bài sa hình thực hành.</p>
       </div>
 
@@ -8381,7 +8404,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <span style="background:rgba(255,255,255,0.15); color:#FDE047; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; padding:4px 14px; border-radius:20px; display:inline-block; margin-bottom:10px;">
           🚗 HẠNG B Ô TÔ CHUẨN MỚI 2026
         </span>
-        <h1 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Lý Thuyết &amp; 11 Bài Sa Hình Hạng B (B2)</h1>
+        <h2 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Lý Thuyết &amp; 11 Bài Sa Hình Hạng B (B2)</h2>
         <p style="color:#CBD5E1; font-size:0.95rem; line-height:1.5; margin:0;">Khóa chặt 60 câu điểm liệt ô tô, bỏ túi bí quyết dốc đề-pa, vệt bánh xe và căn nhà xe dọc/ngang đỗ 100/100 điểm.</p>
       </div>
 
@@ -8471,7 +8494,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         <span style="background:rgba(255,255,255,0.15); color:#FDE047; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; padding:4px 14px; border-radius:20px; display:inline-block; margin-bottom:10px;">
           🚛 HẠNG C - XE TẢI NẶNG &gt; 3.500KG
         </span>
-        <h1 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Sát Hạch Hạng C Xe Tải 2026</h1>
+        <h2 style="font-size:2rem; font-weight:900; color:#FFF; margin-bottom:8px; line-height:1.2;">Mẹo Thi Sát Hạch Hạng C Xe Tải 2026</h2>
         <p style="color:#CBD5E1; font-size:0.95rem; line-height:1.5; margin:0;">Bảng con số vàng cần nhớ: niên hạn, khoảng cách an toàn, tải trọng, kích thước xe và bí quyết xử lý điểm mù xe tải.</p>
       </div>
 
@@ -8566,9 +8589,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               <span style="width:8px; height:8px; background:#EF4444; border-radius:50%; display:inline-block; box-shadow:0 0 0 3px rgba(239,68,68,0.3);"></span>
               QUY CHUẨN SÁT HẠCH 2026 • SAI 1 CÂU LÀ RỚT NGAY
             </div>
-            <h1 style="font-size:2rem; font-weight:900; color:#FFF; margin:0 0 8px; line-height:1.25;">
+            <h2 style="font-size:2rem; font-weight:900; color:#FFF; margin:0 0 8px; line-height:1.25;">
               20 Câu Hỏi Điểm Liệt Xe Máy (Hạng A1 &amp; A)
-            </h1>
+            </h2>
             <p style="color:#CBD5E1; font-size:0.95rem; line-height:1.6; max-width:760px; margin:0;">
               Chỉ cần trả lời sai dù chỉ <b>1 câu duy nhất</b> trong 20 câu này, bài thi sẽ bị <b>TRƯỢT TRỰC TIẾP NGAY LẬP TỨC</b>! Toàn bộ 20 câu đã được thiết kế chuẩn ProMax kèm đáp án đúng, mẹo ghi nhớ vàng và giọng đọc AI.
             </p>
@@ -8666,9 +8689,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(217,119,6,0.25); color:#FDE68A; font-weight:700; font-size:0.78rem; padding:5px 14px; border-radius:20px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:14px;">
         🤖 Trí Tuệ Nhân Tạo &amp; Khảo Thí Số • Free AI APIs 2026
       </div>
-      <h1 style="color:#fff; font-size:clamp(1.9rem, 3.2vw, 2.5rem); margin-bottom:12px; font-weight:800;">
+      <h2 style="color:#fff; font-size:clamp(1.9rem, 3.2vw, 2.5rem); margin-bottom:12px; font-weight:800;">
         Cổng Nộp Bài &amp; Hệ Thống Chấm Điểm Tự Động Cho Học Sinh
-      </h1>
+      </h2>
       <p style="color:#CBD5E1; font-size:1.05rem; max-width:82ch; line-height:1.65; margin:0 auto 28px auto;">
         Tạo đường link cá nhân hóa &amp; mã QR riêng cho từng học sinh. Học sinh mở link chụp ảnh bài làm gửi lên. Phần mềm tự động nhận diện đề bài, chấm tự động cả <b>Ngữ Văn</b>, <b>Tiếng Anh</b> và <b>Trắc nghiệm</b>. Ưu tiên dùng đáp án có sẵn; với đề mở, AI tự động phân tích đề để giải và đối chiếu kết quả.
       </p>
@@ -8820,7 +8843,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
               <span style="font-weight:700; color:#0F3D6E;">🤖 Chế Độ AI Chấm Điểm:</span>
               <span id="studentAiStatusText" style="margin-left:6px; font-weight:600; color:#15803d;">🟢 Đang kích hoạt AI Vision &amp; OCR (Kiểm định ảnh giấy thi nghiêm ngặt, từ chối ảnh bừa 0 điểm)</span>
             </div>
-            <a href="javascript:void(0)" onclick="StudentGradingEngine.switchTab('aiconfig')" style="font-weight:700; color:#2563EB; text-decoration:underline;">⚙️ Cấu Hình Free API Key</a>
+            <a href="javascript:void(0)" onclick="StudentGradingEngine.switchGradingTab('aiconfig')" style="font-weight:700; color:#2563EB; text-decoration:underline;">⚙️ Cấu Hình Free API Key</a>
           </div>
         </div>
 
@@ -10196,6 +10219,25 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       if (ft) ft.style.display = '';
     }
 
+    const PAGE_TITLES = {
+      home: "Ninh Bình Digital — Nền tảng Công cụ số & Quản trị cho cộng đồng Ninh Bình",
+      tools: "Danh Mục Công Cụ Số Ninh Bình — Ninh Bình Digital",
+      services: "Dịch Vụ Số Hóa & Thiết Kế Website — Ninh Bình Digital",
+      travel: "Cẩm Nang Du Lịch, Homestay & Đặc Sản Ninh Bình — Ninh Bình Digital",
+      prompt: "Thư Viện Prompt AI Chuyên Ngành — Ninh Bình Digital",
+      blog: "Cẩm Nang & Tin Tức Số Hóa Ninh Bình — Ninh Bình Digital",
+      vanban: "Soạn Thảo Văn Bản Hành Chính Chuẩn NĐ 30/2020 — Ninh Bình Digital",
+      grading: "Chấm Điểm Thi Trắc Nghiệm Tự Động AI — Ninh Bình Digital",
+      driving: "Ôn Thi Giấy Phép Lái Xe GPLX 2026 — Ninh Bình Digital",
+      community: "Cộng Đồng Số & Kết Nối Doanh Nghiệp Ninh Bình — Ninh Bình Digital",
+      contact: "Liên Hệ & Đăng Ký Tư Vấn — Ninh Bình Digital",
+      login: "Đăng Nhập Quản Trị Hệ Thống — Ninh Bình Digital",
+      profile: "Thông Tin Cá Nhân & Hồ Sơ — Ninh Bình Digital"
+    };
+    if (PAGE_TITLES[pageId]) {
+      document.title = PAGE_TITLES[pageId];
+    }
+
     if(pageId === 'community') {
       setTimeout(renderCommunityQr, 50);
     }
@@ -10206,6 +10248,28 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       setTimeout(() => AdministrativeDocEngine.init(), 50);
     }
   }
+
+  // Render mã QR cho nhóm Zalo cộng đồng số Ninh Bình
+  function renderCommunityQr() {
+    const qrDiv = document.getElementById('communityQrArea');
+    if (!qrDiv) return;
+    qrDiv.innerHTML = '';
+    if (typeof QRCode !== 'undefined') {
+      try {
+        new QRCode(qrDiv, {
+          text: "https://zalo.me/g/owbmlx898",
+          width: 160,
+          height: 160,
+          colorDark: "#0E7C74",
+          colorLight: "#ffffff",
+          correctLevel: (QRCode.CorrectLevel && QRCode.CorrectLevel.M) || 0
+        });
+      } catch (err) {
+        console.warn('[Community QR Error]', err);
+      }
+    }
+  }
+  window.renderCommunityQr = renderCommunityQr;
 
   function toggleMobileMenu() {
     const nav = document.getElementById('mainNavLinks') || document.querySelector('.nav-links');
@@ -10280,11 +10344,17 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   // ========================================================
   // AUTH SYSTEM (ĐĂNG KÝ, ĐĂNG NHẬP, QUẢN TRỊ ADMIN)
   // ========================================================
+  const ADMIN_AUTHORIZED_EMAILS = ['admin@gmail.com', 'admin@ninhbinhdigital.id.vn', 'jaytran0522@gmail.com'];
+
   function updateAuthUI() {
     const authBox = document.getElementById('authActions');
     const userBox = document.getElementById('userActions');
 
     if(currentUser) {
+      if (currentUser.role === 'admin' && (!currentUser.email || !ADMIN_AUTHORIZED_EMAILS.includes(currentUser.email.toLowerCase()))) {
+        currentUser.role = 'member';
+        try { localStorage.setItem('nb_user', JSON.stringify(currentUser)); } catch(e) {}
+      }
       if(authBox) authBox.style.display = 'none';
       if(userBox) userBox.style.display = 'flex';
       const uName = document.getElementById('headerUserName');
@@ -10443,10 +10513,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         showToast('Mật khẩu không chính xác! Vui lòng thử lại.');
         return;
       }
+      const isAuthorizedAdmin = foundUser.role === 'admin' && ADMIN_AUTHORIZED_EMAILS.includes((foundUser.email || '').toLowerCase());
       currentUser = {
         name: foundUser.name,
         email: foundUser.email,
-        role: foundUser.role === 'admin' ? 'admin' : 'member'
+        role: isAuthorizedAdmin ? 'admin' : (foundUser.role === 'admin' ? 'member' : (foundUser.role || 'member'))
       };
     } else {
       showToast('Tài khoản chưa tồn tại hoặc sai thông tin, vui lòng đăng ký thành viên mới!');
@@ -10494,13 +10565,14 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     const newUser = {
       name: name,
       email: email,
-      role: role,
+      role: role === 'admin' ? 'member' : role, // Đăng ký công khai không tự cấp admin
       password_hash: passwordHash,
       date: new Date().toISOString().split('T')[0]
     };
 
-    currentUser = { name: name, email: email, role: role };
-    allUsers.push(newUser);
+    currentUser = { name: name, email: email, role: newUser.role };
+    // Lưu vào allUsers cục bộ KHÔNG kèm password_hash để tránh lộ thông tin
+    allUsers.push({ name: name, email: email, role: newUser.role, date: newUser.date });
     localStorage.setItem('nb_user', JSON.stringify(currentUser));
     localStorage.setItem('nb_all_users', JSON.stringify(allUsers));
 
@@ -12177,7 +12249,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
                 <div style="font-size:0.72rem; color:#64748B; margin-top:2px;" id="invPrevQrNote">Nội dung: Thanh toan HD NB-0908</div>
               </div>
               <div style="text-align:center; flex-shrink:0;">
-                <img id="invPrevQrImg" src="" style="width:85px; height:85px; border-radius:6px; border:1px solid #CBD5E1; display:block; background:#fff;" alt="VietQR Pay">
+                <img id="invPrevQrImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='85' height='85'%3E%3Crect width='85' height='85' fill='%23f1f5f9'/%3E%3C/svg%3E" style="width:85px; height:85px; border-radius:6px; border:1px solid #CBD5E1; display:block; background:#fff;" alt="VietQR Pay">
                 <div style="font-size:0.62rem; color:#15803D; font-weight:700; margin-top:2px;">Quét VietQR Pay</div>
               </div>
             </div>
@@ -13834,18 +13906,50 @@ Quản trị tài chính số — Ninh Bình Digital`;
   function updateVoucherPreview() {
     const brand = document.getElementById('vcBrand')?.value || '';
     const disc = document.getElementById('vcDiscount')?.value || '';
-    const code = document.getElementById('vcCode')?.value || '';
+    const code = (document.getElementById('vcCode')?.value || '').trim();
     const exp = document.getElementById('vcExpiry')?.value || '';
 
-    document.getElementById('vcDispBrand').textContent = brand;
-    document.getElementById('vcDispDisc').textContent = disc;
-    document.getElementById('vcDispCode').textContent = 'MÃ: ' + code;
-    document.getElementById('vcDispExp').textContent = 'Hạn dùng: ' + exp;
+    const dispBrand = document.getElementById('vcDispBrand');
+    const dispDisc = document.getElementById('vcDispDisc');
+    const dispCode = document.getElementById('vcDispCode');
+    const dispExp = document.getElementById('vcDispExp');
+
+    if (dispBrand) dispBrand.textContent = brand;
+    if (dispDisc) dispDisc.textContent = disc;
+    if (dispCode) dispCode.textContent = 'MÃ: ' + code;
+    if (dispExp) dispExp.textContent = 'Hạn dùng: ' + exp;
 
     const qrDiv = document.getElementById('vcQrArea');
-    if(!qrDiv) return;
+    if (!qrDiv) return;
     qrDiv.innerHTML = '';
-    new QRCode(qrDiv, { text: `VOUCHER:${code}|${brand}|${disc}|EXP:${exp}`, width: 130, height: 130, colorDark: "#092545" });
+
+    if (typeof QRCode !== 'undefined') {
+      try {
+        const cleanPayload = `https://ninhbinhdigital.id.vn/?voucher=${encodeURIComponent(code || 'NB2026')}&exp=${encodeURIComponent(exp || '')}`;
+        new QRCode(qrDiv, {
+          text: cleanPayload,
+          width: 130,
+          height: 130,
+          colorDark: "#092545",
+          colorLight: "#ffffff",
+          correctLevel: (QRCode.CorrectLevel && QRCode.CorrectLevel.M) || 0
+        });
+      } catch (err) {
+        try {
+          qrDiv.innerHTML = '';
+          new QRCode(qrDiv, {
+            text: code || 'VOUCHER2026',
+            width: 130,
+            height: 130,
+            colorDark: "#092545",
+            colorLight: "#ffffff",
+            correctLevel: 0
+          });
+        } catch (e2) {
+          console.warn('[Voucher QR]', e2);
+        }
+      }
+    }
   }
 
   function printVoucherCard() {
@@ -13853,9 +13957,13 @@ Quản trị tài chính số — Ninh Bình Digital`;
     const disc = document.getElementById('vcDiscount')?.value || '';
     const code = document.getElementById('vcCode')?.value || '';
     const exp = document.getElementById('vcExpiry')?.value || '';
-    const qrImg = document.querySelector('#vcQrArea img')?.src || '';
+    const qrImg = document.querySelector('#vcQrArea img')?.src || document.querySelector('#vcQrArea canvas')?.toDataURL() || '';
 
     const w = window.open('', '', 'width=650,height=650');
+    if (!w) {
+      showToast('Trình duyệt đang chặn popup. Vui lòng cho phép popup để in thẻ voucher!');
+      return;
+    }
     w.document.write(`
       <!DOCTYPE html>
       <html>
@@ -13877,7 +13985,7 @@ Quản trị tài chính số — Ninh Bình Digital`;
             ${disc}
           </div>
           <div style="background:#fff; padding:10px; border-radius:8px; display:inline-block; margin:10px 0;">
-            <img src="${qrImg}" style="width:140px; height:140px; display:block;">
+            ${qrImg ? `<img src="${qrImg}" style="width:140px; height:140px; display:block;">` : `<div style="width:140px; height:140px; line-height:140px; color:#333;">QR Code</div>`}
           </div>
           <div style="font-size:15px; font-weight:bold; color:#FDE68A; margin-top:4px;">MÃ ƯU ĐÃI: ${code}</div>
           <div style="font-size:11px; color:#CBD5E1; margin-top:6px;">Áp dụng đến hết ngày: ${exp}</div>
@@ -16204,14 +16312,16 @@ Quản trị tài chính số — Ninh Bình Digital`;
     if (isChecked) {
       if (compareSelectedIds.length >= 4) {
         showToast('Bạn chỉ có thể so sánh tối đa 4 cơ sở cùng lúc!');
-        filterTravelPlaces();
+        if (typeof filterTravelPlaces === 'function') filterTravelPlaces();
         return;
       }
       if (!compareSelectedIds.includes(id)) {
         compareSelectedIds.push(id);
       }
+      showToast(`Đã thêm vào danh sách so sánh (${compareSelectedIds.length}/4 cơ sở).`);
     } else {
       compareSelectedIds = compareSelectedIds.filter(itemId => itemId !== id);
+      showToast('Đã bỏ chọn so sánh.');
     }
     updateCompareFloatingBar();
   }
@@ -16231,8 +16341,11 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
   function clearCompareSelection() {
     compareSelectedIds = [];
+    document.querySelectorAll('.nb-card-tag.compare input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+    document.querySelectorAll('.tv-compare-badge input[type="checkbox"]').forEach(cb => { cb.checked = false; });
     updateCompareFloatingBar();
-    filterTravelPlaces();
+    if (typeof filterTravelPlaces === 'function') filterTravelPlaces();
+    showToast('Đã hủy chọn danh sách so sánh.');
   }
 
   function openCompareModal() {
@@ -16244,11 +16357,34 @@ Quản trị tài chính số — Ninh Bình Digital`;
     const body = document.getElementById('compareModalBody');
     if (!modal || !body) return;
 
-    const items = NINHBINH_PLACES.filter(p => compareSelectedIds.includes(p.id));
+    let allPlaces = Array.isArray(NINHBINH_PLACES) ? [...NINHBINH_PLACES] : [];
+    if (typeof nbHomestayCardsData !== 'undefined' && Array.isArray(nbHomestayCardsData)) {
+      nbHomestayCardsData.forEach(hc => {
+        if (!allPlaces.some(p => p.id === hc.id)) {
+          allPlaces.push({
+            id: hc.id,
+            name: hc.name,
+            price: hc.price,
+            rating: hc.rating,
+            area: hc.location ? hc.location.split(',')[0] : 'Hoa Lư',
+            address: hc.location || 'Ninh Bình',
+            highlight: hc.desc || 'Không gian nghỉ dưỡng tuyệt vời tại Ninh Bình',
+            mapUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(hc.name + ' Ninh Bình'),
+            phone: '0866520567'
+          });
+        }
+      });
+    }
+
+    const items = allPlaces.filter(p => compareSelectedIds.includes(p.id));
+    if (items.length < 2) {
+      showToast('Không tìm thấy thông tin cơ sở đã chọn để so sánh!');
+      return;
+    }
 
     body.innerHTML = `
       <div style="overflow-x:auto;">
-        <table class="admin-table" style="min-width:600px;">
+        <table class="admin-table" style="min-width:600px; width:100%;">
           <thead>
             <tr>
               <th style="width:160px;">Tiêu chí so sánh</th>
@@ -16258,31 +16394,31 @@ Quản trị tài chính số — Ninh Bình Digital`;
           <tbody>
             <tr>
               <td><b>Mức giá niêm yết</b></td>
-              ${items.map(item => `<td style="font-size:1.05rem; font-weight:800; color:var(--accent);">${item.price}</td>`).join('')}
+              ${items.map(item => `<td style="font-size:1.05rem; font-weight:800; color:var(--accent);">${item.price || 'Liên hệ'}</td>`).join('')}
             </tr>
             <tr>
               <td><b>Đánh giá trung bình</b></td>
-              ${items.map(item => `<td><span style="color:var(--gold); font-weight:700;">★ ${item.rating}</span> (${item.reviews || 100}+ review)</td>`).join('')}
+              ${items.map(item => `<td><span style="color:var(--gold); font-weight:700;">★ ${item.rating || '4.8'}</span> (${item.reviews || 100}+ review)</td>`).join('')}
             </tr>
             <tr>
               <td><b>Khu vực</b></td>
-              ${items.map(item => `<td><span class="badge-tag">${item.area.toUpperCase()}</span></td>`).join('')}
+              ${items.map(item => `<td><span class="badge-tag">${(item.area || 'NINH BÌNH').toUpperCase()}</span></td>`).join('')}
             </tr>
             <tr>
               <td><b>Địa chỉ</b></td>
-              ${items.map(item => `<td style="font-size:0.84rem; color:var(--muted);">${item.address}</td>`).join('')}
+              ${items.map(item => `<td style="font-size:0.84rem; color:var(--muted);">${item.address || 'Ninh Bình'}</td>`).join('')}
             </tr>
             <tr>
               <td><b>Điểm nổi bật</b></td>
-              ${items.map(item => `<td style="font-size:0.85rem;">💡 ${item.highlight}</td>`).join('')}
+              ${items.map(item => `<td style="font-size:0.85rem;">💡 ${item.highlight || 'Không gian thoáng mát, chuẩn vị Ninh Bình'}</td>`).join('')}
             </tr>
             <tr>
               <td><b>Thao tác</b></td>
               ${items.map(item => `
                 <td>
                   <div style="display:flex; flex-direction:column; gap:6px;">
-                    <a href="${item.mapUrl}" target="_blank" class="btn btn-outline btn-sm">📍 Xem Bản Đồ</a>
-                    ${item.phone ? `<a href="tel:${item.phone.replace(/[^0-9]/g,'')}" class="btn btn-primary btn-sm">📞 Gọi Điện</a>` : ''}
+                    <a href="${item.mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.name))}" target="_blank" class="btn btn-outline btn-sm">📍 Xem Bản Đồ</a>
+                    <a href="tel:${(item.phone || '0866520567').replace(/[^0-9]/g,'')}" class="btn btn-primary btn-sm">📞 Gọi Điện</a>
                   </div>
                 </td>
               `).join('')}
@@ -16414,6 +16550,17 @@ Quản trị tài chính số — Ninh Bình Digital`;
       return;
     }
 
+    const cleanPhone = phone.replace(/[\s\.-]/g, '');
+    const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      if (window.showAppAlert) {
+        window.showAppAlert({ title: 'Số điện thoại không hợp lệ', message: 'Vui lòng nhập đúng định dạng số điện thoại di động Việt Nam (10 số, bắt đầu bằng 03, 05, 07, 08, 09 hoặc +84)!', icon: '⚠️' });
+      } else {
+        alert('Vui lòng nhập đúng số điện thoại di động Việt Nam!');
+      }
+      return;
+    }
+
     const newLead = {
       id: Date.now(),
       name,
@@ -16462,22 +16609,26 @@ Quản trị tài chính số — Ninh Bình Digital`;
     if (typeof getSiteConfig !== 'function') return;
     const cfg = getSiteConfig();
 
-    const hotlineEls = document.querySelectorAll('#dynBtnHotline, #floatHotlineBtn');
+    const hotlineEls = document.querySelectorAll('.dynBtnHotline, #dynBtnHotline, #dynBtnHotlineServices, #floatHotlineBtn');
     hotlineEls.forEach(el => {
       el.href = 'tel:' + (cfg.hotline || '0866520567');
-      if (el.id === 'dynBtnHotline') el.innerHTML = '<span>📞 Hotline: <b>' + (cfg.hotlineDisplay || cfg.hotline || '0866.520.567') + '</b></span>';
+      el.innerHTML = '<span>📞 Hotline: <b>' + (cfg.hotlineDisplay || cfg.hotline || '0866.520.567') + '</b></span>';
     });
 
-    const zaloEls = document.querySelectorAll('#dynBtnZalo, #floatZaloBtn');
+    const zaloEls = document.querySelectorAll('.dynBtnZalo, #dynBtnZalo, #dynBtnZaloServices, #floatZaloBtn');
     zaloEls.forEach(el => {
       el.href = cfg.zaloLink || ('https://zalo.me/' + (cfg.zaloNumber || cfg.hotline || '0866520567'));
     });
 
-    const zaloGroupEl = document.getElementById('dynBtnZaloGroup');
-    if (zaloGroupEl && cfg.zaloGroup) zaloGroupEl.href = cfg.zaloGroup;
+    const zaloGroupEls = document.querySelectorAll('.dynBtnZaloGroup, #dynBtnZaloGroup, #dynBtnZaloGroupServices');
+    zaloGroupEls.forEach(el => {
+      if (cfg.zaloGroup) el.href = cfg.zaloGroup;
+    });
 
-    const fbEl = document.getElementById('dynBtnFacebook');
-    if (fbEl && cfg.facebookLink) fbEl.href = cfg.facebookLink;
+    const fbEls = document.querySelectorAll('.dynBtnFacebook, #dynBtnFacebook, #dynBtnFacebookServices');
+    fbEls.forEach(el => {
+      if (cfg.facebookLink) el.href = cfg.facebookLink;
+    });
   }
 
   window.addEventListener('DOMContentLoaded', () => {
@@ -16774,7 +16925,7 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function toggleNBCompare(id, isChecked) {
-    showToast(isChecked ? 'Đã thêm vào danh sách so sánh tiện ích & giá.' : 'Đã bỏ chọn so sánh.');
+    toggleComparePlace(id, isChecked);
   }
 
   function openNBFastChat() {
@@ -16956,8 +17107,39 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function openAllHomestayModal() {
-    showToast('Đang hiển thị danh mục 50+ Homestay Ninh Bình...');
-    scrollToHomestayList();
+    const list = Array.isArray(NINHBINH_PLACES) ? NINHBINH_PLACES.filter(p => p.cat === 'homestay') : [];
+    if (list.length === 0) {
+      showToast('Đang cuộn xuống danh sách cơ sở lưu trú...');
+      scrollToHomestayList();
+      return;
+    }
+    const html = `
+      <div style="max-height:70vh; overflow-y:auto; padding-right:6px;">
+        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">
+          Danh sách tổng hợp <b>${list.length} cơ sở</b> homestay &amp; khách sạn tiêu biểu tại Ninh Bình với giá ưu đãi trực tiếp:
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">
+          ${list.map(item => `
+            <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--surface); display:flex; flex-direction:column; box-shadow:var(--shadow-sm);">
+              <img src="${item.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80'}" alt="${item.name}" style="height:140px; width:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80'">
+              <div style="padding:14px; display:flex; flex-direction:column; flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                  <span class="badge-tag" style="font-size:0.7rem;">${(item.area || 'Ninh Bình').toUpperCase()}</span>
+                  <span style="font-size:0.8rem; font-weight:700; color:#D97706;">★ ${item.rating || '4.8'}</span>
+                </div>
+                <h4 style="font-size:0.98rem; font-weight:800; color:var(--ink); margin:4px 0 6px;">${item.name}</h4>
+                <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px;">📍 ${item.address || 'Ninh Bình'}</div>
+                <div style="font-size:0.95rem; font-weight:800; color:var(--primary); margin-top:auto; padding-top:8px; border-top:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center;">
+                  <span>${item.price}</span>
+                  <a href="${item.mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.name))}" target="_blank" class="btn btn-outline btn-sm" style="font-size:0.75rem; padding:4px 8px;">Chỉ đường ↗</a>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    openModal('Toàn Bộ Danh Mục Homestay & Khách Sạn Ninh Bình', html);
   }
 
   // BUTTERY-SMOOTH PROGRESSIVE SCROLL BLUR LOGIC
