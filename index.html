@@ -5400,8 +5400,20 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
   <div class="wrap" style="position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 0 16px 60px;">
     
-    <!-- 1. SCENIC HERO OVER VIDEO (Thẻ tiêu đề Cơm Cổ Hoa Lư & Homestay cùng mũi tên đẩy các phần tử lên) -->
+    <!-- 1. FULL-SCREEN HERO VIDEO: Chỉ mũi tên cuộn xuống, toàn bộ nội dung ở section bên dưới -->
     <div class="nb-hero-banner" id="nbHeroBanner">
+      <div class="nb-scroll-explore" onclick="scrollToExplore()" title="Bấm để cuộn xuống khám phá">
+        <span class="nb-scroll-text">CUỘN XUỐNG ĐỂ KHÁM PHÁ</span>
+        <div class="nb-scroll-circle-btn" aria-label="Cuộn xuống khám phá">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. CONTENT SECTION: Tiêu đề + nút + search (xuất hiện ngay sau hero khi cuộn) -->
+    <div class="nb-content-section" id="nbContentSection">
       <div class="nb-hero-content">
         <div class="nb-hero-badge">
           <span>✨ Di Sản Văn Hóa &amp; Thiên Nhiên Thế Giới Tràng An</span>
@@ -5422,17 +5434,6 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
           </button>
         </div>
       </div>
-
-      <!-- Scroll Down Indicator: bấm mũi tên các phần tử mới đẩy lên -->
-      <div class="nb-scroll-explore" onclick="scrollToExplore()" title="Bấm để cuộn xuống khám phá">
-        <span class="nb-scroll-text">CUỘN XUỐNG ĐỂ KHÁM PHÁ</span>
-        <div class="nb-scroll-circle-btn" aria-label="Cuộn xuống khám phá">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </div>
-      </div>
-    </div>
 
     <!-- 2. REFINED FLOATING GLASSMORPHISM SEARCH BAR (APPLE SEGMENTED PILL) -->
       <div class="nb-glass-search-wrap" id="nbGlassSearchBar">
@@ -5525,6 +5526,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </div>
       </div>
     </div>
+    </div><!-- /.nb-content-section -->
 
     <!-- 3. SECTION 1: HOMESTAY & KHÁCH SẠN NỔI BẬT -->
     <div class="nb-section-head" id="homestaySectionAnchor" style="margin-top: 30px;">
@@ -16540,10 +16542,10 @@ Quản trị tài chính số — Ninh Bình Digital`;
   ];
 
   function scrollToExplore() {
-    const el = document.getElementById('nbGlassSearchBar') || document.getElementById('homestaySectionAnchor');
+    const el = document.getElementById('nbContentSection') || document.getElementById('nbGlassSearchBar') || document.getElementById('homestaySectionAnchor');
     if (el) {
       const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 76;
-      const topPos = el.getBoundingClientRect().top + window.pageYOffset - headerH - 14;
+      const topPos = el.getBoundingClientRect().top + window.pageYOffset - headerH;
       window.scrollTo({ top: topPos, behavior: 'smooth' });
     }
   }

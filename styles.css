@@ -3745,23 +3745,38 @@ body[data-theme="dark"] .nb-search-input-box input {
 }
 
 /* ========================================================
-   HERO BANNER - CINEMATIC FULL VIEWPORT
+   HERO BANNER - CINEMATIC FULL VIEWPORT (Video only + down arrow)
    ======================================================== */
 .nb-hero-banner {
   position: relative;
   z-index: 5;
   margin: 0 auto;
-  max-width: 1440px;
-  height: calc(100vh - var(--header-h) - 30px);
-  min-height: 480px;
+  max-width: 100%;
+  width: 100%;
+  height: calc(100vh - var(--header-h));
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 16px 36px;
+  padding: 0 16px 44px;
   text-align: center;
   box-sizing: border-box;
 }
+
+/* Content section: tiêu đề + nút + search ngay sau hero, gần nhau */
+.nb-content-section {
+  position: relative;
+  z-index: 5;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
 
 /* Scroll Down To Explore Indicator (Centered Bottom) */
 .nb-scroll-explore {
