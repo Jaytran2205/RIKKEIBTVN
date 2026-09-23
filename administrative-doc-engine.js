@@ -553,13 +553,33 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
       });
     }
 
-    // Đảm bảo cuộn lên đầu trang khi người dùng in bằng phím tắt Ctrl+P hoặc từ trình duyệt
+    // Đảm bảo cuộn lên đầu trang và ẩn triệt để mọi phần tử nổi khi người dùng in (Ctrl+P hoặc từ trình duyệt)
     window.addEventListener('beforeprint', () => {
       const previewPane = document.getElementById('vbPreviewPane');
       if (previewPane) previewPane.scrollTop = 0;
       window.scrollTo(0, 0);
       if (document.documentElement) document.documentElement.scrollTop = 0;
       if (document.body) document.body.scrollTop = 0;
+
+      const toHide = document.querySelectorAll(
+        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+      );
+      toHide.forEach(el => {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+        el.style.setProperty('opacity', '0', 'important');
+      });
+    });
+
+    window.addEventListener('afterprint', () => {
+      const toHide = document.querySelectorAll(
+        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+      );
+      toHide.forEach(el => {
+        el.style.removeProperty('display');
+        el.style.removeProperty('visibility');
+        el.style.removeProperty('opacity');
+      });
     });
   }
 
@@ -1509,6 +1529,16 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
     if (document.documentElement) document.documentElement.scrollTop = 0;
     if (document.body) document.body.scrollTop = 0;
 
+    // Ẩn triệt để tất cả các nút nổi, logo, chat, header, footer bằng DOM style trực tiếp
+    const toHide = document.querySelectorAll(
+      '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+    );
+    toHide.forEach(el => {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('opacity', '0', 'important');
+    });
+
     // Đảm bảo tỷ lệ cột 38% / 60% và chống tuyệt đối co vỡ cột khi in
     const headerRow = document.getElementById('docHeaderRow');
     const leftCol = document.getElementById('docHeaderLeft');
@@ -1552,12 +1582,20 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
       window.print();
     }, 50);
 
-    // Khôi phục lại title gốc và vị trí cuộn
-    setTimeout(() => {
+    // Khôi phục lại title gốc, vị trí cuộn và các phần tử nổi sau khi in
+    const restorePrintState = () => {
       document.title = oldTitle;
       updateHeaderLayout();
       if (previewPane) previewPane.scrollTop = prevScroll;
-    }, 1000);
+      toHide.forEach(el => {
+        el.style.removeProperty('display');
+        el.style.removeProperty('visibility');
+        el.style.removeProperty('opacity');
+      });
+    };
+
+    window.addEventListener('afterprint', restorePrintState, { once: true });
+    setTimeout(restorePrintState, 1500);
   }
 
   // 17. EXPORT MICROSOFT WORD (.DOC)

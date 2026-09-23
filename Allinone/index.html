@@ -3736,10 +3736,20 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   @media print {
     /* 1. Ẩn toàn bộ các thành phần giao diện thừa không in */
     header,
+    header *,
     footer,
+    footer *,
     nav,
+    nav *,
     .main-header,
     .site-footer,
+    .logo,
+    .logo *,
+    .logo-emblem-wrap,
+    .logo-img,
+    .logo-text,
+    .nav-container,
+    .nav-links,
     .toolbar,
     .vb-top-bar,
     .vb-control-pane,
@@ -3749,7 +3759,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     #btnTogglePreviewPane,
     .modal,
     .modal-overlay,
+    .modal-box,
     .toast,
+    .toast-container,
     #toastContainer,
     #compareFloatingBar,
     #floatingContactWidget,
@@ -3757,6 +3769,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     #floatHotlineBtn,
     #floatZaloBtn,
     #floatMessengerBtn,
+    .nb-floating-chat,
+    .nb-floating-chat *,
+    .nb-travel-floating-stack,
+    .nb-travel-float-btn,
+    .feedback-fab-container,
     .feedback-fab,
     #feedbackModalOverlay,
     #compareModalOverlay,
@@ -3769,6 +3786,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       display: none !important;
       visibility: hidden !important;
       opacity: 0 !important;
+      position: static !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
     }
 
 
