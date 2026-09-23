@@ -1342,7 +1342,7 @@ body.midnight-mode{
 
   position:fixed; inset:0; background:rgba(6,30,28,.68); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
 
-  z-index:999; display:none; align-items:center; justify-content:center; padding:20px; opacity:0; transition:opacity .25s ease;
+  z-index:100000; display:none; align-items:center; justify-content:center; padding:20px; opacity:0; transition:opacity .25s ease;
 
 }
 
@@ -10338,14 +10338,32 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     const modal = document.getElementById('mainModal');
     modal.classList.remove('open');
     document.body.style.overflow = '';
+    const modalHeader = document.querySelector('#mainModal .modal-header');
+    if (modalHeader) {
+      modalHeader.style.display = '';
+    }
     const modalBox = document.getElementById('modalBox');
     if (modalBox) {
       modalBox.style.maxWidth = '';
       modalBox.style.borderRadius = '';
+      modalBox.style.maxHeight = '';
+      modalBox.style.height = '';
+      modalBox.style.overflow = '';
+      modalBox.style.display = '';
+      modalBox.style.flexDirection = '';
+      modalBox.style.boxShadow = '';
     }
     const modalBody = document.getElementById('modalBody');
     if (modalBody) {
       modalBody.style.padding = '';
+      modalBody.style.overflow = '';
+      modalBody.style.flex = '';
+      modalBody.style.minHeight = '';
+      modalBody.style.display = '';
+      modalBody.style.flexDirection = '';
+    }
+    if (typeof stopRobySpeaking === 'function') {
+      try { stopRobySpeaking(); } catch(e) {}
     }
     if (typeof robyPreviewAudioObj !== 'undefined' && robyPreviewAudioObj) {
       try { robyPreviewAudioObj.pause(); } catch(e) {}
@@ -17264,148 +17282,54 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
 
 
-  // ========================================================
-  // ROBY TEXT TO SPEECH STUDIO (CLONE 1:1 CHUẨN XÁC, MƯỢT MÀ, KHÔNG LỖI FORBIDDEN)
-  // ========================================================
-  const ROBY_VOICES = [
-    // --- VOICES FROM SCREENSHOT ---
-    {
-      id: "cassie_j",
-      initials: "CA",
-      name: "Cassie J",
-      tag: "PRO",
-      gender: "female",
-      lang: "English",
-      subtitle: "English • female",
-      langCode: "en",
-      accent: "US Natural",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_ngochuyen_fast_news_48k-thg.mp3"
-    },
-    {
-      id: "hope_sterling",
-      initials: "HO",
-      name: "Hope Sterling",
-      tag: "PRO",
-      gender: "female",
-      lang: "English",
-      subtitle: "English • female",
-      langCode: "en",
-      accent: "US Expressive",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_maiphuong_vdts_48k_cs-thg.mp3"
-    },
-    {
-      id: "archer_kingsley",
-      initials: "AR",
-      name: "Archer Kingsley",
-      tag: "PRO",
-      gender: "male",
-      lang: "English",
-      subtitle: "English • male",
-      langCode: "en",
-      accent: "US Deep Narration",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_manhdung_news_48k_cs-thg.mp3"
-    },
-    {
-      id: "britney_spears",
-      initials: "BR",
-      name: "Britney Spears",
-      tag: "PRO",
-      gender: "female",
-      lang: "English",
-      subtitle: "English • female",
-      langCode: "en",
-      accent: "Celebrity Style",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_ngochuyen_full_24k-st.mp3"
-    },
-    {
-      id: "markus_webb",
-      initials: "MA",
-      name: "Markus Webb",
-      tag: "PRO",
-      gender: "male",
-      lang: "English",
-      subtitle: "English • male",
-      langCode: "en",
-      accent: "Commercial Voiceover",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_phuthang_stor80dt_48k-fhg.mp3"
-    },
-    {
-      id: "andrew_foster",
-      initials: "AN",
-      name: "Andrew Foster",
-      tag: "PRO",
-      gender: "male",
-      lang: "English",
-      subtitle: "English • male",
-      langCode: "en",
-      accent: "British Elegant",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_thanhlong_talk_48k-fhg.mp3"
-    },
-    {
-      id: "spuds_oconnell",
-      initials: "SP",
-      name: "Spuds O'Connell",
-      tag: "PRO",
-      gender: "male",
-      lang: "English",
-      subtitle: "English • male",
-      langCode: "en",
-      accent: "Irish Charm",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/sg_male_minhhoang_full_48k-fhg.mp3"
-    },
-    {
-      id: "patty_wells",
-      initials: "PA",
-      name: "Patty Wells",
-      tag: "PRO",
-      gender: "male",
-      lang: "English",
-      subtitle: "English • male",
-      langCode: "en",
-      accent: "Friendly Character",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_phuthang_stor80dt_48k-fhg.mp3"
-    },
+  // =========================================================================
+  // ROBY TEXT TO SPEECH STUDIO (MICROSOFT EDGE TTS & BROWSER NATIVE VOICE ENGINE)
+  // =========================================================================
 
-    // --- POPULAR VIETNAMESE VOICES ---
+  const DEFAULT_ROBY_VOICES = [
+    // --- 🇻🇳 VIETNAMESE VOICES (Edge Natural & Chrome) ---
     {
-      id: "ngoc_huyen",
-      initials: "NH",
-      name: "Ngọc Huyền",
+      id: "edge_hoaimy",
+      voiceNameMatch: ["hoaimy", "hoài my", "vietnam", "tiếng việt", "vietnamese"],
+      name: "Hoài My (Natural AI)",
       tag: "PRO",
       gender: "female",
       lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • nữ Miền Bắc (Review phim)",
+      subtitle: "Tiếng Việt • nữ Miền Bắc (Edge Natural)",
       langCode: "vi",
-      accent: "Hà Nội Ngọt Ngào",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_ngochuyen_fast_news_48k-thg.mp3"
+      accent: "Hà Nội Tự Nhiên",
+      initials: "HM",
+      isEdge: true
     },
     {
-      id: "manh_dung",
-      initials: "MD",
-      name: "Mạnh Dũng",
+      id: "edge_namminh",
+      voiceNameMatch: ["namminh", "nam minh"],
+      name: "Nam Minh (Natural AI)",
       tag: "PRO",
       gender: "male",
       lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • nam Miền Bắc (Thời sự)",
+      subtitle: "Tiếng Việt • nam Miền Bắc (Edge Natural)",
       langCode: "vi",
-      accent: "Hà Nội Chuẩn",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_manhdung_news_48k_cs-thg.mp3"
+      accent: "Trầm Ấm Thời Sự",
+      initials: "NM",
+      isEdge: true
     },
     {
-      id: "mai_phuong",
-      initials: "MP",
-      name: "Mai Phương",
-      tag: "PRO",
+      id: "google_tiengviet",
+      voiceNameMatch: ["google tiếng việt", "google vi"],
+      name: "Google Tiếng Việt",
+      tag: "AI",
       gender: "female",
       lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • nữ Miền Bắc (Ẩm thực & Du lịch)",
+      subtitle: "Tiếng Việt • phát âm chuẩn",
       langCode: "vi",
-      accent: "Hà Nội Trẻ Trung",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_maiphuong_vdts_48k_cs-thg.mp3"
+      accent: "Toàn Quốc Chuẩn",
+      initials: "GV",
+      isEdge: false
     },
     {
       id: "anh_khoi",
-      initials: "AK",
+      voiceNameMatch: ["an", "male", "nam"],
       name: "Anh Khôi",
       tag: "PRO",
       gender: "male",
@@ -17413,11 +17337,25 @@ Quản trị tài chính số — Ninh Bình Digital`;
       subtitle: "Tiếng Việt • nam Miền Bắc (Sách nói)",
       langCode: "vi",
       accent: "Trầm Ấm Truyền Cảm",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_male_phuthang_stor80dt_48k-fhg.mp3"
+      initials: "AK",
+      isEdge: false
+    },
+    {
+      id: "ngoc_huyen",
+      voiceNameMatch: ["female", "nữ"],
+      name: "Ngọc Huyền",
+      tag: "PRO",
+      gender: "female",
+      lang: "Tiếng Việt",
+      subtitle: "Tiếng Việt • nữ Miền Bắc (Review phim)",
+      langCode: "vi",
+      accent: "Hà Nội Ngọt Ngào",
+      initials: "NH",
+      isEdge: false
     },
     {
       id: "thu_ha",
-      initials: "TH",
+      voiceNameMatch: ["south", "nam bộ"],
       name: "Thu Hà",
       tag: "PRO",
       gender: "female",
@@ -17425,200 +17363,452 @@ Quản trị tài chính số — Ninh Bình Digital`;
       subtitle: "Tiếng Việt • nữ Miền Nam (Quảng cáo)",
       langCode: "vi",
       accent: "Sài Gòn Dễ Thương",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/sg_female_thaotrinh_full_48k-fhg.mp3"
+      initials: "TH",
+      isEdge: false
+    },
+
+    // --- 🇬🇧 ENGLISH VOICES (Edge Natural & Chrome) ---
+    {
+      id: "cassie_j",
+      voiceNameMatch: ["jenny", "aria", "zira", "cassie"],
+      name: "Cassie J",
+      tag: "PRO",
+      gender: "female",
+      lang: "English",
+      subtitle: "English • female (Edge Natural)",
+      langCode: "en",
+      accent: "US Natural",
+      initials: "CA",
+      isEdge: true
     },
     {
-      id: "le_minh",
-      initials: "LM",
-      name: "Lê Minh",
+      id: "hope_sterling",
+      voiceNameMatch: ["hope", "michelle", "sonia"],
+      name: "Hope Sterling",
+      tag: "PRO",
+      gender: "female",
+      lang: "English",
+      subtitle: "English • female (US Expressive)",
+      langCode: "en",
+      accent: "US Expressive",
+      initials: "HO",
+      isEdge: true
+    },
+    {
+      id: "archer_kingsley",
+      voiceNameMatch: ["guy", "christopher", "david"],
+      name: "Archer Kingsley",
       tag: "PRO",
       gender: "male",
-      lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • nam Miền Nam (Podcast)",
-      langCode: "vi",
-      accent: "Sài Gòn Hiện Đại",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/sg_male_minhhoang_full_48k-fhg.mp3"
+      lang: "English",
+      subtitle: "English • male (US Deep Narration)",
+      langCode: "en",
+      accent: "US Deep Narration",
+      initials: "AR",
+      isEdge: true
     },
     {
-      id: "huong_nhi",
-      initials: "HN",
-      name: "Hương Nhi",
+      id: "britney_spears",
+      voiceNameMatch: ["britney", "steffan", "natural"],
+      name: "Britney Spears",
       tag: "PRO",
       gender: "female",
-      lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • nữ Miền Trung (Dịu dàng)",
-      langCode: "vi",
-      accent: "Huế Truyền Cảm",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hue_female_huonggiang_news_48k-fhg.mp3"
+      lang: "English",
+      subtitle: "English • female (Celebrity Style)",
+      langCode: "en",
+      accent: "Celebrity Style",
+      initials: "BR",
+      isEdge: false
     },
     {
-      id: "hoai_my",
-      initials: "HM",
-      name: "Hoài My (Natural AI)",
+      id: "markus_webb",
+      voiceNameMatch: ["markus", "eric", "george"],
+      name: "Markus Webb",
       tag: "PRO",
-      gender: "female",
-      lang: "Tiếng Việt",
-      subtitle: "Tiếng Việt • AI Tự Nhiên Thế Hệ Mới",
-      langCode: "vi",
-      accent: "Neural Pro",
-      demo: "https://vbee.s3.ap-southeast-1.amazonaws.com/audios/demo/vbee/hn_female_ngochuyen_full_24k-st.mp3"
+      gender: "male",
+      lang: "English",
+      subtitle: "English • male (Commercial Voiceover)",
+      langCode: "en",
+      accent: "Commercial Voiceover",
+      initials: "MA",
+      isEdge: false
+    },
+    {
+      id: "andrew_foster",
+      voiceNameMatch: ["andrew", "ryan", "brian"],
+      name: "Andrew Foster",
+      tag: "PRO",
+      gender: "male",
+      lang: "English",
+      subtitle: "English • male (British Elegant)",
+      langCode: "en",
+      accent: "British Elegant",
+      initials: "AN",
+      isEdge: true
     }
   ];
 
-  let currentRobyVoice = ROBY_VOICES[0]; // Default: Cassie J
+  let robyActiveVoices = [...DEFAULT_ROBY_VOICES];
+  let currentRobyVoice = robyActiveVoices[0];
   let currentRobyTab = "all";
-  let robyPreviewAudioObj = null;
+  let robySpeechChunks = [];
+  let robyCurrentChunkIdx = 0;
+  let isRobySpeaking = false;
+  let isRobyPaused = false;
+  let robyKeepAliveTimer = null;
+  let previewingVoiceId = null;
 
-  function renderRobyTTSStudio() {
-    const modalBox = document.querySelector('#mainModal .modal-box');
-    if (modalBox) {
-      modalBox.style.maxWidth = '1060px';
-      modalBox.style.borderRadius = '16px';
+  // Tự động nhận diện và cập nhật danh sách giọng nói từ Microsoft Edge / Trình duyệt
+  function loadBrowserSpeechVoices() {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    const sysVoices = window.speechSynthesis.getVoices();
+    if (!sysVoices || sysVoices.length === 0) return;
+
+    const dynamicList = [];
+
+    sysVoices.forEach((sv, idx) => {
+      const lowerName = (sv.name || '').toLowerCase();
+      const lang = (sv.lang || '').toLowerCase();
+      const isVi = lang.startsWith('vi') || lowerName.includes('vietnam') || lowerName.includes('tiếng việt');
+      const isEn = lang.startsWith('en');
+      const isNatural = lowerName.includes('natural') || lowerName.includes('online');
+      const isGoogle = lowerName.includes('google');
+
+      let gender = 'female';
+      if (lowerName.includes('namminh') || lowerName.includes('guy') || lowerName.includes('christopher') || 
+          lowerName.includes('david') || lowerName.includes('eric') || lowerName.includes('ryan') || 
+          lowerName.includes('male') || lowerName.includes('george') || lowerName.includes('mark') ||
+          lowerName.includes('nam') || lowerName.includes('dũng') || lowerName.includes('khôi')) {
+        gender = 'male';
+      }
+
+      let cleanName = sv.name
+        .replace(/\(.*?\)/g, '')
+        .replace(/Microsoft|Online|Google|Desktop/gi, '')
+        .trim();
+      if (!cleanName) cleanName = sv.name;
+      if (isNatural) cleanName += ' (Natural AI)';
+
+      const words = cleanName.replace(/[^a-zA-Z0-9\s]/g, '').trim().split(/\s+/);
+      let initials = 'AI';
+      if (words.length >= 2 && words[0] && words[1]) {
+        initials = (words[0][0] + words[1][0]).toUpperCase();
+      } else if (words.length === 1 && words[0].length >= 2) {
+        initials = words[0].slice(0, 2).toUpperCase();
+      }
+
+      let subtitle = isVi 
+        ? `Tiếng Việt • ${gender === 'female' ? 'nữ' : 'nam'} (Việt Nam)` 
+        : (isEn ? `English • ${gender}` : `${sv.lang} • ${gender}`);
+      if (isNatural) subtitle += ' (Edge Natural)';
+      else if (isGoogle) subtitle += ' (Google AI)';
+
+      dynamicList.push({
+        id: `sys_v_${idx}`,
+        name: cleanName,
+        tag: isNatural ? 'Edge Natural' : (isGoogle ? 'Google AI' : 'System'),
+        gender: gender,
+        lang: isVi ? 'Tiếng Việt' : (isEn ? 'English' : sv.lang),
+        subtitle: subtitle,
+        langCode: isVi ? 'vi' : (isEn ? 'en' : sv.lang.slice(0, 2)),
+        accent: isNatural ? 'Microsoft Edge Natural' : (isGoogle ? 'Google Neural' : 'System TTS'),
+        initials: initials,
+        rawVoice: sv,
+        isEdge: isNatural
+      });
+    });
+
+    // Nếu danh sách giọng hệ thống không có Tiếng Việt (chưa cài gói ngôn ngữ Windows), giữ lại các giọng mẫu Tiếng Việt chuẩn Edge Natural / Google AI
+    const hasViVoice = dynamicList.some(v => v.langCode === 'vi');
+    if (!hasViVoice) {
+      DEFAULT_ROBY_VOICES.filter(v => v.langCode === 'vi').forEach(fv => {
+        dynamicList.push(fv);
+      });
     }
 
+    // Sắp xếp ưu tiên: Giọng Tiếng Việt Natural -> Giọng Tiếng Việt -> Giọng Tiếng Anh Natural -> Khác
+    dynamicList.sort((a, b) => {
+      const scoreA = (a.langCode === 'vi' ? 100 : 0) + (a.isEdge ? 50 : 0) + (a.tag.includes('Google') ? 30 : 0);
+      const scoreB = (b.langCode === 'vi' ? 100 : 0) + (b.isEdge ? 50 : 0) + (b.tag.includes('Google') ? 30 : 0);
+      return scoreB - scoreA;
+    });
+
+    if (dynamicList.length > 0) {
+      robyActiveVoices = dynamicList;
+
+      // Giữ giọng đang chọn nếu đã có, nếu chưa thì chọn giọng Tiếng Việt đầu tiên
+      if (!currentRobyVoice || !currentRobyVoice.rawVoice) {
+        const preferredVi = robyActiveVoices.find(v => v.langCode === 'vi') || robyActiveVoices[0];
+        currentRobyVoice = preferredVi;
+      }
+
+      // Cập nhật số lượng giọng trên giao diện nếu Studio đang mở
+      const countBadge = document.getElementById('robyVoiceCountBadge');
+      if (countBadge) {
+        const edgeCount = robyActiveVoices.filter(v => v.isEdge).length;
+        countBadge.textContent = edgeCount > 0 
+          ? `${robyActiveVoices.length} giọng (${edgeCount} Edge Natural)` 
+          : `${robyActiveVoices.length} giọng sẵn có`;
+      }
+
+      if (document.getElementById('robyVoiceCardList')) {
+        filterRobyVoices(document.getElementById('robyVoiceSearch')?.value || '');
+        updateActiveVoiceDisplay();
+      }
+    }
+  }
+
+  // Khởi tạo bộ nạp giọng nói trình duyệt
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      loadBrowserSpeechVoices();
+    };
+    setTimeout(loadBrowserSpeechVoices, 200);
+  }
+
+  function renderRobyTTSStudio() {
+    loadBrowserSpeechVoices();
+
+    const modalBox = document.getElementById('modalBox') || document.querySelector('#mainModal .modal-box');
+    const modalBody = document.getElementById('modalBody');
+    const modalHeader = document.querySelector('#mainModal .modal-header');
+
+    // Ẩn modal-header mặc định để dùng thanh Studio Header Roby tích hợp chuẩn đẹp
+    if (modalHeader) {
+      modalHeader.style.display = 'none';
+    }
+
+    if (modalBox) {
+      modalBox.style.maxWidth = '1040px';
+      modalBox.style.borderRadius = '16px';
+      modalBox.style.maxHeight = '92vh';
+      modalBox.style.height = 'min(760px, 92vh)';
+      modalBox.style.display = 'flex';
+      modalBox.style.flexDirection = 'column';
+      modalBox.style.overflow = 'hidden';
+      modalBox.style.boxShadow = '0 25px 60px -15px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.08)';
+    }
+
+    if (modalBody) {
+      modalBody.style.padding = '0';
+      modalBody.style.overflow = 'hidden';
+      modalBody.style.flex = '1';
+      modalBody.style.display = 'flex';
+      modalBody.style.flexDirection = 'column';
+      modalBody.style.minHeight = '0';
+    }
+
+    const edgeCount = robyActiveVoices.filter(v => v.isEdge).length;
+    const badgeText = edgeCount > 0 
+      ? `${robyActiveVoices.length} giọng (${edgeCount} Edge Natural)` 
+      : `${robyActiveVoices.length} giọng khả dụng`;
+
     const html = `
-      <div id="roby-tts-container" style="font-family:'Inter', -apple-system, sans-serif; display:flex; flex-direction:column; background:#FAF9F8; border-radius:12px; overflow:hidden;">
-        <!-- Top Studio Bar -->
-        <div style="background:#FFFFFF; border-bottom:1.5px solid #F1EAE5; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <style>
+        @keyframes robyWaveAnim {
+          0%, 100% { height: 4px; }
+          50% { height: 20px; }
+        }
+        .roby-wave-bar {
+          width: 3.5px;
+          background: #C85A32;
+          border-radius: 3px;
+          display: inline-block;
+          animation: robyWaveAnim 0.75s ease-in-out infinite;
+        }
+        .roby-wave-bar:nth-child(2) { animation-delay: 0.15s; }
+        .roby-wave-bar:nth-child(3) { animation-delay: 0.3s; }
+        .roby-wave-bar:nth-child(4) { animation-delay: 0.45s; }
+        .roby-wave-bar:nth-child(5) { animation-delay: 0.6s; }
+
+        @media (max-width: 820px) {
+          #robyStudioGrid {
+            grid-template-columns: 1fr !important;
+            overflow-y: auto !important;
+          }
+          #robyVoicesLeftCol {
+            max-height: 250px !important;
+            border-right: none !important;
+            border-bottom: 1.5px solid #F1EAE5 !important;
+          }
+        }
+      </style>
+
+      <div id="roby-tts-container" style="font-family:'Inter', -apple-system, sans-serif; display:flex; flex-direction:column; background:#FAF9F8; height:100%; flex:1; min-height:0; overflow:hidden;">
+        
+        <!-- Top Studio Header Bar (Tích hợp chuẩn, không bị che bởi navbar) -->
+        <div style="background:#FFFFFF; border-bottom:1.5px solid #F1EAE5; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; gap:12px;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:#C85A32; display:flex; align-items:center; justify-content:center; color:#FFF; box-shadow:0 3px 8px rgba(200,90,50,0.3);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M2 10v4"/><path d="M6 7v10"/><path d="M10 4v16"/><path d="M14 7v10"/><path d="M18 10v4"/><path d="M22 12v0"/></svg>
+            <div style="width:38px; height:38px; border-radius:10px; background:#C85A32; display:flex; align-items:center; justify-content:center; color:#FFF; box-shadow:0 3px 8px rgba(200,90,50,0.3); flex-shrink:0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M2 10v4"/><path d="M6 7v10"/><path d="M10 4v16"/><path d="M14 7v10"/><path d="M18 10v4"/><path d="M22 12v0"/></svg>
             </div>
             <div>
-              <h2 style="margin:0; font-size:1.25rem; font-weight:800; color:#1E293B; letter-spacing:-0.02em;">Roby Text to Speech</h2>
-              <div style="font-size:0.75rem; color:#94A3B8;">Nền tảng chuyển đổi giọng nói AI tự nhiên không giới hạn</div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h2 style="margin:0; font-size:1.2rem; font-weight:800; color:#1E293B; letter-spacing:-0.02em;">Roby Text to Speech</h2>
+                <span style="background:#FFEDD5; color:#C2410C; font-size:0.65rem; font-weight:800; padding:2px 6px; border-radius:6px; letter-spacing:0.04em;">EDGE TTS</span>
+              </div>
+              <div style="font-size:0.75rem; color:#64748B;">Nền tảng chuyển đổi giọng nói AI tự nhiên không giới hạn (Web Speech API)</div>
             </div>
           </div>
 
           <div style="display:flex; align-items:center; gap:10px;">
-            <div style="background:#ECFDF5; border:1px solid #A7F3D0; color:#059669; font-size:0.78rem; font-weight:750; padding:4px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;">
+            <div style="background:#ECFDF5; border:1px solid #A7F3D0; color:#059669; font-size:0.75rem; font-weight:750; padding:4px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;">
               <span style="width:7px; height:7px; border-radius:50%; background:#10B981; display:inline-block; animation:pulseDot 1.8s infinite;"></span>
               <span>Engine Ready</span>
             </div>
+
+            <!-- Nút Đóng Modal Chuẩn Đẹp -->
+            <button type="button" onclick="closeModal()" title="Đóng hộp thoại" style="background:#F1F5F9; border:none; border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#475569; font-size:1.3rem; line-height:1; transition:all 0.15s;" onmouseover="this.style.background='#E2E8F0'; this.style.color='#0F172A';" onmouseout="this.style.background='#F1F5F9'; this.style.color='#475569';">
+              &times;
+            </button>
           </div>
         </div>
 
         <!-- 2-Column Studio Body -->
-        <div style="display:grid; grid-template-columns:330px 1fr; min-height:560px; background:#FAF9F8;" id="robyStudioGrid">
+        <div style="display:grid; grid-template-columns:290px 1fr; flex:1; min-height:0; overflow:hidden; background:#FAF9F8;" id="robyStudioGrid">
           
-          <!-- LEFT COLUMN: VOICES LIST -->
-          <div style="background:#FFFFFF; border-right:1.5px solid #F1EAE5; padding:16px; display:flex; flex-direction:column; gap:12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:0.8rem; font-weight:800; color:#64748B; letter-spacing:0.06em; text-transform:uppercase;">🎙️ VOICES</span>
-              <span style="font-size:0.78rem; font-weight:700; color:#94A3B8;">6639 total</span>
+          <!-- CỘT TRÁI: DANH SÁCH GIỌNG ĐỌC BROWSER / EDGE TTS -->
+          <div id="robyVoicesLeftCol" style="background:#FFFFFF; border-right:1.5px solid #F1EAE5; padding:16px; display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; box-sizing:border-box;">
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
+              <span style="font-size:0.8rem; font-weight:800; color:#475569; letter-spacing:0.06em; text-transform:uppercase;">🎙️ VOICES</span>
+              <span id="robyVoiceCountBadge" style="font-size:0.73rem; font-weight:700; color:#059669; background:#ECFDF5; padding:2px 8px; border-radius:12px; border:1px solid #A7F3D0;">${badgeText}</span>
             </div>
 
-            <!-- Search input -->
-            <div style="position:relative;">
-              <input type="text" id="robyVoiceSearch" placeholder="Search voices, accents..." oninput="filterRobyVoices(this.value)" style="width:100%; box-sizing:border-box; padding:9px 12px 9px 34px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:0.84rem; outline:none; background:#F8FAFC; transition:border 0.2s;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5" style="position:absolute; left:11px; top:50%; transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <!-- Ô tìm kiếm giọng đọc -->
+            <div style="position:relative; flex-shrink:0;">
+              <input type="text" id="robyVoiceSearch" placeholder="Tìm tên giọng, vùng miền..." oninput="filterRobyVoices(this.value)" style="width:100%; box-sizing:border-box; padding:8px 12px 8px 32px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:0.82rem; outline:none; background:#F8FAFC; transition:border 0.2s;" onfocus="this.style.borderColor='#C85A32'" onblur="this.style.borderColor='#E2E8F0'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5" style="position:absolute; left:10px; top:50%; transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             </div>
 
-            <!-- Filter tabs: All, Female, Male, VN, EN -->
-            <div style="display:flex; background:#F1F5F9; padding:3px; border-radius:8px; gap:2px;">
-              <button type="button" class="roby-tab-btn active" id="tab_all" onclick="setRobyTab('all')" style="flex:1; border:none; padding:6px 0; font-size:0.78rem; font-weight:700; border-radius:6px; cursor:pointer; background:#FFF; color:#1E293B; box-shadow:0 1px 2px rgba(0,0,0,0.06);">All</button>
-              <button type="button" class="roby-tab-btn" id="tab_female" onclick="setRobyTab('female')" style="flex:1; border:none; padding:6px 0; font-size:0.78rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">Female</button>
-              <button type="button" class="roby-tab-btn" id="tab_male" onclick="setRobyTab('male')" style="flex:1; border:none; padding:6px 0; font-size:0.78rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">Male</button>
-              <button type="button" class="roby-tab-btn" id="tab_vi" onclick="setRobyTab('vi')" style="flex:1; border:none; padding:6px 0; font-size:0.78rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">🇻🇳 VN</button>
+            <!-- Tab lọc giọng: All, Việt, Anh, Nữ, Nam -->
+            <div style="display:flex; background:#F1F5F9; padding:3px; border-radius:8px; gap:2px; flex-shrink:0;">
+              <button type="button" class="roby-tab-btn active" id="tab_all" onclick="setRobyTab('all')" style="flex:1; border:none; padding:5px 0; font-size:0.75rem; font-weight:700; border-radius:6px; cursor:pointer; background:#FFF; color:#1E293B; box-shadow:0 1px 2px rgba(0,0,0,0.06);">All</button>
+              <button type="button" class="roby-tab-btn" id="tab_vi" onclick="setRobyTab('vi')" style="flex:1; border:none; padding:5px 0; font-size:0.75rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">🇻🇳 Việt</button>
+              <button type="button" class="roby-tab-btn" id="tab_en" onclick="setRobyTab('en')" style="flex:1; border:none; padding:5px 0; font-size:0.75rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">🇬🇧 Anh</button>
+              <button type="button" class="roby-tab-btn" id="tab_female" onclick="setRobyTab('female')" style="flex:1; border:none; padding:5px 0; font-size:0.75rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">Nữ</button>
+              <button type="button" class="roby-tab-btn" id="tab_male" onclick="setRobyTab('male')" style="flex:1; border:none; padding:5px 0; font-size:0.75rem; font-weight:600; border-radius:6px; cursor:pointer; background:transparent; color:#64748B;">Nam</button>
             </div>
 
-            <!-- Scrollable Voice Cards Container -->
-            <div id="robyVoiceCardList" style="display:flex; flex-direction:column; gap:8px; overflow-y:auto; max-height:460px; padding-right:4px;">
+            <!-- Danh sách cuộn chứa các thẻ giọng nói -->
+            <div id="robyVoiceCardList" style="display:flex; flex-direction:column; gap:7px; overflow-y:auto; flex:1; min-height:0; padding-right:3px;">
               <!-- Rendered via JS -->
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: EDITOR & GENERATOR -->
-          <div style="padding:20px; display:flex; flex-direction:column; gap:14px; background:#FAF9F8;">
+          <!-- CỘT PHẢI: KHUNG SOẠN THẢO VĂN BẢN & BỘ ĐIỀU KHIỂN PHÁT -->
+          <div style="padding:18px 20px; display:flex; flex-direction:column; gap:12px; background:#FAF9F8; overflow-y:auto; height:100%; box-sizing:border-box;">
             
-            <!-- Selected Voice Top Header -->
-            <div style="background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,0.02);">
-              <div style="display:flex; align-items:center; gap:12px;" id="robyActiveVoiceDisplay">
-                <div style="width:36px; height:36px; border-radius:50%; background:#F3E8E2; color:#C85A32; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center;">
-                  ${currentRobyVoice.initials}
+            <!-- Giọng đọc đang chọn hiện tại -->
+            <div style="background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:10px 16px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,0.02); flex-shrink:0;">
+              <div style="display:flex; align-items:center; gap:12px; overflow:hidden;" id="robyActiveVoiceDisplay">
+                <div style="width:36px; height:36px; border-radius:50%; background:#F3E8E2; color:#C85A32; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;" id="robyActiveInitials">
+                  ${currentRobyVoice.initials || 'AI'}
                 </div>
-                <div>
+                <div style="overflow:hidden;">
                   <div style="display:flex; align-items:center; gap:6px;">
-                    <b style="font-size:0.95rem; color:#1E293B;" id="robyActiveName">${currentRobyVoice.name}</b>
-                    <span style="background:#FFEDD5; color:#C2410C; font-size:0.65rem; font-weight:800; padding:1px 6px; border-radius:4px;">PRO</span>
+                    <b style="font-size:0.92rem; color:#1E293B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="robyActiveName">${currentRobyVoice.name}</b>
+                    <span id="robyActiveTag" style="background:#FFEDD5; color:#C2410C; font-size:0.62rem; font-weight:800; padding:1px 6px; border-radius:4px; flex-shrink:0;">${currentRobyVoice.tag}</span>
                   </div>
-                  <div style="font-size:0.75rem; color:#64748B;" id="robyActiveSub">${currentRobyVoice.subtitle}</div>
+                  <div style="font-size:0.73rem; color:#64748B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="robyActiveSub">${currentRobyVoice.subtitle}</div>
                 </div>
               </div>
 
-              <!-- Counter -->
-              <div style="font-size:0.78rem; color:#64748B; font-weight:600;">
-                <span id="robyCharCount">0</span> / 4,000 characters • <span id="robyWordCount">0</span> words
+              <!-- Bộ đếm ký tự & từ -->
+              <div style="font-size:0.76rem; color:#64748B; font-weight:600; text-align:right; flex-shrink:0;">
+                <span id="robyCharCount" style="color:#C85A32; font-weight:700;">0</span> / 4,000 ký tự • <span id="robyWordCount">0</span> từ
               </div>
             </div>
 
-            <!-- Textarea Editor -->
-            <div style="display:flex; flex-direction:column; gap:8px;">
-              <textarea id="robyTextInput" rows="6" oninput="updateRobyCharStats()" placeholder="Nhập hoặc dán nội dung văn bản bạn muốn chuyển thành giọng nói tại đây..." style="width:100%; box-sizing:border-box; padding:14px 16px; border:1.5px solid #E2E8F0; border-radius:12px; font-size:0.95rem; line-height:1.65; color:#1E293B; background:#FFFFFF; resize:vertical; min-height:160px; outline:none; font-family:inherit; transition:border 0.2s;" onfocus="this.style.borderColor='#C85A32'" onblur="this.style.borderColor='#E2E8F0'">Chào mừng bạn đến với Roby Text to Speech Studio. Hệ thống chuyển đổi giọng nói tự nhiên, mượt mà và hoàn toàn không giới hạn!</textarea>
+            <!-- Khung Textarea Soạn Thảo Văn Bản -->
+            <div style="display:flex; flex-direction:column; gap:7px; flex-shrink:0;">
+              <textarea id="robyTextInput" rows="5" oninput="updateRobyCharStats()" placeholder="Nhập hoặc dán nội dung văn bản bạn muốn chuyển thành giọng nói tại đây..." style="width:100%; box-sizing:border-box; padding:12px 14px; border:1.5px solid #E2E8F0; border-radius:12px; font-size:0.92rem; line-height:1.6; color:#1E293B; background:#FFFFFF; resize:vertical; min-height:130px; outline:none; font-family:inherit; transition:border 0.2s;" onfocus="this.style.borderColor='#C85A32'" onblur="this.style.borderColor='#E2E8F0'">Chào mừng bạn đến với Roby Text to Speech Studio. Hệ thống sử dụng trực tiếp công nghệ giọng đọc tự nhiên của trình duyệt Microsoft Edge, chuyển đổi mượt mà và hoàn toàn không giới hạn!</textarea>
 
-              <!-- Quick prompt chips -->
+              <!-- Mẫu thử nhanh -->
               <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                <span style="font-size:0.74rem; color:#94A3B8; font-weight:600;">Mẫu thử:</span>
-                <button type="button" onclick="setRobySampleText('giaitri')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:600; color:#475569; cursor:pointer;">🎬 Giải trí</button>
-                <button type="button" onclick="setRobySampleText('dulich')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:600; color:#475569; cursor:pointer;">⛰️ Du lịch Ninh Bình</button>
-                <button type="button" onclick="setRobySampleText('tintuc')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:600; color:#475569; cursor:pointer;">📰 Tin thời sự</button>
-                <button type="button" onclick="setRobySampleText('quangcao')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:600; color:#475569; cursor:pointer;">📢 Quảng cáo</button>
-                <button type="button" onclick="document.getElementById('robyTextInput').value=''; updateRobyCharStats();" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.75rem; font-weight:600; color:#EF4444; cursor:pointer; margin-left:auto;">🗑️ Xóa hết</button>
+                <span style="font-size:0.73rem; color:#94A3B8; font-weight:600;">Mẫu thử:</span>
+                <button type="button" onclick="setRobySampleText('giaitri')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; color:#475569; cursor:pointer;">🎬 Giải trí</button>
+                <button type="button" onclick="setRobySampleText('dulich')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; color:#475569; cursor:pointer;">⛰️ Du lịch Ninh Bình</button>
+                <button type="button" onclick="setRobySampleText('tintuc')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; color:#475569; cursor:pointer;">📰 Tin thời sự</button>
+                <button type="button" onclick="setRobySampleText('quangcao')" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; color:#475569; cursor:pointer;">📢 Quảng cáo</button>
+                <button type="button" onclick="document.getElementById('robyTextInput').value=''; updateRobyCharStats();" style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:3px 10px; font-size:0.74rem; font-weight:600; color:#EF4444; cursor:pointer; margin-left:auto;">🗑️ Xóa hết</button>
               </div>
             </div>
 
-            <!-- Controls: Speed & Pitch Sliders (Matching Screenshot) -->
-            <div style="background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:12px 18px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+            <!-- Thanh Trượt: Speed & Pitch -->
+            <div style="background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:10px 16px; display:grid; grid-template-columns:1fr 1fr; gap:20px; flex-shrink:0;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                  <span style="font-size:0.82rem; font-weight:700; color:#334155;">Speed</span>
-                  <span style="font-size:0.82rem; font-weight:800; color:#C85A32;" id="robySpeedLabel">1.0x</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <span style="font-size:0.8rem; font-weight:700; color:#334155;">Speed (Tốc độ đọc)</span>
+                  <span style="font-size:0.8rem; font-weight:800; color:#C85A32;" id="robySpeedLabel">1.0x</span>
                 </div>
                 <input type="range" id="robySpeedSlider" min="0.5" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('robySpeedLabel').textContent = this.value + 'x'" style="width:100%; accent-color:#C85A32; cursor:pointer;">
               </div>
 
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                  <span style="font-size:0.82rem; font-weight:700; color:#334155;">Pitch</span>
-                  <span style="font-size:0.82rem; font-weight:800; color:#C85A32;" id="robyPitchLabel">0</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <span style="font-size:0.8rem; font-weight:700; color:#334155;">Pitch (Cao độ giọng)</span>
+                  <span style="font-size:0.8rem; font-weight:800; color:#C85A32;" id="robyPitchLabel">0</span>
                 </div>
                 <input type="range" id="robyPitchSlider" min="-10" max="10" step="1" value="0" oninput="document.getElementById('robyPitchLabel').textContent = this.value" style="width:100%; accent-color:#C85A32; cursor:pointer;">
               </div>
             </div>
 
-            <!-- Action Bar: Status & Generate Button -->
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px; flex-wrap:wrap; gap:10px;">
-              <div id="robyStatusMsg" style="font-size:0.82rem; font-weight:600; color:#64748B;">
+            <!-- Action Bar: Status Message & Nút Tạo Giọng Nói (Được căn lề chuẩn, không bao giờ bị cắt viền) -->
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; box-sizing:border-box; width:100%; flex-shrink:0;">
+              <div id="robyStatusMsg" style="font-size:0.8rem; font-weight:600; color:#64748B; flex:1 1 200px; min-width:0; line-height:1.4;">
                 ⚡ Sẵn sàng tạo audio giọng nói chất lượng cao
               </div>
 
-              <button type="button" id="btnRobyGenerate" onclick="generateRobySpeech()" style="background:#C85A32; color:#FFFFFF; border:none; border-radius:10px; padding:12px 28px; font-weight:800; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(200,90,50,0.35); transition:all 0.2s;" onmouseover="this.style.background='#B24A24'" onmouseout="this.style.background='#C85A32'">
-                <span>✨ Generate Speech</span>
-              </button>
+              <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+                <!-- Nút dừng phát khi đang đọc -->
+                <button type="button" id="btnRobyStop" onclick="stopRobySpeaking()" style="display:none; background:#EF4444; color:#FFFFFF; border:none; border-radius:10px; padding:11px 18px; font-weight:800; font-size:0.88rem; cursor:pointer; align-items:center; gap:6px; box-shadow:0 3px 10px rgba(239,68,68,0.25);">
+                  <span>⏹ Dừng phát</span>
+                </button>
+
+                <!-- Nút tạm dừng / tiếp tục -->
+                <button type="button" id="btnRobyPause" onclick="toggleRobyPause()" style="display:none; background:#F59E0B; color:#FFFFFF; border:none; border-radius:10px; padding:11px 16px; font-weight:800; font-size:0.88rem; cursor:pointer; align-items:center; gap:6px; box-shadow:0 3px 10px rgba(245,158,11,0.25);">
+                  <span id="robyPauseText">⏸ Tạm dừng</span>
+                </button>
+
+                <!-- Nút Generate Speech -->
+                <button type="button" id="btnRobyGenerate" onclick="generateRobySpeech()" style="background:#C85A32; color:#FFFFFF; border:none; border-radius:10px; padding:11px 24px; font-weight:800; font-size:0.92rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(200,90,50,0.35); transition:all 0.2s; white-space:nowrap;" onmouseover="this.style.background='#B24A24'" onmouseout="this.style.background='#C85A32'">
+                  <span>✨ Generate Speech</span>
+                </button>
+              </div>
             </div>
 
-            <!-- Generated Audio Player Result Box -->
-            <div id="robyPlayerBox" style="display:none; background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:16px; margin-top:4px; box-shadow:0 4px 14px rgba(0,0,0,0.04);">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span style="font-size:1.2rem;">🔊</span>
-                  <b style="font-size:0.9rem; color:#1E293B;" id="robyResultVoiceLabel">Giọng đọc đã tạo</b>
+            <!-- Hộp trạng thái phát thanh & Sóng âm thanh động -->
+            <div id="robyPlayerBox" style="display:none; background:#FFFFFF; border:1.5px solid #F1EAE5; border-radius:12px; padding:12px 16px; box-shadow:0 2px 8px rgba(0,0,0,0.03); flex-shrink:0;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="display:inline-flex; align-items:center; gap:2.5px; height:24px; padding:0 4px;">
+                    <span class="roby-wave-bar"></span>
+                    <span class="roby-wave-bar"></span>
+                    <span class="roby-wave-bar"></span>
+                    <span class="roby-wave-bar"></span>
+                    <span class="roby-wave-bar"></span>
+                  </div>
+                  <div>
+                    <b style="font-size:0.88rem; color:#1E293B;" id="robyResultVoiceLabel">Đang phát giọng đọc...</b>
+                    <div style="font-size:0.72rem; color:#64748B;" id="robyChunkProgress">Đang xử lý từng câu liên tục không ngắt quãng</div>
+                  </div>
                 </div>
-                <div style="display:flex; gap:8px;">
-                  <button type="button" class="btn btn-sm btn-outline" onclick="replayRobyAudio()" style="font-size:0.75rem; padding:4px 10px;">🔄 Nghe lại</button>
-                  <a id="robyDownloadBtn" href="#" download="roby_speech.mp3" class="btn btn-sm btn-accent" style="background:#C85A32; color:#FFF; font-size:0.75rem; padding:4px 12px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">⬇️ Tải file MP3</a>
+
+                <div style="display:flex; gap:6px;">
+                  <button type="button" class="btn btn-sm btn-outline" onclick="replayRobyAudio()" style="font-size:0.74rem; padding:4px 10px; border-radius:8px;">🔄 Đọc lại</button>
+                  <button type="button" class="btn btn-sm btn-outline" onclick="copyRobySpokenText()" style="font-size:0.74rem; padding:4px 10px; border-radius:8px;">📋 Sao chép</button>
                 </div>
               </div>
-              <audio id="robyAudioPlayer" controls style="width:100%; border-radius:30px;"></audio>
             </div>
 
-            <!-- Conversion History Logs -->
-            <div style="margin-top:6px;">
-              <div style="font-size:0.78rem; font-weight:700; color:#64748B; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+            <!-- Lịch sử tạo gần đây -->
+            <div style="margin-top:2px; flex-shrink:0;">
+              <div style="font-size:0.76rem; font-weight:700; color:#64748B; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
                 <span>📜 Lịch sử tạo gần đây</span>
                 <span id="robyHistoryCount" style="color:#C85A32;">0 bản ghi</span>
               </div>
-              <div id="robyHistoryList" style="max-height:130px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
+              <div id="robyHistoryList" style="max-height:120px; overflow-y:auto; display:flex; flex-direction:column; gap:5px;">
                 <!-- Rendered dynamically -->
               </div>
             </div>
@@ -17629,9 +17819,21 @@ Quản trị tài chính số — Ninh Bình Digital`;
     `;
 
     openModal('Roby Text to Speech Studio — Trình Tạo Giọng Nói AI', html);
-    renderRobyVoiceList(ROBY_VOICES);
+    renderRobyVoiceList(robyActiveVoices);
     updateRobyCharStats();
     renderRobyHistory();
+  }
+
+  function updateActiveVoiceDisplay() {
+    if (!currentRobyVoice) return;
+    const nameEl = document.getElementById('robyActiveName');
+    const subEl = document.getElementById('robyActiveSub');
+    const tagEl = document.getElementById('robyActiveTag');
+    const initEl = document.getElementById('robyActiveInitials');
+    if (nameEl) nameEl.textContent = currentRobyVoice.name;
+    if (subEl) subEl.textContent = currentRobyVoice.subtitle;
+    if (tagEl) tagEl.textContent = currentRobyVoice.tag;
+    if (initEl) initEl.textContent = currentRobyVoice.initials || 'AI';
   }
 
   function renderRobyVoiceList(voices) {
@@ -17639,30 +17841,35 @@ Quản trị tài chính số — Ninh Bình Digital`;
     if (!container) return;
 
     if (!voices || voices.length === 0) {
-      container.innerHTML = '<div style="text-align:center; padding:20px; font-size:0.8rem; color:#94A3B8;">Không tìm thấy giọng đọc phù hợp</div>';
+      container.innerHTML = '<div style="text-align:center; padding:24px 12px; font-size:0.8rem; color:#94A3B8;">Không tìm thấy giọng đọc phù hợp</div>';
       return;
     }
 
     let html = '';
     voices.forEach(v => {
-      const isSelected = v.id === currentRobyVoice.id;
+      const isSelected = currentRobyVoice && v.id === currentRobyVoice.id;
+      const isPreviewing = previewingVoiceId === v.id;
+
       html += `
-        <div class="roby-voice-card ${isSelected ? 'selected' : ''}" onclick="selectRobyVoice('${v.id}')" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; cursor:pointer; transition:all 0.15s ease; border:1.5px solid ${isSelected ? '#C85A32' : '#F1EAE5'}; background:${isSelected ? '#FFF8F5' : '#FFFFFF'};">
-          <div style="display:flex; align-items:center; gap:10px; overflow:hidden;">
-            <div style="width:34px; height:34px; border-radius:50%; background:${isSelected ? '#F3E8E2' : '#F1F5F9'}; color:${isSelected ? '#C85A32' : '#475569'}; font-weight:800; font-size:0.82rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-              ${v.initials}
+        <div class="roby-voice-card ${isSelected ? 'selected' : ''}" onclick="selectRobyVoice('${v.id}')" style="display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-radius:10px; cursor:pointer; transition:all 0.15s ease; border:1.5px solid ${isSelected ? '#C85A32' : '#F1EAE5'}; background:${isSelected ? '#FFF8F5' : '#FFFFFF'};">
+          <div style="display:flex; align-items:center; gap:8px; overflow:hidden;">
+            <div style="width:32px; height:32px; border-radius:50%; background:${isSelected ? '#F3E8E2' : '#F1F5F9'}; color:${isSelected ? '#C85A32' : '#475569'}; font-weight:800; font-size:0.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              ${v.initials || 'AI'}
             </div>
             <div style="overflow:hidden;">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span style="font-size:0.88rem; font-weight:700; color:#1E293B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${v.name}</span>
-                <span style="background:#FFEDD5; color:#C2410C; font-size:0.62rem; font-weight:800; padding:1px 5px; border-radius:4px;">${v.tag}</span>
+              <div style="display:flex; align-items:center; gap:5px;">
+                <span style="font-size:0.84rem; font-weight:700; color:#1E293B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${v.name}</span>
+                <span style="background:${v.isEdge ? '#FFEDD5' : '#E2E8F0'}; color:${v.isEdge ? '#C2410C' : '#475569'}; font-size:0.6rem; font-weight:800; padding:1px 4px; border-radius:4px; flex-shrink:0;">${v.tag}</span>
               </div>
-              <div style="font-size:0.72rem; color:#64748B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${v.subtitle}</div>
+              <div style="font-size:0.7rem; color:#64748B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${v.subtitle}</div>
             </div>
           </div>
 
-          <button type="button" onclick="previewRobyVoice(event, '${v.id}')" title="Nghe thử mẫu giọng" style="width:30px; height:30px; border-radius:50%; border:none; background:#F8FAFC; color:#64748B; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.15s;" onmouseover="this.style.background='#C85A32'; this.style.color='#FFF';" onmouseout="this.style.background='#F8FAFC'; this.style.color='#64748B';">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <button type="button" onclick="previewRobyVoice(event, '${v.id}')" title="${isPreviewing ? 'Dừng nghe thử' : 'Nghe thử mẫu giọng'}" style="width:28px; height:28px; border-radius:50%; border:none; background:${isPreviewing ? '#EF4444' : '#F8FAFC'}; color:${isPreviewing ? '#FFF' : '#64748B'}; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.15s;" onmouseover="if(!${isPreviewing}){this.style.background='#C85A32'; this.style.color='#FFF';}" onmouseout="if(!${isPreviewing}){this.style.background='#F8FAFC'; this.style.color='#64748B';}">
+            ${isPreviewing 
+              ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>'
+              : '<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>'
+            }
           </button>
         </div>
       `;
@@ -17672,17 +17879,10 @@ Quản trị tài chính số — Ninh Bình Digital`;
   }
 
   function selectRobyVoice(voiceId) {
-    const v = ROBY_VOICES.find(x => x.id === voiceId);
+    const v = robyActiveVoices.find(x => x.id === voiceId);
     if (!v) return;
     currentRobyVoice = v;
-
-    // Update active voice header display
-    const nameEl = document.getElementById('robyActiveName');
-    const subEl = document.getElementById('robyActiveSub');
-    if (nameEl) nameEl.textContent = v.name;
-    if (subEl) subEl.textContent = v.subtitle;
-
-    // Re-render list with selection highlight
+    updateActiveVoiceDisplay();
     filterRobyVoices(document.getElementById('robyVoiceSearch')?.value || '');
   }
 
@@ -17708,53 +17908,74 @@ Quản trị tài chính số — Ninh Bình Digital`;
 
   function filterRobyVoices(kw) {
     const term = (kw || '').trim().toLowerCase();
-    const filtered = ROBY_VOICES.filter(v => {
-      const matchSearch = !term || v.name.toLowerCase().includes(term) || v.subtitle.toLowerCase().includes(term) || v.lang.toLowerCase().includes(term);
+    const filtered = robyActiveVoices.filter(v => {
+      const matchSearch = !term || 
+        v.name.toLowerCase().includes(term) || 
+        v.subtitle.toLowerCase().includes(term) || 
+        v.lang.toLowerCase().includes(term) ||
+        v.accent.toLowerCase().includes(term);
       if (!matchSearch) return false;
 
       if (currentRobyTab === 'all') return true;
-      if (currentRobyTab === 'female') return v.gender === 'female';
-      if (currentRobyTab === 'male') return v.gender === 'male';
       if (currentRobyTab === 'vi') return v.langCode === 'vi';
       if (currentRobyTab === 'en') return v.langCode === 'en';
+      if (currentRobyTab === 'female') return v.gender === 'female';
+      if (currentRobyTab === 'male') return v.gender === 'male';
       return true;
     });
 
     renderRobyVoiceList(filtered);
   }
 
+  // Phát mẫu thử ngắn bằng chính giọng đọc đã chọn qua Web Speech API
   function previewRobyVoice(e, voiceId) {
     if (e && e.stopPropagation) e.stopPropagation();
-    const v = ROBY_VOICES.find(x => x.id === voiceId);
+    const v = robyActiveVoices.find(x => x.id === voiceId);
     if (!v) return;
 
-    if (robyPreviewAudioObj) {
-      robyPreviewAudioObj.pause();
+    if (previewingVoiceId === voiceId) {
+      // Bấm lần 2 thì dừng
+      stopRobySpeaking();
+      previewingVoiceId = null;
+      renderRobyVoiceList(robyActiveVoices);
+      return;
     }
 
-    if (v.demo && v.demo.startsWith('http')) {
-      robyPreviewAudioObj = new Audio(v.demo);
-      robyPreviewAudioObj.play().catch(() => {
-        speakWebSpeechSample(v);
-      });
-    } else {
-      speakWebSpeechSample(v);
-    }
-    showToast(`Đang phát mẫu giọng "${v.name}"...`);
-  }
+    stopRobySpeaking();
+    previewingVoiceId = voiceId;
+    renderRobyVoiceList(robyActiveVoices);
 
-  function speakWebSpeechSample(v) {
     if (window.speechSynthesis) {
       window.speechSynthesis.cancel();
-      const sampleText = v.langCode === 'vi' 
-        ? `Xin chào! Tôi là ${v.name}, rất hân hạnh được đồng hành cùng bạn trên Ninh Bình Digital!`
-        : `Hello there! I am ${v.name}, ready to synthesize your text into natural high quality speech.`;
+      const sampleText = v.langCode === 'vi'
+        ? `Xin chào! Tôi là giọng đọc ${v.name}, rất hân hạnh đồng hành cùng bạn trên Ninh Bình Digital!`
+        : `Hello! I am ${v.name}, ready to read your text with high quality natural speech.`;
+
       const utter = new SpeechSynthesisUtterance(sampleText);
-      utter.lang = v.langCode === 'vi' ? 'vi-VN' : 'en-US';
-      const bVoices = window.speechSynthesis.getVoices();
-      const matched = bVoices.find(bv => bv.lang.startsWith(v.langCode) && (v.gender === 'female' ? bv.name.toLowerCase().includes('female') : bv.name.toLowerCase().includes('male')));
-      if (matched) utter.voice = matched;
+      utter.rate = 1.0;
+      utter.pitch = 1.0;
+
+      if (v.rawVoice) {
+        utter.voice = v.rawVoice;
+      } else {
+        utter.lang = v.langCode === 'vi' ? 'vi-VN' : 'en-US';
+        const allVoices = window.speechSynthesis.getVoices();
+        const matched = allVoices.find(bv => bv.lang.startsWith(v.langCode));
+        if (matched) utter.voice = matched;
+      }
+
+      utter.onend = () => {
+        previewingVoiceId = null;
+        renderRobyVoiceList(robyActiveVoices);
+      };
+
+      utter.onerror = () => {
+        previewingVoiceId = null;
+        renderRobyVoiceList(robyActiveVoices);
+      };
+
       window.speechSynthesis.speak(utter);
+      showToast(`Đang nghe thử giọng "${v.name}"...`);
     }
   }
 
@@ -17788,99 +18009,239 @@ Quản trị tài chính số — Ninh Bình Digital`;
     updateRobyCharStats();
   }
 
-  // CORE ROBUST TTS GENERATION (NEVER FORBIDDEN!)
-  async function generateRobySpeech() {
+  // Tách văn bản dài thành các đoạn nhỏ theo câu để tránh lỗi giới hạn 15s của Chromium/Edge
+  function chunkRobyText(text, maxLen = 150) {
+    if (!text) return [];
+    const sentences = text.match(/[^.!?;\n]+[.!?;\n]+|[^.!?;\n]+$/g) || [text];
+    const chunks = [];
+    let currentChunk = '';
+
+    for (let s of sentences) {
+      s = s.trim();
+      if (!s) continue;
+
+      if (s.length > maxLen) {
+        const words = s.split(/\s+/);
+        let subChunk = '';
+        for (let w of words) {
+          if ((subChunk + ' ' + w).length <= maxLen) {
+            subChunk = subChunk ? subChunk + ' ' + w : w;
+          } else {
+            if (subChunk) chunks.push(subChunk);
+            subChunk = w;
+          }
+        }
+        if (subChunk) chunks.push(subChunk);
+      } else {
+        if ((currentChunk + ' ' + s).length <= maxLen) {
+          currentChunk = currentChunk ? currentChunk + ' ' + s : s;
+        } else {
+          if (currentChunk) chunks.push(currentChunk);
+          currentChunk = s;
+        }
+      }
+    }
+    if (currentChunk) chunks.push(currentChunk);
+    return chunks;
+  }
+
+  // CHỨC NĂNG TẠO GIỌNG NÓI CHÍNH BẰNG MICROSOFT EDGE TTS / BROWSER SYNTHESIS
+  function generateRobySpeech() {
     const text = document.getElementById('robyTextInput')?.value.trim();
     if (!text) {
       showToast('Vui lòng nhập nội dung văn bản để tạo audio!');
       return;
     }
 
+    if (!window.speechSynthesis) {
+      showToast('Trình duyệt của bạn không hỗ trợ Web Speech API!');
+      return;
+    }
+
     const voice = currentRobyVoice;
     const speed = parseFloat(document.getElementById('robySpeedSlider')?.value) || 1.0;
-    const pitch = parseFloat(document.getElementById('robyPitchSlider')?.value) || 0;
+    const pitchVal = parseFloat(document.getElementById('robyPitchSlider')?.value) || 0;
+    // Map slider -10..+10 sang pitch 0.6..1.4
+    const pitch = Math.max(0.6, Math.min(1.4, 1 + pitchVal / 25));
 
-    const btn = document.getElementById('btnRobyGenerate');
+    const btnGenerate = document.getElementById('btnRobyGenerate');
+    const btnStop = document.getElementById('btnRobyStop');
+    const btnPause = document.getElementById('btnRobyPause');
     const statusMsg = document.getElementById('robyStatusMsg');
     const playerBox = document.getElementById('robyPlayerBox');
-    const audio = document.getElementById('robyAudioPlayer');
-    const dlBtn = document.getElementById('robyDownloadBtn');
     const resVoiceLabel = document.getElementById('robyResultVoiceLabel');
+    const chunkProgress = document.getElementById('robyChunkProgress');
 
-    btn.disabled = true;
-    btn.innerHTML = '<span>⏳ Đang tạo audio...</span>';
-    statusMsg.innerHTML = '<span style="color:#C85A32; font-weight:700;">⏳ Đang xử lý giọng đọc AI mượt mà...</span>';
+    stopRobySpeaking();
 
-    try {
-      const langCode = voice.langCode || (voice.lang.includes('Việt') ? 'vi' : 'en');
-      // Direct high quality TTS endpoint
-      const encoded = encodeURIComponent(text.slice(0, 200));
-      const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${langCode}&client=tw-ob&q=${encoded}`;
+    robySpeechChunks = chunkRobyText(text);
+    if (robySpeechChunks.length === 0) return;
 
-      audio.src = directUrl;
-      audio.playbackRate = speed;
-      audio.load();
+    robyCurrentChunkIdx = 0;
+    isRobySpeaking = true;
+    isRobyPaused = false;
 
-      const playPromise = audio.play();
-      if (playPromise) {
-        playPromise.catch(() => {
-          // If browser restricts audio play or offline, trigger client synthesis
-          if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.rate = speed;
-            utter.pitch = Math.max(0.5, Math.min(2.0, 1 + pitch / 10));
-            utter.lang = langCode === 'vi' ? 'vi-VN' : 'en-US';
-            const bVoices = window.speechSynthesis.getVoices();
-            const matched = bVoices.find(bv => bv.lang.startsWith(langCode) && (voice.gender === 'female' ? bv.name.toLowerCase().includes('female') : bv.name.toLowerCase().includes('male')));
-            if (matched) utter.voice = matched;
-            window.speechSynthesis.speak(utter);
-          }
-        });
+    // Cập nhật giao diện đang đọc
+    if (btnStop) btnStop.style.display = 'inline-flex';
+    if (btnPause) {
+      btnPause.style.display = 'inline-flex';
+      const pauseText = document.getElementById('robyPauseText');
+      if (pauseText) pauseText.textContent = '⏸ Tạm dừng';
+    }
+    if (btnGenerate) {
+      btnGenerate.innerHTML = '<span>⚡ Đang đọc...</span>';
+      btnGenerate.style.background = '#475569';
+    }
+    if (playerBox) playerBox.style.display = 'block';
+    if (resVoiceLabel) {
+      resVoiceLabel.textContent = `Giọng đọc: ${voice.name} (${voice.tag}) • Tốc độ ${speed}x`;
+    }
+    if (statusMsg) {
+      statusMsg.innerHTML = `<span style="color:#059669; font-weight:700;">🔊 Đang đọc văn bản mượt mà bằng công nghệ Edge TTS...</span>`;
+    }
+
+    // Keep-alive hack cho Chromium để không bị ngắt giữa chừng
+    clearInterval(robyKeepAliveTimer);
+    robyKeepAliveTimer = setInterval(() => {
+      if (window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
       }
+    }, 10000);
 
-      dlBtn.href = directUrl;
-      dlBtn.download = `roby_tts_${voice.id}_${Date.now()}.mp3`;
-      if (resVoiceLabel) resVoiceLabel.textContent = `${voice.name} (${voice.subtitle}) • Tốc độ ${speed}x`;
+    speakNextRobyChunk(voice, speed, pitch);
 
-      playerBox.style.display = 'block';
-      statusMsg.innerHTML = '<span style="color:#059669; font-weight:700;">✅ Tạo giọng nói AI thành công! Audio đang phát, bạn có thể nghe và tải tệp MP3 bên dưới.</span>';
+    saveRobyHistory({
+      id: Date.now(),
+      voiceName: voice.name,
+      initials: voice.initials || 'AI',
+      subtitle: voice.subtitle,
+      text: text.slice(0, 90) + (text.length > 90 ? '...' : ''),
+      fullText: text,
+      time: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'})
+    });
+  }
 
-      saveRobyHistory({
-        id: Date.now(),
-        voiceName: voice.name,
-        initials: voice.initials,
-        subtitle: voice.subtitle,
-        text: text.slice(0, 90) + (text.length > 90 ? '...' : ''),
-        audioUrl: directUrl,
-        time: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'})
-      });
+  function speakNextRobyChunk(voice, speed, pitch) {
+    if (!isRobySpeaking || robyCurrentChunkIdx >= robySpeechChunks.length) {
+      finishRobySpeech();
+      return;
+    }
 
-      showToast(`Đã tạo audio thành công với giọng ${voice.name}!`);
+    const chunkProgress = document.getElementById('robyChunkProgress');
+    if (chunkProgress) {
+      chunkProgress.textContent = `Đang phát câu ${robyCurrentChunkIdx + 1} / ${robySpeechChunks.length} câu liên tục`;
+    }
 
-    } catch (err) {
-      console.warn('[Roby TTS]', err);
-      if (window.speechSynthesis) {
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.rate = speed;
-        utter.lang = voice.langCode === 'vi' ? 'vi-VN' : 'en-US';
-        window.speechSynthesis.speak(utter);
+    const chunkText = robySpeechChunks[robyCurrentChunkIdx];
+    const utter = new SpeechSynthesisUtterance(chunkText);
+    utter.rate = speed;
+    utter.pitch = pitch;
+
+    if (voice.rawVoice) {
+      utter.voice = voice.rawVoice;
+    } else {
+      utter.lang = voice.langCode === 'vi' ? 'vi-VN' : 'en-US';
+      const all = window.speechSynthesis.getVoices();
+      const matched = all.find(v => v.lang.startsWith(voice.langCode));
+      if (matched) utter.voice = matched;
+    }
+
+    utter.onend = () => {
+      if (isRobySpeaking) {
+        robyCurrentChunkIdx++;
+        speakNextRobyChunk(voice, speed, pitch);
       }
-      statusMsg.innerHTML = '<span style="color:#059669;">✅ Đang phát âm thanh trực tiếp qua trình duyệt!</span>';
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<span>✨ Generate Speech</span>';
+    };
+
+    utter.onerror = (e) => {
+      console.warn('[Roby Chunk Error]', e);
+      if (isRobySpeaking) {
+        robyCurrentChunkIdx++;
+        speakNextRobyChunk(voice, speed, pitch);
+      }
+    };
+
+    window.speechSynthesis.speak(utter);
+  }
+
+  function toggleRobyPause() {
+    if (!window.speechSynthesis) return;
+    const pauseText = document.getElementById('robyPauseText');
+    const statusMsg = document.getElementById('robyStatusMsg');
+
+    if (isRobyPaused) {
+      window.speechSynthesis.resume();
+      isRobyPaused = false;
+      if (pauseText) pauseText.textContent = '⏸ Tạm dừng';
+      if (statusMsg) statusMsg.innerHTML = '<span style="color:#059669; font-weight:700;">🔊 Tiếp tục phát âm thanh...</span>';
+    } else {
+      window.speechSynthesis.pause();
+      isRobyPaused = true;
+      if (pauseText) pauseText.textContent = '▶ Tiếp tục';
+      if (statusMsg) statusMsg.innerHTML = '<span style="color:#D97706; font-weight:700;">⏸ Đang tạm dừng giọng đọc.</span>';
+    }
+  }
+
+  function stopRobySpeaking() {
+    isRobySpeaking = false;
+    isRobyPaused = false;
+    clearInterval(robyKeepAliveTimer);
+
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+
+    const btnGenerate = document.getElementById('btnRobyGenerate');
+    const btnStop = document.getElementById('btnRobyStop');
+    const btnPause = document.getElementById('btnRobyPause');
+    const statusMsg = document.getElementById('robyStatusMsg');
+    const waveBars = document.querySelectorAll('.roby-wave-bar');
+
+    if (btnStop) btnStop.style.display = 'none';
+    if (btnPause) btnPause.style.display = 'none';
+    if (btnGenerate) {
+      btnGenerate.innerHTML = '<span>✨ Generate Speech</span>';
+      btnGenerate.style.background = '#C85A32';
+    }
+    if (statusMsg) {
+      statusMsg.innerHTML = '⚡ Sẵn sàng tạo audio giọng nói chất lượng cao';
+    }
+  }
+
+  function finishRobySpeech() {
+    isRobySpeaking = false;
+    isRobyPaused = false;
+    clearInterval(robyKeepAliveTimer);
+
+    const btnGenerate = document.getElementById('btnRobyGenerate');
+    const btnStop = document.getElementById('btnRobyStop');
+    const btnPause = document.getElementById('btnRobyPause');
+    const statusMsg = document.getElementById('robyStatusMsg');
+    const chunkProgress = document.getElementById('robyChunkProgress');
+
+    if (btnStop) btnStop.style.display = 'none';
+    if (btnPause) btnPause.style.display = 'none';
+    if (btnGenerate) {
+      btnGenerate.innerHTML = '<span>✨ Generate Speech</span>';
+      btnGenerate.style.background = '#C85A32';
+    }
+    if (chunkProgress) chunkProgress.textContent = 'Đã hoàn thành đọc toàn bộ văn bản!';
+    if (statusMsg) {
+      statusMsg.innerHTML = '<span style="color:#059669; font-weight:700;">✅ Đã hoàn tất phát giọng đọc! Bạn có thể bấm "Đọc lại" hoặc nhập văn bản mới.</span>';
     }
   }
 
   function replayRobyAudio() {
-    const audio = document.getElementById('robyAudioPlayer');
-    if (audio && audio.src && audio.src !== window.location.href) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    } else {
-      const text = document.getElementById('robyTextInput')?.value || '';
-      generateRobySpeech();
+    generateRobySpeech();
+  }
+
+  function copyRobySpokenText() {
+    const text = document.getElementById('robyTextInput')?.value || '';
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Đã sao chép nội dung văn bản vào clipboard!');
+      });
     }
   }
 
@@ -17910,7 +18271,7 @@ Quản trị tài chính số — Ninh Bình Digital`;
     if (countEl) countEl.textContent = `${hist.length} bản ghi`;
 
     if (hist.length === 0) {
-      container.innerHTML = '<div style="color:#94A3B8; font-size:0.75rem; padding:6px 0;">Chưa có bản ghi nào. Hãy bấm "Generate Speech" để tạo!</div>';
+      container.innerHTML = '<div style="color:#94A3B8; font-size:0.75rem; padding:6px 0;">Chưa có bản ghi nào. Hãy bấm "Generate Speech" để nghe giọng đọc!</div>';
       return;
     }
 
@@ -17918,13 +18279,12 @@ Quản trị tài chính số — Ninh Bình Digital`;
     hist.forEach(h => {
       html += `
         <div style="background:#FFF; border:1px solid #F1EAE5; border-radius:8px; padding:6px 10px; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem;">
-          <div style="max-width:70%; overflow:hidden;">
+          <div style="max-width:76%; overflow:hidden;">
             <div style="font-weight:700; color:#1E293B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${h.text}</div>
             <div style="color:#64748B; font-size:0.7rem;">🎙️ ${h.voiceName} • 🕒 ${h.time}</div>
           </div>
           <div style="display:flex; gap:6px;">
-            <button type="button" class="btn btn-sm btn-outline" onclick="playRobyHistoryAudio('${h.audioUrl || ''}', '${h.text}')" style="padding:2px 8px; font-size:0.7rem;">▶</button>
-            <a href="${h.audioUrl || '#'}" download="audio_${h.id}.mp3" class="btn btn-sm btn-accent" style="background:#C85A32; color:#FFF; padding:2px 8px; font-size:0.7rem; text-decoration:none;">⬇</a>
+            <button type="button" class="btn btn-sm btn-outline" onclick="loadRobyHistoryText('${h.id}')" title="Nạp lại văn bản này" style="padding:2px 8px; font-size:0.7rem;">▶ Nạp</button>
           </div>
         </div>
       `;
@@ -17932,13 +18292,18 @@ Quản trị tài chính số — Ninh Bình Digital`;
     container.innerHTML = html;
   }
 
-  function playRobyHistoryAudio(url, text) {
-    if (url && url.startsWith('http')) {
-      const a = new Audio(url);
-      a.play().catch(() => {});
-    } else {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  function loadRobyHistoryText(histId) {
+    let hist = [];
+    try {
+      hist = JSON.parse(localStorage.getItem('roby_tts_history') || '[]');
+    } catch(e) {}
+    const item = hist.find(x => String(x.id) === String(histId));
+    if (item && item.fullText) {
+      const input = document.getElementById('robyTextInput');
+      if (input) {
+        input.value = item.fullText;
+        updateRobyCharStats();
+        showToast('Đã nạp lại văn bản từ lịch sử!');
       }
     }
   }
@@ -17950,9 +18315,12 @@ Quản trị tài chính số — Ninh Bình Digital`;
   window.previewRobyVoice = previewRobyVoice;
   window.generateRobySpeech = generateRobySpeech;
   window.replayRobyAudio = replayRobyAudio;
+  window.stopRobySpeaking = stopRobySpeaking;
+  window.toggleRobyPause = toggleRobyPause;
   window.updateRobyCharStats = updateRobyCharStats;
   window.setRobySampleText = setRobySampleText;
-  window.playRobyHistoryAudio = playRobyHistoryAudio;
+  window.copyRobySpokenText = copyRobySpokenText;
+  window.loadRobyHistoryText = loadRobyHistoryText;
 
 
 </script>
