@@ -640,27 +640,38 @@ body {
   border: 1px solid #BFDBFE;
 }
 
-/* Login Gateway Modal */
+/* Bảo mật tuyệt đối: Ẩn toàn bộ giao diện quản trị khi chưa đăng nhập */
+body:not(.admin-authenticated) #adminSidebar,
+body:not(.admin-authenticated) .admin-main,
+body:not(.admin-authenticated) #adminDrawerBackdrop {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Login Gateway Modal - Nền tối đặc 100%, không mờ, không lộ trang quản lý */
 #adminLoginOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(6,30,28,0.78);
-  backdrop-filter: blur(8px);
+  background: radial-gradient(circle at 50% 25%, #0B332E 0%, #051A17 60%, #03100E 100%);
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 20px;
+  overflow-y: auto;
 }
 .login-card {
-  background: #fff;
-  border-radius: 20px;
-  max-width: 420px;
+  background: #FFFFFF;
+  border-radius: 24px;
+  max-width: 430px;
   width: 100%;
-  padding: 32px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
+  padding: 36px 32px;
+  box-shadow: 0 25px 60px -15px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   text-align: center;
+  position: relative;
 }
 .login-icon {
   width: 54px;
@@ -854,15 +865,17 @@ body {
 </head>
 <body>
 
-<!-- Security Gateway Modal -->
+<!-- Security Gateway Modal (Nền tối đặc bảo mật 100%, không để lộ trang quản trị) -->
 <div id="adminLoginOverlay">
-  <div class="login-card" style="max-width:400px; text-align:left;">
+  <div class="login-card" style="max-width:420px; text-align:left;">
     <div style="text-align:center;">
-      <div class="login-icon">🛡️</div>
-      <h2 style="font-size:1.45rem; margin-bottom:6px;">Cổng Quản Trị Hệ Thống</h2>
-      <p style="font-size:0.86rem; color:var(--muted); margin-bottom:18px;">Vui lòng nhập tài khoản &amp; mật khẩu quản trị viên để vào điều hành.</p>
+      <div style="width:58px; height:58px; border-radius:18px; background:linear-gradient(135deg, rgba(14,124,116,0.15), rgba(11,92,87,0.08)); border:1.5px solid rgba(14,124,116,0.25); display:inline-flex; align-items:center; justify-content:center; margin-bottom:14px; box-shadow:0 4px 14px rgba(0,0,0,0.05);">
+        <img src="images/logo.png" onerror="this.src='images/logo-icon.png'" alt="Ninh Bình Digital" style="width:38px; height:38px; object-fit:contain; border-radius:8px;" />
+      </div>
+      <h2 style="font-size:1.4rem; font-weight:800; color:var(--ink); margin-bottom:6px;">Cổng Quản Trị Hệ Thống</h2>
+      <p style="font-size:0.86rem; color:var(--muted); margin-bottom:20px;">Vui lòng nhập tài khoản &amp; mật khẩu quản trị viên để vào điều hành.</p>
     </div>
-    <div style="display:flex; flex-direction:column; gap:12px;">
+    <div style="display:flex; flex-direction:column; gap:14px;">
       <div>
         <label style="font-size:0.82rem; font-weight:700; color:var(--ink); display:block; margin-bottom:5px;">Tài khoản</label>
         <input type="text" id="adminUserInput" class="login-input" style="text-align:left; letter-spacing:normal; margin-bottom:0;" placeholder="Nhập tài khoản quản trị..." value="" autofocus onkeydown="if(event.key==='Enter')document.getElementById('adminPassInput').focus()">
@@ -872,12 +885,12 @@ body {
         <input type="password" id="adminPassInput" class="login-input" style="text-align:left; letter-spacing:normal; margin-bottom:0;" placeholder="Nhập mật khẩu quản trị..." value="" onkeydown="if(event.key==='Enter')verifyAdminPin()">
       </div>
       <div id="adminLoginError" style="display:none; font-size:0.82rem; color:#DC2626; background:#FEE2E2; padding:8px 12px; border-radius:8px; font-weight:600; text-align:center;"></div>
-      <button class="btn btn-primary" style="width:100%; padding:12px; font-weight:700; margin-top:4px;" onclick="verifyAdminPin()">
+      <button class="btn btn-primary" style="width:100%; padding:13px; font-weight:800; font-size:0.95rem; margin-top:2px; box-shadow:0 4px 14px rgba(14,124,116,0.3);" onclick="verifyAdminPin()">
         Đăng Nhập Quản Trị Hệ Thống
       </button>
     </div>
-    <div style="font-size:0.75rem; color:var(--muted); margin-top:14px; text-align:center; background:#F8FAFC; padding:8px; border-radius:8px; border:1px dashed #CBD5E1;">
-      🛡️ Khu vực bảo mật dành riêng cho Quản trị viên hệ thống
+    <div style="font-size:0.75rem; color:var(--muted); margin-top:16px; text-align:center; background:#F8FAFC; padding:10px; border-radius:10px; border:1px dashed #CBD5E1; display:flex; align-items:center; justify-content:center; gap:6px;">
+      <span>🛡️</span> Khu vực bảo mật dành riêng cho Quản trị viên hệ thống
     </div>
   </div>
 </div>
@@ -979,6 +992,9 @@ body {
           <div class="admin-avatar-role">Toàn quyền cấu hình</div>
         </div>
       </div>
+      <button class="btn btn-outline btn-sm" onclick="adminLogout()" title="Đăng xuất khỏi phiên quản trị" style="display:inline-flex; align-items:center; gap:5px; color:#DC2626; border-color:#FCA5A5; font-weight:700;">
+        <span>🚪</span> Đăng xuất
+      </button>
     </div>
   </header>
 
@@ -1947,6 +1963,7 @@ function verifyAdminPin() {
   if (user === 'jaytran225' && pass === 'Linhxinhdep.03') {
     sessionStorage.setItem('nb_admin_logged', 'true');
     sessionStorage.setItem('nb_admin_user', 'jaytran225');
+    document.body.classList.add('admin-authenticated');
     document.getElementById('adminLoginOverlay').style.display = 'none';
     showAdminToast('Đăng nhập thành công! Chào mừng Quản trị viên trở lại.');
     initAdminData();
@@ -1955,9 +1972,24 @@ function verifyAdminPin() {
       errEl.textContent = 'Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.';
       errEl.style.display = 'block';
     } else {
-      alert('Tài khoản hoặc mật khẩu không chính xác!');
+      alert('Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.');
     }
   }
+}
+
+function adminLogout() {
+  sessionStorage.removeItem('nb_admin_logged');
+  sessionStorage.removeItem('nb_admin_user');
+  document.body.classList.remove('admin-authenticated');
+  const overlay = document.getElementById('adminLoginOverlay');
+  if (overlay) overlay.style.display = 'flex';
+  const userInput = document.getElementById('adminUserInput');
+  const passInput = document.getElementById('adminPassInput');
+  if (userInput) { userInput.value = ''; userInput.focus(); }
+  if (passInput) passInput.value = '';
+  const errEl = document.getElementById('adminLoginError');
+  if (errEl) errEl.style.display = 'none';
+  showAdminToast('Đã đăng xuất khỏi phiên làm việc quản trị an toàn!');
 }
 
 // Mobile Drawer Control
@@ -3319,8 +3351,12 @@ function handleSaveAd(e) {
 window.addEventListener('DOMContentLoaded', () => {
   // If already authenticated in session
   if (sessionStorage.getItem('nb_admin_logged') === 'true') {
+    document.body.classList.add('admin-authenticated');
     document.getElementById('adminLoginOverlay').style.display = 'none';
     initAdminData();
+  } else {
+    document.body.classList.remove('admin-authenticated');
+    document.getElementById('adminLoginOverlay').style.display = 'flex';
   }
 });
 </script>
