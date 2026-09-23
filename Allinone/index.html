@@ -1569,7 +1569,30 @@ footer .wrap{padding-top:44px;}
 
 .foot-grid a:hover{color:#fff;}
 
-.foot-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:20px; font-size:.82rem; flex-wrap:wrap; gap:10px;}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  font-size: .82rem;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.foot-bottom .feedback-fab {
+  padding: 9px 18px;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 14px -2px rgba(11,92,87,0.45);
+  flex-shrink: 0;
+}
+
 
 footer .logo-icon{background:rgba(255,255,255,.12); color:#fff; box-shadow:none;}
 
@@ -4172,10 +4195,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
 /* Floating Feedback FAB */
 .feedback-fab-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
+  display: none; /* moved to footer */
 }
 .feedback-fab {
   display: inline-flex;
@@ -9670,6 +9690,10 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     <div class="foot-bottom">
       <span>© 2026 Ninh Bình Digital. Bảo lưu mọi quyền.</span>
       <span>Xây dựng bằng tình yêu quê hương Ninh Bình.</span>
+      <button type="button" class="feedback-fab" onclick="openFeedbackModal()" title="Đóng góp ý kiến xây dựng Ninh Bình Digital">
+        <span class="fab-icon">💬</span>
+        <span class="fab-label">Đóng góp ý kiến</span>
+      </button>
     </div>
   </div>
 </footer>
@@ -17808,13 +17832,7 @@ Quản trị tài chính số — Ninh Bình Digital`;
   </div>
 </div>
 
-<!-- FLOATING FEEDBACK FAB & MODAL -->
-<div id="feedbackFabContainer" class="feedback-fab-container">
-  <button type="button" class="feedback-fab" onclick="openFeedbackModal()" title="Đóng góp ý kiến xây dựng Ninh Bình Digital">
-    <span class="fab-icon">💬</span>
-    <span class="fab-label">Đóng góp ý kiến</span>
-  </button>
-</div>
+<!-- feedback-fab-container removed: button moved into footer foot-bottom -->
 
 <!-- FEEDBACK MODAL -->
 <div id="feedbackModalOverlay" class="modal-overlay" style="z-index:999999;" onclick="if(event.target===this)closeFeedbackModal()">
