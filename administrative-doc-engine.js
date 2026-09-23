@@ -562,7 +562,7 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
       if (document.body) document.body.scrollTop = 0;
 
       const toHide = document.querySelectorAll(
-        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, footer, .main-header, .site-footer'
       );
       toHide.forEach(el => {
         el.style.setProperty('display', 'none', 'important');
@@ -573,10 +573,18 @@ Kế hoạch này có hiệu lực kể từ ngày ký. Lãnh đạo các cơ qu
 
     window.addEventListener('afterprint', () => {
       const toHide = document.querySelectorAll(
-        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+        '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, footer, .main-header, .site-footer'
       );
       toHide.forEach(el => {
-        el.style.removeProperty('display');
+        if (el.id === 'ttsModal' || el.classList.contains('modal-overlay') || (el.id && el.id.includes('Modal'))) {
+          if (!el.classList.contains('open') && !el.classList.contains('active')) {
+            el.style.display = 'none';
+          } else {
+            el.style.removeProperty('display');
+          }
+        } else {
+          el.style.removeProperty('display');
+        }
         el.style.removeProperty('visibility');
         el.style.removeProperty('opacity');
       });
@@ -1531,7 +1539,7 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
 
     // Ẩn triệt để tất cả các nút nổi, logo, chat, header, footer bằng DOM style trực tiếp
     const toHide = document.querySelectorAll(
-      '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, #ttsModal, footer, .main-header, .site-footer'
+      '.nb-floating-chat, #floatingContactWidget, #compareFloatingBar, .toast-container, #toastContainer, .nb-travel-floating-stack, header, .logo, nav, .feedback-fab-container, .feedback-fab, .nav-links, .nav-container, .modal-overlay, footer, .main-header, .site-footer'
     );
     toHide.forEach(el => {
       el.style.setProperty('display', 'none', 'important');
@@ -1588,7 +1596,15 @@ Giao các đơn vị chức năng chịu trách nhiệm triển khai và báo c�
       updateHeaderLayout();
       if (previewPane) previewPane.scrollTop = prevScroll;
       toHide.forEach(el => {
-        el.style.removeProperty('display');
+        if (el.id === 'ttsModal' || el.classList.contains('modal-overlay') || (el.id && el.id.includes('Modal'))) {
+          if (!el.classList.contains('open') && !el.classList.contains('active')) {
+            el.style.display = 'none';
+          } else {
+            el.style.removeProperty('display');
+          }
+        } else {
+          el.style.removeProperty('display');
+        }
         el.style.removeProperty('visibility');
         el.style.removeProperty('opacity');
       });

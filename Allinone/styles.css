@@ -3987,7 +3987,21 @@ body[data-theme="dark"] .nb-search-input-box input {
     bottom: 75px;
   }
   .nb-travel-float-btn {
-    width: 42px;
-    height: 42px;
-  }
 }
+}
+
+/* TTS Modal - Text to Speech Guard */
+#ttsModal:not(.open) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#ttsModal.open {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
