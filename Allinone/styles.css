@@ -2399,9 +2399,8 @@ body[data-theme="dark"] .hero-brand-pill span {
   height: auto;
   transform: translate(-50%, -50%) scale(1.01);
   object-fit: cover;
-  filter: contrast(1.12) saturate(1.16) brightness(1.03) !important;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  filter: none !important;
+  image-rendering: auto !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;

@@ -5487,7 +5487,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
   <!-- FULL BACKGROUND VIDEO LAYER (Runs behind everything and blurs as user scrolls up) -->
   <div class="nb-global-video-bg-wrap" id="nbGlobalVideoBgWrap">
     <video id="nbGlobalVideoBg" class="nb-global-video-bg" autoplay loop muted playsinline poster="images/nb_travel_hero_poster.jpg">
-      <source src="images/ninhbinh_travel_intro.mp4" type="video/mp4">
+      <source src="images/ninhbinh_travel_intro.mp4?v=4k_60fps" type="video/mp4">
       <source src="images/nb_scenic_bg.webm" type="video/webm">
     </video>
     <div class="nb-global-video-overlay" id="nbGlobalVideoOverlay"></div>
@@ -5930,7 +5930,7 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
       </div>
       <div class="nb-video-player-wrap">
         <video id="nbCinematicVideoEl" controls playsinline loop poster="images/nb_travel_hero_poster.jpg">
-          <source src="images/ninhbinh_travel_intro.mp4" type="video/mp4">
+          <source src="images/ninhbinh_travel_intro.mp4?v=4k_60fps" type="video/mp4">
           <source src="images/nb_scenic_bg.webm" type="video/webm">
         </video>
       </div>
@@ -10206,8 +10206,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     if (pageId === 'travel') {
       const vid = document.getElementById('nbGlobalVideoBg');
       if (vid) {
-        vid.style.filter = 'blur(0px) brightness(1)';
-        vid.style.transform = 'translate3d(-50%, -50%, 0) scale(1.05)';
+        vid.style.filter = 'none';
+        vid.style.transform = 'translate3d(-50%, -50%, 0) scale(1.01)';
         vid.play().catch(() => {});
       }
       setTimeout(() => {
@@ -17197,8 +17197,8 @@ Quản trị tài chính số — Ninh Bình Digital`;
           const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
           
           if (video) {
-            // Video luôn sắc nét tối đa, tuyệt đối không bị mờ nhòe (zero blur, enhanced contrast & vibrance)
-            video.style.filter = 'contrast(1.12) saturate(1.16) brightness(1.03)';
+            // Giữ màu sắc tự nhiên, mượt mà và chân thực (zero noise, smooth frame rendering)
+            video.style.filter = 'none';
             video.style.transform = 'translate3d(-50%, -50%, 0) scale(1.01)';
           }
           if (overlay) {
