@@ -415,6 +415,8 @@
 
 <script src="administrative-doc-engine.js?v=2026_v9_centered_perfect"></script>
 
+<script src="tts-engine.js?v=2026_full_voices"></script>
+
 
 
 
@@ -553,12 +555,23 @@ html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
 
 body{
 
+  padding-top:var(--header-h);
+
   background:var(--bg); color:var(--ink);
 
   font-family:var(--font-body); font-size:16px; line-height:1.6;
 
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 
+}
+
+body.driving-page-active {
+  padding-top:calc(var(--header-h) + 40px) !important;
+}
+
+body.travel-page-active #floatingContactWidget,
+#page-travel.active ~ #floatingContactWidget {
+  display:none !important;
 }
 
 h1,h2,h3,h4,.brand-font{
@@ -614,12 +627,13 @@ input:focus, select:focus, textarea:focus{border-color:var(--primary-light); box
 /* =====================================================================
 
    HEADER — thanh điều hướng đặc, mảnh, chỉ báo trang đang xem bằng gạch chân
+   FIX CỨNG LÊN TRÊN — không chạy khi kéo chuột
 
    ===================================================================== */
 
 header{
 
-  position:sticky; top:0; z-index:1000;
+  position:fixed !important; top:0; left:0; right:0; width:100%; z-index:1000;
 
   background:var(--header-bg) !important;
 
@@ -627,7 +641,7 @@ header{
 
   border-bottom:1px solid var(--border) !important;
 
-  box-shadow:none !important; padding:0 !important; margin:0 !important;
+  box-shadow:0 2px 14px rgba(0,0,0,0.06) !important; padding:0 !important; margin:0 !important;
 
 }
 
@@ -2757,6 +2771,8 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
     max-height: 100vh !important;
 
+    padding-top: var(--header-h) !important;
+
   }
 
   body.vanban-page-active footer {
@@ -2769,9 +2785,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
   #page-vanban.active {
 
-    height: calc(100vh - 64px) !important;
+    height: calc(100vh - var(--header-h)) !important;
 
-    max-height: calc(100vh - 64px) !important;
+    max-height: calc(100vh - var(--header-h)) !important;
 
     overflow: hidden !important;
 
@@ -5382,78 +5398,15 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     <div class="nb-global-video-overlay" id="nbGlobalVideoOverlay"></div>
   </div>
 
-  <!-- FLOATING ACTION STACK ON RIGHT (MESSENGER, ZALO, MAP, CALL - MATCHING SCREENSHOT) -->
-  <div class="nb-travel-floating-stack" id="nbTravelFloatingStack">
-    <a href="javascript:void(0)" onclick="openFeedbackModal('general')" class="nb-travel-float-btn" title="Gửi tin nhắn / Góp ý">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="float-tooltip">Nhắn tin / Tư vấn</span>
-    </a>
-    <a href="https://zalo.me/0866520567" target="_blank" rel="noopener noreferrer" class="nb-travel-float-btn" title="Chat Zalo: 0866520567">
-      <span style="font-weight:900; font-size:0.8rem; font-family:sans-serif;">Zalo</span>
-      <span class="float-tooltip">Chat Zalo 24/7</span>
-    </a>
-    <a href="https://maps.google.com/?q=Trang+An+Ninh+Binh" target="_blank" rel="noopener noreferrer" class="nb-travel-float-btn" title="Vị trí bản đồ Tràng An - Ninh Bình">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span class="float-tooltip">Bản đồ điểm đến</span>
-    </a>
-    <a href="tel:0866520567" class="nb-travel-float-btn" title="Gọi Hotline: 0866520567">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <span class="float-tooltip">Hotline: 0866520567</span>
-    </a>
-  </div>
-
-  <div class="wrap" style="position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 20px 16px 60px;">
+  <div class="wrap" style="position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 0 16px 60px;">
     
-    <!-- 1. SCENIC HERO HEADER OVER VIDEO -->
-    <!-- TOP HEADER BAR (Over Video - Matching Mockup) -->
-    <div class="nb-travel-header-bar">
-      <div class="nb-travel-brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <div class="nb-travel-brand-logo">🏛️</div>
-        <div class="nb-travel-brand-name">Cơm Cổ <span>Hoa Lư</span></div>
-      </div>
-
-      <div class="nb-travel-nav-links">
-        <span class="nb-travel-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">Trang chủ</span>
-        <span class="nb-travel-nav-item" onclick="scrollToHomestayList()">Thực đơn &amp; Phòng</span>
-        <span class="nb-travel-nav-item" onclick="scrollToExplore()">Điểm tham quan</span>
-        <span class="nb-travel-nav-item" onclick="scrollToExplore()">Khuyến mãi</span>
-        <span class="nb-travel-nav-item" onclick="openBookingModal('Tuyển dụng & Hợp tác')">Tuyển dụng</span>
-        <span class="nb-travel-nav-item" onclick="openBookingModal('Liên hệ du lịch')">Liên hệ</span>
-      </div>
-
-      <div class="nb-travel-header-actions">
-        <button type="button" class="nb-travel-admin-btn" onclick="openBookingModal('Quản trị & Đối tác')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>Quản trị</span>
-        </button>
-        <button type="button" class="nb-travel-book-btn" onclick="openBookingModal('Đặt bàn nhà hàng Cơm Cổ Hoa Lư / Homestay')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-          <span>ĐẶT BÀN</span>
-        </button>
-        <!-- Mascot Robot matching screenshot -->
-        <div class="nb-travel-mascot" title="Trợ lý số Ninh Bình">
-          <svg width="38" height="38" viewBox="0 0 100 100" fill="none">
-            <rect width="80" height="70" x="10" y="15" rx="24" fill="#3B82F6" stroke="#1D4ED8" stroke-width="4"/>
-            <rect width="58" height="40" x="21" y="26" rx="14" fill="#0F172A"/>
-            <path d="M36 42 L28 47 L36 52" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M45 53 L55 53" stroke="#60A5FA" stroke-width="3" stroke-linecap="round"/>
-            <path d="M64 42 L72 47 L64 52" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="50" y1="15" x2="50" y2="6" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="50" cy="5" r="4" fill="#60A5FA"/>
-            <circle cx="28" cy="72" r="5" fill="#93C5FD"/>
-            <circle cx="72" cy="72" r="5" fill="#93C5FD"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- 1. SCENIC HERO HEADER OVER VIDEO -->
+    <!-- 1. SCENIC HERO OVER VIDEO (Thẻ tiêu đề Cơm Cổ Hoa Lư & Homestay cùng mũi tên đẩy các phần tử lên) -->
     <div class="nb-hero-banner" id="nbHeroBanner">
       <div class="nb-hero-content">
         <div class="nb-hero-badge">
           <span>✨ Di Sản Văn Hóa &amp; Thiên Nhiên Thế Giới Tràng An</span>
         </div>
-        <h1 class="nb-hero-title">CƠM CỔ HOA LƯ &amp; HOMESTAY NINH BÌNH</h1>
+        <h1 class="nb-hero-title">HOMESTAY NINH BÌNH</h1>
         <p class="nb-hero-subtitle">
           Thưởng ngoạn vẻ đẹp non nước ngút ngàn, dặm trường trời bao la. Hòa mình vào không gian ẩm thực Cố Đô đặc sắc cùng hệ thống homestay nghỉ dưỡng sinh thái hàng đầu.
         </p>
@@ -5470,11 +5423,11 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
         </div>
       </div>
 
-      <!-- Scroll Down Indicator matching Screenshot -->
+      <!-- Scroll Down Indicator: bấm mũi tên các phần tử mới đẩy lên -->
       <div class="nb-scroll-explore" onclick="scrollToExplore()" title="Bấm để cuộn xuống khám phá">
         <span class="nb-scroll-text">CUỘN XUỐNG ĐỂ KHÁM PHÁ</span>
-        <div class="nb-scroll-circle-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="nb-scroll-circle-btn" aria-label="Cuộn xuống khám phá">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6"/>
           </svg>
         </div>
@@ -9031,6 +8984,9 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
             <button type="button" class="vb-toolbar-btn" onclick="AdministrativeDocEngine.copyDocText()" title="Sao chép toàn bộ văn bản">
               📋 Sao chép
             </button>
+            <button type="button" class="vb-toolbar-btn" onclick="openTTSModal()" title="Đọc văn bản bằng giọng nói" style="background: linear-gradient(135deg, #10B981, #059669); color: #fff;">
+              🔊 Đọc văn bản
+            </button>
           </div>
           <button type="button" class="btn-toggle-preview" id="btnTogglePreviewPane" onclick="AdministrativeDocEngine.togglePreviewPane()">
             Đóng &gt;
@@ -10141,14 +10097,25 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     const activeNav = document.getElementById(activeNavId);
     if(activeNav) activeNav.classList.add('active');
     if(updateHash) window.location.hash = pageId;
+
+    // Quản lý class trạng thái trang trên body để tinh chỉnh Header & Nút nổi
+    document.body.classList.toggle('driving-page-active', pageId === 'driving');
+    document.body.classList.toggle('travel-page-active', pageId === 'travel');
+
     if (pageId === 'travel') {
+      const vid = document.getElementById('nbGlobalVideoBg');
+      if (vid) {
+        vid.style.filter = 'blur(0px) brightness(1)';
+        vid.style.transform = 'translate3d(-50%, -50%, 0) scale(1.05)';
+        vid.play().catch(() => {});
+      }
       setTimeout(() => {
         if (typeof initNinhBinhMap === 'function') initNinhBinhMap();
         if (window.ninhbinhMap) window.ninhbinhMap.invalidateSize();
       }, 120);
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     // Nối liền thanh subnav GPLX trực tiếp dưới thanh header khi dùng chức năng Bằng lái xe (#driving)
     const drivingHeaderSubnav = document.getElementById('drivingHeaderSubnav');
@@ -16575,7 +16542,9 @@ Quản trị tài chính số — Ninh Bình Digital`;
   function scrollToExplore() {
     const el = document.getElementById('nbGlassSearchBar') || document.getElementById('homestaySectionAnchor');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 76;
+      const topPos = el.getBoundingClientRect().top + window.pageYOffset - headerH - 14;
+      window.scrollTo({ top: topPos, behavior: 'smooth' });
     }
   }
 
@@ -16950,14 +16919,12 @@ Quản trị tài chính số — Ninh Bình Digital`;
           const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
           
           if (video) {
-            const blurPx = (progress * 24).toFixed(1);
-            const brightness = (1 - progress * 0.28).toFixed(2);
-            const scale = (1.05 + progress * 0.05).toFixed(3);
-            video.style.filter = `blur(${blurPx}px) brightness(${brightness})`;
-            video.style.transform = `translate3d(-50%, -50%, 0) scale(${scale})`;
+            // Video luôn sắc nét tối đa, tuyệt đối không bị mờ nhòe (zero blur, enhanced contrast & vibrance)
+            video.style.filter = 'contrast(1.12) saturate(1.16) brightness(1.03)';
+            video.style.transform = 'translate3d(-50%, -50%, 0) scale(1.01)';
           }
           if (overlay) {
-            const alpha = (0.35 + progress * 0.45).toFixed(2);
+            const alpha = (progress * 0.55).toFixed(2);
             overlay.style.backgroundColor = `rgba(11, 29, 22, ${alpha})`;
           }
         }
@@ -17925,6 +17892,209 @@ Quản trị tài chính số — Ninh Bình Digital`;
       Zalo
     </a>
   </div>
+
+  <!-- ========================================== -->
+  <!-- TTS MODAL - TEXT TO SPEECH -->
+  <!-- ========================================== -->
+  <div id="ttsModal" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.3s ease;">
+    <div style="background: #fff; border-radius: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); position: relative;">
+
+      <!-- Header -->
+      <div style="background: linear-gradient(135deg, #10B981, #059669); color: #fff; padding: 24px; border-radius: 20px 20px 0 0; position: relative;">
+        <button onclick="closeTTSModal()" style="position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.2); border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+          ×
+        </button>
+        <h2 style="margin: 0; font-size: 28px; font-weight: 800; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 36px;">🔊</span>
+          Chuyển văn bản thành giọng nói
+        </h2>
+        <p style="margin: 8px 0 0 0; opacity: 0.95; font-size: 15px;">
+          Nghe văn bản được đọc bằng giọng nói tự nhiên với nhiều lựa chọn
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div style="padding: 28px;">
+
+        <!-- Văn bản cần đọc -->
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-weight: 700; font-size: 16px; margin-bottom: 10px; color: #1F2937;">
+            📝 Văn bản cần đọc:
+          </label>
+          <textarea id="ttsTextInput" placeholder="Nhập hoặc dán văn bản cần đọc tại đây..." style="width: 100%; min-height: 150px; padding: 16px; border: 2px solid #E5E7EB; border-radius: 12px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; resize: vertical; transition: all 0.2s;" onfocus="this.style.borderColor='#10B981'" onblur="this.style.borderColor='#E5E7EB'"></textarea>
+          <div style="margin-top: 8px; font-size: 13px; color: #6B7280; display: flex; justify-content: space-between;">
+            <span>💡 Hỗ trợ tiếng Việt và tiếng Anh</span>
+            <span id="ttsCharCount">0 ký tự</span>
+          </div>
+        </div>
+
+        <!-- Chọn giọng đọc -->
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-weight: 700; font-size: 16px; margin-bottom: 10px; color: #1F2937;">
+            🎤 Chọn giọng đọc:
+          </label>
+          <select id="ttsVoiceSelect" onchange="TTSEngine.setVoice(this.value)" style="width: 100%; padding: 14px 16px; border: 2px solid #E5E7EB; border-radius: 12px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; cursor: pointer; background: #fff; transition: all 0.2s;" onfocus="this.style.borderColor='#10B981'" onblur="this.style.borderColor='#E5E7EB'">
+            <option value="">-- Đang tải giọng đọc... --</option>
+          </select>
+        </div>
+
+        <!-- Điều chỉnh -->
+        <div style="background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+          <h3 style="margin: 0 0 18px 0; font-size: 16px; font-weight: 700; color: #1F2937;">
+            ⚙️ Điều chỉnh âm thanh
+          </h3>
+          <div id="ttsControlPanel"></div>
+        </div>
+
+        <!-- Nút điều khiển -->
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button id="ttsPlayBtn" onclick="TTSEngine.togglePlayPause()" style="flex: 1; min-width: 150px; padding: 16px 24px; background: linear-gradient(135deg, #10B981, #059669); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(16, 185, 129, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.3)'">
+            ▶️ Phát
+          </button>
+
+          <button onclick="TTSEngine.stop()" style="flex: 1; min-width: 150px; padding: 16px 24px; background: #EF4444; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(239, 68, 68, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(239, 68, 68, 0.3)'">
+            ⏹️ Dừng
+          </button>
+
+          <button onclick="loadCurrentDocToTTS()" style="flex: 1; min-width: 150px; padding: 16px 24px; background: #3B82F6; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(59, 130, 246, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.3)'">
+            📄 Tải văn bản hiện tại
+          </button>
+        </div>
+
+        <!-- Hướng dẫn -->
+        <div style="margin-top: 24px; padding: 16px; background: #EFF6FF; border-left: 4px solid #3B82F6; border-radius: 8px;">
+          <p style="margin: 0; font-size: 14px; color: #1E40AF; line-height: 1.6;">
+            <strong>💡 Mẹo sử dụng:</strong><br>
+            • Nhấn "Tải văn bản hiện tại" để đọc văn bản đang soạn thảo<br>
+            • Điều chỉnh tốc độ, cao độ và âm lượng theo ý muốn<br>
+            • Giọng trình duyệt hoàn toàn miễn phí và hoạt động offline<br>
+            • Văn bản dài sẽ được tự động chia nhỏ để đọc mượt mà hơn
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========================================
+    // TTS MODAL FUNCTIONS
+    // ========================================
+
+    function openTTSModal() {
+      const modal = document.getElementById('ttsModal');
+      if (!modal) return;
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      // Initialize TTS components
+      TTSEngine.renderVoiceSelector();
+      TTSEngine.renderControlPanel();
+
+      // Auto-load current document text
+      setTimeout(() => {
+        loadCurrentDocToTTS();
+      }, 300);
+    }
+
+    function closeTTSModal() {
+      const modal = document.getElementById('ttsModal');
+      if (!modal) return;
+
+      // Stop any playing audio
+      TTSEngine.stop();
+
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function loadCurrentDocToTTS() {
+      const a4Doc = document.getElementById('a4PaperDoc');
+      if (!a4Doc) {
+        alert('Không tìm thấy văn bản để đọc');
+        return;
+      }
+
+      // Extract text from A4 document
+      let text = a4Doc.innerText || a4Doc.textContent || '';
+
+      // Clean up the text
+      text = text.trim();
+      text = text.replace(/\s+/g, ' '); // Remove extra spaces
+      text = text.replace(/\n{3,}/g, '\n\n'); // Remove extra line breaks
+
+      if (!text) {
+        alert('Văn bản trống, vui lòng soạn thảo nội dung trước');
+        return;
+      }
+
+      // Load into textarea
+      const textarea = document.getElementById('ttsTextInput');
+      if (textarea) {
+        textarea.value = text;
+        updateCharCount();
+      }
+
+      console.log('✅ Đã tải văn bản:', text.length, 'ký tự');
+    }
+
+    function updateCharCount() {
+      const textarea = document.getElementById('ttsTextInput');
+      const counter = document.getElementById('ttsCharCount');
+      if (textarea && counter) {
+        const count = textarea.value.length;
+        counter.textContent = count.toLocaleString('vi-VN') + ' ký tự';
+      }
+    }
+
+    // Character counter
+    document.addEventListener('DOMContentLoaded', function() {
+      const textarea = document.getElementById('ttsTextInput');
+      if (textarea) {
+        textarea.addEventListener('input', updateCharCount);
+      }
+
+      // Close modal on ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeTTSModal();
+        }
+      });
+    });
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+      const modal = document.getElementById('ttsModal');
+      if (e.target === modal) {
+        closeTTSModal();
+      }
+    });
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .vb-toolbar-btn.playing {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+  </style>
 
 </body>
 </html>

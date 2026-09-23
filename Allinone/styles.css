@@ -2356,17 +2356,21 @@ body[data-theme="dark"] .hero-brand-pill span {
   min-height: 100%;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: translate(-50%, -50%) scale(1.01);
   object-fit: cover;
-  transition: filter 0.15s ease-out, transform 0.2s ease-out;
-  will-change: filter, transform;
+  filter: contrast(1.12) saturate(1.16) brightness(1.03) !important;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .nb-global-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 29, 22, 0.35) 0%, rgba(11, 29, 22, 0.55) 40%, rgba(15, 23, 42, 0.88) 100%);
-  transition: background-color 0.2s ease;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 20%, transparent 75%, rgba(11, 29, 22, 0.4) 100%);
+  transition: background-color 0.25s ease, opacity 0.25s ease;
   pointer-events: none;
 }
 
@@ -3748,13 +3752,15 @@ body[data-theme="dark"] .nb-search-input-box input {
   z-index: 5;
   margin: 0 auto;
   max-width: 1440px;
-  min-height: calc(85vh - 30px);
+  height: calc(100vh - var(--header-h) - 30px);
+  min-height: 480px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 10px 16px 26px;
+  padding: 0 16px 36px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* Scroll Down To Explore Indicator (Centered Bottom) */
@@ -3763,13 +3769,13 @@ body[data-theme="dark"] .nb-search-input-box input {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-top: 30px;
+  margin-top: auto;
   cursor: pointer;
   user-select: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .nb-scroll-explore:hover {
-  transform: translateY(2px);
+  transform: translateY(3px);
 }
 .nb-scroll-text {
   font-size: 0.84rem;
@@ -3780,24 +3786,26 @@ body[data-theme="dark"] .nb-search-input-box input {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 .nb-scroll-circle-btn {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.45);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 255, 255, 0.2);
   animation: bounceChevron 2.2s infinite ease-in-out;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: all 0.25s ease;
 }
 .nb-scroll-explore:hover .nb-scroll-circle-btn {
-  background: rgba(217, 119, 6, 0.85);
-  border-color: rgba(251, 191, 36, 0.9);
+  background: rgba(217, 119, 6, 0.9);
+  border-color: #FBBF24;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6), 0 0 20px rgba(251, 191, 36, 0.5);
 }
 
 @keyframes bounceChevron {
@@ -3805,10 +3813,10 @@ body[data-theme="dark"] .nb-search-input-box input {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(7px);
+    transform: translateY(8px);
   }
   60% {
-    transform: translateY(3px);
+    transform: translateY(4px);
   }
 }
 
