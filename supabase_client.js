@@ -86,6 +86,26 @@ async function dbGetOrders() {
   return res.data || [];
 }
 
+async function dbDeleteOrder(idOrCode) {
+  if (!idOrCode) return { data: null, error: 'No identifier' };
+  const query = (typeof idOrCode === 'number' || /^\d+$/.test(idOrCode))
+    ? `id=eq.${idOrCode}`
+    : `order_code=eq.${encodeURIComponent(idOrCode)}`;
+  const res = await supabaseFetch('nb_orders', {
+    method: 'DELETE',
+    query
+  });
+  return res;
+}
+
+async function dbClearAllOrders() {
+  const res = await supabaseFetch('nb_orders', {
+    method: 'DELETE',
+    query: 'id=gt.0'
+  });
+  return res;
+}
+
 // ==========================================
 // 2. KHÁCH HÀNG CRM / TƯ VẤN (nb_leads)
 // ==========================================
@@ -124,6 +144,23 @@ async function dbDeleteLead(id) {
   return res;
 }
 
+async function dbDeleteLeadByPhone(phone) {
+  if (!phone) return { data: null, error: 'No phone' };
+  const res = await supabaseFetch('nb_leads', {
+    method: 'DELETE',
+    query: `phone=eq.${encodeURIComponent(phone)}`
+  });
+  return res;
+}
+
+async function dbClearAllLeads() {
+  const res = await supabaseFetch('nb_leads', {
+    method: 'DELETE',
+    query: 'id=gt.0'
+  });
+  return res;
+}
+
 // ==========================================
 // 3. HÒM THƯ GÓP Ý & ĐÁNH GIÁ (nb_feedbacks)
 // ==========================================
@@ -143,6 +180,23 @@ async function dbCreateFeedback(fb) {
 async function dbGetFeedbacks() {
   const res = await supabaseFetch('nb_feedbacks', { query: 'select=*&order=id.desc' });
   return res.data || [];
+}
+
+async function dbDeleteFeedback(id) {
+  if (!id) return { data: null, error: 'No id' };
+  const res = await supabaseFetch('nb_feedbacks', {
+    method: 'DELETE',
+    query: `id=eq.${id}`
+  });
+  return res;
+}
+
+async function dbClearAllFeedbacks() {
+  const res = await supabaseFetch('nb_feedbacks', {
+    method: 'DELETE',
+    query: 'id=gt.0'
+  });
+  return res;
 }
 
 // ==========================================
@@ -467,12 +521,18 @@ if (typeof window !== 'undefined') {
   window.supabaseFetch = supabaseFetch;
   window.dbCreateOrder = dbCreateOrder;
   window.dbGetOrders = dbGetOrders;
+  window.dbDeleteOrder = dbDeleteOrder;
+  window.dbClearAllOrders = dbClearAllOrders;
   window.dbCreateLead = dbCreateLead;
   window.dbGetLeads = dbGetLeads;
   window.dbUpdateLeadStatus = dbUpdateLeadStatus;
   window.dbDeleteLead = dbDeleteLead;
+  window.dbDeleteLeadByPhone = dbDeleteLeadByPhone;
+  window.dbClearAllLeads = dbClearAllLeads;
   window.dbCreateFeedback = dbCreateFeedback;
   window.dbGetFeedbacks = dbGetFeedbacks;
+  window.dbDeleteFeedback = dbDeleteFeedback;
+  window.dbClearAllFeedbacks = dbClearAllFeedbacks;
   window.dbCreateCashbookEntry = dbCreateCashbookEntry;
   window.dbGetCashbook = dbGetCashbook;
   window.dbDeleteCashbookEntry = dbDeleteCashbookEntry;

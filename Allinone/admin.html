@@ -861,6 +861,147 @@ body:not(.admin-authenticated) #adminDrawerBackdrop {
     min-width: 600px;
   }
 }
+
+/* Custom Popup Dialog Modal (Alert & Confirm) */
+.admin-dialog-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: rgba(16, 35, 31, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: var(--font-body);
+}
+.admin-dialog-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transform: scale(0.92);
+  opacity: 0;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.admin-dialog-accent {
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--primary));
+  transition: background 0.2s ease;
+}
+.admin-dialog-body {
+  padding: 24px 26px 22px;
+}
+.admin-dialog-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.admin-dialog-iconbox {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #E6F3F0;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.admin-dialog-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--ink);
+  font-family: var(--font-display);
+  margin: 0 0 3px 0;
+  line-height: 1.3;
+}
+.admin-dialog-sub {
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.admin-dialog-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+.admin-dialog-close:hover {
+  color: var(--ink);
+}
+.admin-dialog-message {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin-bottom: 22px;
+  max-height: 55vh;
+  overflow-y: auto;
+  word-break: break-word;
+}
+.admin-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.admin-dialog-btn-cancel {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid var(--border-hover);
+  color: var(--ink-2);
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.admin-dialog-btn-cancel:hover {
+  background: var(--surface-2);
+  border-color: var(--ink-2);
+}
+.admin-dialog-btn-confirm {
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(11, 92, 87, 0.28);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.admin-dialog-btn-confirm:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.admin-dialog-btn-confirm.btn-danger-confirm {
+  background: #DC2626 !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35) !important;
+}
+.admin-dialog-btn-confirm.btn-danger-confirm:hover {
+  background: #B91C1C !important;
+}
+@media print {
+  .admin-dialog-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -897,6 +1038,28 @@ body:not(.admin-authenticated) #adminDrawerBackdrop {
 
 <!-- Toast notification -->
 <div id="adminToast" class="admin-toast"></div>
+
+<!-- Admin Modal Dialog (Alert & Confirm) -->
+<div id="adminDialogOverlay" class="admin-dialog-overlay" onclick="if(event.target===this)closeAdminDialog(false)">
+  <div id="adminDialogCard" class="admin-dialog-card">
+    <div id="adminDialogAccent" class="admin-dialog-accent"></div>
+    <div class="admin-dialog-body">
+      <div class="admin-dialog-header">
+        <div id="adminDialogIconBox" class="admin-dialog-iconbox">🔔</div>
+        <div style="flex:1;">
+          <h3 id="adminDialogTitle" class="admin-dialog-title">Thông Báo</h3>
+          <div id="adminDialogSub" class="admin-dialog-sub">Ninh Bình Digital Admin</div>
+        </div>
+        <button type="button" class="admin-dialog-close" onclick="closeAdminDialog(false)" title="Đóng">&times;</button>
+      </div>
+      <div id="adminDialogMessage" class="admin-dialog-message"></div>
+      <div id="adminDialogActions" class="admin-dialog-actions">
+        <button id="adminDialogBtnCancel" type="button" class="admin-dialog-btn-cancel" onclick="closeAdminDialog(false)">Hủy bỏ</button>
+        <button id="adminDialogBtnConfirm" type="button" class="admin-dialog-btn-confirm" onclick="closeAdminDialog(true)">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Mobile Drawer Backdrop -->
 <div id="adminDrawerBackdrop" class="admin-drawer-backdrop" onclick="closeAdminDrawer()"></div>
@@ -1517,6 +1680,7 @@ body:not(.admin-authenticated) #adminDrawerBackdrop {
                 <th>Địa chỉ giao hàng</th>
                 <th>Tổng tiền</th>
                 <th>Trạng thái</th>
+                <th style="text-align:right;">Thao tác</th>
               </tr>
             </thead>
             <tbody id="adminOrdersTableBody"></tbody>
@@ -1971,9 +2135,14 @@ function verifyAdminPin() {
     if (errEl) {
       errEl.textContent = 'Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.';
       errEl.style.display = 'block';
-    } else {
-      alert('Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.');
     }
+    showAdminAlert({
+      title: 'Đăng Nhập Thất Bại',
+      message: 'Sai tài khoản hoặc mật khẩu quản trị! Vui lòng kiểm tra lại.',
+      icon: '❌',
+      btnText: 'Thử lại',
+      isDanger: true
+    });
   }
 }
 
@@ -2045,6 +2214,153 @@ function showAdminToast(msg) {
   setTimeout(() => { t.style.display = 'none'; }, 3000);
 }
 
+// 3.1. HỆ THỐNG POPUP MODAL (ALERT & CONFIRM) CAO CẤP
+let adminDialogResolve = null;
+
+function showAdminAlert(opts) {
+  return new Promise((resolve) => {
+    adminDialogResolve = resolve;
+    const msg = typeof opts === 'string' ? opts : (opts.message || '');
+    const title = (typeof opts === 'object' && opts.title) ? opts.title : 'Thông Báo';
+    const icon = (typeof opts === 'object' && opts.icon) ? opts.icon : '🔔';
+    const sub = (typeof opts === 'object' && opts.sub) ? opts.sub : 'Hệ Thống Quản Trị Ninh Bình Digital';
+    const btnText = (typeof opts === 'object' && opts.btnText) ? opts.btnText : 'Đã hiểu';
+    const isDanger = (typeof opts === 'object' && opts.isDanger);
+
+    const overlay = document.getElementById('adminDialogOverlay');
+    const card = document.getElementById('adminDialogCard');
+    const titleEl = document.getElementById('adminDialogTitle');
+    const subEl = document.getElementById('adminDialogSub');
+    const msgEl = document.getElementById('adminDialogMessage');
+    const iconBox = document.getElementById('adminDialogIconBox');
+    const accent = document.getElementById('adminDialogAccent');
+    const btnCancel = document.getElementById('adminDialogBtnCancel');
+    const btnConfirm = document.getElementById('adminDialogBtnConfirm');
+
+    if (!overlay) {
+      resolve(true);
+      return;
+    }
+
+    titleEl.innerText = title;
+    if (subEl) subEl.innerText = sub;
+    msgEl.innerHTML = (typeof msg === 'string') ? msg.replace(/\n/g, '<br>') : msg;
+    iconBox.innerText = icon;
+
+    if (isDanger) {
+      iconBox.style.background = '#FEE2E2';
+      iconBox.style.color = '#DC2626';
+      accent.style.background = 'linear-gradient(90deg, #DC2626, #B91C1C)';
+      btnConfirm.className = 'admin-dialog-btn-confirm btn-danger-confirm';
+    } else {
+      iconBox.style.background = '#E6F3F0';
+      iconBox.style.color = 'var(--teal)';
+      accent.style.background = 'linear-gradient(90deg, var(--teal), var(--primary))';
+      btnConfirm.className = 'admin-dialog-btn-confirm';
+    }
+
+    btnConfirm.innerText = btnText;
+    btnCancel.style.display = 'none';
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      card.style.transform = 'scale(1)';
+      card.style.opacity = '1';
+    });
+  });
+}
+
+function showAdminConfirm(opts) {
+  return new Promise((resolve) => {
+    adminDialogResolve = resolve;
+    const msg = typeof opts === 'string' ? opts : (opts.message || '');
+    const title = (typeof opts === 'object' && opts.title) ? opts.title : 'Xác Nhận Thao Tác';
+    const icon = (typeof opts === 'object' && opts.icon) ? opts.icon : '⚠️';
+    const sub = (typeof opts === 'object' && opts.sub) ? opts.sub : 'Hệ Thống Quản Trị Ninh Bình Digital';
+    const confirmText = (typeof opts === 'object' && opts.confirmText) ? opts.confirmText : 'Đồng ý';
+    const cancelText = (typeof opts === 'object' && opts.cancelText) ? opts.cancelText : 'Hủy bỏ';
+    const isDanger = (typeof opts === 'object' && opts.isDanger !== false);
+
+    const overlay = document.getElementById('adminDialogOverlay');
+    const card = document.getElementById('adminDialogCard');
+    const titleEl = document.getElementById('adminDialogTitle');
+    const subEl = document.getElementById('adminDialogSub');
+    const msgEl = document.getElementById('adminDialogMessage');
+    const iconBox = document.getElementById('adminDialogIconBox');
+    const accent = document.getElementById('adminDialogAccent');
+    const btnCancel = document.getElementById('adminDialogBtnCancel');
+    const btnConfirm = document.getElementById('adminDialogBtnConfirm');
+
+    if (!overlay) {
+      resolve(confirm(msg));
+      return;
+    }
+
+    titleEl.innerText = title;
+    if (subEl) subEl.innerText = sub;
+    msgEl.innerHTML = (typeof msg === 'string') ? msg.replace(/\n/g, '<br>') : msg;
+    iconBox.innerText = icon;
+
+    if (isDanger) {
+      iconBox.style.background = '#FEE2E2';
+      iconBox.style.color = '#DC2626';
+      accent.style.background = 'linear-gradient(90deg, #DC2626, #B91C1C)';
+      btnConfirm.className = 'admin-dialog-btn-confirm btn-danger-confirm';
+    } else {
+      iconBox.style.background = '#FBEFD2';
+      iconBox.style.color = '#A65F00';
+      accent.style.background = 'linear-gradient(90deg, #E9B23F, #A65F00)';
+      btnConfirm.className = 'admin-dialog-btn-confirm';
+    }
+
+    btnConfirm.innerText = confirmText;
+    btnCancel.innerText = cancelText;
+    btnCancel.style.display = 'inline-flex';
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      card.style.transform = 'scale(1)';
+      card.style.opacity = '1';
+    });
+  });
+}
+
+function closeAdminDialog(result) {
+  const overlay = document.getElementById('adminDialogOverlay');
+  const card = document.getElementById('adminDialogCard');
+  if (card) {
+    card.style.transform = 'scale(0.92)';
+    card.style.opacity = '0';
+  }
+  setTimeout(() => {
+    if (overlay) overlay.style.display = 'none';
+    if (typeof adminDialogResolve === 'function') {
+      const fn = adminDialogResolve;
+      adminDialogResolve = null;
+      fn(result);
+    }
+  }, 180);
+}
+
+// Bắt phím bấm cho Modal Dialog
+document.addEventListener('keydown', function(e) {
+  const overlay = document.getElementById('adminDialogOverlay');
+  if (overlay && overlay.style.display === 'flex') {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeAdminDialog(false);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      closeAdminDialog(true);
+    }
+  }
+});
+
+// Chuyển toàn bộ alert() mặc định sang Pop-up hiện đại
+window.alert = function(msg) {
+  showAdminAlert(msg);
+};
+
 // 4. Initialize Data
 function initAdminData() {
   renderLiveUsersSimulation();
@@ -2066,10 +2382,11 @@ async function syncDataFromSupabase() {
   if (typeof dbGetOrders === 'function') {
     try {
       const orders = await dbGetOrders();
-      if (orders && orders.length > 0) {
+      if (Array.isArray(orders)) {
         const mapped = orders.map(o => ({
+          id: o.id,
           orderId: o.order_code,
-          date: new Date(o.created_at).toLocaleDateString('vi-VN'),
+          date: o.created_at ? new Date(o.created_at).toLocaleString('vi-VN') : 'Hôm nay',
           customer: { name: o.customer_name, phone: o.customer_phone, address: o.customer_address },
           total: Number(o.total) || 0,
           status: o.status
@@ -2085,7 +2402,7 @@ async function syncDataFromSupabase() {
   if (typeof dbGetLeads === 'function') {
     try {
       const leads = await dbGetLeads();
-      if (leads && leads.length > 0) {
+      if (Array.isArray(leads)) {
         const mapped = leads.map(l => ({
           id: l.id,
           name: l.name,
@@ -2105,14 +2422,15 @@ async function syncDataFromSupabase() {
   if (typeof dbGetFeedbacks === 'function') {
     try {
       const fbs = await dbGetFeedbacks();
-      if (fbs && fbs.length > 0) {
+      if (Array.isArray(fbs)) {
         const mapped = fbs.map(f => ({
+          id: f.id,
           name: f.name,
           phone: f.phone,
           topic: f.topic,
           rating: f.rating,
           content: f.content,
-          date: new Date(f.created_at).toLocaleDateString('vi-VN')
+          date: f.created_at ? new Date(f.created_at).toLocaleDateString('vi-VN') : 'Hôm nay'
         }));
         localStorage.setItem('nb_user_feedbacks', JSON.stringify(mapped));
         renderFeedbackTable();
@@ -2123,12 +2441,13 @@ async function syncDataFromSupabase() {
   if (typeof dbGetUsers === 'function') {
     try {
       const users = await dbGetUsers();
-      if (users && users.length > 0) {
+      if (Array.isArray(users)) {
         const mapped = users.map(u => ({
+          id: u.id,
           name: u.name,
           email: u.email,
           role: u.role,
-          date: new Date(u.created_at).toLocaleDateString('vi-VN')
+          date: u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : 'Hôm nay'
         }));
         localStorage.setItem('nb_all_users', JSON.stringify(mapped));
         renderUsersTable();
@@ -2531,8 +2850,15 @@ function toggleItemVisibility(id) {
 }
 
 // Delete Item Permanently
-function deleteItemPermanently(id, name) {
-  if (!confirm(`Bạn có chắc muốn XÓA vĩnh viễn "${name}" khỏi web chính và trang quản trị?`)) return;
+async function deleteItemPermanently(id, name) {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Vĩnh Viễn',
+    message: `Bạn có chắc muốn <b>XÓA vĩnh viễn</b> "${name}" khỏi web chính và trang quản trị?`,
+    icon: '🗑️',
+    confirmText: '🗑️ Xóa vĩnh viễn',
+    isDanger: true
+  });
+  if (!ok) return;
   let customPlaces = JSON.parse(localStorage.getItem('nb_custom_places') || '[]');
   const wasCustom = customPlaces.some(p => p.id === id);
   if (wasCustom) {
@@ -2624,8 +2950,15 @@ function renderCustomToolsTable() {
   `).join('');
 }
 
-function deleteCustomTool(id) {
-  if (!confirm('Bạn có chắc muốn xóa chức năng này khỏi danh mục Web?')) return;
+async function deleteCustomTool(id) {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Tiện Ích',
+    message: 'Bạn có chắc chắn muốn xóa chức năng này khỏi danh mục Web chính?',
+    icon: '🗑️',
+    confirmText: '🗑️ Xóa công cụ',
+    isDanger: true
+  });
+  if (!ok) return;
   let customTools = JSON.parse(localStorage.getItem('nb_custom_tools') || '[]');
   customTools = customTools.filter(t => t.id !== id);
   localStorage.setItem('nb_custom_tools', JSON.stringify(customTools));
@@ -2679,46 +3012,91 @@ function renderFeedbackTable() {
   }
 }
 
-function markFeedbackResolved(idx) {
+async function markFeedbackResolved(idx) {
   let feedbacks = JSON.parse(localStorage.getItem('nb_user_feedbacks') || '[]');
+  const fb = feedbacks[idx];
+  if (!fb) return;
+
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Đã Xử Lý',
+    message: `Bạn có chắc muốn hoàn tất và xóa góp ý của <b>${fb.name || 'Người dùng'}</b>?`,
+    icon: '✅',
+    confirmText: 'Hoàn tất & Xóa',
+    isDanger: false
+  });
+  if (!ok) return;
+
   feedbacks.splice(idx, 1);
   localStorage.setItem('nb_user_feedbacks', JSON.stringify(feedbacks));
   renderFeedbackTable();
+
+  if (fb.id && typeof dbDeleteFeedback === 'function') {
+    dbDeleteFeedback(fb.id).catch(e => console.warn('[Supabase Delete Feedback Error]', e));
+  }
   showAdminToast('Đã đánh dấu xử lý xong ý kiến góp ý!');
 }
 
-function clearAllFeedbacks() {
-  if (!confirm('Bạn có chắc muốn dọn sạch toàn bộ hòm thư góp ý?')) return;
+async function clearAllFeedbacks() {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Dọn Sạch Hòm Thư',
+    message: 'Bạn có chắc chắn muốn dọn sạch <b>toàn bộ hòm thư góp ý</b>? Dữ liệu sẽ được xóa vĩnh viễn trên máy chủ.',
+    icon: '🗑️',
+    confirmText: '🗑️ Dọn sạch hòm thư',
+    isDanger: true
+  });
+  if (!ok) return;
+
   localStorage.removeItem('nb_user_feedbacks');
   renderFeedbackTable();
+
+  if (typeof dbClearAllFeedbacks === 'function') {
+    dbClearAllFeedbacks().catch(e => console.warn('[Supabase Clear Feedbacks Error]', e));
+  }
   showAdminToast('Đã xóa toàn bộ hòm thư góp ý!');
 }
 
 // 9. Orders Management
 function renderOrdersTable() {
   const orders = JSON.parse(localStorage.getItem('nb_specialty_orders') || '[]');
-  document.getElementById('asideOrdersBadge').textContent = orders.length;
+  const asideBadge = document.getElementById('asideOrdersBadge');
+  if (asideBadge) asideBadge.textContent = orders.length;
 
   const tbody = document.getElementById('adminOrdersTableBody');
   const dashEl = document.getElementById('dashboardRecentOrders');
 
+  if (!tbody) return;
   if (orders.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--muted); padding:24px;">Chưa có đơn đặt hàng nào phát sinh. Khách đặt qua Web chính sẽ xuất hiện ngay tại đây!</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--muted); padding:24px;">Chưa có đơn đặt hàng nào phát sinh. Khách đặt qua Web chính sẽ xuất hiện ngay tại đây!</td></tr>`;
     if (dashEl) dashEl.innerHTML = `<div style="color:var(--muted); padding:10px 0;">Chưa có đơn hàng mới nào.</div>`;
     return;
   }
 
-  tbody.innerHTML = orders.map(o => `
-    <tr>
-      <td><b>#${o.orderId || 'NB' + Math.floor(Math.random()*9000+1000)}</b></td>
-      <td style="font-size:0.78rem; color:var(--muted);">${o.date || 'Hôm nay'}</td>
-      <td><b>${o.customer?.name || 'Khách Ninh Bình'}</b></td>
-      <td>${o.customer?.phone ? `<a href="tel:${o.customer.phone}" style="color:var(--primary); font-weight:700;">${o.customer.phone}</a>` : '—'}</td>
-      <td>${o.customer?.address || 'Tại khách sạn'}</td>
-      <td><b style="color:var(--accent);">${(o.total || 0).toLocaleString()} đ</b></td>
-      <td><span class="table-tag tag-active">Chờ giao hàng</span></td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = orders.map((o, idx) => {
+    const cleanPhone = (o.customer?.phone || '').replace(/[^0-9]/g, '');
+    const code = o.orderId || ('NB' + (o.id || idx));
+    return `
+      <tr>
+        <td><b>#${code}</b></td>
+        <td style="font-size:0.78rem; color:var(--muted);">${o.date || 'Hôm nay'}</td>
+        <td><b>${o.customer?.name || 'Khách Ninh Bình'}</b></td>
+        <td>
+          ${o.customer?.phone ? `
+            <a href="tel:${cleanPhone}" style="color:var(--primary); font-weight:700;">${o.customer.phone}</a>
+            <div style="display:flex; gap:4px; margin-top:4px;">
+              <a href="tel:${cleanPhone}" class="btn btn-sm" style="padding:2px 6px; font-size:0.7rem; background:#DCFCE7; color:#15803D; text-decoration:none;">📞 Gọi</a>
+              <a href="https://zalo.me/${cleanPhone}" target="_blank" class="btn btn-sm" style="padding:2px 6px; font-size:0.7rem; background:#DBEAFE; color:#1D4ED8; text-decoration:none;">💬 Zalo</a>
+            </div>
+          ` : '—'}
+        </td>
+        <td>${o.customer?.address || 'Tại khách sạn'}</td>
+        <td><b style="color:var(--accent);">${(o.total || 0).toLocaleString()} đ</b></td>
+        <td><span class="table-tag tag-active">${o.status === 'delivered' ? 'Đã giao' : 'Chờ giao hàng'}</span></td>
+        <td style="text-align:right;">
+          <button class="btn btn-danger btn-sm" onclick="deleteOrder(${idx})">🗑️ Xóa</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
 
   if (dashEl) {
     dashEl.innerHTML = `
@@ -2726,7 +3104,7 @@ function renderOrdersTable() {
         ${orders.slice(0, 3).map(o => `
           <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:10px;">
             <div style="display:flex; justify-content:space-between; font-size:0.82rem;">
-              <b>#${o.orderId} - ${o.customer?.name}</b>
+              <b>#${o.orderId || ('NB' + (o.id || ''))} - ${o.customer?.name}</b>
               <b style="color:var(--accent);">${(o.total || 0).toLocaleString()} đ</b>
             </div>
             <div style="font-size:0.78rem; color:var(--muted); margin-top:2px;">📍 ${o.customer?.address}</div>
@@ -2737,10 +3115,54 @@ function renderOrdersTable() {
   }
 }
 
-function clearAllOrders() {
-  if (!confirm('Bạn có chắc muốn xóa lịch sử đơn hàng?')) return;
+async function deleteOrder(idx) {
+  const orders = JSON.parse(localStorage.getItem('nb_specialty_orders') || '[]');
+  const order = orders[idx];
+  if (!order) return;
+
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Đơn Hàng',
+    message: `Bạn có chắc chắn muốn xóa đơn hàng <b>#${order.orderId || ''}</b> của khách <b>${order.customer?.name || 'này'}</b>?<br><span style="font-size:0.8rem; color:var(--muted);">Dữ liệu đơn hàng sẽ được xóa vĩnh viễn trên máy chủ và hệ thống.</span>`,
+    icon: '🗑️',
+    confirmText: '🗑️ Xóa đơn hàng',
+    cancelText: 'Hủy bỏ',
+    isDanger: true
+  });
+  if (!ok) return;
+
+  orders.splice(idx, 1);
+  localStorage.setItem('nb_specialty_orders', JSON.stringify(orders));
+  renderOrdersTable();
+  renderRevenueChart();
+  updateDashboardCounts();
+
+  if (typeof dbDeleteOrder === 'function') {
+    dbDeleteOrder(order.id || order.orderId).catch(err => console.warn('[Supabase Delete Order Error]', err));
+  }
+
+  showAdminToast('Đã xóa đơn hàng thành công!');
+}
+
+async function clearAllOrders() {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Toàn Bộ Đơn Hàng',
+    message: 'Bạn có chắc chắn muốn xóa <b>toàn bộ lịch sử đơn hàng</b>? Dữ liệu sẽ được dọn sạch hoàn toàn trên cả máy chủ.',
+    icon: '⚠️',
+    confirmText: '🗑️ Xóa tất cả',
+    cancelText: 'Hủy bỏ',
+    isDanger: true
+  });
+  if (!ok) return;
+
   localStorage.removeItem('nb_specialty_orders');
   renderOrdersTable();
+  renderRevenueChart();
+  updateDashboardCounts();
+
+  if (typeof dbClearAllOrders === 'function') {
+    dbClearAllOrders().catch(err => console.warn('[Supabase Clear All Orders Error]', err));
+  }
+
   showAdminToast('Đã xóa toàn bộ lịch sử đơn hàng!');
 }
 
@@ -2919,28 +3341,66 @@ function renderLeadsTable() {
   }).join('');
 }
 
-function updateLeadStatus(idx, newStatus) {
+async function updateLeadStatus(idx, newStatus) {
   const leads = JSON.parse(localStorage.getItem('nb_service_leads') || '[]');
   if (!leads[idx]) return;
   leads[idx].status = newStatus;
   localStorage.setItem('nb_service_leads', JSON.stringify(leads));
   renderLeadsTable();
+  if (leads[idx].id && typeof dbUpdateLeadStatus === 'function') {
+    dbUpdateLeadStatus(leads[idx].id, newStatus).catch(e => console.warn('[Supabase Update Lead Status Error]', e));
+  }
   showAdminToast('Đã cập nhật trạng thái khách hàng!');
 }
 
-function deleteLead(idx) {
-  if (!confirm('Bạn có chắc muốn xóa khách hàng này?')) return;
+async function deleteLead(idx) {
   const leads = JSON.parse(localStorage.getItem('nb_service_leads') || '[]');
+  const lead = leads[idx];
+  if (!lead) return;
+
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Khách Hàng',
+    message: `Bạn có chắc chắn muốn xóa khách hàng <b>${lead.name || 'này'}</b> ${lead.phone ? `(${lead.phone})` : ''}?<br><span style="font-size:0.8rem; color:var(--muted);">Dữ liệu khách hàng sẽ được xóa vĩnh viễn khỏi hệ thống và máy chủ Cloud CRM.</span>`,
+    icon: '🗑️',
+    confirmText: '🗑️ Xóa khách hàng',
+    cancelText: 'Hủy bỏ',
+    isDanger: true
+  });
+  if (!ok) return;
+
   leads.splice(idx, 1);
   localStorage.setItem('nb_service_leads', JSON.stringify(leads));
   renderLeadsTable();
-  showAdminToast('Đã xóa lượt đăng ký!');
+
+  if (typeof dbDeleteLead === 'function') {
+    if (lead.id) {
+      await dbDeleteLead(lead.id).catch(e => console.warn('[Supabase Delete Lead Error]', e));
+    } else if (lead.phone && typeof dbDeleteLeadByPhone === 'function') {
+      await dbDeleteLeadByPhone(lead.phone).catch(e => console.warn('[Supabase Delete Lead Phone Error]', e));
+    }
+  }
+
+  showAdminToast('Đã xóa lượt đăng ký tư vấn thành công!');
 }
 
-function clearAllLeads() {
-  if (!confirm('Bạn có chắc muốn xóa toàn bộ danh sách khách hàng?')) return;
+async function clearAllLeads() {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Toàn Bộ',
+    message: 'Bạn có chắc chắn muốn xóa <b>toàn bộ danh sách khách hàng tư vấn</b>? Thao tác này sẽ dọn sạch dữ liệu vĩnh viễn trên máy chủ.',
+    icon: '⚠️',
+    confirmText: '🗑️ Xóa tất cả',
+    cancelText: 'Hủy bỏ',
+    isDanger: true
+  });
+  if (!ok) return;
+
   localStorage.removeItem('nb_service_leads');
   renderLeadsTable();
+
+  if (typeof dbClearAllLeads === 'function') {
+    await dbClearAllLeads().catch(e => console.warn('[Supabase Clear All Leads Error]', e));
+  }
+
   showAdminToast('Đã xóa toàn bộ danh sách khách hàng!');
 }
 
@@ -3305,8 +3765,15 @@ function editAd(idx) {
   if (modal) modal.style.display = 'flex';
 }
 
-function deleteAd(idx) {
-  if (!confirm('Bạn có chắc chắn muốn xóa banner quảng cáo này không?')) return;
+async function deleteAd(idx) {
+  const ok = await showAdminConfirm({
+    title: 'Xác Nhận Xóa Banner',
+    message: 'Bạn có chắc chắn muốn xóa banner quảng cáo này không?',
+    icon: '🗑️',
+    confirmText: '🗑️ Xóa banner',
+    isDanger: true
+  });
+  if (!ok) return;
   const data = getAdminPopupsData();
   if (data.bannerAds) {
     data.bannerAds.splice(idx, 1);
