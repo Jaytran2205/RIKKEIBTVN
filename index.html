@@ -9977,6 +9977,23 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
     if (typeof AdministrativeDocEngine !== 'undefined') {
       AdministrativeDocEngine.init();
     }
+    // Tự động đồng bộ danh sách thành viên từ Supabase Cloud
+    if (typeof dbGetUsers === 'function') {
+      dbGetUsers().then(users => {
+        if (Array.isArray(users) && users.length > 0) {
+          allUsers = users.map(u => ({
+            id: u.id,
+            name: u.name || 'Người dùng',
+            email: u.email || '—',
+            role: u.role || 'member',
+            phone: u.phone || '',
+            date: u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : 'Hôm nay'
+          }));
+          localStorage.setItem('nb_all_users', JSON.stringify(allUsers));
+          renderAdminData();
+        }
+      }).catch(() => {});
+    }
     // Tự động mở popup chào mừng giới thiệu sau 1.2 giây khi vào trang (Kiểm tra thiết bị & cấu hình)
     setTimeout(() => { openWelcomePromo(false); }, 1200);
     // Kích hoạt nhịp tim theo dõi phiên trực tiếp cho Admin Dashboard

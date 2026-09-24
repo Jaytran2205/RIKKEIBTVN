@@ -1086,7 +1086,7 @@ body:not(.admin-authenticated) #adminDrawerBackdrop {
     </a>
     <a class="aside-link" onclick="switchAdminNav('users', this)">
       <span class="ic">👥</span> Người dùng &amp; Truy cập
-      <span class="badge" id="asideOnlineBadge">42</span>
+      <span class="badge" id="asideUsersBadge" style="background:#E0F2FE; color:#0369A1;">0</span>
     </a>
 
     <div class="nav-group-title">Cấu hình Web chính</div>
@@ -1182,7 +1182,7 @@ body:not(.admin-authenticated) #adminDrawerBackdrop {
           </div>
           <div class="stat-val" id="statTotalUsers">0</div>
           <div class="stat-meta">
-            <span class="stat-up">0</span> thành viên đăng ký
+            <span class="stat-up" id="statTotalUsersCount">0</span> thành viên đăng ký
           </div>
         </div>
         <div class="stat-card success">
@@ -2444,15 +2444,19 @@ async function syncDataFromSupabase() {
       if (Array.isArray(users)) {
         const mapped = users.map(u => ({
           id: u.id,
-          name: u.name,
-          email: u.email,
-          role: u.role,
+          name: u.name || 'Người dùng',
+          email: u.email || '—',
+          role: u.role || 'member',
+          phone: u.phone || '',
           date: u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : 'Hôm nay'
         }));
         localStorage.setItem('nb_all_users', JSON.stringify(mapped));
         renderUsersTable();
+        updateDashboardCounts();
       }
-    } catch(e) {}
+    } catch(e) {
+      console.warn('Lỗi đồng bộ users từ Supabase:', e);
+    }
   }
 }
 
@@ -2472,18 +2476,40 @@ function renderLiveUsersSimulation() {
 
   const elLive = document.getElementById('statLiveUsers');
   const elVis = document.getElementById('liveVisitorsCount');
-  const elBadge = document.getElementById('asideOnlineBadge');
   if (elLive) elLive.textContent = count;
   if (elVis) elVis.textContent = count;
-  if (elBadge) elBadge.textContent = count;
 }
 renderLiveUsersSimulation();
 setInterval(renderLiveUsersSimulation, 2000);
+
+// Đồng bộ Realtime đa tab qua storage event & BroadcastChannel
 window.addEventListener('storage', (e) => {
   if (e.key === 'nb_active_sessions') {
     renderLiveUsersSimulation();
   }
+  if (e.key === 'nb_all_users') {
+    renderUsersTable();
+    updateDashboardCounts();
+  }
+  if (e.key === 'nb_specialty_orders') {
+    renderOrdersTable();
+    renderRevenueChart();
+    updateDashboardCounts();
+  }
+  if (e.key === 'nb_service_leads') {
+    renderLeadsTable();
+  }
+  if (e.key === 'nb_user_feedbacks') {
+    renderFeedbackTable();
+  }
 });
+
+// Định kỳ tự động đồng bộ dữ liệu mới nhất từ Supabase Cloud (mỗi 25s hoặc khi click lại vào tab)
+setInterval(syncDataFromSupabase, 25000);
+window.addEventListener('focus', () => {
+  syncDataFromSupabase();
+});
+
 try {
   const bc = new BroadcastChannel('nb_live_presence');
   bc.onmessage = () => {
@@ -2519,8 +2545,13 @@ function renderRevenueChart() {
 // Users Table (clean empty state)
 function renderUsersTable() {
   const users = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+  const countStr = users.length.toString();
   const totalEl = document.getElementById('statTotalUsers');
-  if (totalEl) totalEl.textContent = users.length.toString();
+  if (totalEl) totalEl.textContent = countStr;
+  const subEl = document.getElementById('statTotalUsersCount');
+  if (subEl) subEl.textContent = countStr;
+  const asideBadge = document.getElementById('asideUsersBadge');
+  if (asideBadge) asideBadge.textContent = countStr;
 
   const tbody = document.getElementById('adminUsersTableBody');
   if (!tbody) return;
@@ -2886,8 +2917,13 @@ function updateDashboardCounts() {
   if (elPlaces) elPlaces.textContent = `${activePlaces} cơ sở`;
 
   const users = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+  const countStr = users.length.toString();
   const elUsers = document.getElementById('statTotalUsers');
-  if (elUsers) elUsers.textContent = users.length.toString();
+  if (elUsers) elUsers.textContent = countStr;
+  const subUsers = document.getElementById('statTotalUsersCount');
+  if (subUsers) subUsers.textContent = countStr;
+  const asideUsers = document.getElementById('asideUsersBadge');
+  if (asideUsers) asideUsers.textContent = countStr;
 
   const orders = JSON.parse(localStorage.getItem('nb_specialty_orders') || '[]');
   const totalRev = orders.reduce((sum, o) => sum + (o.total || 0), 0);

@@ -348,7 +348,11 @@ async function dbGetUserByEmail(email) {
 }
 
 async function dbGetUsers() {
-  const res = await supabaseFetch('nb_users', { query: 'select=id,name,email,role,phone,avatar,created_at&order=id.desc' });
+  const res = await supabaseFetch('nb_users', { query: 'select=id,name,email,role,phone,created_at&order=id.desc' });
+  if (res.error) {
+    console.warn('[Supabase dbGetUsers error]:', res.error);
+    return null;
+  }
   return res.data || [];
 }
 
@@ -394,6 +398,21 @@ async function handleSupabaseAuthCallback(onSuccess) {
       };
 
       localStorage.setItem('nb_user', JSON.stringify(currentUser));
+
+      // Tự động lưu/cập nhật vào danh sách thành viên nb_all_users
+      try {
+        let allUsers = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+        const exists = allUsers.some(u => u.email && u.email.toLowerCase() === currentUser.email.toLowerCase());
+        if (!exists) {
+          allUsers.unshift({
+            name: currentUser.name,
+            email: currentUser.email,
+            role: currentUser.role,
+            date: new Date().toLocaleDateString('vi-VN')
+          });
+          localStorage.setItem('nb_all_users', JSON.stringify(allUsers));
+        }
+      } catch(e) {}
 
       // Xóa access_token khỏi thanh địa chỉ cho sạch URL
       if (window.history && window.history.replaceState) {
@@ -445,7 +464,24 @@ async function handleGoogleIdTokenResponse(response) {
   };
 
   localStorage.setItem('nb_user', JSON.stringify(currentUser));
+
+  // Tự động lưu/cập nhật vào danh sách thành viên nb_all_users
+  try {
+    let allUsers = JSON.parse(localStorage.getItem('nb_all_users') || '[]');
+    const exists = allUsers.some(u => u.email && u.email.toLowerCase() === currentUser.email.toLowerCase());
+    if (!exists) {
+      allUsers.unshift({
+        name: currentUser.name,
+        email: currentUser.email,
+        role: currentUser.role,
+        date: new Date().toLocaleDateString('vi-VN')
+      });
+      localStorage.setItem('nb_all_users', JSON.stringify(allUsers));
+    }
+  } catch(e) {}
+
   if (typeof updateAuthUI === 'function') updateAuthUI();
+  if (typeof renderAdminData === 'function') renderAdminData();
   if (typeof closeModal === 'function') closeModal();
   if (typeof showToast === 'function') {
     showToast(`Chào mừng ${currentUser.name} đã đăng nhập Google thành công!`);
