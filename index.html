@@ -2829,24 +2829,24 @@ body.midnight-mode .vb-wrapper input, body.midnight-mode .vb-wrapper select, bod
 
      ========================================================================== */
 
-  html.vanban-page-active,
+  html.vanban-page-active {
+    overflow: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    padding-top: 0 !important;
+    margin: 0 !important;
+  }
 
   body.vanban-page-active {
-
     overflow: hidden !important;
-
     height: 100vh !important;
-
     max-height: 100vh !important;
-
     padding-top: var(--header-h) !important;
-
+    margin: 0 !important;
   }
 
   body.vanban-page-active footer {
-
     display: none !important;
-
   }
 
 

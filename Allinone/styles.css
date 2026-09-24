@@ -111,11 +111,20 @@
    2. BỐ CỤC 2 CỘT TÁCH RỜI CUỘN ĐỘC LẬP (INDEPENDENT SPLIT SCROLL)
    ========================================================================== */
 /* Khóa tuyệt đối cuộn trang ngoài khi ở giao diện Soạn thảo văn bản */
-html.vanban-page-active,
+html.vanban-page-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  padding-top: 0 !important;
+  margin: 0 !important;
+}
+
 body.vanban-page-active {
   overflow: hidden !important;
   height: 100vh !important;
   max-height: 100vh !important;
+  padding-top: var(--header-h, 76px) !important;
+  margin: 0 !important;
 }
 
 body.vanban-page-active footer {
@@ -123,8 +132,8 @@ body.vanban-page-active footer {
 }
 
 #page-vanban.active {
-  height: calc(100vh - 58px) !important;
-  max-height: calc(100vh - 58px) !important;
+  height: calc(100vh - var(--header-h, 76px)) !important;
+  max-height: calc(100vh - var(--header-h, 76px)) !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
